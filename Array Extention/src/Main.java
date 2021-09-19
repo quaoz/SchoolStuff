@@ -16,13 +16,17 @@ public class Main {
 		// Splits the string by spaces
 		final String[] wordArray = stringToWordArray(string);
 
-		RotatedString[] rotatedString = Arrays.stream(wordArray).map(Main::rotateString).toArray(RotatedString[]::new);
+		// Iterates through each word in wordArray and parses it to the rotateString function
+		// Stores the RotatedString object returned by rotateString in the rotatedStrings array
+		RotatedString[] rotatedStrings = Arrays.stream(wordArray).map(Main::rotateString).toArray(RotatedString[]::new);
 
-		for (RotatedString i : rotatedString) {
+		// Displays all the original strings, rotated versions and offsets
+		for (RotatedString i : rotatedStrings) {
 			System.out.println(i.originalString + " became " + i.offsetString + " with an offset of " + i.offset);
 		}
 
-		String unrotatedString = UnrotateString(rotatedString);
+		// Un-rotates the strings
+		String unrotatedString = UnrotateString(rotatedStrings);
 		System.out.println(unrotatedString);
 	}
 
@@ -30,18 +34,21 @@ public class Main {
 		return string.split(" ");
 	}
 
-	private static RotatedString rotateString(String string) {
+	private static RotatedString rotateString(@NotNull String string) {
 		final int length = string.length();
 		RotatedString rotatedString = new RotatedString();
-		rotatedString.offset = random.nextInt(length + 1) + 1;
+		rotatedString.offset = random.nextInt(length) + 1;
 		rotatedString.originalString = string;
 
+		// Converts the string to an array of chars and creates an empty char array with the same number of spaces
 		char[] stringArray = string.toCharArray();
 		char[] rotatedStringArray = new char[length];
 
+		// Maps each character to its offset place in the array
 		for (int i = 0; i < length; i++) {
 			int pos = rotatedString.offset + i;
 
+			// Keeps the position within the array bounds
 			if (pos > length - 1) {
 				pos %= length;
 			}
@@ -53,30 +60,52 @@ public class Main {
 		return rotatedString;
 	}
 
-	private static String UnrotateString(RotatedString[] rotatedString) {
+	/* Explanation:
+	*
+	* 	If the offset is smaller than the length of the string then it can be reverted to the original string by
+	* 	offsetting it by the length minus the offset
+	*
+	* 	E.g. If the string 'hello' has an offset of 2 it will become 'lohel', taking the length (5) and subtracting the
+	* 	offset (2) gives you 3 and when you offset the rotated word (lohel) by three you get back to 'hello'
+	*
+	* 	If the offset is larger than the length it can be reverted by offsetting it by the length minus the offset mod
+	* 	the length
+	*
+	* 	E.g. If the string 'hello' has an offset of 6 (the maximum possible for that word) it will become 'ohell', when
+	* 	you do the offset mod the length you get 1 and then by subtracting that from the length (giving you 4) you have
+	* 	the offset needed to get you back to the original word
+	* */
+
+	private static String UnrotateString(RotatedString @NotNull [] rotatedString) {
 		StringBuilder deobfuscatedString = new StringBuilder();
 
 		for (RotatedString string : rotatedString) {
 			int length = string.offsetString.length();
 			int offset = length - string.offset;
-			char[] stringArray = string.offsetString.toCharArray();
-			char[] rotatedStringArray = new char[length];
 
+			// Converts the string to an array of chars and creates an empty char array with the same number of spaces
+			char[] stringArray = string.offsetString.toCharArray();
+			char[] deobfuscatedStringArray = new char[length];
+
+			// Keeps the offset positive
 			if (string.offset > length) {
 				offset = length - (string.offset % length);
 			}
 
+			// Maps each character to its original place in the array
 			for (int i = 0; i < length; i++) {
 				int pos = offset + i;
 
+				// Keeps the position within the array bounds
 				if (pos > length - 1) {
 					pos %= length;
 				}
 
-				rotatedStringArray[pos] = stringArray[i];
+				deobfuscatedStringArray[pos] = stringArray[i];
 			}
 
-			deobfuscatedString.append(new String(rotatedStringArray));
+			// Appends the deobfuscatedStringArray to the string that it will return
+			deobfuscatedString.append(new String(deobfuscatedStringArray));
 			deobfuscatedString.append(" ");
 		}
 		return deobfuscatedString.toString();
