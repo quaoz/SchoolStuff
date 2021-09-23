@@ -56,13 +56,19 @@ public class Main {
 
 	private static void printDay(int day, int month, int currentMonth, int currentDay) {
 		// Prints out the days
-		if (month == currentMonth && ((day + 1) == currentDay)) {
-			System.out.print(" " + day + "  ");
-		} else if (month == currentMonth && (day == currentDay)) {
-			if (day < 10) {
-				System.out.print("[" + day + "]  ");
+		if (month == currentMonth) {
+			if (day + 1 == currentDay) {
+				System.out.print(" " + day + "  ");
+			} else if (day == currentDay) {
+				if (day < 10) {
+					System.out.print("[" + day + "]  ");
+				} else {
+					System.out.print("[" + day + "] ");
+				}
+			} else if (day < 10) {
+				System.out.print(" " + day + "   ");
 			} else {
-				System.out.print("[" + day + "] ");
+				System.out.print(" " + day + "  ");
 			}
 		} else {
 			if (day < 10) {
