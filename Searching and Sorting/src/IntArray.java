@@ -25,14 +25,40 @@ public class IntArray {
 			count++;
 		}
 
-		// returns false if the term was the sentinel value
-		if (count != array.length - 1) {
-			// -2 indicates that the value was not found
+		// returns if the term was the sentinel value
+		if (count == array.length - 1) {
+			// returns -2 if the value isn't found
 			return -2;
 		}
-		// -1 indicates that the array contains the value
-		// the position is returned if it is asked for (contains is false)
+		// returns -1 if contains is true (you only want to know whether the array has teh value in it) or the
+		// index if contains is false
 		return contains ? -1 : count;
+	}
+
+	// overloads binary search as it recursively calls itself (means we don't have to give it the extra parameters)
+	public int binarySearch(int term, boolean contains) {
+		return binarySearch(array, term, contains, 0, array.length);
+	}
+
+	public int binarySearch(int[] array, int term, boolean contains, int left, int right) {
+		// returns -2 if the value isn't found
+		if (right < left) {
+			return -2;
+		}
+
+		// finds the middle value
+		int median = (left + right) / 2;
+
+		// recursively searches the array
+		if (term == array[median]) {
+			// returns -1 if contains is true (you only want to know whether the array has teh value in it) or the
+			// index if contains is false
+			return contains ? -1 : median;
+		} else if (term > array[median]) {
+			return binarySearch(array, term, contains, median - 1, right);
+		} else {
+			return binarySearch(array, term, contains, left, median + 1);
+		}
 	}
 
 	public int[] bubbleSort(boolean reverse) {
@@ -57,10 +83,7 @@ public class IntArray {
 		return array;
 	}
 
-	// as merge sort recursively calls itself we have to overload it without any parameters to get it to operate
-	// on the array which is part of this class, we can now call intArray.mergeSort() instead of having to do
-	// intArray.mergeSort(intArray.getArray(), intArray.getArray().length), this also allows us to return the sorted
-	// array as we do with the bubbleSort function
+	// overloads merge sort as it recursively calls itself (means we don't have to give it the extra parameters)
 	public int[] mergeSort() {
 		mergeSort(array, array.length);
 		return array;
