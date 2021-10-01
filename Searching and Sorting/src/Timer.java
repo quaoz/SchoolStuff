@@ -83,7 +83,7 @@ public class Timer {
 	}
 
 	// returns the difference between the start and end times or minus one if the timer hasn't been stopped
-	public long getElapsedTime() {
+	public long getElapsedTime() throws RuntimeException {
 		// throws an exception if the timer was running when the method was called
 		if (!timerRunning) {
 			return endTime - startTime;

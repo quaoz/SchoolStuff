@@ -8,7 +8,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		// creates an array
-		int[] array = new int[100000];
+		int[] array = new int[10000];
 
 		// fills the array with random numbers under 100
 		IntStream.range(0, array.length - 1).forEach(i -> array[i] = random.nextInt(array.length));
@@ -16,7 +16,7 @@ public class Main {
 
 		// searches for the term
 		System.out.println("-2 = value not found, -1 = value found, anything else is the index of the value");
-		System.out.println("Value found: " + intArray.search(5, true) + "\n");
+		System.out.println("Value found: " + intArray.linearSearch(5, true) + "\n");
 
 		// prints the array
 		System.out.println("The unsorted array: " + Arrays.toString(intArray.getArray()) + "\n");

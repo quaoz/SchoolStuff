@@ -15,7 +15,7 @@ public class IntArray {
 		this.array = array;
 	}
 
-	public int search(int term, boolean contains) {
+	public int linearSearch(int term, boolean contains) {
 		// adds the sentinel value
 		array[array.length - 1] = term;
 		int count = 0;
@@ -46,7 +46,7 @@ public class IntArray {
 			// loops through each element in the array
 			for (int i = 0; i < array.length - 1 - sortedCount; i++) {
 				// swaps the elements without storing the in a temporary variable
-				if ((reverse && array[i] < array[i + 1]) || (!reverse && array[i] > array[i + 1])) {
+				if (reverse ? array[i] < array[i + 1] : array[i] > array[i + 1]) {
 					array[i] = (array[i] + array[i + 1]) - (array[i + 1] = array[i]);
 					swapped = true;
 				}
@@ -94,11 +94,13 @@ public class IntArray {
 	public static void merge(int[] array, int[] leftArray, int[] rightArray, int left, int right) {
 		int i = 0, j = 0, k = 0;
 
+		// merges the two arrays with the smaller number first
 		while (i < left && j < right) {
 			array[k++] = leftArray[i] <= rightArray[j]
 					? leftArray[i++]
 					: rightArray[j++];
 		}
+
 		while (i < left) {
 			array[k++] = leftArray[i++];
 		}
