@@ -11,13 +11,8 @@ public class Main {
 		int[] array = new int[10000];
 
 		// fills the array with random numbers under 100
-		IntStream.range(0, array.length - 1).forEach(i -> array[i] = random.nextInt(100));
+		IntStream.range(0, array.length - 1).forEach(i -> array[i] = random.nextInt(array.length));
 		IntArray intArray = new IntArray(array);
-
-		// searches for the term
-		System.out.println("-2 = value not found, -1 = value found, anything else is the index of the value");
-		System.out.println("Value found: " + intArray.linearSearch(5, true) + "\n");
-		System.out.println("Value found: " + intArray.binarySearch(5, true) + "\n");
 
 		// prints the array
 		System.out.println("The unsorted array: " + Arrays.toString(intArray.getArray()) + "\n");
@@ -36,15 +31,20 @@ public class Main {
 
 		// sorts the array using bubble sort
 		timer.startTimerNano();
-		System.out.println("Bubble sorted array: " + Arrays.toString(intArray.bubbleSort(false)));
+		int[] bubbleSortedArray = intArray.bubbleSort(false);
 		long bubbleTime = timer.stopAndGetElapsedTime();
 
+		System.out.println("Bubble sorted array: " + Arrays.toString(bubbleSortedArray));
 		System.out.println("Bubble sort took: " + bubbleTime + " milliseconds \n");
 
 		System.out.println("Merge sort was " + bubbleTime / mergeTime + " times faster than bubble sort \n");
 
+		// searches for the term
+		System.out.println("-2 = value not found, -1 = value found, anything else is the index of the value");
+		System.out.println("Value found (linear search): " + intArray.linearSearch(array.length / 2, true));
+		System.out.println("Value found (binary search): " + intArray.binarySearch(array.length / 2, true) + "\n");
+
 		String string = "the quick brown fox jumps over the lazy dog";
 		char[] charArray = string.toCharArray();
-
 	}
 }
