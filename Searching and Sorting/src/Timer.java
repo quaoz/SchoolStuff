@@ -1,98 +1,141 @@
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
+
 public class Timer {
-	private long startTime;
-	private long endTime;
-	private boolean timerRunning;
+	private final AtomicLong startTime = new AtomicLong();
+	private final AtomicLong endTime = new AtomicLong();
+	private final AtomicBoolean timerRunning = new AtomicBoolean(false);
 	// -1 - not running, 0 - nanoseconds, 1 - milliseconds
-	private int timerMode;
+	private final AtomicInteger timerMode = new AtomicInteger();
 
 	Timer() {
-		this.timerMode = -1;
-		this.startTime = 0;
-		this.endTime = 0;
-		this.timerRunning = false;
+		this.timerMode.set(-1);
+		this.startTime.set(0);
+		this.endTime.set(0);
+		this.timerRunning.set(false);
 	}
 
-	// returns whether the timer is still running
+	/**
+	 * Returns whether the timer is still running
+	 *
+	 * @return boolean Is the timer running
+	 */
 	public boolean isTimerRunning() {
-		return timerRunning;
+		return timerRunning.get();
 	}
 
-	// returns the start time
+	/**
+	 * Returns the start time
+	 *
+	 * @return long The start time
+	 */
 	public long getStartTime() {
-		return startTime;
+		return startTime.get();
 	}
 
-	// returns the end time
+	/**
+	 * Returns the end time
+	 *
+	 * @return long The end time
+	 */
 	public long getEndTime() {
-		return endTime;
+		return endTime.get();
 	}
 
-	// stores the current time in nanoseconds as the start time
+	/**
+	 * Stores the current time in nanoseconds as the start time
+	 *
+	 * @throws RuntimeException Attempted to start the timer while it was running
+	 */
 	public void startTimerNano() throws RuntimeException {
 		// throws an exception if the timer was already running when the method was called
-		if (!timerRunning) {
-			startTime = System.nanoTime();
+		if (!timerRunning.get()) {
+			startTime.set(System.nanoTime());
 		} else {
 			throw new RuntimeException("Attempted to start the timer while it was running");
 		}
 
-		timerMode = 0;
-		timerRunning = true;
+		timerMode.set(0);
+		timerRunning.set(true);
 	}
 
-	// stores the current time in milliseconds as the start time
+	/**
+	 * 	Stores the current time in milliseconds as the start time
+	 *
+	 * @throws RuntimeException Attempted to start the timer while it was running
+	 */
 	public void startTimerMilli() throws RuntimeException {
 		// throws an exception if the timer was already running when the method was called
-		if (!timerRunning) {
-			startTime = System.currentTimeMillis();
+		if (!timerRunning.get()) {
+			startTime.set(System.currentTimeMillis());
 		} else {
 			throw new RuntimeException("Attempted to start the timer while it was running");
 		}
 
-		timerRunning = true;
-		timerMode = 1;
+		timerRunning.set(true);
+		timerMode.set(1);
 	}
 
-	// stores the current time as the end time
+	/**
+	 * Stores the current time as the end time
+	 *
+	 * @throws RuntimeException Attempted to stop the timer while it wasn't running
+	 */
 	public void stopTimer() throws RuntimeException {
 		// throws an exception if the timer wasn't running when the method was called
-		if (timerRunning) {
+		if (timerRunning.get()) {
 			// stops the timer in the correct time unit
-			if (timerMode == 0) {
-				endTime = System.nanoTime();
+			if (timerMode.get() == 0) {
+				endTime.set(System.nanoTime());
 			} else {
-				endTime = System.currentTimeMillis();
+				endTime.set(System.currentTimeMillis());
 			}
 		} else {
 			throw new RuntimeException("Attempted to stop the timer while it wasn't running");
 		}
 
-		timerRunning = false;
+		timerRunning.set(false);
 	}
 
-	// resets the timer
+	/**
+	 * Resets the timer
+	 *
+	 * @throws RuntimeException Attempted to reset the timer while it was running
+	 */
 	public void resetTimer() throws RuntimeException {
 		// throws an exception if the timer was running when the method was called
-		if (!timerRunning) {
-			startTime = 0;
-			endTime = 0;
-			timerMode = -1;
+		if (!timerRunning.get()) {
+			startTime.set(0);
+			endTime.set(0);
+			timerMode.set(-1);
 		} else {
 			throw new RuntimeException("Attempted to reset the timer while it was running");
 		}
 	}
 
-	// returns the difference between the start and end times or minus one if the timer hasn't been stopped
+	/**
+	 * Gets the difference between the start and end times
+	 *
+	 * @return long The end time minus the start time
+	 * @throws RuntimeException Attempted to get the elapsed time while the timer was running
+	 */
 	public long getElapsedTime() throws RuntimeException {
+		long result;
 		// throws an exception if the timer was running when the method was called
-		if (!timerRunning) {
-			return endTime - startTime;
+		if (!timerRunning.get()) {
+			result = endTime.get() - startTime.get();
 		} else {
 			throw new RuntimeException("Attempted to get the elapsed time while the timer was running");
 		}
+		return result;
 	}
 
-	// wrapper for stopTimer and getElapsedTime
+	/**
+	 * Calls stopTimer then returns the elapsed time
+	 *
+	 * @return long The end time minus the start time
+	 */
 	public long stopAndGetElapsedTime() {
 		stopTimer();
 		return getElapsedTime();
