@@ -2,6 +2,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
+/**
+ * Implements a simple way to time code execution
+ */
 public class Timer {
 	private final AtomicLong startTime = new AtomicLong();
 	private final AtomicLong endTime = new AtomicLong();
