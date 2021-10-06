@@ -5,18 +5,18 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
 /**
- * A linear search is the simplest search algorithm, works on sorted and unsorted arrays by comparing the value to each
+ * Linear search is the simplest search algorithm, works on sorted and unsorted arrays by comparing the value to each
  * element
  *
- * <p> Worst-case performance O(n) Best-case performance O(1) Average performance O(n)
+ * <p> Worst-case performance O(n), Best-case performance O(1), Average performance O(n)
  */
 public class LinearSearch {
 
 	/**
 	 * An overload for find(); A generic linear search without a sentinel value which returns the index by default
 	 *
-	 * @param array List to be searched
-	 * @param value Value being searched for
+	 * @param array The array to be searched
+	 * @param value The value being searched for
 	 * @return int Whether the value was found or not, -2 = not found, anything else is the index
 	 */
 	public static <T extends Comparable<T>> int find(T @NotNull [] array, @NotNull T value) {
@@ -26,8 +26,8 @@ public class LinearSearch {
 	/**
 	 * Generic linear search without a sentinel value
 	 *
-	 * @param array List to be searched
-	 * @param value Value being searched for
+	 * @param array The array to be searched
+	 * @param value The value being searched for
 	 * @param contains Whether to return the index of the value or just if the array contains it
 	 * @return int Whether the value was found or not, -2 = not found, -1 = found, anything else is the index
 	 */
@@ -49,8 +49,8 @@ public class LinearSearch {
 	 * An overload for findWithSentinel(); A generic linear search with a sentinel value which returns the index by
 	 * default, the list must have one empty element on the end as it will be overwritten with the sentinel value
 	 *
-	 * @param array List to be searched
-	 * @param value Value being searched for
+	 * @param array The array to be searched
+	 * @param value The value being searched for
 	 * @return int Whether the value was found or not, -2 = not found, anything else is the index
 	 */
 	public static <T extends Comparable<T>> int findWithSentinel(T @NotNull [] array, @NotNull T value) {
@@ -61,8 +61,8 @@ public class LinearSearch {
 	 * Generic linear search with a sentinel value, the list must have one empty element on the end as it will be
 	 * overwritten with the sentinel value
 	 *
-	 * @param array List to be searched
-	 * @param value Value being searched for
+	 * @param array The array to be searched
+	 * @param value The value being searched for
 	 * @param contains Whether to return the index of the value or just if the array contains it
 	 * @return int Whether the value was found or not, -2 = not found, -1 = found, anything else is the index
 	 */
@@ -93,8 +93,8 @@ public class LinearSearch {
 	/**
 	 * Generic linear search algorithm to find the indexes of all the occurrences of a value
 	 *
-	 * @param array List to be searched
-	 * @param value Value being searched for
+	 * @param array The array being searched
+	 * @param value The value being searched for
 	 * @return Integer ArrayList All the indexes the value was found at
 	 */
 	public static <T extends Comparable<T>> @NotNull ArrayList<Integer> findOccurrences(T @NotNull [] array, @NotNull T value) {
@@ -113,8 +113,8 @@ public class LinearSearch {
 	/**
 	 * Generic linear search algorithm to find total number of occurrences of a value
 	 *
-	 * @param array List to be searched
-	 * @param value Value being searched for
+	 * @param array The array being searched
+	 * @param value The value being searched for
 	 * @return int The total number of times the value occurred
 	 */
 	public static <T extends Comparable<T>> int findTotalOccurrences(T @NotNull [] array, @NotNull T value) {
