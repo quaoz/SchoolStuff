@@ -18,7 +18,7 @@ public class BinarySearch {
 	 * @return int Whether the value was found or not, -2 = not found, -1 = found, anything else is the index
 	 */
 	public static <T extends Comparable<T>> int find(T[] array, T value, boolean contains) {
-		return find(array, value, 0, array.length, contains);
+		return find(array, value, 0, array.length - 1, contains);
 	}
 
 	/**
@@ -30,7 +30,7 @@ public class BinarySearch {
 	 * @return int Whether the value was found or not, -2 = not found, -1 = found, anything else is the index
 	 */
 	public static <T extends Comparable<T>> int find(T[] array, T value) {
-		return find(array, value, 0, array.length, false);
+		return find(array, value, 0, array.length - 1, false);
 	}
 
 	/**
@@ -43,26 +43,25 @@ public class BinarySearch {
 	 * @param contains Whether to return the index of the value or just if the array contains it
 	 * @return int Whether the value was found or not, -2 = not found, -1 = found, anything else is the index
 	 */
-	private static <T extends Comparable<T>> int find(T[] array, T value, int left, int right, boolean contains) {
+	static <T extends Comparable<T>> int find(T[] array, T value, int left, int right, boolean contains) {
 		int result;
 
-		// returns if the key isn't found
-		if (right < left) {
-			result = -2;
-		} else {
+		 if (right >= left) {
 			// finds the middle
-			int middle = left + right >>> 1;
+			int middle = (left + right) >>> 1;
 			int comp = value.compareTo(array[middle]);
 
 			// recursively splits the array and searches the half that may contain the term
-			if (comp == 0) {
+			if (comp < 0) {
+				result = find(array, value, left, middle - 1, contains);
+			} else if (comp > 0) {
+				result = find(array, value, middle + 1, right, contains);
+			} else {
 				// returns -1 if contains is true or the index if contains is false
 				result = contains ? -1 : middle;
-			} else if (comp < 0) {
-				result = find(array, value, left, middle - 1, contains);
-			} else {
-				result = find(array, value, middle + 1, right, contains);
 			}
+		} else {
+			result = -2;
 		}
 
 		return result;
