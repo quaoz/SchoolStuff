@@ -1,9 +1,15 @@
 package common.sorts;
 
+/**
+ * Merge sort is a popular sorting algorithm, sorts an array by splitting it then recombining the pieces in order
+ *
+ * <p> Best-case, worst-case and average-case performance of O(n log n)
+ */
 public class MergeSort {
 
 	/**
-	 * Generic merge sort algorithm implements.
+	 * An overload for sort() so the left and right values don't have to be specified, implements a generic merge
+	 * sort algorithm
 	 *
 	 * @param array The array which should be sorted.
 	 * @return sorted array.
@@ -13,6 +19,8 @@ public class MergeSort {
 	}
 
 	/**
+	 * Implements a generic merge sort algorithm
+	 *
 	 * @param array The array to be sorted.
 	 * @param left The first index of the array.
 	 * @param right The last index of the array.
@@ -30,10 +38,10 @@ public class MergeSort {
 	/**
 	 * Merges two parts of an array.
 	 *
-	 * @param array the array to be merged.
-	 * @param left the first index of the array.
-	 * @param mid the middle index of the array.
-	 * @param right the last index of the array merges two parts of an array in increasing order.
+	 * @param array The array to be merged.
+	 * @param left The first index of the array.
+	 * @param mid The middle index of the array.
+	 * @param right The last index of the array merges two parts of an array in increasing order.
 	 */
 	private static <T extends Comparable<T>> T[] merge(T[] array, int left, int mid, int right) {
 		int length = right - left + 1;
