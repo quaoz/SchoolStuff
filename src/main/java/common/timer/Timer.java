@@ -8,11 +8,11 @@ import java.util.concurrent.atomic.AtomicLong;
  * Implements a simple way to time code execution
  */
 public class Timer {
-	private AtomicLong startTime = new AtomicLong();
-	private AtomicLong endTime = new AtomicLong();
-	private AtomicBoolean timerRunning = new AtomicBoolean(false);
+	private final AtomicLong startTime = new AtomicLong();
+	private final AtomicLong endTime = new AtomicLong();
+	private final AtomicBoolean timerRunning = new AtomicBoolean(false);
 	// -1 - not running, 0 - nanoseconds, 1 - milliseconds
-	private AtomicInteger timerMode = new AtomicInteger();
+	private final AtomicInteger timerMode = new AtomicInteger();
 
 	public Timer() {
 		this.timerMode.set(-1);

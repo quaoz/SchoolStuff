@@ -1,3 +1,6 @@
+package tasks.arraysextention;
+
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -18,7 +21,7 @@ public class Main {
 
 		// Iterates through each word in wordArray and parses it to the rotateString function
 		// Stores the RotatedString object returned by rotateString in the rotatedStrings array
-		RotatedString[] rotatedStrings = Arrays.stream(wordArray).map(Main::rotateString).toArray(RotatedString[]::new);
+		RotatedString[] rotatedStrings = Arrays.stream(wordArray).map(tasks.arraysextention.Main::rotateString).toArray(RotatedString[]::new);
 
 		// Displays all the original strings, rotated versions and offsets
 		for (RotatedString i : rotatedStrings) {
@@ -30,11 +33,12 @@ public class Main {
 		System.out.println(unrotatedString);
 	}
 
-	private static String[] stringToWordArray(@NotNull String string) {
+	@Contract(pure = true)
+	private static String @NotNull [] stringToWordArray(@NotNull String string) {
 		return string.split(" ");
 	}
 
-	private static RotatedString rotateString(@NotNull String string) {
+	private static @NotNull RotatedString rotateString(@NotNull String string) {
 		final int length = string.length();
 		RotatedString rotatedString = new RotatedString();
 		rotatedString.offset = random.nextInt(length) + 1;
@@ -76,7 +80,7 @@ public class Main {
 	* 	the offset needed to get you back to the original word
 	* */
 
-	private static String UnrotateString(RotatedString @NotNull [] rotatedString) {
+	private static @NotNull String UnrotateString(RotatedString @NotNull [] rotatedString) {
 		StringBuilder deobfuscatedString = new StringBuilder();
 
 		for (RotatedString string : rotatedString) {

@@ -1,3 +1,5 @@
+package tasks.shapes;
+
 public class Shape {
 	float numSides;
 

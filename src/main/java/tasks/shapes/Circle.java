@@ -1,3 +1,5 @@
+package tasks.shapes;
+
 public class Circle extends Shape {
 	private double radius;
 	private final double Pi = Math.PI;

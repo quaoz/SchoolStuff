@@ -1,7 +1,9 @@
+package tasks.calendar;
+
 public class Month {
 	private final String name;
 	private final int daysInTheMonth;
-	private int[][] days;
+	private final int[][] days;
 
 	Month(String name, int daysInTheMonth) {
 		this.name = name;

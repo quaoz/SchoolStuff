@@ -1,3 +1,7 @@
+package tasks.intarray;
+
+import common.timer.Timer;
+
 import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.IntStream;

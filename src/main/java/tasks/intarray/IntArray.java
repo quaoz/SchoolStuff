@@ -1,7 +1,11 @@
+package tasks.intarray;
+
+import org.jetbrains.annotations.NotNull;
+
 public class IntArray {
 	private int[] array;
 
-	IntArray(int[] array) {
+	IntArray(int @NotNull [] array) {
 		// copies the value to a new array with one extra element for a sentinel value
 		this.array = new int[array.length];
 		System.arraycopy(array, 0, this.array, 0, array.length);

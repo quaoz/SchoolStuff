@@ -1,3 +1,5 @@
+package tasks.shapes;
+
 public class Main {
 	public static void main(String[] args) {
 		final Square square = new Square(6);

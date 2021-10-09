@@ -1,3 +1,5 @@
+package tasks.tasks2;
+
 import java.util.Random;
 import java.util.Scanner;
 

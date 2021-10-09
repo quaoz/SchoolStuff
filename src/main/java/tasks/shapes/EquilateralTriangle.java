@@ -1,3 +1,5 @@
+package tasks.shapes;
+
 public class EquilateralTriangle extends Shape {
 	private double side;
 
