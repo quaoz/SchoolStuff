@@ -4,7 +4,7 @@ package common.searches;
  * Binary search is a popular search algorithm, it works by repeatedly splitting the array and selecting the half that
  * may contain the value, it requires the array to be sorted
  *
- * <p>Worst-case performance O(log n), Best-case performance O(1), Average performance O(log n)
+ * <p> Worst-case performance O(log n), Best-case performance O(1), Average performance O(log n)
  **/
 public class BinarySearch {
 

@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
  * Jump search is a search algorithm which improves on linear search by jumping ahead a fixed amount instead of
  * searching each element, requires the array to be sorted
  *
- * <p>Worst-case performance O(√n), Best-case performance O(1), Average performance O(√n)
+ * <p >Worst-case performance O(√n), Best-case performance O(1), Average performance O(√n)
  **/
 public class JumpSearch {
 

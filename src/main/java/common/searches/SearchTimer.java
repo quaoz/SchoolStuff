@@ -27,7 +27,6 @@ public class SearchTimer {
 
 		System.out.println("Searching for " + randomElement.toString() + ", exists at " + randomIndex + "\n");
 
-		// starts the time, runs the search algorithm then stops the timer
 		timer.startTimerNano();
 		index = LinearSearch.find(array, randomElement);
 		searchResults.add(timer.stopAndGetElapsedTime());
@@ -36,7 +35,6 @@ public class SearchTimer {
 		System.out.println("Linear search took " + searchResults.get(0) + " nanoseconds");
 		timer.resetTimer();
 
-		// starts the time, runs the search algorithm then stops the timer
 		timer.startTimerNano();
 		index = BinarySearch.find(array, randomElement);
 		searchResults.add(timer.stopAndGetElapsedTime());
@@ -45,7 +43,6 @@ public class SearchTimer {
 		System.out.println("Binary search took " + searchResults.get(1) + " nanoseconds, " + searchResults.get(0) / searchResults.get(1) + " times faster than linear search");
 		timer.resetTimer();
 
-		// starts the time, runs the search algorithm then stops the timer
 		timer.startTimerNano();
 		index = JumpSearch.find(array, randomElement);
 		searchResults.add(timer.stopAndGetElapsedTime());
@@ -54,7 +51,6 @@ public class SearchTimer {
 		System.out.println("Jump search took " + searchResults.get(2) + " nanoseconds, " + searchResults.get(0) / searchResults.get(2) + " times faster than linear search");
 		timer.resetTimer();
 
-		// starts the time, runs the search algorithm then stops the timer
 		timer.startTimerNano();
 		index = ExponentialSearch.find(array, randomElement);
 		searchResults.add(timer.stopAndGetElapsedTime());

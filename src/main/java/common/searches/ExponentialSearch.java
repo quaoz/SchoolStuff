@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
  * Exponential search works by find the range where the value may be found and then performing a binary search over this
  * range, it requires the array to be sorted
  *
- * <p>Worst-case performance O(log i), Best-case performance O(1), Average performance O(log i) where i is the position
+ * <p> Worst-case performance O(log i), Best-case performance O(1), Average performance O(log i) where i is the position
  * of the value being searched for
  **/
 public class ExponentialSearch {
