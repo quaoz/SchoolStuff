@@ -11,6 +11,12 @@ public class SortTimer {
 	private static final Timer timer = new Timer();
 	public static final Random random = new Random();
 
+	/**
+	 * Finds the fastest sorting algorithm for an array
+	 *
+	 * @param array The array to test
+	 * @return Long[] The sorting times
+	 */
 	public static <T extends Comparable<T>> @NotNull ArrayList<Long> fastestSort(T @NotNull [] array) {
 		ArrayList<Long> sortResults = new ArrayList<>();
 
@@ -34,7 +40,7 @@ public class SortTimer {
 
 		long mergeMean = 0;
 
-		// generates repeats / 25 arrays
+		// generates several arrays
 		for (int i = 0; i < repeats; i++) {
 			// fills array with sorted random numbers
 			array = IntStream.generate(() -> random.nextInt(maxElement))

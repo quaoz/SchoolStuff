@@ -86,7 +86,7 @@ public class SearchTimer {
 		long jumpMean = 0;
 		long exponentialMean = 0;
 
-		// generates repeats / 25 arrays
+		// generates several arrays
 		for (int i = 0; i < numArrays; i++) {
 			// fills array with sorted random numbers
 			array = IntStream.generate(() -> random.nextInt(maxElement))
@@ -95,7 +95,7 @@ public class SearchTimer {
 					.boxed()
 					.toArray(Integer[]::new);
 
-			// calls fastestSearch repeats times for each array
+			// calls fastestSearch several times for each array
 			for (int j = 0; j < repeatsPerArray; j++) {
 				newRandomIndex(array.length);
 				results = fastestSearch(array);
