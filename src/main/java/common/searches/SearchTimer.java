@@ -3,6 +3,7 @@ package common.searches;
 import common.timer.Timer;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.stream.IntStream;
 
@@ -17,11 +18,11 @@ public class SearchTimer {
 	 * @param array The array to test
 	 * @return Long[] The search times
 	 */
-	public static <T extends Comparable<T>> Long @NotNull [] fastestSearch(T @NotNull [] array) {
+	public static <T extends Comparable<T>> @NotNull ArrayList<Long> fastestSearch(T @NotNull [] array) {
 		// picks a random element from the array
 		T randomElement = array[randomIndex];
 
-		Long[] searchResults = new Long[4];
+		ArrayList<Long> searchResults = new ArrayList<>();
 		int index;
 
 		System.out.println("Searching for " + randomElement.toString() + ", exists at " + randomIndex + "\n");
@@ -29,37 +30,37 @@ public class SearchTimer {
 		// starts the time, runs the search algorithm then stops the timer
 		timer.startTimerNano();
 		index = LinearSearch.find(array, randomElement);
-		searchResults[0] = timer.stopAndGetElapsedTime();
+		searchResults.add(timer.stopAndGetElapsedTime());
 
 		assert index == randomIndex;
-		System.out.println("Linear search took " + searchResults[0] + " nanoseconds");
+		System.out.println("Linear search took " + searchResults.get(0) + " nanoseconds");
 		timer.resetTimer();
 
 		// starts the time, runs the search algorithm then stops the timer
 		timer.startTimerNano();
 		index = BinarySearch.find(array, randomElement);
-		searchResults[1] = timer.stopAndGetElapsedTime();
+		searchResults.add(timer.stopAndGetElapsedTime());
 
 		assert index == randomIndex;
-		System.out.println("Binary search took " + searchResults[1] + " nanoseconds, " + searchResults[0] / searchResults[1] + " times faster than linear search");
+		System.out.println("Binary search took " + searchResults.get(1) + " nanoseconds, " + searchResults.get(0) / searchResults.get(1) + " times faster than linear search");
 		timer.resetTimer();
 
 		// starts the time, runs the search algorithm then stops the timer
 		timer.startTimerNano();
 		index = JumpSearch.find(array, randomElement);
-		searchResults[2] = timer.stopAndGetElapsedTime();
+		searchResults.add(timer.stopAndGetElapsedTime());
 
 		assert index == randomIndex;
-		System.out.println("Jump search took " + searchResults[2] + " nanoseconds, " + searchResults[0] / searchResults[2] + " times faster than linear search");
+		System.out.println("Jump search took " + searchResults.get(2) + " nanoseconds, " + searchResults.get(0) / searchResults.get(2) + " times faster than linear search");
 		timer.resetTimer();
 
 		// starts the time, runs the search algorithm then stops the timer
 		timer.startTimerNano();
-		index = ExponentialSearch.find(array, randomElement, false);
-		searchResults[3] = timer.stopAndGetElapsedTime();
+		index = ExponentialSearch.find(array, randomElement);
+		searchResults.add(timer.stopAndGetElapsedTime());
 
 		assert index == randomIndex;
-		System.out.println("Exponential search took " + searchResults[3] + " nanoseconds, " + searchResults[0] / searchResults[3] + " times faster than linear search\n");
+		System.out.println("Exponential search took " + searchResults.get(3) + " nanoseconds, " + searchResults.get(0) / searchResults.get(3) + " times faster than linear search\n");
 		timer.resetTimer();
 
 		return searchResults;
@@ -77,7 +78,7 @@ public class SearchTimer {
 
 		final int totalRepeats = numArrays * repeatsPerArray;
 
-		Long[] results;
+		ArrayList<Long> results;
 		Integer[] array;
 
 		long linearMean = 0;
@@ -99,10 +100,10 @@ public class SearchTimer {
 				newRandomIndex(array.length);
 				results = fastestSearch(array);
 
-				linearMean += results[0];
-				binaryMean += results[1];
-				jumpMean += results[2];
-				exponentialMean += results[3];
+				linearMean += results.get(0);
+				binaryMean += results.get(1);
+				jumpMean += results.get(2);
+				exponentialMean += results.get(3);
 			}
 		}
 
@@ -111,7 +112,7 @@ public class SearchTimer {
 		jumpMean /= totalRepeats;
 		exponentialMean /= totalRepeats;
 
-		System.out.println("The mean for linear search was " + linearMean);
+		System.out.println("The mean for linear search was " + linearMean + " nanoseconds");
 		System.out.println("The mean for binary search was " + binaryMean + " nanoseconds, " + linearMean / binaryMean + " times faster than linear search");
 		System.out.println("The mean for jump search was " + jumpMean + " nanoseconds, " + linearMean / jumpMean + " times faster than linear search");
 		System.out.println("The mean for exponential search was " + exponentialMean + " nanoseconds, " + linearMean / exponentialMean + " times faster than linear search\n");
