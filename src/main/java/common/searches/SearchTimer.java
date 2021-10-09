@@ -3,13 +3,13 @@ package common.searches;
 import common.timer.Timer;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.IntStream;
 
 public class SearchTimer {
 	private static final Timer timer = new Timer();
 	private static final Random random = new Random();
+	private static int randomIndex;
 
 	/**
 	 * Finds the fastest search algorithm for an array
@@ -19,7 +19,6 @@ public class SearchTimer {
 	 */
 	public static <T extends Comparable<T>> Long @NotNull [] fastestSearch(T @NotNull [] array) {
 		// picks a random element from the array
-		int randomIndex = random.nextInt(array.length);
 		T randomElement = array[randomIndex];
 
 		Long[] searchResults = new Long[4];
@@ -66,6 +65,10 @@ public class SearchTimer {
 		return searchResults;
 	}
 
+	private static void newRandomIndex(int max) {
+		randomIndex = random.nextInt(max);
+	}
+
 	public static void main(String[] args) {
 		final int repeatsPerArray = 500;
 		final int numArrays = 20;
@@ -93,6 +96,7 @@ public class SearchTimer {
 
 			// calls fastestSearch repeats times for each array
 			for (int j = 0; j < repeatsPerArray; j++) {
+				newRandomIndex(array.length);
 				results = fastestSearch(array);
 
 				linearMean += results[0];
