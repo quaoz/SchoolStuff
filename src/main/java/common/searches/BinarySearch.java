@@ -47,17 +47,17 @@ public class BinarySearch {
 		int result;
 
 		 if (right >= left) {
-			// finds the middle
+			// Finds the middle
 			int middle = (left + right) >>> 1;
 			int comp = value.compareTo(array[middle]);
 
-			// recursively splits the array and searches the half that may contain the term
+			// Recursively splits the array and searches the half that may contain the term
 			if (comp < 0) {
 				result = find(array, value, left, middle - 1, contains);
 			} else if (comp > 0) {
 				result = find(array, value, middle + 1, right, contains);
 			} else {
-				// returns -1 if contains is true or the index if contains is false
+				// Returns -1 if contains is true or the index if contains is false
 				result = contains ? -1 : middle;
 			}
 		} else {

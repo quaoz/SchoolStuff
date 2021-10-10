@@ -48,9 +48,9 @@ public class SortTimer {
 		long bubbleMean = 0;
 		long mergeMean = 0;
 
-		// generates several arrays
+		// Generates several arrays
 		for (int i = 0; i < repeats; i++) {
-			// fills array with sorted random numbers
+			// Fills array with sorted random numbers
 			array = IntStream.generate(() -> random.nextInt(maxElement))
 					.limit(size)
 					.unordered()

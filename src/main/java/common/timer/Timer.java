@@ -54,7 +54,7 @@ public class Timer {
 	 * @throws RuntimeException Attempted to start the timer while it was running
 	 */
 	public void startTimerNano() throws RuntimeException {
-		// throws an exception if the timer was already running when the method was called
+		// Throws an exception if the timer was already running when the method was called
 		if (!timerRunning.get()) {
 			startTime.set(System.nanoTime());
 		} else {
@@ -71,7 +71,7 @@ public class Timer {
 	 * @throws RuntimeException Attempted to start the timer while it was running
 	 */
 	public void startTimerMilli() throws RuntimeException {
-		// throws an exception if the timer was already running when the method was called
+		// Throws an exception if the timer was already running when the method was called
 		if (!timerRunning.get()) {
 			startTime.set(System.currentTimeMillis());
 		} else {
@@ -88,9 +88,9 @@ public class Timer {
 	 * @throws RuntimeException Attempted to stop the timer while it wasn't running
 	 */
 	public void stopTimer() throws RuntimeException {
-		// throws an exception if the timer wasn't running when the method was called
+		// Throws an exception if the timer wasn't running when the method was called
 		if (timerRunning.get()) {
-			// stops the timer in the correct time unit
+			// Stops the timer in the correct time unit
 			if (timerMode.get() == 0) {
 				endTime.set(System.nanoTime());
 			} else {
@@ -109,7 +109,7 @@ public class Timer {
 	 * @throws RuntimeException Attempted to reset the timer while it was running
 	 */
 	public void resetTimer() throws RuntimeException {
-		// throws an exception if the timer was running when the method was called
+		// Throws an exception if the timer was running when the method was called
 		if (!timerRunning.get()) {
 			startTime.set(0);
 			endTime.set(0);
@@ -127,7 +127,7 @@ public class Timer {
 	 */
 	public long getElapsedTime() throws RuntimeException {
 		long result;
-		// throws an exception if the timer was running when the method was called
+		// Throws an exception if the timer was running when the method was called
 		if (!timerRunning.get()) {
 			result = endTime.get() - startTime.get();
 		} else {

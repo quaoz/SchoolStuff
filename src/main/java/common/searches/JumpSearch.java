@@ -32,19 +32,19 @@ public class JumpSearch {
 	public static <T extends Comparable<T>> int find(T @NotNull [] array, @NotNull T value, boolean contains) {
 		int result = -2;
 		final int length = array.length;
-		// defines the block size
+		// Defines the block size
 		final int blockSize = (int) Math.floor(Math.sqrt(length));
 
-		// finds the block which may contain the value
+		// Finds the block which may contain the value
 		int limit = blockSize;
 		while (value.compareTo(array[limit]) > 0 && limit < length - 1) {
 			limit = Math.min(limit + blockSize, length - 1);
 		}
 
-		// uses linear search on the block
+		// Uses linear search on the block
 		for (int i = limit - blockSize; i <= limit; i++) {
 			if (array[i] == value) {
-				// returns -1 if contains is true or the index if contains is false
+				// Returns -1 if contains is true or the index if contains is false
 				result = contains ? -1 : i;
 				break;
 			}

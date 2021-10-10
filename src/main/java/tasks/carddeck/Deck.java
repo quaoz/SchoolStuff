@@ -29,7 +29,7 @@ public class Deck {
 		this.suits[2] = new Suit("Diamonds");
 		this.suits[3] = new Suit("Hearts");
 
-		// Adds teh suits to the deck
+		// Adds the suits to the deck
 		System.arraycopy(this.suits[0].getCards(), 0, this.cards, 0, 13);
 		System.arraycopy(this.suits[1].getCards(), 0, this.cards, 13, 13);
 		System.arraycopy(this.suits[2].getCards(), 0, this.cards, 26, 13);
@@ -146,7 +146,7 @@ public class Deck {
 
 	/**
 	 * @param hand int The number of cards per player
-	 * @param players int The number of player
+	 * @param players int The number of players
 	 * @return Card[][] The dealt deck
 	 * @throws AssertionError Not enough cards to deal them equally
 	 */

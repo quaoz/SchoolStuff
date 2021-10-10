@@ -34,7 +34,7 @@ public class LinearSearch {
 	public static <T extends Comparable<T>> int find(T @NotNull [] array, @NotNull T value, boolean contains) {
 		int result = -2;
 
-		// loops until it reaches the term or the end of the array
+		// Loops until it reaches the term or the end of the array
 		for (int i = 0; i < array.length; i++) {
 			if (array[i].compareTo(value) == 0) {
 				result = contains ? -1 : i;
@@ -69,21 +69,21 @@ public class LinearSearch {
 	public static <T extends Comparable<T>> int findWithSentinel(T @NotNull [] array, @NotNull T value, boolean contains) {
 		final int result;
 
-		// adds the sentinel value
+		// Adds the sentinel value
 		array[array.length - 1] = value;
 
 		int count = 0;
 
-		// loops until it reaches the term or sentinel value
+		// Loops until it reaches the term or sentinel value
 		while (value.compareTo(array[count]) != 0) {
 			count++;
 		}
 
 		if (count == array.length - 1) {
-			// returns -2 if the term was the sentinel value
+			// Returns -2 if the term was the sentinel value
 			result = -2;
 		} else {
-			// returns -1 if contains is true or the index if contains is false
+			// Returns -1 if contains is true or the index if contains is false
 			result = contains ? -1 : count;
 		}
 
@@ -111,7 +111,7 @@ public class LinearSearch {
 	}
 
 	/**
-	 * Generic linear search algorithm to find total number of occurrences of a value
+	 * Generic linear search algorithm to find the total number of occurrences of a value
 	 *
 	 * @param array The array being searched
 	 * @param value The value being searched for
@@ -120,7 +120,7 @@ public class LinearSearch {
 	public static <T extends Comparable<T>> int findTotalOccurrences(T @NotNull [] array, @NotNull T value) {
 		int occurrences = 0;
 
-		// loops until it reaches the term or the end of the array
+		// Loops until it reaches the term or the end of the array
 		for (T t : array) {
 			if (t.compareTo(value) == 0) {
 				occurrences++;

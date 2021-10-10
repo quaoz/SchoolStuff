@@ -29,13 +29,13 @@ public class MergeSort {
 		if (left < right) {
 			int mid = (left + right) >>> 1;
 
-			// sorts the first half
+			// Sorts the first half
 			sort(array, left, mid);
 
-			// sorts the second half
+			// Sorts the second half
 			sort(array, mid + 1, right);
 
-			// merges the sorted halves
+			// Merges the sorted halves
 			merge(array, left, mid, right);
 		}
 		return array;
@@ -43,7 +43,7 @@ public class MergeSort {
 
 	/**
 	 * Merges two parts of an array.
-	 *  @param array The array to be merged.
+	 * @param array The array to be merged.
 	 * @param left The first index of the array.
 	 * @param mid The middle index of the array.
 	 * @param right The last index of the array merges two parts of an array in increasing order.
@@ -57,14 +57,14 @@ public class MergeSort {
 		int j = mid + 1;
 		int k = 0;
 
-		// compares and adds the values to the temp array
+		// Compares and adds the values to the temp array
 		while (i <= mid && j <= right) {
 			temp[k++] = array[i].compareTo(array[j]) <= 0
 					? array[i++]
 					: array[j++];
 		}
 
-		// copy remaining values to the array
+		// Copy remaining values to the array
 		while (i <= mid) {
 			temp[k++] = array[i++];
 		}
@@ -73,7 +73,7 @@ public class MergeSort {
 			temp[k++] = array[j++];
 		}
 
-		// copies the temp array to the original array
+		// Copies the temp array to the original array
 		System.arraycopy(temp, 0, array, left, length);
 	}
 }
