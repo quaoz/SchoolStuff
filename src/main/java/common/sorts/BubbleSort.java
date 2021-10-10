@@ -1,5 +1,6 @@
 package common.sorts;
 
+import common.arrayutils.Swap;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -18,15 +19,12 @@ public class BubbleSort {
 	 */
 	public static <T extends Comparable<T>> T[] sort(T @NotNull [] array) {
 		boolean swapped;
-		T swap;
 
 		for (int i = 0, size = array.length; i < size - 1; ++i) {
 			swapped = false;
 			for (int j = 0; j < size - 1 - i; ++j) {
 				if (array[j].compareTo(array[j + 1]) > 0) {
-					swap = array[j];
-					array[j] = array[j + 1];
-					array[j + 1] = swap;
+					Swap.swap(array, j, j + 1);
 					swapped = true;
 				}
 			}
