@@ -29,21 +29,22 @@ public class Card implements Comparable<Card> {
 		put(10, "Queen");
 		put(11, "King");
 		put(12, "Ace");
+		put(13, "Joker");
 	}};
 
 	/**
 	 * Card constructor
 	 *
 	 * @param suit A string containing the suit name
-	 * @param faceValue A number from 0 to 12 representing the cards value
+	 * @param faceValue A number representing the cards value
 	 * @throws AssertionError Invalid face value
 	 */
 	public Card(@NotNull String suit, int faceValue) throws AssertionError {
-		assert faceValue < cardNames.size() && faceValue >= 0 : "Invalid faceValue, should be between 0 and " + cardNames.size();
+		assert faceValue < cardNames.size() && faceValue >= 0
+				: "Invalid faceValue, should be between 0 and " + cardNames.size();
 		this.suit = suit.toLowerCase(Locale.ROOT);
 		this.faceValue = faceValue;
 	}
-
 
 	/**
 	 * @return String The cards suit
@@ -73,20 +74,34 @@ public class Card implements Comparable<Card> {
 	@Override
 	public int compareTo(@NotNull Card c) {
 		int result;
-		if (Deck.isCompareByValue()) {
-			if (c.getFaceValue() == this.getFaceValue()) {
-				if (c.getSuit().equals("hearts") || this.getSuit().equals("hearts")) {
-					result = c.getSuit().equals("hearts") ? -1 : 1;
-				} else if (c.getSuit().equals("diamonds") || this.getSuit().equals("diamonds")) {
-					result = c.getSuit().equals("diamonds") ? -1 : 1;
+
+		if (c.getFaceValue() == 13 && !Deck.isIncludeJokers()) {
+			// If the cards are jokers and jokers aren't included it always returns -1, unless it is comparing one
+			// joker to another
+			result = c.getFaceValue() == this.getFaceValue() ? 0 : -1;
+		} else {
+			if (Deck.isCompareByValue()) {
+				// Compares the cards by their face values
+				if (c.getFaceValue() == this.getFaceValue()) {
+					// If the cards have the same face values then it compares them based on their suit
+					// Spades > Clubs > Diamonds > Hearts > Jokers
+					if (c.getSuit().equals("jokers") || this.getSuit().equals("jokers")) {
+						result = c.getSuit().equals("diamonds") ? -1 : 1;
+					} else if (c.getSuit().equals("hearts") || this.getSuit().equals("hearts")) {
+						result = c.getSuit().equals("hearts") ? -1 : 1;
+					} else if (c.getSuit().equals("diamonds") || this.getSuit().equals("diamonds")) {
+						result = c.getSuit().equals("diamonds") ? -1 : 1;
+					} else {
+						result = c.getSuit().equals("clubs") ? -1 : 1;
+					}
 				} else {
-					result = c.getSuit().equals("clubs") ? -1 : 1;
+					// If the values aren't the same it compares them
+					result = Integer.compare(this.getFaceValue(), c.getFaceValue());
 				}
 			} else {
-				result = Integer.compare(this.getFaceValue(), c.getFaceValue());
+				// Compares the cards by their long form names
+				result = this.getName().compareTo(c.getName());
 			}
-		} else {
-			result = this.getName().compareTo(c.getName());
 		}
 		return result;
 	}

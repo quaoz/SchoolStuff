@@ -8,18 +8,22 @@ public class Main {
 		Deck deck = new Deck();
 
 		System.out.println("Unsorted array:\n");
-		Arrays.stream(deck.getCards()).map(Card::getName).forEach(System.out::println);
+		deck.printDeck();
 
 		deck.mergeSort();
 		System.out.println("\nArray sorted by value:\n");
-		Arrays.stream(deck.getCards()).map(Card::getName).forEach(System.out::println);
+		deck.printDeck();
 
 		deck.mergeSort(false);
 		System.out.println("\nArray sorted by name:\n");
-		Arrays.stream(deck.getCards()).map(Card::getName).forEach(System.out::println);
+		deck.printDeck();
 
 		System.out.println("\nArray sorted by suit then value:\n");
-		IntStream.range(0, deck.getSuits().length).forEachOrdered(i -> Arrays.stream(deck.getSuits()[i].getCards()).map(Card::getName).forEach(System.out::println));
+		int bound = deck.getSuits().length;
+		IntStream.range(0, bound).forEachOrdered(i -> Arrays
+						.stream(deck.getSuits()[i].getCards())
+						.map(Card::getName)
+						.forEach(System.out::println));
 
 		int index = deck.indexOf("spades", 9);
 		System.out.println("\nThe nine of spades is at: " + index);
@@ -27,17 +31,21 @@ public class Main {
 
 		System.out.println("The shuffled cards are:\n");
 		deck.shuffleDeck();
-		Arrays.stream(deck.getCards()).map(Card::getName).forEach(System.out::println);
+		deck.printDeck();
 
-		System.out.println("\n");
+		System.out.println();
 		Card[][] dealtDeck = deck.deal(13, 4);
 
 		for (Card[] cards : dealtDeck) {
-			for (int j = 0; j < dealtDeck[0].length; j++) {
-				System.out.print(cards[j].getName() + ", ");
-			}
-			System.out.println("\n");
+			IntStream.range(0, dealtDeck[0].length)
+					.mapToObj(j -> cards[j].getName() + (j == dealtDeck[0].length - 1 ? "\n" : ", "))
+					.forEach(System.out::print);
 		}
+
+		System.out.println("\nDeck without jokers:\n");
+
+		deck.setIncludeJokers(false);
+		deck.printDeck();
 	}
 }
 
