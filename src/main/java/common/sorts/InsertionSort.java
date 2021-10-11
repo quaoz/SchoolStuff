@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 public class InsertionSort {
 
 	/**
-	 * Implements a generic merge sort algorithm
+	 * Implements a generic insertion sort algorithm
 	 *
 	 * @param array The array to be sorted
 	 * @return The sorted array
