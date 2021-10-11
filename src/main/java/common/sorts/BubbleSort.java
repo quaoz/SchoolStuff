@@ -12,10 +12,10 @@ import org.jetbrains.annotations.NotNull;
 public class BubbleSort {
 
 	/**
-	 * Implements a  generic bubble sort algorithm
+	 * Implements a generic bubble sort algorithm
 	 *
-	 * @param array The array to be sorted.
-	 * @return The sorted array.
+	 * @param array The array to be sorted
+	 * @return The sorted array
 	 */
 	public static <T extends Comparable<T>> T[] sort(T @NotNull [] array) {
 		boolean swapped;

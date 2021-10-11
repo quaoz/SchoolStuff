@@ -4,6 +4,7 @@ import common.timer.Timer;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.IntStream;
 
@@ -31,7 +32,14 @@ public class SortTimer {
 		MergeSort.sort(array);
 		sortResults.add(timer.stopAndGetElapsedTime());
 
-		System.out.println("Merge sort took " + sortResults.get(1) + " nanoseconds, " + sortResults.get(0) / sortResults.get(1) + " times faster than bubble sort\n");
+		System.out.println("Merge sort took " + sortResults.get(1) + " nanoseconds, " + sortResults.get(0) / sortResults.get(1) + " times faster than bubble sort");
+		timer.resetTimer();
+
+		timer.startTimerNano();
+		InsertionSort.sort(array);
+		sortResults.add(timer.stopAndGetElapsedTime());
+
+		System.out.println("Insertion sort took " + sortResults.get(2) + " nanoseconds, " + sortResults.get(0) / sortResults.get(2) + " times faster than bubble sort\n");
 		timer.resetTimer();
 
 		return sortResults;
@@ -47,6 +55,7 @@ public class SortTimer {
 
 		long bubbleMean = 0;
 		long mergeMean = 0;
+		long insertionMean = 0;
 
 		// Generates several arrays
 		for (int i = 0; i < repeats; i++) {
@@ -61,12 +70,15 @@ public class SortTimer {
 
 			bubbleMean += results.get(0);
 			mergeMean += results.get(1);
+			insertionMean += results.get(2);
 		}
 
 		bubbleMean /= repeats;
 		mergeMean /= repeats;
+		insertionMean /= repeats;
 
 		System.out.println("The mean for bubbles sort was " + bubbleMean + " nanoseconds");
 		System.out.println("The mean for merge sort was " + mergeMean + " nanoseconds, " + bubbleMean / mergeMean + " times faster than bubble sort");
+		System.out.println("The mean for insertion sort was " + insertionMean + " nanoseconds, " + bubbleMean / insertionMean + " times faster than bubble sort");
 	}
 }

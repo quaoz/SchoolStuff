@@ -1,7 +1,7 @@
 package common.sorts;
 
 /**
- * Merge sort is a popular sorting algorithm, sorts an array by splitting it then recombining the pieces in order
+ * Merge sort is a popular sorting algorithm, works by splitting it then recombining the pieces in order
  *
  * <p> Worst-case performance O(n log n), Best-case performance O(n log n), Average performance O(n log n)
  */
@@ -11,8 +11,8 @@ public class MergeSort {
 	 * An overload for sort() so the left and right values don't have to be specified, implements a generic merge
 	 * sort algorithm
 	 *
-	 * @param array The array which should be sorted.
-	 * @return sorted array.
+	 * @param array The array to be sorted
+	 * @return The sorted array
 	 */
 	public static <T extends Comparable<T>> T[] sort(T[] array) {
 		return sort(array, 0, array.length - 1);
@@ -21,9 +21,10 @@ public class MergeSort {
 	/**
 	 * Implements a generic merge sort algorithm
 	 *
-	 * @param array The array to be sorted.
-	 * @param left The first index of the array.
-	 * @param right The last index of the array.
+	 * @param array The array to be sorted
+	 * @param left The first index of the array
+	 * @param right The last index of the array
+	 * @return The sorted array
 	 */
 	private static <T extends Comparable<T>> T[] sort(T[] array, int left, int right) {
 		if (left < right) {
@@ -43,10 +44,11 @@ public class MergeSort {
 
 	/**
 	 * Merges two parts of an array.
-	 * @param array The array to be merged.
-	 * @param left The first index of the array.
-	 * @param mid The middle index of the array.
-	 * @param right The last index of the array merges two parts of an array in increasing order.
+	 *
+	 * @param array The array to be merged
+	 * @param left The first index of the array
+	 * @param mid The middle index of the array
+	 * @param right The last index of the array merges two parts of an array in increasing order
 	 */
 	private static <T extends Comparable<T>> void merge(T[] array, int left, int mid, int right) {
 		int length = right - left + 1;
