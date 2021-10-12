@@ -1,5 +1,6 @@
 package common.sorts;
 
+import common.arrayutils.Shuffle;
 import common.timer.Timer;
 import org.jetbrains.annotations.NotNull;
 
@@ -22,28 +23,28 @@ public class SortTimer {
 		ArrayList<Long> sortResults = new ArrayList<>();
 
 		timer.startTimerNano();
-		BubbleSort.sort(array);
+		BubbleSort.sort(array.clone());
 		sortResults.add(timer.stopAndGetElapsedTime());
 
 		System.out.println("Bubble sort took " + sortResults.get(0) + " nanoseconds");
 		timer.resetTimer();
 
 		timer.startTimerNano();
-		MergeSort.sort(array);
+		MergeSort.sort(array.clone());
 		sortResults.add(timer.stopAndGetElapsedTime());
 
 		System.out.println("Merge sort took " + sortResults.get(1) + " nanoseconds, " + sortResults.get(0) / sortResults.get(1) + " times faster than bubble sort");
 		timer.resetTimer();
 
 		timer.startTimerNano();
-		InsertionSort.sort(array);
+		InsertionSort.sort(array.clone());
 		sortResults.add(timer.stopAndGetElapsedTime());
 
 		System.out.println("Insertion sort took " + sortResults.get(2) + " nanoseconds, " + sortResults.get(0) / sortResults.get(2) + " times faster than bubble sort");
 		timer.resetTimer();
 
 		timer.startTimerNano();
-		ShellSort.sort(array);
+		ShellSort.sort(array.clone());
 		sortResults.add(timer.stopAndGetElapsedTime());
 
 		System.out.println("Shell sort took " + sortResults.get(3) + " nanoseconds, " + sortResults.get(0) / sortResults.get(3) + " times faster than bubble sort\n");
@@ -65,14 +66,16 @@ public class SortTimer {
 		long insertionMean = 0;
 		long shellMean = 0;
 
-		// Generates several arrays
+		// Fills array with sorted random numbers
+		array = IntStream.generate(() -> random.nextInt(maxElement))
+				.limit(size)
+				.unordered()
+				.boxed()
+				.toArray(Integer[]::new);
+
 		for (int i = 0; i < repeats; i++) {
-			// Fills array with sorted random numbers
-			array = IntStream.generate(() -> random.nextInt(maxElement))
-					.limit(size)
-					.unordered()
-					.boxed()
-					.toArray(Integer[]::new);
+			// Shuffles the array
+			Shuffle.shuffle(array);
 
 			results = fastestSort(array);
 
