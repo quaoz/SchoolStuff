@@ -5,7 +5,6 @@ import common.timer.Timer;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.IntStream;
 
@@ -61,9 +60,12 @@ public class SortTimer {
 	}
 
 	public static void main(String[] args) {
-		final int repeats = 50;
+		final int repeatsPerArray = 10;
+		final int numArrays = 10;
 		final int maxElement = 1000000;
 		final int size = 10000;
+
+		final int totalRepeats = numArrays * repeatsPerArray;
 
 		ArrayList<Long> results;
 		Integer[] array;
@@ -74,31 +76,33 @@ public class SortTimer {
 		long shellMean = 0;
 		long quickMean = 0;
 
-		// Fills array with sorted random numbers
-		array = IntStream.generate(() -> random.nextInt(maxElement))
-				.limit(size)
-				.unordered()
-				.boxed()
-				.toArray(Integer[]::new);
+		for (int i = 0; i < numArrays; i++) {
+			// Fills array with sorted random numbers
+			array = IntStream.generate(() -> random.nextInt(maxElement))
+					.limit(size)
+					.unordered()
+					.boxed()
+					.toArray(Integer[]::new);
 
-		for (int i = 0; i < repeats; i++) {
-			// Shuffles the array
-			Shuffle.shuffle(array);
+			for (int j = 0; j < repeatsPerArray; j++) {
+				// Shuffles the array
+				Shuffle.shuffle(array);
 
-			results = fastestSort(array);
+				results = fastestSort(array);
 
-			bubbleMean += results.get(0);
-			mergeMean += results.get(1);
-			insertionMean += results.get(2);
-			shellMean += results.get(3);
-			quickMean += results.get(4);
+				bubbleMean += results.get(0);
+				mergeMean += results.get(1);
+				insertionMean += results.get(2);
+				shellMean += results.get(3);
+				quickMean += results.get(4);
+			}
 		}
 
-		bubbleMean /= repeats;
-		mergeMean /= repeats;
-		insertionMean /= repeats;
-		shellMean /= repeats;
-		quickMean /= repeats;
+		bubbleMean /= totalRepeats;
+		mergeMean /= totalRepeats;
+		insertionMean /= totalRepeats;
+		shellMean /= totalRepeats;
+		quickMean /= totalRepeats;
 
 		System.out.println("The mean for bubbles sort was " + bubbleMean + " nanoseconds");
 		System.out.println("The mean for merge sort was " + mergeMean + " nanoseconds, " + bubbleMean / mergeMean + " times faster than bubble sort");

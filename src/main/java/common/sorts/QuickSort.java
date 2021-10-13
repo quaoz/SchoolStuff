@@ -36,7 +36,6 @@ public class QuickSort {
 			sort(array, left, pivot - 1);
 			sort(array, pivot, right);
 		}
-
 		return array;
 	}
 
