@@ -37,7 +37,9 @@ public class MergeSort {
 			sort(array, mid + 1, right);
 
 			// Merges the sorted halves
-			merge(array, left, mid, right);
+			if (array[mid].compareTo(array[mid + 1]) > 0) {
+				merge(array, left, mid, right);
+			}
 		}
 		return array;
 	}

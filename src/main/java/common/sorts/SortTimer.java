@@ -5,7 +5,6 @@ import common.timer.Timer;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.IntStream;
 
@@ -54,7 +53,7 @@ public class SortTimer {
 	}
 
 	public static void main(String[] args) {
-		final int repeats = 20;
+		final int repeats = 50;
 		final int maxElement = 1000000;
 		final int size = 10000;
 

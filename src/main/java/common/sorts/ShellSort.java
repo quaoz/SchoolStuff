@@ -11,17 +11,18 @@ import org.jetbrains.annotations.NotNull;
 public class ShellSort {
 
 	/**
-	 * Implements generic shell sort.
+	 * Implements generic shell sort algorithm
 	 *
 	 * @param array The array to be sorted
 	 * @return The sorted array
 	 */
 	public static <T extends Comparable<T>> T[] sort(T @NotNull [] array) {
+		final double gapConstant = 2.25;
 		int gap = 1;
 
-		// Calculate gap
-		while (gap < array.length / 3) {
-			gap = 3 * gap + 1;
+		// Calculate the gap
+		while (gap < array.length / gapConstant) {
+			gap = (int) Math.ceil(gapConstant * gap + 1);
 		}
 
 		while (gap > 0) {
@@ -37,7 +38,7 @@ public class ShellSort {
 				}
 				array[j] = insertValue;
 			}
-			gap /= 3;
+			gap /= gapConstant;
 		}
 		return array;
 	}

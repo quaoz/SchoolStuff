@@ -34,28 +34,28 @@ public class BinarySearch {
 	}
 
 	/**
-	 * Implements a generic binary search, this method should not be directly called
+	 * Implements a generic binary search
 	 *
 	 * @param array The array to be searched
 	 * @param value The value being searched for
-	 * @param left The lower bound
-	 * @param right The upper bound
+	 * @param low The lower bound
+	 * @param high The upper bound
 	 * @param contains Whether to return the index of the value or just if the array contains it
 	 * @return int Whether the value was found or not, -2 = not found, -1 = found, anything else is the index
 	 */
-	static <T extends Comparable<T>> int find(T[] array, T value, int left, int right, boolean contains) {
-		int result;
+	static <T extends Comparable<T>> int find(T[] array, T value, int low, int high, boolean contains) {
+		 int result;
 
-		 if (right >= left) {
+		 if (low <= high) {
 			// Finds the middle
-			int middle = (left + right) >>> 1;
+			int middle = (low + high) >>> 1;
 			int comp = value.compareTo(array[middle]);
 
 			// Recursively splits the array and searches the half that may contain the term
 			if (comp < 0) {
-				result = find(array, value, left, middle - 1, contains);
+				result = find(array, value, low, middle - 1, contains);
 			} else if (comp > 0) {
-				result = find(array, value, middle + 1, right, contains);
+				result = find(array, value, middle + 1, high, contains);
 			} else {
 				// Returns -1 if contains is true or the index if contains is false
 				result = contains ? -1 : middle;
