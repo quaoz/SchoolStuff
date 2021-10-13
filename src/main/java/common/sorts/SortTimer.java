@@ -5,6 +5,7 @@ import common.timer.Timer;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.IntStream;
 
@@ -46,7 +47,14 @@ public class SortTimer {
 		ShellSort.sort(array.clone());
 		sortResults.add(timer.stopAndGetElapsedTime());
 
-		System.out.println("Shell sort took " + sortResults.get(3) + " nanoseconds, " + sortResults.get(0) / sortResults.get(3) + " times faster than bubble sort\n");
+		System.out.println("Shell sort took " + sortResults.get(3) + " nanoseconds, " + sortResults.get(0) / sortResults.get(3) + " times faster than bubble sort");
+		timer.resetTimer();
+
+		timer.startTimerNano();
+		QuickSort.sort(array.clone());
+		sortResults.add(timer.stopAndGetElapsedTime());
+
+		System.out.println("Quick sort took " + sortResults.get(4) + " nanoseconds, " + sortResults.get(0) / sortResults.get(4) + " times faster than bubble sort\n");
 		timer.resetTimer();
 
 		return sortResults;
@@ -64,6 +72,7 @@ public class SortTimer {
 		long mergeMean = 0;
 		long insertionMean = 0;
 		long shellMean = 0;
+		long quickMean = 0;
 
 		// Fills array with sorted random numbers
 		array = IntStream.generate(() -> random.nextInt(maxElement))
@@ -82,16 +91,19 @@ public class SortTimer {
 			mergeMean += results.get(1);
 			insertionMean += results.get(2);
 			shellMean += results.get(3);
+			quickMean += results.get(4);
 		}
 
 		bubbleMean /= repeats;
 		mergeMean /= repeats;
 		insertionMean /= repeats;
 		shellMean /= repeats;
+		quickMean /= repeats;
 
 		System.out.println("The mean for bubbles sort was " + bubbleMean + " nanoseconds");
 		System.out.println("The mean for merge sort was " + mergeMean + " nanoseconds, " + bubbleMean / mergeMean + " times faster than bubble sort");
 		System.out.println("The mean for insertion sort was " + insertionMean + " nanoseconds, " + bubbleMean / insertionMean + " times faster than bubble sort");
 		System.out.println("The mean for shell sort was " + shellMean + " nanoseconds, " + bubbleMean / shellMean + " times faster than bubble sort");
+		System.out.println("The mean for quick sort was " + quickMean + " nanoseconds, " + bubbleMean / quickMean + " times faster than bubble sort");
 	}
 }
