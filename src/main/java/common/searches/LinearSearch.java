@@ -129,4 +129,28 @@ public class LinearSearch {
 
 		return occurrences;
 	}
+
+	/**
+	 * Generic linear search algorithm to find the total number of occurrences of an array of values
+	 *
+	 * @param array The array being searched
+	 * @param values The array of values being searched for
+	 * @return int The total number of times the value occurred
+	 */
+	public static <T extends Comparable<T>> int findTotalOccurrences(T @NotNull [] array, T @NotNull [] values) {
+		int occurrences = 0;
+
+		// Loops until it reaches the term or the end of the array
+		for (T t : array) {
+			for (T v : values) {
+				if (t.compareTo(v) == 0) {
+					occurrences++;
+					break;
+				}
+			}
+		}
+
+		return occurrences;
+	}
+
 }
