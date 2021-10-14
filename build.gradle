@@ -1,0 +1,20 @@
+plugins {
+	id 'java'
+}
+
+group 'com.github.quaoz'
+version '1.0-SNAPSHOT'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation "org.jetbrains:annotations:${project.annotaions_version}"
+	testImplementation "org.junit.jupiter:junit-jupiter-api:${project.junit_jupiter_version}"
+	testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${project.junit_jupiter_version}"
+}
+
+test {
+	useJUnitPlatform()
+}
