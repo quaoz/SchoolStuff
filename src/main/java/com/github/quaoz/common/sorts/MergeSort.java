@@ -52,7 +52,7 @@ public class MergeSort {
 	 * @param mid The middle index of the array
 	 * @param right The last index of the array merges two parts of an array in increasing order
 	 */
-	private static <T extends Comparable<T>> void merge(T[] array, int left, int mid, int right) {
+	static <T extends Comparable<T>> void merge(T[] array, int left, int mid, int right) {
 		int length = right - left + 1;
 
 		@SuppressWarnings("unchecked")
