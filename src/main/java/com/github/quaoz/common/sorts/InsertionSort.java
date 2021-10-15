@@ -1,5 +1,6 @@
 package com.github.quaoz.common.sorts;
 
+import com.github.quaoz.common.arrayutils.Comparisons;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -39,7 +40,7 @@ public class InsertionSort {
 			int j = i - 1;
 
 			// Moves elements of array[0..i-1] that are greater than the insert value one position ahead
-			while (j >= start && insertValue.compareTo(array[j]) < 0) {
+			while (j >= start && Comparisons.smaller(insertValue, array[j])) {
 				array[j + 1] = array[j];
 				j--;
 			}

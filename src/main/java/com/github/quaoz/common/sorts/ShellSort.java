@@ -1,5 +1,6 @@
 package com.github.quaoz.common.sorts;
 
+import com.github.quaoz.common.arrayutils.Comparisons;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -32,7 +33,7 @@ public class ShellSort {
 				int j = i;
 
 				// Moves elements of array[0..i-1] that are greater than the insert value one gap ahead
-				while (j >= gap && insertValue.compareTo(array[j - gap]) < 0) {
+				while (j >= gap && Comparisons.smaller(insertValue, array[j - gap])) {
 					array[j] = array[j - gap];
 					j -= gap;
 				}

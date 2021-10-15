@@ -1,5 +1,6 @@
 package com.github.quaoz.common.sorts;
 
+import com.github.quaoz.common.arrayutils.Comparisons;
 import com.github.quaoz.common.arrayutils.Swap;
 import org.jetbrains.annotations.NotNull;
 
@@ -39,7 +40,7 @@ public class BubbleSort {
 		for (int i = start, size = end; i < size - 1; ++i) {
 			swapped = false;
 			for (int j = start; j < size - 1 - i; ++j) {
-				if (array[j].compareTo(array[j + 1]) > 0) {
+				if (Comparisons.bigger(array[j], array[j + 1])) {
 					Swap.swap(array, j, j + 1);
 					swapped = true;
 				}

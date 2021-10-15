@@ -1,5 +1,6 @@
 package com.github.quaoz.common.searches;
 
+import com.github.quaoz.common.arrayutils.Comparisons;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -37,7 +38,7 @@ public class JumpSearch {
 
 		// Finds the block which may contain the value
 		int limit = blockSize;
-		while (value.compareTo(array[limit]) > 0 && limit < length - 1) {
+		while (Comparisons.smaller(array[limit], value) && limit < length - 1) {
 			limit = Math.min(limit + blockSize, length - 1);
 		}
 

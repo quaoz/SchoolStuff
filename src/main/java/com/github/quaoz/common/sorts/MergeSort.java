@@ -1,5 +1,7 @@
 package com.github.quaoz.common.sorts;
 
+import com.github.quaoz.common.arrayutils.Comparisons;
+
 /**
  * Merge sort is a fast popular sorting algorithm, works by splitting it then recombining the pieces in order
  *
@@ -36,7 +38,7 @@ public class MergeSort {
 			sort(array, mid + 1, right);
 
 			// Merges the sorted halves
-			if (array[mid].compareTo(array[mid + 1]) > 0) {
+			if (Comparisons.bigger(array[mid], array[mid + 1])) {
 				merge(array, left, mid, right);
 			}
 		}
@@ -62,7 +64,7 @@ public class MergeSort {
 
 		// Compares and adds the values to the temp array
 		while (i <= mid && j <= right) {
-			temp[k++] = array[i].compareTo(array[j]) <= 0
+			temp[k++] = !Comparisons.bigger(array[i], array[j])
 					? array[i++]
 					: array[j++];
 		}

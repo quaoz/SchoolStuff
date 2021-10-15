@@ -1,5 +1,6 @@
 package com.github.quaoz.common.searches;
 
+import com.github.quaoz.common.arrayutils.Comparisons;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -35,10 +36,10 @@ public class ExponentialSearch {
 		int bound = 1;
 		int result;
 
-		if (array[0].compareTo(value) == 0) {
+		if (Comparisons.equal(array[0], value)) {
 			result = contains ? -1 : 0;
 		} else {
-			while (bound < size && array[bound].compareTo(value) < 0) {
+			while (bound < size && Comparisons.smaller(array[bound], value)) {
 				bound *= 2;
 			}
 			result = BinarySearch.find(array, value, bound / 2, Math.min(bound + 1, size), contains);

@@ -1,5 +1,6 @@
 package com.github.quaoz.common.sorts;
 
+import com.github.quaoz.common.arrayutils.Comparisons;
 import com.github.quaoz.common.arrayutils.Swap;
 import org.jetbrains.annotations.NotNull;
 
@@ -65,10 +66,10 @@ public class QuickSort {
 		T pivot = array[mid];
 
 		while (left <= right) {
-			while (array[left].compareTo(pivot) < 0) {
+			while (Comparisons.bigger(pivot, array[left])) {
 				left++;
 			}
-			while (pivot.compareTo(array[right]) < 0) {
+			while (Comparisons.bigger(pivot, array[right])) {
 				right--;
 			}
 			if (left <= right) {

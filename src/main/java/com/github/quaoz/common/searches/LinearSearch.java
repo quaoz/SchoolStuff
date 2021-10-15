@@ -1,5 +1,6 @@
 package com.github.quaoz.common.searches;
 
+import com.github.quaoz.common.arrayutils.Comparisons;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class LinearSearch {
 
 		// Loops until it reaches the term or the end of the array
 		for (int i = 0; i < array.length; i++) {
-			if (array[i].compareTo(value) == 0) {
+			if (Comparisons.equal(array[i], value)) {
 				result = contains ? -1 : i;
 				break;
 			}
@@ -75,7 +76,7 @@ public class LinearSearch {
 		int count = 0;
 
 		// Loops until it reaches the term or sentinel value
-		while (value.compareTo(array[count]) != 0) {
+		while (Comparisons.notEqual(value, array[count])) {
 			count++;
 		}
 
@@ -117,7 +118,7 @@ public class LinearSearch {
 	 * @return int Whether the value was found or not, -2 = not found, anything else is the index
 	 */
 	public static <T extends Comparable<T>> int findForceSentinel(T @NotNull [] array, @NotNull T value, boolean contains) {
-		return array[array.length - 1].compareTo(value) == 0
+		return Comparisons.equal(array[array.length - 1], value)
 				? contains ? -1 : array.length - 1
 				: findWithSentinel(array, value, contains);
 	}
@@ -134,7 +135,7 @@ public class LinearSearch {
 
 		// loops until it reaches the term or the end of the array
 		for (int i = 0; i < array.length; i++) {
-			if (array[i].compareTo(value) == 0) {
+			if (Comparisons.equal(array[i], value)) {
 				indexes.add(i);
 			}
 		}
@@ -154,7 +155,7 @@ public class LinearSearch {
 
 		// Loops until it reaches the term or the end of the array
 		for (T t : array) {
-			if (t.compareTo(value) == 0) {
+			if (Comparisons.equal(t, value)) {
 				occurrences++;
 			}
 		}
@@ -175,7 +176,7 @@ public class LinearSearch {
 		// Loops until it reaches the term or the end of the array
 		for (T t : array) {
 			for (T v : values) {
-				if (t.compareTo(v) == 0) {
+				if (Comparisons.equal(t, v)) {
 					occurrences++;
 					break;
 				}
