@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 public class JumpSearch {
 
 	/**
-	 * An overload for find(); implements a generic jump search which returns the index by default
+	 * Implements a generic jump search which returns the index by default
 	 *
 	 * @param array The array to be searched
 	 * @param value The value being searched for

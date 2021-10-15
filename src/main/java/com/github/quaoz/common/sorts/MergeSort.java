@@ -1,15 +1,14 @@
 package com.github.quaoz.common.sorts;
 
 /**
- * Merge sort is a popular sorting algorithm, works by splitting it then recombining the pieces in order
+ * Merge sort is a fast popular sorting algorithm, works by splitting it then recombining the pieces in order
  *
  * <p> Worst-case performance O(n log n), Best-case performance O(n log n), Average performance O(n log n)
  */
 public class MergeSort {
 
 	/**
-	 * An overload for sort() so the left and right values don't have to be specified, implements a generic merge
-	 * sort algorithm
+	 * Implements a generic merge sort algorithm without having to specify the left and right bounds
 	 *
 	 * @param array The array to be sorted
 	 * @return The sorted array
@@ -50,7 +49,7 @@ public class MergeSort {
 	 * @param array The array to be merged
 	 * @param left The first index of the array
 	 * @param mid The middle index of the array
-	 * @param right The last index of the array merges two parts of an array in increasing order
+	 * @param right The last index of the array
 	 */
 	static <T extends Comparable<T>> void merge(T[] array, int left, int mid, int right) {
 		int length = right - left + 1;

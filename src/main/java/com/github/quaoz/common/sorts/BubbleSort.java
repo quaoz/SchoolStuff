@@ -4,25 +4,41 @@ import com.github.quaoz.common.arrayutils.Swap;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Bubble sort is the simplest sorting algorithm, works by comparing adjacent elements and swapping them if they are
- * out of order
+ * Bubble sort a very slow simplest sorting algorithm, works by comparing adjacent elements and swapping them if they
+ * are out of order
  *
  * <p> Worst-case performance O(n^2), Best-case performance O(n), Average performance O(n^2)
  */
 public class BubbleSort {
 
 	/**
-	 * Implements a generic bubble sort algorithm
+	 * Implements a generic bubble sort algorithm, assumes the whole array should be sorted
 	 *
 	 * @param array The array to be sorted
 	 * @return The sorted array
 	 */
 	public static <T extends Comparable<T>> T[] sort(T @NotNull [] array) {
+		return sort(array, 0, 0);
+	}
+
+	/**
+	 * Implements a generic bubble sort algorithm
+	 *
+	 * @param array The array to be sorted
+	 * @param start The index to start searching from
+	 * @param end The index to stop searching at
+	 * @return The sorted array
+	 */
+	public static <T extends Comparable<T>> T[] sort(T @NotNull [] array, int start, int end) {
 		boolean swapped;
 
-		for (int i = 0, size = array.length; i < size - 1; ++i) {
+		if (end <= start) {
+			end = array.length;
+		}
+
+		for (int i = start, size = end; i < size - 1; ++i) {
 			swapped = false;
-			for (int j = 0; j < size - 1 - i; ++j) {
+			for (int j = start; j < size - 1 - i; ++j) {
 				if (array[j].compareTo(array[j + 1]) > 0) {
 					Swap.swap(array, j, j + 1);
 					swapped = true;

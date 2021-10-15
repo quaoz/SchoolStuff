@@ -9,8 +9,7 @@ package com.github.quaoz.common.searches;
 public class BinarySearch {
 
 	/**
-	 * An overload for find() so the upper and lower bounds don't have to be specified; implements a generic binary
-	 * search
+	 * Implements a generic binary search without having to specify the upper and lower bounds
 	 *
 	 * @param array The array to be searched
 	 * @param value The value being searched for
@@ -22,8 +21,8 @@ public class BinarySearch {
 	}
 
 	/**
-	 * An overload for find() so the upper and lower bounds don't have to be specified; implements a generic binary
-	 * search which returns the index by default
+	 * Implements a generic binary search without having to specify the upper and lower bounds and returning the index
+	 * by default
 	 *
 	 * @param array The array to be searched
 	 * @param value The value being searched for
@@ -38,24 +37,24 @@ public class BinarySearch {
 	 *
 	 * @param array The array to be searched
 	 * @param value The value being searched for
-	 * @param low The lower bound
-	 * @param high The upper bound
+	 * @param left The left bound
+	 * @param right The right bound
 	 * @param contains Whether to return the index of the value or just if the array contains it
 	 * @return int Whether the value was found or not, -2 = not found, -1 = found, anything else is the index
 	 */
-	static <T extends Comparable<T>> int find(T[] array, T value, int low, int high, boolean contains) {
+	static <T extends Comparable<T>> int find(T[] array, T value, int left, int right, boolean contains) {
 		 int result;
 
-		 if (low <= high) {
+		 if (left <= right) {
 			// Finds the middle
-			int middle = (low + high) >>> 1;
+			int middle = (left + right) >>> 1;
 			int comp = value.compareTo(array[middle]);
 
 			// Recursively splits the array and searches the half that may contain the term
 			if (comp < 0) {
-				result = find(array, value, low, middle - 1, contains);
+				result = find(array, value, left, middle - 1, contains);
 			} else if (comp > 0) {
-				result = find(array, value, middle + 1, high, contains);
+				result = find(array, value, middle + 1, right, contains);
 			} else {
 				// Returns -1 if contains is true or the index if contains is false
 				result = contains ? -1 : middle;

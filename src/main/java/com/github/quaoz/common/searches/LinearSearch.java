@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class LinearSearch {
 
 	/**
-	 * An overload for find(); A generic linear search without a sentinel value which returns the index by default
+	 * Implements a generic linear search without a sentinel value which returns the index by default
 	 *
 	 * @param array The array to be searched
 	 * @param value The value being searched for
@@ -24,7 +24,7 @@ public class LinearSearch {
 	}
 
 	/**
-	 * Generic linear search without a sentinel value
+	 * Implements a generic linear search without a sentinel value
 	 *
 	 * @param array The array to be searched
 	 * @param value The value being searched for
@@ -46,8 +46,8 @@ public class LinearSearch {
 	}
 
 	/**
-	 * An overload for findWithSentinel(); A generic linear search with a sentinel value which returns the index by
-	 * default, the list must have one empty element on the end as it will be overwritten with the sentinel value
+	 * Implements a generic linear search with a sentinel value which returns the index by efault, the list must have
+	 * one empty element on the end as it will be overwritten with the sentinel value
 	 *
 	 * @param array The array to be searched
 	 * @param value The value being searched for
@@ -58,8 +58,8 @@ public class LinearSearch {
 	}
 
 	/**
-	 * Generic linear search with a sentinel value, the list must have one empty element on the end as it will be
-	 * overwritten with the sentinel value
+	 * Implements a generic linear search with a sentinel value, the list must have one empty element on the end as it
+	 * will be overwritten with the sentinel value
 	 *
 	 * @param array The array to be searched
 	 * @param value The value being searched for
@@ -91,7 +91,39 @@ public class LinearSearch {
 	}
 
 	/**
-	 * Generic linear search algorithm to find the indexes of all the occurrences of a value
+	 * Implements a generic linear search with a sentinel value which checks to see if the last element is the value
+	 * and replaces it with a sentinel value if it isn't, returns the index by default
+	 *
+	 * with a sentinel value which returns the index by efault, the list must have
+	 * one empty element on the end as it will be overwritten with the sentinel value
+	 *
+	 * @param array The array to be searched
+	 * @param value The value being searched for
+	 * @return int Whether the value was found or not, -2 = not found, anything else is the index
+	 */
+	public static <T extends Comparable<T>> int findForceSentinel(T @NotNull [] array, @NotNull T value) {
+		return findForceSentinel(array, value, false);
+	}
+
+	/**
+	 * Implements a generic linear search which checks to see if the last element is the value and replaces it with a
+	 * sentinel value if it isn't
+	 *
+	 * with a sentinel value which returns the index by efault, the list must have
+	 * one empty element on the end as it will be overwritten with the sentinel value
+	 *
+	 * @param array The array to be searched
+	 * @param value The value being searched for
+	 * @return int Whether the value was found or not, -2 = not found, anything else is the index
+	 */
+	public static <T extends Comparable<T>> int findForceSentinel(T @NotNull [] array, @NotNull T value, boolean contains) {
+		return array[array.length - 1].compareTo(value) == 0
+				? contains ? -1 : array.length - 1
+				: findWithSentinel(array, value, contains);
+	}
+
+	/**
+	 * Implements a generic linear search algorithm to find the indexes of all the occurrences of a value
 	 *
 	 * @param array The array being searched
 	 * @param value The value being searched for
@@ -111,7 +143,7 @@ public class LinearSearch {
 	}
 
 	/**
-	 * Generic linear search algorithm to find the total number of occurrences of a value
+	 * Implements a generic linear search algorithm to find the total number of occurrences of a value
 	 *
 	 * @param array The array being searched
 	 * @param value The value being searched for
@@ -131,7 +163,7 @@ public class LinearSearch {
 	}
 
 	/**
-	 * Generic linear search algorithm to find the total number of occurrences of an array of values
+	 * Implements a generic linear search algorithm to find the total number of occurrences of an array of values
 	 *
 	 * @param array The array being searched
 	 * @param values The array of values being searched for

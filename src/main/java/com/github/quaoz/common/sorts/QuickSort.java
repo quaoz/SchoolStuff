@@ -4,16 +4,15 @@ import com.github.quaoz.common.arrayutils.Swap;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Quick sort is a fast sorting algorithm, works by picking an element as a pivot and partitioning the array around the
- * chosen pivot
+ * Quick sort is a very fast sorting algorithm, works by picking an element as a pivot and partitioning the array around
+ * the chosen pivot
  *
  * <p> Worst-case performance O(n^2), Best-case performance O(n log n), Average performance O(n log n)
  */
 public class QuickSort {
 
 	/**
-	 * An overload for sort() so the left and right bounds don't have to be specified; implements a generic quick sort
-	 * algorithm
+	 * Implements a generic quick sort algorithm without having to specify the left and right bounds
 	 *
 	 * @param array The array to be sorted
 	 * @return The sorted array
