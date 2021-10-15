@@ -17,11 +17,6 @@ public class Main {
 
 		System.out.println("------------------------------");
 
-		final double pi = getPi();
-		System.out.println("PI: " + pi);
-
-		System.out.println("------------------------------");
-
 		final boolean isOdd = isOdd(number);
 		if (isOdd) {
 			System.out.println(number + " is odd");
@@ -77,11 +72,6 @@ public class Main {
 		for (int i=1; i<=n; i++) {
 			System.out.println(i);
 		}
-	}
-
-	/* returns Pi */
-	private static double getPi() {
-		return Math.PI;
 	}
 
 	/* returns whether a number is odd */
