@@ -5,6 +5,12 @@ import com.github.quaoz.common.arrayutils.Swap;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Heap sort is a fast sorting algorithm, works by dividing the array into a sorted and unsorted region and shrinking
+ * the unsorted region by moving the largest element into the sorted region
+ *
+ * <p> Worst-case performance O(n log n), Best-case performance O(n log n), Average performance O(n log n)
+ */
 public class HeapSort {
 
     /**
