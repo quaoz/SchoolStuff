@@ -53,18 +53,25 @@ public class SortTimer {
 		QuickSort.sort(array.clone());
 		sortResults.add(timer.stopAndGetElapsedTime());
 
-		System.out.println("Quick sort took " + sortResults.get(4) + " nanoseconds, " + sortResults.get(0) / sortResults.get(4) + " times faster than bubble sort");
-		timer.resetTimer();
+        System.out.println("Quick sort took " + sortResults.get(4) + " nanoseconds, " + sortResults.get(0) / sortResults.get(4) + " times faster than bubble sort");
+        timer.resetTimer();
 
-		timer.startTimerNano();
-		TimSort.sort(array.clone());
-		sortResults.add(timer.stopAndGetElapsedTime());
+        timer.startTimerNano();
+        TimSort.sort(array.clone());
+        sortResults.add(timer.stopAndGetElapsedTime());
 
-		System.out.println("Tim sort took " + sortResults.get(5) + " nanoseconds, " + sortResults.get(0) / sortResults.get(5) + " times faster than bubble sort\n");
-		timer.resetTimer();
+        System.out.println("Tim sort took " + sortResults.get(5) + " nanoseconds, " + sortResults.get(0) / sortResults.get(5) + " times faster than bubble sort");
+        timer.resetTimer();
 
-		return sortResults;
-	}
+        timer.startTimerNano();
+        HeapSort.sort(array.clone());
+        sortResults.add(timer.stopAndGetElapsedTime());
+
+        System.out.println("Heap sort took " + sortResults.get(6) + " nanoseconds, " + sortResults.get(0) / sortResults.get(6) + " times faster than bubble sort\n");
+        timer.resetTimer();
+
+        return sortResults;
+    }
 
 	public static void main(String[] args) {
 		final int repeatsPerArray = 10;
@@ -82,7 +89,8 @@ public class SortTimer {
 		long insertionMean = 0;
 		long shellMean = 0;
 		long quickMean = 0;
-		long timMean = 0;
+        long timMean = 0;
+        long heapMean = 0;
 
 		for (int i = 0; i < numArrays; i++) {
 			// Fills array with sorted random numbers
@@ -103,7 +111,8 @@ public class SortTimer {
 				insertionMean += results.get(2);
 				shellMean += results.get(3);
 				quickMean += results.get(4);
-				timMean += results.get(5);
+                timMean += results.get(5);
+                heapMean += results.get(6);
 			}
 		}
 
@@ -112,13 +121,15 @@ public class SortTimer {
 		insertionMean /= totalRepeats;
 		shellMean /= totalRepeats;
 		quickMean /= totalRepeats;
-		timMean /= totalRepeats;
+        timMean /= totalRepeats;
+        heapMean /= totalRepeats;
 
 		System.out.println("The mean for bubbles sort was " + bubbleMean + " nanoseconds");
 		System.out.println("The mean for merge sort was " + mergeMean + " nanoseconds, " + bubbleMean / mergeMean + " times faster than bubble sort");
 		System.out.println("The mean for insertion sort was " + insertionMean + " nanoseconds, " + bubbleMean / insertionMean + " times faster than bubble sort");
 		System.out.println("The mean for shell sort was " + shellMean + " nanoseconds, " + bubbleMean / shellMean + " times faster than bubble sort");
 		System.out.println("The mean for quick sort was " + quickMean + " nanoseconds, " + bubbleMean / quickMean + " times faster than bubble sort");
-		System.out.println("The mean for tim sort was " + timMean + " nanoseconds, " + bubbleMean / timMean + " times faster than bubble sort");
+        System.out.println("The mean for tim sort was " + timMean + " nanoseconds, " + bubbleMean / timMean + " times faster than bubble sort");
+        System.out.println("The mean for heap sort was " + heapMean + " nanoseconds, " + bubbleMean / heapMean + " times faster than bubble sort");
 	}
 }
