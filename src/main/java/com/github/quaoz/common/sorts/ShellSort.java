@@ -41,6 +41,7 @@ public class ShellSort {
 			}
 			gap /= gapConstant;
 		}
-		return array;
+
+        return array;
 	}
 }

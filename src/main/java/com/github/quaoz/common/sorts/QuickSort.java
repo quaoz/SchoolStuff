@@ -36,6 +36,7 @@ public class QuickSort {
 			sort(array, left, pivot - 1);
 			sort(array, pivot, right);
 		}
+
 		return array;
 	}
 
@@ -53,29 +54,30 @@ public class QuickSort {
 		return partition(array, left, right);
 	}
 
-	/**
-	 * This method finds the partition index for an array
-	 *
-	 * @param array The array to be sorted
-	 * @param left The first index of an array
-	 * @param right The last index of an array
-	 * @return The partition index
-	 */
-	private static <T extends Comparable<T>> int partition(T @NotNull [] array, int left, int right) {
-		int mid = (left + right) >>> 1;
-		T pivot = array[mid];
+    /**
+     * This method finds the partition index for an array
+     *
+     * @param array The array to be partitioned
+     * @param left  The first index of an array
+     * @param right The last index of an array
+     * @return The partition index
+     */
+    private static <T extends Comparable<T>> int partition(T @NotNull [] array, int left, int right) {
+        int mid = (left + right) >>> 1;
+        T pivot = array[mid];
 
-		while (left <= right) {
-			while (Comparisons.bigger(pivot, array[left])) {
-				left++;
-			}
-			while (Comparisons.bigger(pivot, array[right])) {
-				right--;
-			}
+        while (left <= right) {
+            while (Comparisons.bigger(pivot, array[left])) {
+                left++;
+            }
+            while (Comparisons.bigger(pivot, array[right])) {
+                right--;
+            }
 			if (left <= right) {
 				Swap.swap(array, left++, right--);
 			}
 		}
+
 		return left;
 	}
 }

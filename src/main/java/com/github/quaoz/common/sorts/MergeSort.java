@@ -42,7 +42,8 @@ public class MergeSort {
 				merge(array, left, mid, right);
 			}
 		}
-		return array;
+
+        return array;
 	}
 
 	/**

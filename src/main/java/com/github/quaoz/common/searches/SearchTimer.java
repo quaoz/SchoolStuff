@@ -19,45 +19,47 @@ public class SearchTimer {
 	 * @return Long[] The search times
 	 */
 	public static <T extends Comparable<T>> @NotNull ArrayList<Long> fastestSearch(T @NotNull [] array) {
-		// picks a random element from the array
-		T randomElement = array[randomIndex];
+        // picks a random element from the array
+        T randomElement = array[randomIndex];
 
-		ArrayList<Long> searchResults = new ArrayList<>();
-		int index;
+        ArrayList<Long> searchResults = new ArrayList<>();
+        int index;
 
-		System.out.println("Searching for " + randomElement.toString() + ", exists at " + randomIndex + "\n");
+        int searchNumber = 0;
 
-		timer.startTimerNano();
-		index = LinearSearch.find(array, randomElement);
-		searchResults.add(timer.stopAndGetElapsedTime());
+        System.out.println("Searching for " + randomElement.toString() + ", exists at " + randomIndex + "\n");
 
-		assert index == randomIndex;
-		System.out.println("Linear search took " + searchResults.get(0) + " nanoseconds");
-		timer.resetTimer();
+        timer.startTimerNano();
+        index = LinearSearch.find(array, randomElement);
+        searchResults.add(timer.stopAndGetElapsedTime());
+
+        assert index == randomIndex;
+        System.out.println("Linear search took " + searchResults.get(searchNumber++) + " nanoseconds");
+        timer.resetTimer();
 
 		timer.startTimerNano();
 		index = BinarySearch.find(array, randomElement);
 		searchResults.add(timer.stopAndGetElapsedTime());
 
 		assert index == randomIndex;
-		System.out.println("Binary search took " + searchResults.get(1) + " nanoseconds, " + searchResults.get(0) / searchResults.get(1) + " times faster than linear search");
-		timer.resetTimer();
+        System.out.println("Binary search took " + searchResults.get(searchNumber) + " nanoseconds, " + searchResults.get(0) / searchResults.get(searchNumber++) + " times faster than linear search");
+        timer.resetTimer();
 
 		timer.startTimerNano();
 		index = JumpSearch.find(array, randomElement);
 		searchResults.add(timer.stopAndGetElapsedTime());
 
 		assert index == randomIndex;
-		System.out.println("Jump search took " + searchResults.get(2) + " nanoseconds, " + searchResults.get(0) / searchResults.get(2) + " times faster than linear search");
-		timer.resetTimer();
+        System.out.println("Jump search took " + searchResults.get(searchNumber) + " nanoseconds, " + searchResults.get(0) / searchResults.get(searchNumber++) + " times faster than linear search");
+        timer.resetTimer();
 
 		timer.startTimerNano();
 		index = ExponentialSearch.find(array, randomElement);
 		searchResults.add(timer.stopAndGetElapsedTime());
 
 		assert index == randomIndex;
-		System.out.println("Exponential search took " + searchResults.get(3) + " nanoseconds, " + searchResults.get(0) / searchResults.get(3) + " times faster than linear search\n");
-		timer.resetTimer();
+        System.out.println("Exponential search took " + searchResults.get(searchNumber) + " nanoseconds, " + searchResults.get(0) / searchResults.get(searchNumber) + " times faster than linear search\n");
+        timer.resetTimer();
 
 		return searchResults;
 	}
