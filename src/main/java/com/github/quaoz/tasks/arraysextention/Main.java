@@ -65,20 +65,20 @@ public class Main {
 	}
 
 	/* Explanation:
-	*
-	* 	If the offset is smaller than the length of the string then it can be reverted to the original string by
-	* 	offsetting it by the length minus the offset
-	*
-	* 	E.g. If the string 'hello' has an offset of 2 it will become 'lohel', taking the length (5) and subtracting the
-	* 	offset (2) gives you 3 and when you offset the rotated word (lohel) by three you get back to 'hello'
-	*
-	* 	If the offset is larger than the length it can be reverted by offsetting it by the length minus the offset mod
-	* 	the length
-	*
-	* 	E.g. If the string 'hello' has an offset of 6 (the maximum possible for that word) it will become 'ohell', when
-	* 	you do the offset mod the length you get 1 and then by subtracting that from the length (giving you 4) you have
-	* 	the offset needed to get you back to the original word
-	* */
+	 *
+	 * 	If the offset is smaller than the length of the string then it can be reverted to the original string by
+	 * 	offsetting it by the length minus the offset
+	 *
+	 * 	E.g. If the string 'hello' has an offset of 2 it will become 'lohel', taking the length (5) and subtracting the
+	 * 	offset (2) gives you 3 and when you offset the rotated word (lohel) by three you get back to 'hello'
+	 *
+	 * 	If the offset is larger than the length it can be reverted by offsetting it by the length minus the offset mod
+	 * 	the length
+	 *
+	 * 	E.g. If the string 'hello' has an offset of 6 (the maximum possible for that word) it will become 'ohell', when
+	 * 	you do the offset mod the length you get 1 and then by subtracting that from the length (giving you 4) you have
+	 * 	the offset needed to get you back to the original word
+	 * */
 
 	private static @NotNull String UnrotateString(RotatedString @NotNull [] rotatedString) {
 		StringBuilder deobfuscatedString = new StringBuilder();
@@ -115,6 +115,7 @@ public class Main {
 		return deobfuscatedString.toString();
 	}
 }
+
 // Used to return the original word, rotated word and the offset
 class RotatedString {
 	public String originalString;

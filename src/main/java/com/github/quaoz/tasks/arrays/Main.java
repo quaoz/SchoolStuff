@@ -13,12 +13,12 @@ public class Main {
 		System.out.println(Arrays.toString(pi));
 
 		/* Task two */
-		final String[] rainbow = {"red" , "orange", "yellow", "green", "blue", "indigo", "violet"};
+		final String[] rainbow = {"red", "orange", "yellow", "green", "blue", "indigo", "violet"};
 		System.out.println(Arrays.toString(rainbow));
 
 		/* Task three */
 		int[] oneToTen = new int[10];
-		for (int i=0; i<10; i++) {
+		for (int i = 0; i < 10; i++) {
 			oneToTen[i] = i;
 		}
 
@@ -28,7 +28,7 @@ public class Main {
 		final String[] daysOfTheWeek = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
 		boolean[] hasCompSci = new boolean[7];
 
-		for (int i=0; i<daysOfTheWeek.length; i++) {
+		for (int i = 0; i < daysOfTheWeek.length; i++) {
 			System.out.println("Do you have computer science on " + daysOfTheWeek[i] + "?");
 			hasCompSci[i] = scanner.nextLine().equalsIgnoreCase("yes");
 		}
@@ -53,7 +53,7 @@ public class Main {
 		/* Task six */
 		final String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 		final int input = scanner.nextInt();
-		System.out.println(months[input-1]);
+		System.out.println(months[input - 1]);
 
 		/* Task seven */
 		final char[] xArray = xArray(6);
@@ -71,7 +71,7 @@ public class Main {
 	private static char[] xArray(int size) {
 		char[] array = new char[size];
 
-		for (int i=0; i<size; i++) {
+		for (int i = 0; i < size; i++) {
 			array[i] = 'X';
 		}
 
@@ -81,7 +81,7 @@ public class Main {
 	private static char[] arrayFromString(String string) {
 		char[] array = new char[string.length()];
 
-		for (int i=0; i<string.length(); i++) {
+		for (int i = 0; i < string.length(); i++) {
 			array[i] = string.charAt(i);
 		}
 
@@ -91,12 +91,12 @@ public class Main {
 	public static int aTimesB(final int a, final int b) {
 		int[] array = new int[10000];
 
-		for (int i=0; i<100; i++) {
-			for (int j=0; j<100 ; j++) {
-				array[i*j] = i*j;
+		for (int i = 0; i < 100; i++) {
+			for (int j = 0; j < 100; j++) {
+				array[i * j] = i * j;
 			}
 		}
 
-		return array[a*b];
+		return array[a * b];
 	}
 }

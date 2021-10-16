@@ -11,10 +11,12 @@ public class BinarySearch {
 	/**
 	 * Implements a generic binary search without having to specify the upper and lower bounds
 	 *
-	 * @param array The array to be searched
-	 * @param value The value being searched for
+	 * @param array    The array to be searched
+	 * @param value    The value being searched for
 	 * @param contains Whether to return the index of the value or just if the array contains it
-	 * @return int Whether the value was found or not, -2 = not found, -1 = found, anything else is the index
+	 * @param <T>      The array type
+	 *
+	 * @return int        Whether the value was found or not, -2 = not found, -1 = found, anything else is the index
 	 */
 	public static <T extends Comparable<T>> int find(T[] array, T value, boolean contains) {
 		return find(array, value, 0, array.length - 1, contains);
@@ -26,7 +28,9 @@ public class BinarySearch {
 	 *
 	 * @param array The array to be searched
 	 * @param value The value being searched for
-	 * @return int Whether the value was found or not, -2 = not found, -1 = found, anything else is the index
+	 * @param <T>   The array type
+	 *
+	 * @return int    Whether the value was found or not, -2 = not found, -1 = found, anything else is the index
 	 */
 	public static <T extends Comparable<T>> int find(T[] array, T value) {
 		return find(array, value, 0, array.length - 1, false);
@@ -35,17 +39,19 @@ public class BinarySearch {
 	/**
 	 * Implements a generic binary search
 	 *
-	 * @param array The array to be searched
-	 * @param value The value being searched for
-	 * @param left The left bound
-	 * @param right The right bound
+	 * @param array    The array to be searched
+	 * @param value    The value being searched for
+	 * @param left     The left bound
+	 * @param right    The right bound
 	 * @param contains Whether to return the index of the value or just if the array contains it
-	 * @return int Whether the value was found or not, -2 = not found, -1 = found, anything else is the index
+	 * @param <T>      The array type
+	 *
+	 * @return int        Whether the value was found or not, -2 = not found, -1 = found, anything else is the index
 	 */
 	static <T extends Comparable<T>> int find(T[] array, T value, int left, int right, boolean contains) {
-		 int result;
+		int result;
 
-		 if (left <= right) {
+		if (left <= right) {
 			// Finds the middle
 			int middle = (left + right) >>> 1;
 			int comp = value.compareTo(array[middle]);

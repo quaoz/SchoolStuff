@@ -30,7 +30,7 @@ public class Main {
 		System.out.print("Enter a word: ");
 		final String word = scanner.nextLine();
 
-		for (int i=0; i<word.length(); i++) {
+		for (int i = 0; i < word.length(); i++) {
 			System.out.println(word);
 		}
 	}
@@ -40,11 +40,11 @@ public class Main {
 	 * they have left */
 	private static void numberGuesser() {
 		final Random random = new Random();
-		final int randomNumber =random.nextInt(50);
+		final int randomNumber = random.nextInt(50);
 
 		System.out.println(randomNumber);
 
-		for (int i = 0; i<10; i++) {
+		for (int i = 0; i < 10; i++) {
 			System.out.print("Guess the number: ");
 			int guess = scanner.nextInt();
 

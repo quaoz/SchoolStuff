@@ -18,7 +18,9 @@ public class LinearSearch {
 	 *
 	 * @param array The array to be searched
 	 * @param value The value being searched for
-	 * @return int Whether the value was found or not, -2 = not found, anything else is the index
+	 * @param <T>   The array type
+	 *
+	 * @return int    Whether the value was found or not, -2 = not found, anything else is the index
 	 */
 	public static <T extends Comparable<T>> int find(T @NotNull [] array, @NotNull T value) {
 		return find(array, value, false);
@@ -27,10 +29,12 @@ public class LinearSearch {
 	/**
 	 * Implements a generic linear search without a sentinel value
 	 *
-	 * @param array The array to be searched
-	 * @param value The value being searched for
+	 * @param array    The array to be searched
+	 * @param value    The value being searched for
 	 * @param contains Whether to return the index of the value or just if the array contains it
-	 * @return int Whether the value was found or not, -2 = not found, -1 = found, anything else is the index
+	 * @param <T>   The array type
+	 *
+	 * @return int        Whether the value was found or not, -2 = not found, -1 = found, anything else is the index
 	 */
 	public static <T extends Comparable<T>> int find(T @NotNull [] array, @NotNull T value, boolean contains) {
 		int result = -2;
@@ -52,7 +56,9 @@ public class LinearSearch {
 	 *
 	 * @param array The array to be searched
 	 * @param value The value being searched for
-	 * @return int Whether the value was found or not, -2 = not found, anything else is the index
+	 * @param <T>   The array type
+	 *
+	 * @return int    Whether the value was found or not, -2 = not found, anything else is the index
 	 */
 	public static <T extends Comparable<T>> int findWithSentinel(T @NotNull [] array, @NotNull T value) {
 		return findWithSentinel(array, value, false);
@@ -62,10 +68,12 @@ public class LinearSearch {
 	 * Implements a generic linear search with a sentinel value, the list must have one empty element on the end as it
 	 * will be overwritten with the sentinel value
 	 *
-	 * @param array The array to be searched
-	 * @param value The value being searched for
+	 * @param array    The array to be searched
+	 * @param value    The value being searched for
 	 * @param contains Whether to return the index of the value or just if the array contains it
-	 * @return int Whether the value was found or not, -2 = not found, -1 = found, anything else is the index
+	 * @param <T>   The array type
+	 *
+	 * @return int        Whether the value was found or not, -2 = not found, -1 = found, anything else is the index
 	 */
 	public static <T extends Comparable<T>> int findWithSentinel(T @NotNull [] array, @NotNull T value, boolean contains) {
 		final int result;
@@ -94,13 +102,15 @@ public class LinearSearch {
 	/**
 	 * Implements a generic linear search with a sentinel value which checks to see if the last element is the value
 	 * and replaces it with a sentinel value if it isn't, returns the index by default
-	 *
+	 * <p>
 	 * with a sentinel value which returns the index by efault, the list must have
 	 * one empty element on the end as it will be overwritten with the sentinel value
 	 *
 	 * @param array The array to be searched
 	 * @param value The value being searched for
-	 * @return int Whether the value was found or not, -2 = not found, anything else is the index
+	 * @param <T>   The array type
+	 *
+	 * @return int    Whether the value was found or not, -2 = not found, anything else is the index
 	 */
 	public static <T extends Comparable<T>> int findForceSentinel(T @NotNull [] array, @NotNull T value) {
 		return findForceSentinel(array, value, false);
@@ -109,13 +119,15 @@ public class LinearSearch {
 	/**
 	 * Implements a generic linear search which checks to see if the last element is the value and replaces it with a
 	 * sentinel value if it isn't
-	 *
+	 * <p>
 	 * with a sentinel value which returns the index by efault, the list must have
 	 * one empty element on the end as it will be overwritten with the sentinel value
 	 *
 	 * @param array The array to be searched
 	 * @param value The value being searched for
-	 * @return int Whether the value was found or not, -2 = not found, anything else is the index
+	 * @param <T>   The array type
+	 *
+	 * @return int    Whether the value was found or not, -2 = not found, anything else is the index
 	 */
 	public static <T extends Comparable<T>> int findForceSentinel(T @NotNull [] array, @NotNull T value, boolean contains) {
 		return Comparisons.equal(array[array.length - 1], value)
@@ -128,7 +140,9 @@ public class LinearSearch {
 	 *
 	 * @param array The array being searched
 	 * @param value The value being searched for
-	 * @return Integer ArrayList All the indexes the value was found at
+	 * @param <T>   The array type
+	 *
+	 * @return Integer    ArrayList All the indexes the value was found at
 	 */
 	public static <T extends Comparable<T>> @NotNull ArrayList<Integer> findOccurrences(T @NotNull [] array, @NotNull T value) {
 		ArrayList<Integer> indexes = new ArrayList<>();
@@ -148,7 +162,9 @@ public class LinearSearch {
 	 *
 	 * @param array The array being searched
 	 * @param value The value being searched for
-	 * @return int The total number of times the value occurred
+	 * @param <T>   The array type
+	 *
+	 * @return int    The total number of times the value occurred
 	 */
 	public static <T extends Comparable<T>> int findTotalOccurrences(T @NotNull [] array, @NotNull T value) {
 		int occurrences = 0;
@@ -166,9 +182,11 @@ public class LinearSearch {
 	/**
 	 * Implements a generic linear search algorithm to find the total number of occurrences of an array of values
 	 *
-	 * @param array The array being searched
+	 * @param array  The array being searched
 	 * @param values The array of values being searched for
-	 * @return int The total number of times the value occurred
+	 * @param <T>    The array type
+	 *
+	 * @return int        The total number of times the value occurred
 	 */
 	public static <T extends Comparable<T>> int findTotalOccurrences(T @NotNull [] array, T @NotNull [] values) {
 		int occurrences = 0;

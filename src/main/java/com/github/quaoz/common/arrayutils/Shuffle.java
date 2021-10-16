@@ -14,7 +14,9 @@ public class Shuffle {
 	 * Randomly swaps each element of an array
 	 *
 	 * @param array The array to be shuffled
-	 * @return The shuffled array
+	 * @param <T>   The value type
+	 *
+	 * @return T[]    The shuffled array
 	 */
 	public static <T extends Comparable<T>> T[] shuffle(T @NotNull [] array) {
 		Random r = ThreadLocalRandom.current();

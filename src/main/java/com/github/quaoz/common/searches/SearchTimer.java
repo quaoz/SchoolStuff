@@ -16,50 +16,51 @@ public class SearchTimer {
 	 * Finds the fastest search algorithm for an array
 	 *
 	 * @param array The array to test
-	 * @return Long[] The search times
+	 *
+	 * @return Long[]    The search times
 	 */
 	public static <T extends Comparable<T>> @NotNull ArrayList<Long> fastestSearch(T @NotNull [] array) {
-        // picks a random element from the array
-        T randomElement = array[randomIndex];
+		// picks a random element from the array
+		T randomElement = array[randomIndex];
 
-        ArrayList<Long> searchResults = new ArrayList<>();
-        int index;
+		ArrayList<Long> searchResults = new ArrayList<>();
+		int index;
 
-        int searchNumber = 0;
+		int searchNumber = 0;
 
-        System.out.println("Searching for " + randomElement.toString() + ", exists at " + randomIndex + "\n");
+		System.out.println("Searching for " + randomElement.toString() + ", exists at " + randomIndex + "\n");
 
-        timer.startTimerNano();
-        index = LinearSearch.find(array, randomElement);
-        searchResults.add(timer.stopAndGetElapsedTime());
+		timer.startTimerNano();
+		index = LinearSearch.find(array, randomElement);
+		searchResults.add(timer.stopAndGetElapsedTime());
 
-        assert index == randomIndex;
-        System.out.println("Linear search took " + searchResults.get(searchNumber++) + " nanoseconds");
-        timer.resetTimer();
+		assert index == randomIndex;
+		System.out.println("Linear search took " + searchResults.get(searchNumber++) + " nanoseconds");
+		timer.resetTimer();
 
 		timer.startTimerNano();
 		index = BinarySearch.find(array, randomElement);
 		searchResults.add(timer.stopAndGetElapsedTime());
 
 		assert index == randomIndex;
-        System.out.println("Binary search took " + searchResults.get(searchNumber) + " nanoseconds, " + searchResults.get(0) / searchResults.get(searchNumber++) + " times faster than linear search");
-        timer.resetTimer();
+		System.out.println("Binary search took " + searchResults.get(searchNumber) + " nanoseconds, " + searchResults.get(0) / searchResults.get(searchNumber++) + " times faster than linear search");
+		timer.resetTimer();
 
 		timer.startTimerNano();
 		index = JumpSearch.find(array, randomElement);
 		searchResults.add(timer.stopAndGetElapsedTime());
 
 		assert index == randomIndex;
-        System.out.println("Jump search took " + searchResults.get(searchNumber) + " nanoseconds, " + searchResults.get(0) / searchResults.get(searchNumber++) + " times faster than linear search");
-        timer.resetTimer();
+		System.out.println("Jump search took " + searchResults.get(searchNumber) + " nanoseconds, " + searchResults.get(0) / searchResults.get(searchNumber++) + " times faster than linear search");
+		timer.resetTimer();
 
 		timer.startTimerNano();
 		index = ExponentialSearch.find(array, randomElement);
 		searchResults.add(timer.stopAndGetElapsedTime());
 
 		assert index == randomIndex;
-        System.out.println("Exponential search took " + searchResults.get(searchNumber) + " nanoseconds, " + searchResults.get(0) / searchResults.get(searchNumber) + " times faster than linear search\n");
-        timer.resetTimer();
+		System.out.println("Exponential search took " + searchResults.get(searchNumber) + " nanoseconds, " + searchResults.get(0) / searchResults.get(searchNumber) + " times faster than linear search\n");
+		timer.resetTimer();
 
 		return searchResults;
 	}
@@ -100,27 +101,27 @@ public class SearchTimer {
 
 				linearMean += results.get(0);
 				binaryMean += results.get(1);
-                jumpMean += results.get(2);
-                exponentialMean += results.get(3);
-            }
-        }
+				jumpMean += results.get(2);
+				exponentialMean += results.get(3);
+			}
+		}
 
-        linearMean /= totalRepeats;
-        binaryMean /= totalRepeats;
-        jumpMean /= totalRepeats;
-        exponentialMean /= totalRepeats;
+		linearMean /= totalRepeats;
+		binaryMean /= totalRepeats;
+		jumpMean /= totalRepeats;
+		exponentialMean /= totalRepeats;
 
-        final String format = "┃ %-25s ┃ %-20d │ %-15d ┃%n";
+		final String format = "┃ %-25s ┃ %-20d │ %-15d ┃%n";
 
-        System.out.format("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓%n");
-        System.out.format("┃ Search Method             ┃ Mean (nanoseconds)   ┃ x linear search ┃%n");
-        System.out.format("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┫%n");
+		System.out.format("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓%n");
+		System.out.format("┃ Search Method             ┃ Mean (nanoseconds)   ┃ x linear search ┃%n");
+		System.out.format("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┫%n");
 
-        System.out.format(format, "Linear search", linearMean, 0);
-        System.out.format(format, "Binary search", binaryMean, linearMean / binaryMean);
-        System.out.format(format, "Jump search", jumpMean, linearMean / jumpMean);
-        System.out.format(format, "Exponential search", exponentialMean, linearMean / exponentialMean);
+		System.out.format(format, "Linear search", linearMean, 0);
+		System.out.format(format, "Binary search", binaryMean, linearMean / binaryMean);
+		System.out.format(format, "Jump search", jumpMean, linearMean / jumpMean);
+		System.out.format(format, "Exponential search", exponentialMean, linearMean / exponentialMean);
 
-        System.out.format("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┛%n");
-    }
+		System.out.format("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┛%n");
+	}
 }

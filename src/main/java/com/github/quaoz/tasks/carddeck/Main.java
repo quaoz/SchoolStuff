@@ -21,9 +21,9 @@ public class Main {
 		System.out.println("\nArray sorted by suit then value:\n");
 		int bound = deck.getSuits().length;
 		IntStream.range(0, bound).forEachOrdered(i -> Arrays
-						.stream(deck.getSuits()[i].getCards())
-						.map(Card::getName)
-						.forEach(System.out::println));
+				.stream(deck.getSuits()[i].getCards())
+				.map(Card::getName)
+				.forEach(System.out::println));
 
 		int index = deck.indexOf("spades", 9);
 		System.out.println("\nThe nine of spades is at: " + index);

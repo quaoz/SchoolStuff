@@ -4,8 +4,8 @@ root = true
 charset = utf-8
 end_of_line = lf
 indent_size = 4
-indent_style = space
-insert_final_newline = false
+indent_style = tab
+insert_final_newline = true
 max_line_length = 120
 tab_width = 4
 ij_continuation_indent_size = 8
@@ -37,6 +37,7 @@ ij_css_value_alignment = do_not_align
 
 [*.feature]
 indent_size = 2
+indent_style = space
 ij_gherkin_keep_indents_on_empty_lines = false
 
 [*.gsp]
@@ -107,15 +108,15 @@ ij_java_do_not_indent_top_level_class_members = false
 ij_java_do_not_wrap_after_single_annotation = false
 ij_java_do_while_brace_force = never
 ij_java_doc_add_blank_line_after_description = true
-ij_java_doc_add_blank_line_after_param_comments = false
-ij_java_doc_add_blank_line_after_return = false
+ij_java_doc_add_blank_line_after_param_comments = true
+ij_java_doc_add_blank_line_after_return = true
 ij_java_doc_add_p_tag_on_empty_lines = true
 ij_java_doc_align_exception_comments = true
 ij_java_doc_align_param_comments = true
 ij_java_doc_do_not_wrap_if_one_line = false
 ij_java_doc_enable_formatting = true
 ij_java_doc_enable_leading_asterisks = true
-ij_java_doc_indent_on_continuation = false
+ij_java_doc_indent_on_continuation = true
 ij_java_doc_keep_empty_lines = true
 ij_java_doc_keep_empty_parameter_tag = true
 ij_java_doc_keep_empty_return_tag = true
@@ -285,7 +286,7 @@ ij_java_ternary_operation_wrap = off
 ij_java_test_name_suffix = Test
 ij_java_throws_keyword_wrap = off
 ij_java_throws_list_wrap = off
-ij_java_use_external_annotations = false
+ij_java_use_external_annotations = true
 ij_java_use_fq_class_names = false
 ij_java_use_relative_indents = false
 ij_java_use_single_class_imports = true
@@ -299,6 +300,7 @@ ij_java_wrap_long_lines = false
 
 [*.less]
 indent_size = 2
+indent_style = space
 ij_less_align_closing_brace_with_properties = false
 ij_less_blank_lines_around_nested_selector = 1
 ij_less_blank_lines_between_blocks = 1
@@ -318,6 +320,7 @@ ij_less_use_double_quotes = true
 ij_less_value_alignment = 0
 
 [*.nbtt]
+indent_style = space
 max_line_length = 150
 ij_continuation_indent_size = 4
 ij_nbtt_keep_indents_on_empty_lines = false
@@ -330,6 +333,7 @@ ij_nbtt_spaces_within_parentheses = false
 
 [*.proto]
 indent_size = 2
+indent_style = space
 tab_width = 2
 ij_continuation_indent_size = 4
 ij_protobuf_keep_blank_lines_in_code = 2
@@ -343,6 +347,7 @@ ij_protobuf_spaces_within_brackets = false
 
 [*.sass]
 indent_size = 2
+indent_style = space
 ij_sass_align_closing_brace_with_properties = false
 ij_sass_blank_lines_around_nested_selector = 1
 ij_sass_blank_lines_between_blocks = 1
@@ -363,6 +368,7 @@ ij_sass_value_alignment = 0
 
 [*.scala]
 indent_size = 2
+indent_style = space
 tab_width = 2
 ij_continuation_indent_size = 2
 ij_scala_align_composite_pattern = true
@@ -558,6 +564,7 @@ ij_scala_wrap_long_lines = false
 
 [*.scss]
 indent_size = 2
+indent_style = space
 ij_scss_align_closing_brace_with_properties = false
 ij_scss_blank_lines_around_nested_selector = 1
 ij_scss_blank_lines_between_blocks = 1
@@ -578,6 +585,7 @@ ij_scss_value_alignment = 0
 
 [*.styl]
 indent_size = 2
+indent_style = space
 ij_stylus_align_closing_brace_with_properties = false
 ij_stylus_blank_lines_around_nested_selector = 1
 ij_stylus_blank_lines_between_blocks = 1
@@ -605,6 +613,7 @@ ij_editorconfig_space_before_comma = false
 ij_editorconfig_spaces_around_assignment_operators = true
 
 [{*.ant,*.fxml,*.jhm,*.jnlp,*.jrxml,*.pom,*.rng,*.tld,*.wadl,*.wsdd,*.wsdl,*.xjb,*.xml,*.xsd,*.xsl,*.xslt,*.xul}]
+indent_style = space
 ij_xml_align_attributes = true
 ij_xml_align_text = false
 ij_xml_attribute_wrap = normal
@@ -624,6 +633,7 @@ ij_xml_text_wrap = normal
 ij_xml_use_custom_settings = false
 
 [{*.ats,*.ts}]
+indent_style = space
 ij_continuation_indent_size = 4
 ij_typescript_align_imports = false
 ij_typescript_align_multiline_array_initializer_expression = false
@@ -793,6 +803,7 @@ ij_typescript_wrap_comments = false
 
 [{*.bash,*.sh,*.zsh}]
 indent_size = 2
+indent_style = space
 tab_width = 2
 ij_shell_binary_ops_start_line = false
 ij_shell_keep_column_alignment_padding = false
@@ -802,6 +813,7 @@ ij_shell_switch_cases_indented = false
 ij_shell_use_unix_line_separator = true
 
 [{*.cjs,*.js}]
+indent_style = space
 ij_continuation_indent_size = 4
 ij_javascript_align_imports = false
 ij_javascript_align_multiline_array_initializer_expression = false
@@ -967,9 +979,11 @@ ij_javascript_while_on_new_line = false
 ij_javascript_wrap_comments = false
 
 [{*.ft,*.vm,*.vsl}]
+indent_style = space
 ij_vtl_keep_indents_on_empty_lines = false
 
 [{*.gant,*.gradle,*.groovy,*.gson,*.gy}]
+indent_style = space
 ij_groovy_align_group_field_declarations = false
 ij_groovy_align_multiline_array_initializer_expression = false
 ij_groovy_align_multiline_assignment = false
@@ -1150,6 +1164,7 @@ ij_groovy_wrap_chain_calls_after_dot = false
 ij_groovy_wrap_long_lines = false
 
 [{*.gradle.kts,*.kt,*.kts,*.main.kts,*.space.kts}]
+indent_style = space
 ij_kotlin_align_in_columns_case_branch = false
 ij_kotlin_align_multiline_binary_operation = false
 ij_kotlin_align_multiline_extends_list = false
@@ -1232,6 +1247,7 @@ ij_kotlin_wrap_first_method_in_call_chain = false
 
 [{*.har,*.jsb2,*.jsb3,*.json,.babelrc,.eslintrc,.stylelintrc,bowerrc,jest.config}]
 indent_size = 2
+indent_style = space
 ij_json_keep_blank_lines_in_code = 0
 ij_json_keep_indents_on_empty_lines = false
 ij_json_keep_line_breaks = true
@@ -1244,6 +1260,7 @@ ij_json_spaces_within_brackets = false
 ij_json_wrap_long_lines = false
 
 [{*.htm,*.html,*.ng,*.sht,*.shtm,*.shtml}]
+indent_style = space
 ij_html_add_new_line_before_tags = body, div, p, form, h1, h2, h3
 ij_html_align_attributes = true
 ij_html_align_text = false
@@ -1271,13 +1288,16 @@ ij_html_space_inside_empty_tag = false
 ij_html_text_wrap = normal
 
 [{*.jsf,*.jsp,*.jspf,*.tag,*.tagf,*.xjsp}]
+indent_style = space
 ij_jsp_jsp_prefer_comma_separated_import_list = false
 ij_jsp_keep_indents_on_empty_lines = false
 
 [{*.jspx,*.tagx}]
+indent_style = space
 ij_jspx_keep_indents_on_empty_lines = false
 
 [{*.markdown,*.md}]
+ij_smart_tabs = false
 ij_markdown_force_one_space_after_blockquote_symbol = true
 ij_markdown_force_one_space_after_header_symbol = true
 ij_markdown_force_one_space_after_list_bullet = true
@@ -1292,6 +1312,7 @@ ij_markdown_min_lines_between_paragraphs = 1
 
 [{*.pb,*.textproto}]
 indent_size = 2
+indent_style = space
 tab_width = 2
 ij_continuation_indent_size = 4
 ij_prototext_keep_blank_lines_in_code = 2
@@ -1311,6 +1332,7 @@ ij_properties_key_value_delimiter = equals
 ij_properties_spaces_around_key_value_delimiter = false
 
 [{*.toml,Cargo.lock,Cargo.toml.orig,Gopkg.lock,Pipfile,poetry.lock}]
+indent_style = space
 ij_toml_keep_indents_on_empty_lines = false
 
 [{*.yaml,*.yml}]

@@ -13,46 +13,51 @@ public class MergeSort {
 	 * Implements a generic merge sort algorithm without having to specify the left and right bounds
 	 *
 	 * @param array The array to be sorted
-	 * @return The sorted array
+	 * @param <T>   The array type
+	 *
+	 * @return T The sorted array
 	 */
 	public static <T extends Comparable<T>> T[] sort(T[] array) {
 		return sort(array, 0, array.length - 1);
 	}
 
 	/**
-     * Implements a generic merge sort algorithm
-     *
-     * @param array The array to be sorted
-     * @param left  The first index of the array
-     * @param right The last index of the array
-     * @return The sorted array
-     */
-    static <T extends Comparable<T>> T[] sort(T[] array, int left, int right) {
-        if (left < right) {
-            int mid = (left + right) >>> 1;
+	 * Implements a generic merge sort algorithm
+	 *
+	 * @param array The array to be sorted
+	 * @param left  The first index of the array
+	 * @param right The last index of the array
+	 * @param <T>   The array type
+	 *
+	 * @return T The sorted array
+	 */
+	static <T extends Comparable<T>> T[] sort(T[] array, int left, int right) {
+		if (left < right) {
+			int mid = (left + right) >>> 1;
 
-            // Sorts the first half
-            sort(array, left, mid);
+			// Sorts the first half
+			sort(array, left, mid);
 
-            // Sorts the second half
-            sort(array, mid + 1, right);
+			// Sorts the second half
+			sort(array, mid + 1, right);
 
-            // Merges the sorted halves
+			// Merges the sorted halves
 			if (Comparisons.bigger(array[mid], array[mid + 1])) {
 				merge(array, left, mid, right);
 			}
 		}
 
-        return array;
+		return array;
 	}
 
 	/**
 	 * Merges two parts of an array.
 	 *
 	 * @param array The array to be merged
-	 * @param left The first index of the array
-	 * @param mid The middle index of the array
+	 * @param left  The first index of the array
+	 * @param mid   The middle index of the array
 	 * @param right The last index of the array
+	* @param <T>   The array type
 	 */
 	static <T extends Comparable<T>> void merge(T[] array, int left, int mid, int right) {
 		int length = right - left + 1;

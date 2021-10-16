@@ -16,7 +16,9 @@ public class QuickSort {
 	 * Implements a generic quick sort algorithm without having to specify the left and right bounds
 	 *
 	 * @param array The array to be sorted
-	 * @return The sorted array
+	 * @param <T>   The array type
+	 *
+	 * @return T The sorted array
 	 */
 	public static <T extends Comparable<T>> T[] sort(T[] array) {
 		return sort(array, 0, array.length - 1);
@@ -26,15 +28,17 @@ public class QuickSort {
 	 * Implements a generic quick sort algorithm
 	 *
 	 * @param array The array to be sorted
-	 * @param left The first index of the array
+	 * @param left  The first index of the array
 	 * @param right The last index of the array
-	 * @return The sorted array
+	 * @param <T>   The array type
+	 *
+	 * @return T The sorted array
 	 */
 	static <T extends Comparable<T>> T[] sort(T[] array, int left, int right) {
 		if (left < right) {
 			int pivot = randomPartition(array, left, right);
 
-            sort(array, left, pivot - 1);
+			sort(array, left, pivot - 1);
 			sort(array, pivot, right);
 		}
 
@@ -45,9 +49,11 @@ public class QuickSort {
 	 * Randomise the array to avoid the basically ordered sequences
 	 *
 	 * @param array The array to be sorted
-	 * @param left The first index of an array
+	 * @param left  The first index of an array
 	 * @param right The last index of an array
-	 * @return The partition index
+	 * @param <T>   The array type
+	 *
+	 * @return int The partition index
 	 */
 	private static <T extends Comparable<T>> int randomPartition(T[] array, int left, int right) {
 		int randomIndex = left + (int) (Math.random() * (right - left + 1));
@@ -55,25 +61,27 @@ public class QuickSort {
 		return partition(array, left, right);
 	}
 
-    /**
-     * This method finds the partition index for an array
-     *
-     * @param array The array to be partitioned
-     * @param left  The first index of an array
-     * @param right The last index of an array
-     * @return The partition index
-     */
-    static <T extends Comparable<T>> int partition(T @NotNull [] array, int left, int right) {
-        int mid = (left + right) >>> 1;
-        T pivot = array[mid];
+	/**
+	 * This method finds the partition index for an array
+	 *
+	 * @param array The array to be partitioned
+	 * @param left  The first index of an array
+	 * @param right The last index of an array
+	 * @param <T>   The array type
+	 *
+	 * @return int The partition index
+	 */
+	static <T extends Comparable<T>> int partition(T @NotNull [] array, int left, int right) {
+		int mid = (left + right) >>> 1;
+		T pivot = array[mid];
 
-        while (left <= right) {
-            while (Comparisons.bigger(pivot, array[left])) {
-                left++;
-            }
-            while (Comparisons.bigger(pivot, array[right])) {
-                right--;
-            }
+		while (left <= right) {
+			while (Comparisons.bigger(pivot, array[left])) {
+				left++;
+			}
+			while (Comparisons.bigger(pivot, array[right])) {
+				right--;
+			}
 			if (left <= right) {
 				Swap.swap(array, left++, right--);
 			}

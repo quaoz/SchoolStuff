@@ -16,7 +16,8 @@ public class HeapSort {
      * Implements a generic heap sort algorithm without having to specify the bounds
      *
      * @param array The array to be sorted
-     * @return The sorted array
+     * @param <T>   The array type
+     * @return T The sorted array
      */
     public static <T extends Comparable<T>> T @NotNull [] sort(T @NotNull [] array) {
         return sort(array, 0, array.length);
@@ -26,7 +27,11 @@ public class HeapSort {
      * Implements a generic heap sort algorithm
      *
      * @param array The array to be sorted
-     * @return The sorted array
+     * @param <T>   The array type
+     * @param start The start index
+     * @param end    The end index
+     *
+     * @return T The sorted array
      */
     static <T extends Comparable<T>> T @NotNull [] sort(T @NotNull [] array, int start, int end) {
         final int size = end - start;
@@ -54,6 +59,7 @@ public class HeapSort {
      * @param array The array to be heapified
      * @param size  The size of the subtree
      * @param root  The node root of the subtree
+     * @param <T>   The array type
      */
     // to heapify a subtree rooted with node root which is an index in array[]
     static <T extends Comparable<T>> void heapify(T[] array, int size, int root) {

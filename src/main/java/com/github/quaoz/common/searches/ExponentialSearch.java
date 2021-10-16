@@ -17,7 +17,9 @@ public class ExponentialSearch {
 	 *
 	 * @param array The array to be searched
 	 * @param value The value being searched for
-	 * @return int Whether the value was found or not, -2 = not found, -1 = found, anything else is the index
+	 * @param <T>   The array type
+	 *
+	 * @return int    Whether the value was found or not, -2 = not found, -1 = found, anything else is the index
 	 */
 	public static <T extends Comparable<T>> int find(T @NotNull [] array, T value) {
 		return find(array, value, false);
@@ -26,10 +28,12 @@ public class ExponentialSearch {
 	/**
 	 * Implements a generic exponential search
 	 *
-	 * @param array The array to be searched
-	 * @param value The value being searched for
+	 * @param array    The array to be searched
+	 * @param value    The value being searched for
 	 * @param contains Whether to return the index of the value or just if the array contains it
-	 * @return int Whether the value was found or not, -2 = not found, -1 = found, anything else is the index
+	 * @param <T>   The array type
+	 *
+	 * @return int        Whether the value was found or not, -2 = not found, -1 = found, anything else is the index
 	 */
 	public static <T extends Comparable<T>> int find(T @NotNull [] array, T value, boolean contains) {
 		int size = array.length;

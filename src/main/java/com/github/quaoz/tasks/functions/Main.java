@@ -62,26 +62,26 @@ public class Main {
 
 	/* prints the numbers from one to twenty */
 	private static void printTwenty() {
-		for (int i=1; i<=20; i++) {
+		for (int i = 1; i <= 20; i++) {
 			System.out.println(i);
 		}
 	}
 
 	/* prints the numbers from one to n */
 	private static void printUpToInt(final int n) {
-		for (int i=1; i<=n; i++) {
+		for (int i = 1; i <= n; i++) {
 			System.out.println(i);
 		}
 	}
 
 	/* returns whether a number is odd */
 	private static boolean isOdd(final int n) {
-		return n%2!=0;
+		return n % 2 != 0;
 	}
 
 	/* repeats a message count times */
 	private static void repeatMessage(final String message, final int count) {
-		for (int i=0; i<count; i++) {
+		for (int i = 0; i < count; i++) {
 			System.out.println(message);
 		}
 	}
@@ -105,8 +105,8 @@ public class Main {
 	private static int factorial(int n) {
 		int factorial = 0;
 
-		for (int i=1; i<n; i++) {
-			factorial += n*i;
+		for (int i = 1; i < n; i++) {
+			factorial += n * i;
 		}
 
 		return factorial;

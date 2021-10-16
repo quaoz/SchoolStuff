@@ -66,7 +66,7 @@ public class Timer {
 	}
 
 	/**
-	 * 	Stores the current time in milliseconds as the start time
+	 * Stores the current time in milliseconds as the start time
 	 *
 	 * @throws RuntimeException Attempted to start the timer while it was running
 	 */
@@ -123,6 +123,7 @@ public class Timer {
 	 * Gets the difference between the start and end times
 	 *
 	 * @return long The end time minus the start time
+	 *
 	 * @throws RuntimeException Attempted to get the elapsed time while the timer was running
 	 */
 	public long getElapsedTime() throws RuntimeException {

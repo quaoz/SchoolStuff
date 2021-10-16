@@ -91,7 +91,7 @@ public class Deck {
 
 			// Iterates backwards twice through the array to fill in the spots where the jokers where
 			IntStream.range(0, 2).flatMap(i -> IntStream
-					.iterate(cards.length, j -> j > 0, j -> j - 1))
+							.iterate(cards.length, j -> j > 0, j -> j - 1))
 					.filter(j -> cards[j - 1].getFaceValue() == -1)
 					.forEach(j -> cards[j - 1] = cards[j]);
 
@@ -104,8 +104,9 @@ public class Deck {
 	/**
 	 * Uses a generic linear search to find the index of a card
 	 *
-	 * @param suit String The cards suit
+	 * @param suit      String The cards suit
 	 * @param faceValue int The cards face value
+	 *
 	 * @return int The index of the card, -2 if the card isn't found
 	 */
 	public int indexOf(String suit, int faceValue) {
@@ -145,9 +146,11 @@ public class Deck {
 	}
 
 	/**
-	 * @param hand int The number of cards per player
+	 * @param hand    int The number of cards per player
 	 * @param players int The number of players
+	 *
 	 * @return Card[][] The dealt deck
+	 *
 	 * @throws AssertionError Not enough cards to deal them equally
 	 */
 	public Card[][] deal(int hand, int players) throws AssertionError {

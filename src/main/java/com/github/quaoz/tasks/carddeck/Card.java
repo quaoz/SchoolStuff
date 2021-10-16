@@ -15,7 +15,7 @@ public class Card implements Comparable<Card> {
 	/**
 	 * Used to convert integer values to their word representations
 	 */
-	final private static HashMap<Integer, String> cardNames  = new HashMap<>() {{
+	final private static HashMap<Integer, String> cardNames = new HashMap<>() {{
 		put(0, "Two");
 		put(1, "Three");
 		put(2, "Four");
@@ -35,8 +35,9 @@ public class Card implements Comparable<Card> {
 	/**
 	 * Card constructor
 	 *
-	 * @param suit A string containing the suit name
+	 * @param suit      A string containing the suit name
 	 * @param faceValue A number representing the cards value
+	 *
 	 * @throws AssertionError Invalid face value
 	 */
 	public Card(@NotNull String suit, int faceValue) throws AssertionError {
@@ -69,6 +70,7 @@ public class Card implements Comparable<Card> {
 
 	/**
 	 * @param c Card to compare to  this
+	 *
 	 * @return int -1 if c is greater, 0 if c equals this, 1 if c is smaller than this
 	 */
 	@Override

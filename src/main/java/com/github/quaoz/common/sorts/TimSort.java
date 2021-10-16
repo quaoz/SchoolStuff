@@ -14,37 +14,39 @@ public class TimSort {
 	 * Implements generic tim sort algorithm
 	 *
 	 * @param array The array to be sorted
-	 * @return The sorted array
+	 * @param <T>   The array type
+	 *
+	 * @return T The sorted array
 	 */
 	public static <T extends Comparable<T>> T @NotNull [] sort(T @NotNull [] array) {
-        final int arrayLength = array.length;
-        final int minMerge = 32;
-        int minRun = 32;
+		final int arrayLength = array.length;
+		final int minMerge = 32;
+		int minRun = 32;
 
-        while (minRun >= 32) {
-            minRun >>= 1;
-        }
+		while (minRun >= 32) {
+			minRun >>= 1;
+		}
 
-        // Apply insertion sort on RUNS
-        for (int i = 0; i < arrayLength; i += minRun) {
-            InsertionSort.sort(array, i, Math.min(i + minMerge - 1, (arrayLength - 1)));
-        }
+		// Apply insertion sort on RUNS
+		for (int i = 0; i < arrayLength; i += minRun) {
+			InsertionSort.sort(array, i, Math.min(i + minMerge - 1, (arrayLength - 1)));
+		}
 
-        // Start merging from 32 and double each time
-        for (int size = minRun; size < arrayLength; size = 2 * size) {
+		// Start merging from 32 and double each time
+		for (int size = minRun; size < arrayLength; size = 2 * size) {
 
-            // Pick starting point of left sub array
-            for (int left = 0; left < arrayLength; left += 2 * size) {
+			// Pick starting point of left sub array
+			for (int left = 0; left < arrayLength; left += 2 * size) {
 
-                // Find end point of left sub array
-                int mid = left + size - 1;
-                int right = Math.min((left + 2 * size - 1), (arrayLength - 1));
+				// Find end point of left sub array
+				int mid = left + size - 1;
+				int right = Math.min((left + 2 * size - 1), (arrayLength - 1));
 
-                // Merge sub arrays
-                if (mid < right) {
-                    MergeSort.merge(array, left, mid, right);
-                }
-            }
+				// Merge sub arrays
+				if (mid < right) {
+					MergeSort.merge(array, left, mid, right);
+				}
+			}
 		}
 
 		return array;

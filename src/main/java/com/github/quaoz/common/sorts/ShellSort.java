@@ -15,7 +15,9 @@ public class ShellSort {
 	 * Implements generic shell sort algorithm
 	 *
 	 * @param array The array to be sorted
-	 * @return The sorted array
+	 * @param <T>   The array type
+	 *
+	 * @return T The sorted array
 	 */
 	public static <T extends Comparable<T>> T[] sort(T @NotNull [] array) {
 		final double gapConstant = 2.25;
@@ -42,6 +44,6 @@ public class ShellSort {
 			gap /= gapConstant;
 		}
 
-        return array;
+		return array;
 	}
 }
