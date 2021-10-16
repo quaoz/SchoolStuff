@@ -65,6 +65,13 @@ public class SortTimer {
         timer.resetTimer();
 
         timer.startTimerNano();
+        IntroSort.sort(array.clone());
+        sortResults.add(timer.stopAndGetElapsedTime());
+
+        System.out.println("Intro sort took " + sortResults.get(index) + " nanoseconds, " + sortResults.get(0) / sortResults.get(index++) + " times faster than bubble sort");
+        timer.resetTimer();
+
+        timer.startTimerNano();
         TimSort.sort(array.clone());
         sortResults.add(timer.stopAndGetElapsedTime());
 
@@ -82,34 +89,35 @@ public class SortTimer {
     }
 
 	public static void main(String[] args) {
-		final int repeatsPerArray = 10;
-		final int numArrays = 10;
-		final int maxElement = 1000000;
-		final int size = 10000;
+        final int repeatsPerArray = 10;
+        final int numArrays = 100;
+        final int maxElement = 100000;
+        final int size = 1000;
 
-		final int totalRepeats = numArrays * repeatsPerArray;
+        final int totalRepeats = numArrays * repeatsPerArray;
 
-		ArrayList<Long> results;
-		Integer[] array;
+        ArrayList<Long> results;
+        Integer[] array;
 
-		long bubbleMean = 0;
-		long mergeMean = 0;
-		long insertionMean = 0;
-		long shellMean = 0;
-        long quickMean = 0;
-        long dualPivotQuickMean = 0;
-        long timMean = 0;
-        long heapMean = 0;
+        double bubbleMean = 0;
+        double mergeMean = 0;
+        double insertionMean = 0;
+        double shellMean = 0;
+        double quickMean = 0;
+        double dualPivotQuickMean = 0;
+        double introMean = 0;
+        double timMean = 0;
+        double heapMean = 0;
 
-		for (int i = 0; i < numArrays; i++) {
-			// Fills array with sorted random numbers
-			array = IntStream.generate(() -> random.nextInt(maxElement))
-					.limit(size)
-					.unordered()
-					.boxed()
-					.toArray(Integer[]::new);
+        for (int i = 0; i < numArrays; i++) {
+            // Fills array with sorted random numbers
+            array = IntStream.generate(() -> random.nextInt(maxElement))
+                    .limit(size)
+                    .unordered()
+                    .boxed()
+                    .toArray(Integer[]::new);
 
-			for (int j = 0; j < repeatsPerArray; j++) {
+            for (int j = 0; j < repeatsPerArray; j++) {
                 // Shuffles the array
                 Shuffle.shuffle(array);
 
@@ -121,8 +129,9 @@ public class SortTimer {
                 shellMean += results.get(3);
                 quickMean += results.get(4);
                 dualPivotQuickMean += results.get(5);
-                timMean += results.get(6);
-                heapMean += results.get(7);
+                introMean += results.get(6);
+                timMean += results.get(7);
+                heapMean += results.get(8);
             }
 		}
 
@@ -132,21 +141,23 @@ public class SortTimer {
         shellMean /= totalRepeats;
         quickMean /= totalRepeats;
         dualPivotQuickMean /= totalRepeats;
+        introMean /= totalRepeats;
         timMean /= totalRepeats;
         heapMean /= totalRepeats;
 
-        final String format = "┃ %-25s ┃ %-20d │ %-15d ┃%n";
+        final String format = "┃ %-25s ┃ %-20.2f │ %-15.2f ┃%n";
 
         System.out.format("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓%n");
         System.out.format("┃ Sort Method               ┃ Mean (nanoseconds)   ┃ x bubble sort   ┃%n");
         System.out.format("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┫%n");
 
-        System.out.format(format, "Bubble sort", bubbleMean, 0);
+        System.out.format(format, "Bubble sort", bubbleMean, 0f);
         System.out.format(format, "Merge sort", mergeMean, bubbleMean / mergeMean);
         System.out.format(format, "Insertion sort", insertionMean, bubbleMean / insertionMean);
         System.out.format(format, "Shell sort", shellMean, bubbleMean / shellMean);
         System.out.format(format, "Quick sort", quickMean, bubbleMean / quickMean);
         System.out.format(format, "Dual-pivot quick sort", dualPivotQuickMean, bubbleMean / dualPivotQuickMean);
+        System.out.format(format, "Intro sort", introMean, bubbleMean / introMean);
         System.out.format(format, "Tim sort", timMean, bubbleMean / timMean);
         System.out.format(format, "Heap sort", heapMean, bubbleMean / heapMean);
 

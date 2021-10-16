@@ -17,17 +17,21 @@ public class TimSort {
 	 * @return The sorted array
 	 */
 	public static <T extends Comparable<T>> T @NotNull [] sort(T @NotNull [] array) {
-		final int arrayLength = array.length;
-		final int minMerge = 32;
-		final int minRun = minMerge / 2;
+        final int arrayLength = array.length;
+        final int minMerge = 32;
+        int minRun = 32;
 
-		// Apply insertion sort on RUNS
-		for (int i = 0; i < arrayLength; i += minRun) {
-			InsertionSort.sort(array, i, Math.min(i + minMerge - 1, (arrayLength - 1)));
-		}
+        while (minRun >= 32) {
+            minRun >>= 1;
+        }
+
+        // Apply insertion sort on RUNS
+        for (int i = 0; i < arrayLength; i += minRun) {
+            InsertionSort.sort(array, i, Math.min(i + minMerge - 1, (arrayLength - 1)));
+        }
 
         // Start merging from 32 and double each time
-		for (int size = minRun; size < arrayLength; size = 2 * size) {
+        for (int size = minRun; size < arrayLength; size = 2 * size) {
 
             // Pick starting point of left sub array
             for (int left = 0; left < arrayLength; left += 2 * size) {

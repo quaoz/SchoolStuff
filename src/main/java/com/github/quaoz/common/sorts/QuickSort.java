@@ -63,7 +63,7 @@ public class QuickSort {
      * @param right The last index of an array
      * @return The partition index
      */
-    private static <T extends Comparable<T>> int partition(T @NotNull [] array, int left, int right) {
+    static <T extends Comparable<T>> int partition(T @NotNull [] array, int left, int right) {
         int mid = (left + right) >>> 1;
         T pivot = array[mid];
 

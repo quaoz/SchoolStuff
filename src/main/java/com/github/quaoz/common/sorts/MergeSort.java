@@ -20,24 +20,24 @@ public class MergeSort {
 	}
 
 	/**
-	 * Implements a generic merge sort algorithm
-	 *
-	 * @param array The array to be sorted
-	 * @param left The first index of the array
-	 * @param right The last index of the array
-	 * @return The sorted array
-	 */
-	private static <T extends Comparable<T>> T[] sort(T[] array, int left, int right) {
-		if (left < right) {
-			int mid = (left + right) >>> 1;
+     * Implements a generic merge sort algorithm
+     *
+     * @param array The array to be sorted
+     * @param left  The first index of the array
+     * @param right The last index of the array
+     * @return The sorted array
+     */
+    static <T extends Comparable<T>> T[] sort(T[] array, int left, int right) {
+        if (left < right) {
+            int mid = (left + right) >>> 1;
 
-			// Sorts the first half
-			sort(array, left, mid);
+            // Sorts the first half
+            sort(array, left, mid);
 
-			// Sorts the second half
-			sort(array, mid + 1, right);
+            // Sorts the second half
+            sort(array, mid + 1, right);
 
-			// Merges the sorted halves
+            // Merges the sorted halves
 			if (Comparisons.bigger(array[mid], array[mid + 1])) {
 				merge(array, left, mid, right);
 			}

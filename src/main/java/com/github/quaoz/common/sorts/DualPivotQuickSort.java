@@ -50,7 +50,7 @@ public class DualPivotQuickSort {
      * @param right The last index of the array
      * @return The partition indexes
      */
-    private static <T extends Comparable<T>> int @NotNull [] pivots(T @NotNull [] array, int left, int right) {
+    static <T extends Comparable<T>> int @NotNull [] pivots(T @NotNull [] array, int left, int right) {
         T pivot1 = array[left];
         T pivot2 = array[right];
 

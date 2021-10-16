@@ -2,7 +2,6 @@ package com.github.quaoz.common.sorts;
 
 import com.github.quaoz.common.arrayutils.Comparisons;
 import com.github.quaoz.common.arrayutils.Swap;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -14,14 +13,23 @@ import org.jetbrains.annotations.NotNull;
 public class HeapSort {
 
     /**
+     * Implements a generic heap sort algorithm without having to specify the bounds
+     *
+     * @param array The array to be sorted
+     * @return The sorted array
+     */
+    public static <T extends Comparable<T>> T @NotNull [] sort(T @NotNull [] array) {
+        return sort(array, 0, array.length);
+    }
+
+    /**
      * Implements a generic heap sort algorithm
      *
      * @param array The array to be sorted
      * @return The sorted array
      */
-    @Contract("_ -> param1")
-    public static <T extends Comparable<T>> T @NotNull [] sort(T @NotNull [] array) {
-        final int size = array.length;
+    static <T extends Comparable<T>> T @NotNull [] sort(T @NotNull [] array, int start, int end) {
+        final int size = end - start;
 
         // Build heap
         for (int i = size / 2 - 1; i >= 0; i--) {
@@ -31,10 +39,10 @@ public class HeapSort {
         // Extract an element from the heap
         for (int i = size - 1; i >= 0; i--) {
             // Move the current root to the end
-            Swap.swap(array, 0, i);
+            Swap.swap(array, start, start + i);
 
             // Heapify the reduced heap
-            heapify(array, i, 0);
+            heapify(array, i, start);
         }
 
         return array;
@@ -48,7 +56,7 @@ public class HeapSort {
      * @param root  The node root of the subtree
      */
     // to heapify a subtree rooted with node root which is an index in array[]
-    public static <T extends Comparable<T>> void heapify(T[] array, int size, int root) {
+    static <T extends Comparable<T>> void heapify(T[] array, int size, int root) {
         int max = root;
         final int left = 2 * root + 1;
         final int right = 2 * root + 2;
