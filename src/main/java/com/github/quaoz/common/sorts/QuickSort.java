@@ -33,7 +33,8 @@ public class QuickSort {
 	static <T extends Comparable<T>> T[] sort(T[] array, int left, int right) {
 		if (left < right) {
 			int pivot = randomPartition(array, left, right);
-			sort(array, left, pivot - 1);
+
+            sort(array, left, pivot - 1);
 			sort(array, pivot, right);
 		}
 
