@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 
 public class SortTimer {
 	private static final Timer timer = new Timer();
-	public static final Random random = new Random();
+    private static final Random random = new Random();
 
 	/**
 	 * Finds the fastest sorting algorithm for an array
@@ -126,22 +126,30 @@ public class SortTimer {
             }
 		}
 
-		bubbleMean /= totalRepeats;
-		mergeMean /= totalRepeats;
-		insertionMean /= totalRepeats;
-		shellMean /= totalRepeats;
+        bubbleMean /= totalRepeats;
+        mergeMean /= totalRepeats;
+        insertionMean /= totalRepeats;
+        shellMean /= totalRepeats;
         quickMean /= totalRepeats;
         dualPivotQuickMean /= totalRepeats;
         timMean /= totalRepeats;
         heapMean /= totalRepeats;
 
-		System.out.println("The mean for bubbles sort was " + bubbleMean + " nanoseconds");
-		System.out.println("The mean for merge sort was " + mergeMean + " nanoseconds, " + bubbleMean / mergeMean + " times faster than bubble sort");
-		System.out.println("The mean for insertion sort was " + insertionMean + " nanoseconds, " + bubbleMean / insertionMean + " times faster than bubble sort");
-		System.out.println("The mean for shell sort was " + shellMean + " nanoseconds, " + bubbleMean / shellMean + " times faster than bubble sort");
-        System.out.println("The mean for quick sort was " + quickMean + " nanoseconds, " + bubbleMean / quickMean + " times faster than bubble sort");
-        System.out.println("The mean for dual-pivot quick sort was " + dualPivotQuickMean + " nanoseconds, " + bubbleMean / dualPivotQuickMean + " times faster than bubble sort");
-        System.out.println("The mean for tim sort was " + timMean + " nanoseconds, " + bubbleMean / timMean + " times faster than bubble sort");
-        System.out.println("The mean for heap sort was " + heapMean + " nanoseconds, " + bubbleMean / heapMean + " times faster than bubble sort");
-	}
+        final String format = "┃ %-25s ┃ %-20d │ %-15d ┃%n";
+
+        System.out.format("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓%n");
+        System.out.format("┃ Sort Method               ┃ Mean (nanoseconds)   ┃ x bubble sort   ┃%n");
+        System.out.format("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┫%n");
+
+        System.out.format(format, "Bubble sort", bubbleMean, 0);
+        System.out.format(format, "Merge sort", mergeMean, bubbleMean / mergeMean);
+        System.out.format(format, "Insertion sort", insertionMean, bubbleMean / insertionMean);
+        System.out.format(format, "Shell sort", shellMean, bubbleMean / shellMean);
+        System.out.format(format, "Quick sort", quickMean, bubbleMean / quickMean);
+        System.out.format(format, "Dual-pivot quick sort", dualPivotQuickMean, bubbleMean / dualPivotQuickMean);
+        System.out.format(format, "Tim sort", timMean, bubbleMean / timMean);
+        System.out.format(format, "Heap sort", heapMean, bubbleMean / heapMean);
+
+        System.out.format("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┛%n");
+    }
 }

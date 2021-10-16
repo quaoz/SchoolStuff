@@ -100,19 +100,27 @@ public class SearchTimer {
 
 				linearMean += results.get(0);
 				binaryMean += results.get(1);
-				jumpMean += results.get(2);
-				exponentialMean += results.get(3);
-			}
-		}
+                jumpMean += results.get(2);
+                exponentialMean += results.get(3);
+            }
+        }
 
-		linearMean /= totalRepeats;
-		binaryMean /= totalRepeats;
-		jumpMean /= totalRepeats;
-		exponentialMean /= totalRepeats;
+        linearMean /= totalRepeats;
+        binaryMean /= totalRepeats;
+        jumpMean /= totalRepeats;
+        exponentialMean /= totalRepeats;
 
-		System.out.println("The mean for linear search was " + linearMean + " nanoseconds");
-		System.out.println("The mean for binary search was " + binaryMean + " nanoseconds, " + linearMean / binaryMean + " times faster than linear search");
-		System.out.println("The mean for jump search was " + jumpMean + " nanoseconds, " + linearMean / jumpMean + " times faster than linear search");
-		System.out.println("The mean for exponential search was " + exponentialMean + " nanoseconds, " + linearMean / exponentialMean + " times faster than linear search\n");
-	}
+        final String format = "┃ %-25s ┃ %-20d │ %-15d ┃%n";
+
+        System.out.format("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓%n");
+        System.out.format("┃ Search Method             ┃ Mean (nanoseconds)   ┃ x linear search ┃%n");
+        System.out.format("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┫%n");
+
+        System.out.format(format, "Linear search", linearMean, 0);
+        System.out.format(format, "Binary search", binaryMean, linearMean / binaryMean);
+        System.out.format(format, "Jump search", jumpMean, linearMean / jumpMean);
+        System.out.format(format, "Exponential search", exponentialMean, linearMean / exponentialMean);
+
+        System.out.format("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┛%n");
+    }
 }
