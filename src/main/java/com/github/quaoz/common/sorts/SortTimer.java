@@ -80,7 +80,7 @@ public class SortTimer {
 
 	public static void main(String[] args) {
 		final int repeatsPerArray = 10;
-		final int numArrays = 1;
+		final int numArrays = 10;
 		final int maxElement = 100000;
 		final int size = 10000;
 
