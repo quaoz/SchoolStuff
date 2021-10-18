@@ -31,7 +31,7 @@ public class ExponentialSearch {
 	 * @param array    The array to be searched
 	 * @param value    The value being searched for
 	 * @param contains Whether to return the index of the value or just if the array contains it
-	 * @param <T>   The array type
+	 * @param <T>      The array type
 	 *
 	 * @return int        Whether the value was found or not, -2 = not found, -1 = found, anything else is the index
 	 */

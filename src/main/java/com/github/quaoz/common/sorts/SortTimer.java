@@ -2,15 +2,30 @@ package com.github.quaoz.common.sorts;
 
 import com.github.quaoz.common.arrayutils.Shuffle;
 import com.github.quaoz.common.timer.Timer;
+import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
+import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Random;
 import java.util.stream.IntStream;
 
 public class SortTimer {
 	private static final Timer timer = new Timer();
 	private static final Random random = new Random();
+
+	/**
+	 * Stops the timer, saves the results and prints them
+	 *
+	 * @param results     A hash map containing the algorithms names and the results
+	 * @param currentSort The current sorting algorithms name
+	 */
+	private static void printResults(@NotNull Object2LongOpenHashMap<String> results, String currentSort) {
+		results.put(currentSort, timer.stopAndGetElapsedTime());
+		System.out.printf("%s%s sort took %d nanoseconds, %d times faster than bubble sort%n", currentSort.substring(0, 1).toUpperCase(),
+				currentSort.substring(1), results.getLong(currentSort), results.getLong("bubble") / results.getLong(currentSort));
+		timer.resetTimer();
+	}
 
 	/**
 	 * Finds the fastest sorting algorithm for an array
@@ -20,96 +35,70 @@ public class SortTimer {
 	 *
 	 * @return Long[] The sorting times
 	 */
-	public static <T extends Comparable<T>> @NotNull ArrayList<Long> fastestSort(T @NotNull [] array) {
-		ArrayList<Long> sortResults = new ArrayList<>();
-		int index = 0;
+	public static <T extends Comparable<T>> @NotNull Object2LongOpenHashMap<String> fastestSort(T @NotNull [] array) {
+		Object2LongOpenHashMap<String> results = new Object2LongOpenHashMap<>();
 
 		timer.startTimerNano();
 		BubbleSort.sort(array.clone());
-		sortResults.add(timer.stopAndGetElapsedTime());
-
-		System.out.println("Bubble sort took " + sortResults.get(index++) + " nanoseconds");
-		timer.resetTimer();
+		printResults(results, "bubble");
 
 		timer.startTimerNano();
 		MergeSort.sort(array.clone());
-		sortResults.add(timer.stopAndGetElapsedTime());
-
-		System.out.println("Merge sort took " + sortResults.get(index) + " nanoseconds, " + sortResults.get(0) / sortResults.get(index++) + " times faster than bubble sort");
-		timer.resetTimer();
+		printResults(results, "merge");
 
 		timer.startTimerNano();
 		InsertionSort.sort(array.clone());
-		sortResults.add(timer.stopAndGetElapsedTime());
-
-		System.out.println("Insertion sort took " + sortResults.get(index) + " nanoseconds, " + sortResults.get(0) / sortResults.get(index++) + " times faster than bubble sort");
-		timer.resetTimer();
+		printResults(results, "insertion");
 
 		timer.startTimerNano();
 		ShellSort.sort(array.clone());
-		sortResults.add(timer.stopAndGetElapsedTime());
-
-		System.out.println("Shell sort took " + sortResults.get(index) + " nanoseconds, " + sortResults.get(0) / sortResults.get(index++) + " times faster than bubble sort");
-		timer.resetTimer();
+		printResults(results, "shell");
 
 		timer.startTimerNano();
 		QuickSort.sort(array.clone());
-		sortResults.add(timer.stopAndGetElapsedTime());
-
-		System.out.println("Quick sort took " + sortResults.get(index) + " nanoseconds, " + sortResults.get(0) / sortResults.get(index++) + " times faster than bubble sort");
-		timer.resetTimer();
+		printResults(results, "quick");
 
 		timer.startTimerNano();
 		DualPivotQuickSort.sort(array.clone());
-		sortResults.add(timer.stopAndGetElapsedTime());
-
-		System.out.println("Dual-pivot quick sort took " + sortResults.get(index) + " nanoseconds, " + sortResults.get(0) / sortResults.get(index++) + " times faster than bubble sort");
-		timer.resetTimer();
+		printResults(results, "dual-pivot quick");
 
 		timer.startTimerNano();
 		IntroSort.sort(array.clone());
-		sortResults.add(timer.stopAndGetElapsedTime());
-
-		System.out.println("Intro sort took " + sortResults.get(index) + " nanoseconds, " + sortResults.get(0) / sortResults.get(index++) + " times faster than bubble sort");
-		timer.resetTimer();
+		printResults(results, "intro");
 
 		timer.startTimerNano();
 		TimSort.sort(array.clone());
-		sortResults.add(timer.stopAndGetElapsedTime());
-
-		System.out.println("Tim sort took " + sortResults.get(index) + " nanoseconds, " + sortResults.get(0) / sortResults.get(index++) + " times faster than bubble sort");
-		timer.resetTimer();
+		printResults(results, "tim");
 
 		timer.startTimerNano();
 		HeapSort.sort(array.clone());
-		sortResults.add(timer.stopAndGetElapsedTime());
+		printResults(results, "heap");
 
-		System.out.println("Heap sort took " + sortResults.get(index) + " nanoseconds, " + sortResults.get(0) / sortResults.get(index) + " times faster than bubble sort\n");
-		timer.resetTimer();
-
-		return sortResults;
+		System.out.println();
+		return results;
 	}
 
 	public static void main(String[] args) {
 		final int repeatsPerArray = 10;
-		final int numArrays = 100;
+		final int numArrays = 1;
 		final int maxElement = 100000;
-		final int size = 1000;
+		final int size = 10000;
 
 		final int totalRepeats = numArrays * repeatsPerArray;
 
-		ArrayList<Long> results;
+		Object2LongOpenHashMap<String> results;
 		Integer[] array;
 
-		double bubbleMean = 0;
-		double mergeMean = 0;
-		double insertionMean = 0;
-		double shellMean = 0;
-		double quickMean = 0;
-		double dualPivotQuickMean = 0;
-		double introMean = 0;
-		double timMean = 0;
-		double heapMean = 0;
+		Object2DoubleOpenHashMap<String> means = new Object2DoubleOpenHashMap<>();
+		means.put("bubble", 0);
+		means.put("merge", 0);
+		means.put("insertion", 0);
+		means.put("shell", 0);
+		means.put("quick", 0);
+		means.put("dual-pivot quick", 0);
+		means.put("intro", 0);
+		means.put("tim", 0);
+		means.put("heap", 0);
 
 		for (int i = 0; i < numArrays; i++) {
 			// Fills array with sorted random numbers
@@ -124,28 +113,11 @@ public class SortTimer {
 				Shuffle.shuffle(array);
 
 				results = fastestSort(array);
-
-				bubbleMean += results.get(0);
-				mergeMean += results.get(1);
-				insertionMean += results.get(2);
-				shellMean += results.get(3);
-				quickMean += results.get(4);
-				dualPivotQuickMean += results.get(5);
-				introMean += results.get(6);
-				timMean += results.get(7);
-				heapMean += results.get(8);
+				results.forEach(means::addTo);
 			}
 		}
 
-		bubbleMean /= totalRepeats;
-		mergeMean /= totalRepeats;
-		insertionMean /= totalRepeats;
-		shellMean /= totalRepeats;
-		quickMean /= totalRepeats;
-		dualPivotQuickMean /= totalRepeats;
-		introMean /= totalRepeats;
-		timMean /= totalRepeats;
-		heapMean /= totalRepeats;
+		means.forEach((String s, Double aDouble) -> means.put(s, aDouble / totalRepeats));
 
 		final String format = "┃ %-25s ┃ %-20.2f │ %-15.2f ┃%n";
 
@@ -153,15 +125,7 @@ public class SortTimer {
 		System.out.format("┃ Sort Method               ┃ Mean (nanoseconds)   ┃ x bubble sort   ┃%n");
 		System.out.format("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┫%n");
 
-		System.out.format(format, "Bubble sort", bubbleMean, 0f);
-		System.out.format(format, "Merge sort", mergeMean, bubbleMean / mergeMean);
-		System.out.format(format, "Insertion sort", insertionMean, bubbleMean / insertionMean);
-		System.out.format(format, "Shell sort", shellMean, bubbleMean / shellMean);
-		System.out.format(format, "Quick sort", quickMean, bubbleMean / quickMean);
-		System.out.format(format, "Dual-pivot quick sort", dualPivotQuickMean, bubbleMean / dualPivotQuickMean);
-		System.out.format(format, "Intro sort", introMean, bubbleMean / introMean);
-		System.out.format(format, "Tim sort", timMean, bubbleMean / timMean);
-		System.out.format(format, "Heap sort", heapMean, bubbleMean / heapMean);
+		means.forEach((s, aDouble) -> System.out.format(format, s.substring(0, 1).toUpperCase(Locale.ROOT) + s.substring(1), aDouble, means.getDouble("bubble") / aDouble));
 
 		System.out.format("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┛%n");
 	}
