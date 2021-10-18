@@ -22,8 +22,11 @@ public class SortTimer {
 	 */
 	private static void printResults(@NotNull Object2LongOpenHashMap<String> results, String currentSort) {
 		results.put(currentSort, timer.stopAndGetElapsedTime());
-		System.out.printf("%s%s sort took %d nanoseconds, %d times faster than bubble sort%n", currentSort.substring(0, 1).toUpperCase(),
-				currentSort.substring(1), results.getLong(currentSort), results.getLong("bubble") / results.getLong(currentSort));
+		System.out.printf("%s%s sort took %d nanoseconds, %d times faster than bubble sort%n",
+				currentSort.substring(0, 1).toUpperCase(Locale.ROOT),
+				currentSort.substring(1),
+				results.getLong(currentSort),
+				results.getLong("bubble") / results.getLong(currentSort));
 		timer.resetTimer();
 	}
 
@@ -125,7 +128,8 @@ public class SortTimer {
 		System.out.format("┃ Sort Method               ┃ Mean (nanoseconds)   ┃ x bubble sort   ┃%n");
 		System.out.format("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┫%n");
 
-		means.forEach((s, aDouble) -> System.out.format(format, s.substring(0, 1).toUpperCase(Locale.ROOT) + s.substring(1), aDouble, means.getDouble("bubble") / aDouble));
+		means.forEach((s, aDouble) -> System.out.format(format, s.substring(0, 1).toUpperCase(Locale.ROOT) +
+				s.substring(1), aDouble, means.getDouble("bubble") / aDouble));
 
 		System.out.format("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┛%n");
 	}

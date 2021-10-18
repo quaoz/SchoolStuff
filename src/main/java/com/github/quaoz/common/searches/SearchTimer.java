@@ -22,8 +22,11 @@ public class SearchTimer {
 	 */
 	private static void printResults(@NotNull Object2LongOpenHashMap<String> results, String currentSearch) {
 		results.put(currentSearch, timer.stopAndGetElapsedTime());
-		System.out.printf("%s%s search took %d nanoseconds, %d times faster than linear search%n", currentSearch.substring(0, 1).toUpperCase(),
-				currentSearch.substring(1), results.getLong(currentSearch), results.getLong("linear") / results.getLong(currentSearch));
+		System.out.printf("%s%s search took %d nanoseconds, %d times faster than linear search%n",
+				currentSearch.substring(0, 1).toUpperCase(Locale.ROOT),
+				currentSearch.substring(1),
+				results.getLong(currentSearch),
+				results.getLong("linear") / results.getLong(currentSearch));
 		timer.resetTimer();
 	}
 
@@ -108,7 +111,8 @@ public class SearchTimer {
 		System.out.format("┃ Search Method             ┃ Mean (nanoseconds)   ┃ x linear search ┃%n");
 		System.out.format("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┫%n");
 
-		means.forEach((s, aDouble) -> System.out.format(format, s.substring(0, 1).toUpperCase(Locale.ROOT) + s.substring(1), aDouble, means.getDouble("linear") / aDouble));
+		means.forEach((s, aDouble) -> System.out.format(format, s.substring(0, 1).toUpperCase(Locale.ROOT) +
+				s.substring(1), aDouble, means.getDouble("linear") / aDouble));
 
 		System.out.format("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┛%n");
 	}
