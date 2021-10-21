@@ -6,28 +6,81 @@ import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
 import java.util.Locale;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.IntStream;
 
 public class SortTimer {
-	private static final Timer timer = new Timer();
-	private static final Random random = new Random();
+	private final Timer timer = new Timer();
+	private final Object2DoubleOpenHashMap<String> means = new Object2DoubleOpenHashMap<>() {{
+		put("bubble", 0);
+		put("merge", 0);
+		put("insertion", 0);
+		put("shell", 0);
+		put("quick", 0);
+		put("dual-pivot quick", 0);
+		put("intro", 0);
+		put("tim", 0);
+		put("heap", 0);
+		put("java arrays sort", 0);
+	}};
+	private boolean quiet;
 
 	/**
-	 * Stops the timer, saves the results and prints them
-	 *
-	 * @param results     A hash map containing the algorithms names and the results
-	 * @param currentSort The current sorting algorithms name
+	 * Constructor
 	 */
-	private static void printResults(@NotNull Object2LongOpenHashMap<String> results, String currentSort) {
-		results.put(currentSort, timer.stopAndGetElapsedTime());
-		System.out.printf("%s%s sort took %d nanoseconds, %d times faster than bubble sort%n",
-				currentSort.substring(0, 1).toUpperCase(Locale.ROOT),
-				currentSort.substring(1),
-				results.getLong(currentSort),
-				results.getLong("bubble") / results.getLong(currentSort));
-		timer.resetTimer();
+	public SortTimer() {
+		this.quiet = false;
+	}
+
+	/**
+	 * Constructor with quiet specified
+	 */
+	public SortTimer(boolean quiet) {
+		this.quiet = quiet;
+	}
+
+	/*
+	 * Example implementation to test the performance on an array of random numbers
+	 */
+	public static void main(String[] args) {
+		final SortTimer sortTimer = new SortTimer();
+
+		final int repeatsPerArray = 10;
+		final int numArrays = 10;
+		final int maxElement = 100000;
+		final int size = 10000;
+
+		Integer[] array;
+
+		for (int i = 0; i < numArrays; i++) {
+			// Fills array with sorted random numbers
+			array = IntStream.generate(() -> ThreadLocalRandom.current().nextInt(maxElement))
+					.limit(size)
+					.unordered()
+					.boxed()
+					.toArray(Integer[]::new);
+
+			sortTimer.repeatFastestSort(array, repeatsPerArray);
+		}
+
+		sortTimer.calculateMeans(numArrays * repeatsPerArray);
+		sortTimer.printTable();
+	}
+
+	/**
+	 * @return Is quiet
+	 */
+	public boolean isQuiet() {
+		return quiet;
+	}
+
+	/**
+	 * @param quiet Boolean quiet
+	 */
+	public void setQuiet(boolean quiet) {
+		this.quiet = quiet;
 	}
 
 	/**
@@ -36,9 +89,9 @@ public class SortTimer {
 	 * @param array The array to test
 	 * @param <T>   The array type
 	 *
-	 * @return Long[] The sorting times
+	 * @return The sorting times
 	 */
-	public static <T extends Comparable<T>> @NotNull Object2LongOpenHashMap<String> fastestSort(T @NotNull [] array) {
+	public <T extends Comparable<T>> @NotNull Object2LongOpenHashMap<String> fastestSort(T @NotNull [] array) {
 		Object2LongOpenHashMap<String> results = new Object2LongOpenHashMap<>();
 
 		timer.startTimerNano();
@@ -77,60 +130,90 @@ public class SortTimer {
 		HeapSort.sort(array.clone());
 		printResults(results, "heap");
 
+		timer.startTimerNano();
+		Arrays.sort(array.clone());
+		printResults(results, "java arrays sort");
+
 		System.out.println();
 		return results;
 	}
 
-	public static void main(String[] args) {
-		final int repeatsPerArray = 10;
-		final int numArrays = 10;
-		final int maxElement = 100000;
-		final int size = 10000;
+	/**
+	 * Repeatedly times the execution for the different sorting algorithms on a given array, assumes the array should
+	 * be shuffled
+	 *
+	 * @param array   The array to be tested
+	 * @param repeats How many times to repeat the test
+	 * @param <T>     The array type
+	 */
+	public <T extends Comparable<T>> void repeatFastestSort(T[] array, int repeats) {
+		repeatFastestSort(array, repeats, true);
+	}
 
-		final int totalRepeats = numArrays * repeatsPerArray;
-
-		Object2LongOpenHashMap<String> results;
-		Integer[] array;
-
-		Object2DoubleOpenHashMap<String> means = new Object2DoubleOpenHashMap<>();
-		means.put("bubble", 0);
-		means.put("merge", 0);
-		means.put("insertion", 0);
-		means.put("shell", 0);
-		means.put("quick", 0);
-		means.put("dual-pivot quick", 0);
-		means.put("intro", 0);
-		means.put("tim", 0);
-		means.put("heap", 0);
-
-		for (int i = 0; i < numArrays; i++) {
-			// Fills array with sorted random numbers
-			array = IntStream.generate(() -> random.nextInt(maxElement))
-					.limit(size)
-					.unordered()
-					.boxed()
-					.toArray(Integer[]::new);
-
-			for (int j = 0; j < repeatsPerArray; j++) {
-				// Shuffles the array
+	/**
+	 * Repeatedly times the execution for the different sorting algorithms on a given array
+	 *
+	 * @param array   The array to be tested
+	 * @param repeats How many times to repeat the test
+	 * @param shuffle Whether to shuffle the array or not
+	 * @param <T>     The array type
+	 */
+	public <T extends Comparable<T>> void repeatFastestSort(T[] array, int repeats, boolean shuffle) {
+		for (int j = 0; j < repeats; j++) {
+			// Shuffles the array
+			if (shuffle) {
 				Shuffle.shuffle(array);
-
-				results = fastestSort(array);
-				results.forEach(means::addTo);
 			}
+
+			// Adds the results to the means map
+			fastestSort(array).forEach(means::addTo);
+		}
+	}
+
+	/**
+	 * Stops the timer, saves the results and prints them
+	 *
+	 * @param results     A hash map containing the algorithms names and the results
+	 * @param currentSort The current sorting algorithms name
+	 */
+	private void printResults(@NotNull Object2LongOpenHashMap<String> results, String currentSort) {
+		// Stops the timer and saves the time taken
+		results.put(currentSort, timer.stopAndGetElapsedTime());
+
+		if (!quiet) {
+			System.out.printf("%s%s sort took %d nanoseconds, %d times faster than bubble sort%n",
+					currentSort.substring(0, 1).toUpperCase(Locale.ROOT),
+					currentSort.substring(1),
+					results.getLong(currentSort),
+					results.getLong("bubble") / results.getLong(currentSort));
 		}
 
-		means.forEach((String s, Double aDouble) -> means.put(s, aDouble / totalRepeats));
+		timer.resetTimer();
+	}
 
+	/**
+	 * Displays the results formatted into a table
+	 */
+	private void printTable() {
 		final String format = "┃ %-25s ┃ %-20.2f │ %-15.2f ┃%n";
 
 		System.out.format("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓%n");
 		System.out.format("┃ Sort Method               ┃ Mean (nanoseconds)   ┃ x bubble sort   ┃%n");
 		System.out.format("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┫%n");
 
-		means.forEach((s, aDouble) -> System.out.format(format, s.substring(0, 1).toUpperCase(Locale.ROOT) +
-				s.substring(1), aDouble, means.getDouble("bubble") / aDouble));
+		means.forEach((s, aDouble) -> System.out.format(format,
+				s.substring(0, 1).toUpperCase(Locale.ROOT) + s.substring(1),
+				aDouble, means.getDouble("bubble") / aDouble));
 
 		System.out.format("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┛%n");
+	}
+
+	/**
+	 * Divides all the means by the total number of repeats
+	 *
+	 * @param totalRepeats The total number of repeats
+	 */
+	public void calculateMeans(int totalRepeats) {
+		means.forEach((String s, Double aDouble) -> means.replace(s, aDouble / totalRepeats));
 	}
 }

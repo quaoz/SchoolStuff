@@ -1,7 +1,7 @@
 # Sorts
 
-The best sorting algorithm depends on the data, however intro sort is the best general purpose sorting algorithm in my
-testing.
+The best sorting algorithm depends on the data being processed, however intro sort is the best general purpose sorting
+algorithm in my testing. Most sorting algorithms can be modified to further improve performance with specific data sets.
 
 ## Bubble Sort
 
