@@ -32,7 +32,7 @@ public class LinearSearch {
 	 * @param array    The array to be searched
 	 * @param value    The value being searched for
 	 * @param contains Whether to return the index of the value or just if the array contains it
-	 * @param <T>   The array type
+	 * @param <T>      The array type
 	 *
 	 * @return int        Whether the value was found or not, -2 = not found, -1 = found, anything else is the index
 	 */
@@ -51,7 +51,7 @@ public class LinearSearch {
 	}
 
 	/**
-	 * Implements a generic linear search with a sentinel value which returns the index by efault, the list must have
+	 * Implements a generic linear search with a sentinel value that returns the index by default, the list must have
 	 * one empty element on the end as it will be overwritten with the sentinel value
 	 *
 	 * @param array The array to be searched
@@ -100,11 +100,8 @@ public class LinearSearch {
 	}
 
 	/**
-	 * Implements a generic linear search with a sentinel value which checks to see if the last element is the value
+	 * Implements a generic linear search with a sentinel value that checks to see if the last element is the value
 	 * and replaces it with a sentinel value if it isn't, returns the index by default
-	 * <p>
-	 * with a sentinel value which returns the index by efault, the list must have
-	 * one empty element on the end as it will be overwritten with the sentinel value
 	 *
 	 * @param array The array to be searched
 	 * @param value The value being searched for
@@ -119,9 +116,6 @@ public class LinearSearch {
 	/**
 	 * Implements a generic linear search which checks to see if the last element is the value and replaces it with a
 	 * sentinel value if it isn't
-	 * <p>
-	 * with a sentinel value which returns the index by efault, the list must have
-	 * one empty element on the end as it will be overwritten with the sentinel value
 	 *
 	 * @param array The array to be searched
 	 * @param value The value being searched for
