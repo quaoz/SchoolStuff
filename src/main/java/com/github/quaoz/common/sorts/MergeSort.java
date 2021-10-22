@@ -1,6 +1,6 @@
 package com.github.quaoz.common.sorts;
 
-import com.github.quaoz.common.arrayutils.Comparisons;
+import com.github.quaoz.common.Comparisons;
 
 /**
  * Merge sort is a fast popular sorting algorithm, works by splitting it then recombining the pieces in order

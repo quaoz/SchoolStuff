@@ -14,7 +14,7 @@ public class Shuffle {
 	 * Randomly swaps each element of an array
 	 *
 	 * @param array The array to be shuffled
-	 * @param <T>   The value type
+	 * @param <T>   The array type
 	 *
 	 * @return T[]    The shuffled array
 	 */

@@ -1,6 +1,6 @@
 package com.github.quaoz.common.searches;
 
-import com.github.quaoz.common.arrayutils.Comparisons;
+import com.github.quaoz.common.Comparisons;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;

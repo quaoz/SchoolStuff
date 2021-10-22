@@ -41,10 +41,14 @@ public class SortTimer {
 		this.quiet = quiet;
 	}
 
-	/*
-	 * Example implementation to test the performance on an array of random numbers
-	 */
 	public static void main(String[] args) {
+		testRandom();
+	}
+
+	/**
+	 * Example implementation to test the sorting algorithms performance on an array of random numbers
+	 */
+	private static void testRandom() {
 		final SortTimer sortTimer = new SortTimer();
 
 		final int repeatsPerArray = 10;
@@ -66,7 +70,15 @@ public class SortTimer {
 		}
 
 		sortTimer.calculateMeans(numArrays * repeatsPerArray);
-		sortTimer.printTable();
+		System.out.println(sortTimer.getTable());
+	}
+
+	/**
+	 * Resets the means and timer
+	 */
+	public void resetData() {
+		means.forEach((s, aDouble) -> means.replace(s, 0));
+		timer.resetTimer();
 	}
 
 	/**
@@ -134,7 +146,10 @@ public class SortTimer {
 		Arrays.sort(array.clone());
 		printResults(results, "java arrays sort");
 
-		System.out.println();
+		if (!quiet) {
+			System.out.println();
+		}
+
 		return results;
 	}
 
@@ -194,18 +209,21 @@ public class SortTimer {
 	/**
 	 * Displays the results formatted into a table
 	 */
-	private void printTable() {
+	public String getTable() {
 		final String format = "┃ %-25s ┃ %-20.2f │ %-15.2f ┃%n";
 
-		System.out.format("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓%n");
-		System.out.format("┃ Sort Method               ┃ Mean (nanoseconds)   ┃ x bubble sort   ┃%n");
-		System.out.format("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┫%n");
+		StringBuilder table = new StringBuilder();
+		table.append("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓\n");
+		table.append("┃ Sort Method               ┃ Mean (nanoseconds)   ┃ x bubble sort   ┃\n");
+		table.append("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┫\n");
 
-		means.forEach((s, aDouble) -> System.out.format(format,
+		means.forEach((s, aDouble) -> table.append(String.format(format,
 				s.substring(0, 1).toUpperCase(Locale.ROOT) + s.substring(1),
-				aDouble, means.getDouble("bubble") / aDouble));
+				aDouble, means.getDouble("bubble") / aDouble)));
 
-		System.out.format("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┛%n");
+		table.append("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┛\n");
+
+		return table.toString();
 	}
 
 	/**

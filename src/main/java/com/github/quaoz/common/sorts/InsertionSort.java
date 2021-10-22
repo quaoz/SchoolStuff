@@ -1,6 +1,6 @@
 package com.github.quaoz.common.sorts;
 
-import com.github.quaoz.common.arrayutils.Comparisons;
+import com.github.quaoz.common.Comparisons;
 import org.jetbrains.annotations.NotNull;
 
 /**

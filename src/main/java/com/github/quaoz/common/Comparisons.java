@@ -1,9 +1,9 @@
-package com.github.quaoz.common.arrayutils;
+package com.github.quaoz.common;
 
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Class to simplify comparisons between two objects
+ * Class to simplify comparisons between two comparable objects
  */
 public class Comparisons {
 
@@ -14,7 +14,7 @@ public class Comparisons {
 	 * @param value Value to compare
 	 * @param <T>   The value type
 	 *
-	 * @return boolean    Whether base is smalled than value
+	 * @return boolean Whether base is smalled than value
 	 */
 	public static <T extends Comparable<T>> boolean smaller(@NotNull T base, T value) {
 		return base.compareTo(value) < 0;
@@ -27,7 +27,7 @@ public class Comparisons {
 	 * @param value Value to compare
 	 * @param <T>   The value type
 	 *
-	 * @return boolean    Whether base is bigger than value
+	 * @return boolean Whether base is smalled than value
 	 */
 	public static <T extends Comparable<T>> boolean bigger(@NotNull T base, T value) {
 		return base.compareTo(value) > 0;
@@ -40,7 +40,7 @@ public class Comparisons {
 	 * @param value Value to compare
 	 * @param <T>   The value type
 	 *
-	 * @return boolean    Whether base equals value
+	 * @return boolean Whether base is smalled than value
 	 */
 	public static <T extends Comparable<T>> boolean equal(@NotNull T base, T value) {
 		return base.compareTo(value) == 0;
@@ -53,7 +53,7 @@ public class Comparisons {
 	 * @param value Value to compare
 	 * @param <T>   The value type
 	 *
-	 * @return boolean    Whether base doesn't equals value
+	 * @return boolean Whether base is smalled than value
 	 */
 	public static <T extends Comparable<T>> boolean notEqual(@NotNull T base, T value) {
 		return base.compareTo(value) != 0;
