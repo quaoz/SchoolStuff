@@ -2,7 +2,6 @@ package com.github.quaoz.common.arrayutils;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -19,10 +18,8 @@ public class Shuffle {
 	 * @return T[]    The shuffled array
 	 */
 	public static <T extends Comparable<T>> T[] shuffle(T @NotNull [] array) {
-		Random r = ThreadLocalRandom.current();
-
 		for (int i = 0; i < array.length; i++) {
-			Swap.swap(array, i, r.nextInt(array.length));
+			Swap.swap(array, i, ThreadLocalRandom.current().nextInt(array.length));
 		}
 
 		return array;
