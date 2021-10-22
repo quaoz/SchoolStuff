@@ -18,8 +18,22 @@ public class Shuffle {
 	 * @return T[]    The shuffled array
 	 */
 	public static <T extends Comparable<T>> T[] shuffle(T @NotNull [] array) {
-		for (int i = 0; i < array.length; i++) {
-			Swap.swap(array, i, ThreadLocalRandom.current().nextInt(array.length));
+		return shuffle(array, 0, array.length);
+	}
+
+	/**
+	 * Randomly swaps each element within a portion of an array
+	 *
+	 * @param array The array to be shuffled
+	 * @param start The index to start shuffling at
+	 * @param end   The index to shuffle to
+	 * @param <T>   The array type
+	 *
+	 * @return T[]    The shuffled array
+	 */
+	public static <T extends Comparable<T>> T[] shuffle(T @NotNull [] array, int start, int end) {
+		while (start < end) {
+			Swap.swap(array, start++, ThreadLocalRandom.current().nextInt(start, end));
 		}
 
 		return array;

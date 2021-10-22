@@ -17,9 +17,10 @@ public class Swap {
 	 * @param <T>        The array type
 	 */
 	public static <T extends Comparable<T>> void swapBlock(T[] array, int blockStart, int blockEnd, int dest) {
+		final int blockSize = blockEnd - blockStart;
 		int i = 0;
 
-		while (i < blockEnd - blockStart) {
+		while (i < blockSize) {
 			swap(array, blockStart + i, dest + i);
 			i++;
 		}

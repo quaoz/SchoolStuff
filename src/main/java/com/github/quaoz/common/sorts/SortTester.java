@@ -15,7 +15,7 @@ import java.util.stream.IntStream;
 public class SortTester {
 	private static final SortTimer sortTimer = new SortTimer(true);
 	private static final int[] arraySizes = {16, 64, 256, 1024, 4096};
-	private static final int numTests = 5;
+	private static final int numTests = 6;
 	private static final int runsPerArray = 2;
 	private static final int numArrays = 50;
 	private static final int totalRepeats = runsPerArray * numArrays;
@@ -25,7 +25,7 @@ public class SortTester {
 	private static int count;
 
 	public static void main(String[] args) {
-		final String[] testNames = {"Random Integers", "Sorted Integers", "Reverse Sorted Integers", "Block Sorted Integers", "Random Strings"};
+		final String[] testNames = {"Random Integers", "Low Variation Random Integers", "Sorted Integers", "Reverse Sorted Integers", "Block Sorted Integers", "Random Strings"};
 
 		for (String[] table : tables) {
 			Arrays.fill(table, "");
@@ -37,6 +37,7 @@ public class SortTester {
 			arraySize = size;
 
 			randomIntegers();
+			lowVariationRandomIntegers();
 			sortedIntegers();
 			reverseSortedIntegers();
 			blockSortedIntegers();
@@ -59,11 +60,11 @@ public class SortTester {
 
 			if (arraySizes.length % 3 == 1) {
 				for (int k = 0; k < tablesSplit[0].length; k++) {
-					System.out.format("%-70.70s %n", tablesSplit[arraySizes.length / 3][k]);
+					System.out.format("%-70.70s %n", tablesSplit[arraySizes.length - 1][k]);
 				}
 			} else if (arraySizes.length % 3 == 2) {
 				for (int k = 0; k < tablesSplit[0].length; k++) {
-					System.out.format("%-70.70s %-70.70s %n", tablesSplit[arraySizes.length / 3][k], tablesSplit[(arraySizes.length / 3) + 1][k]);
+					System.out.format("%-70.70s %-70.70s %n", tablesSplit[arraySizes.length - 2][k], tablesSplit[arraySizes.length - 1][k]);
 				}
 			}
 		}
@@ -72,6 +73,19 @@ public class SortTester {
 	private static void randomIntegers() {
 		for (int i = 0; i < numArrays; i++) {
 			Integer[] randomIntegers = IntStream.generate(() -> ThreadLocalRandom.current().nextInt())
+					.limit(arraySize)
+					.unordered()
+					.boxed()
+					.toArray(Integer[]::new);
+
+			runAndPrintProgress(randomIntegers);
+		}
+		printAndReset();
+	}
+
+	private static void lowVariationRandomIntegers() {
+		for (int i = 0; i < numArrays; i++) {
+			Integer[] randomIntegers = IntStream.generate(() -> ThreadLocalRandom.current().nextInt(0, arraySize / 10))
 					.limit(arraySize)
 					.unordered()
 					.boxed()

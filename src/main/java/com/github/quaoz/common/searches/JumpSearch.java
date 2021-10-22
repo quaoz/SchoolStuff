@@ -47,12 +47,14 @@ public class JumpSearch {
 		}
 
 		// Uses linear search on the block
-		for (int i = limit - blockSize; i <= limit; i++) {
-			if (array[i] == value) {
+		int i = limit - blockSize;
+		while (i <= limit) {
+			if (Comparisons.equal(array[i], value)) {
 				// Returns -1 if contains is true or the index if contains is false
 				result = contains ? -1 : i;
 				break;
 			}
+			i++;
 		}
 
 		return result;

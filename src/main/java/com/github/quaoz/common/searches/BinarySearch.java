@@ -16,7 +16,7 @@ public class BinarySearch {
 	 * @param contains Whether to return the index of the value or just if the array contains it
 	 * @param <T>      The array type
 	 *
-	 * @return int        Whether the value was found or not, -2 = not found, -1 = found, anything else is the index
+	 * @return int Whether the value was found or not, -2 = not found, -1 = found, anything else is the index
 	 */
 	public static <T extends Comparable<T>> int find(T[] array, T value, boolean contains) {
 		return find(array, value, 0, array.length - 1, contains);
@@ -30,7 +30,7 @@ public class BinarySearch {
 	 * @param value The value being searched for
 	 * @param <T>   The array type
 	 *
-	 * @return int    Whether the value was found or not, -2 = not found, -1 = found, anything else is the index
+	 * @return int Whether the value was found or not, -2 = not found, -1 = found, anything else is the index
 	 */
 	public static <T extends Comparable<T>> int find(T[] array, T value) {
 		return find(array, value, 0, array.length - 1, false);
@@ -46,15 +46,15 @@ public class BinarySearch {
 	 * @param contains Whether to return the index of the value or just if the array contains it
 	 * @param <T>      The array type
 	 *
-	 * @return int        Whether the value was found or not, -2 = not found, -1 = found, anything else is the index
+	 * @return int Whether the value was found or not, -2 = not found, -1 = found, anything else is the index
 	 */
 	static <T extends Comparable<T>> int find(T[] array, T value, int left, int right, boolean contains) {
 		int result;
 
 		if (left <= right) {
 			// Finds the middle
-			int middle = (left + right) >>> 1;
-			int comp = value.compareTo(array[middle]);
+			final int middle = (left + right) >>> 1;
+			final int comp = value.compareTo(array[middle]);
 
 			// Recursively splits the array and searches the half that may contain the term
 			if (comp < 0) {

@@ -43,14 +43,14 @@ public class IntroSort {
 		} else if (size <= 16) {
 			// Use insertion sort when the array is smaller than 16 elements
 			InsertionSort.sort(array, left, right);
-		} else if (maxDepth <= 0) {
-			// Use heap sort if teh max depth is exceeded
-			HeapSort.sort(array, left, right);
-		} else {
+		} else if (maxDepth > 0) {
 			// Recursively use quick sort
 			int pivot = QuickSort.partition(array, left, right);
 			sort(array, maxDepth - 1, left, pivot - 1);
 			sort(array, maxDepth - 1, pivot + 1, right);
+		} else {
+			// Use heap sort if the max depth is exceeded
+			HeapSort.sort(array, left, right);
 		}
 
 		return array;

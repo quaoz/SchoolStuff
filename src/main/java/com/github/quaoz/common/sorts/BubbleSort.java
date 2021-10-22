@@ -21,7 +21,7 @@ public class BubbleSort {
 	 * @return T    The sorted array
 	 */
 	public static <T extends Comparable<T>> T[] sort(T @NotNull [] array) {
-		return sort(array, 0, array.length);
+		return sort(array, 0, array.length - 1);
 	}
 
 	/**
@@ -37,14 +37,15 @@ public class BubbleSort {
 	static <T extends Comparable<T>> T[] sort(T @NotNull [] array, int start, int end) {
 		boolean swapped;
 
-		for (int i = start; i < end - 1; ++i) {
+		for (int i = start; i < end; ++i) {
 			swapped = false;
-			for (int j = start; j < end - 1 - i; ++j) {
+			for (int j = start; j < end - i; ++j) {
 				if (Comparisons.bigger(array[j], array[j + 1])) {
 					Swap.swap(array, j, j + 1);
 					swapped = true;
 				}
 			}
+
 			if (!swapped) {
 				break;
 			}
