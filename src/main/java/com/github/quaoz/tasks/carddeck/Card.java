@@ -69,7 +69,7 @@ class Card implements Comparable<Card> {
 	}
 
 	/**
-	 * @param c Card to compare to  this
+	 * @param c Card to compare to this
 	 *
 	 * @return int -1 if c is greater, 0 if c equals this, 1 if c is smaller than this
 	 */
@@ -85,17 +85,7 @@ class Card implements Comparable<Card> {
 			if (Deck.isCompareByValue()) {
 				// Compares the cards by their face values
 				if (c.getFaceValue() == this.getFaceValue()) {
-					// If the cards have the same face values then it compares them based on their suit
-					// Spades > Clubs > Diamonds > Hearts > Jokers
-					if (c.getSuit().equals("jokers") || this.getSuit().equals("jokers")) {
-						result = c.getSuit().equals("diamonds") ? -1 : 1;
-					} else if (c.getSuit().equals("hearts") || this.getSuit().equals("hearts")) {
-						result = c.getSuit().equals("hearts") ? -1 : 1;
-					} else if (c.getSuit().equals("diamonds") || this.getSuit().equals("diamonds")) {
-						result = c.getSuit().equals("diamonds") ? -1 : 1;
-					} else {
-						result = c.getSuit().equals("clubs") ? -1 : 1;
-					}
+					result = compareSuit(c);
 				} else {
 					// If the values aren't the same it compares them
 					result = Integer.compare(this.getFaceValue(), c.getFaceValue());
@@ -105,6 +95,28 @@ class Card implements Comparable<Card> {
 				result = this.getName().compareTo(c.getName());
 			}
 		}
+		return result;
+	}
+
+	/**
+	 * @param c Card to compare to this
+	 *
+	 * @return int -1 if c's suit is greater, 0 if c's suit equals this, 1 if c's suit is smaller than this
+	 */
+	private int compareSuit(@NotNull Card c) {
+		final int result;
+		// If the cards have the same face values then it compares them based on their suit
+		// Spades > Clubs > Diamonds > Hearts > Jokers
+		if (c.getSuit().equals("jokers") || this.getSuit().equals("jokers")) {
+			result = c.getSuit().equals("diamonds") ? -1 : 1;
+		} else if (c.getSuit().equals("hearts") || this.getSuit().equals("hearts")) {
+			result = c.getSuit().equals("hearts") ? -1 : 1;
+		} else if (c.getSuit().equals("diamonds") || this.getSuit().equals("diamonds")) {
+			result = c.getSuit().equals("diamonds") ? -1 : 1;
+		} else {
+			result = c.getSuit().equals("clubs") ? -1 : 1;
+		}
+
 		return result;
 	}
 }
