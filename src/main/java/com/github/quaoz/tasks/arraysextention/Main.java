@@ -115,10 +115,3 @@ public class Main {
 		return deobfuscatedString.toString();
 	}
 }
-
-// Used to return the original word, rotated word and the offset
-class RotatedString {
-	public String originalString;
-	public String offsetString;
-	public int offset;
-}
