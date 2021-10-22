@@ -1,6 +1,6 @@
 package com.github.quaoz.tasks.calendar;
 
-public class Month {
+class Month {
 	private final String name;
 	private final int daysInTheMonth;
 	private final int[][] days;

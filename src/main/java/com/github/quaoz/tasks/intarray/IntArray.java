@@ -2,7 +2,7 @@ package com.github.quaoz.tasks.intarray;
 
 import org.jetbrains.annotations.NotNull;
 
-public class IntArray {
+class IntArray {
 	private int[] array;
 
 	IntArray(int @NotNull [] array) {

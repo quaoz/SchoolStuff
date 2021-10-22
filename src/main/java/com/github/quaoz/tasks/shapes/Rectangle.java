@@ -1,6 +1,6 @@
 package com.github.quaoz.tasks.shapes;
 
-public class Rectangle extends Shape {
+class Rectangle extends Shape {
 	private double width;
 	private double height;
 

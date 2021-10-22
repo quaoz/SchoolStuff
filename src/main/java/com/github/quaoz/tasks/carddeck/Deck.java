@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
 /**
  * Class representing a deck of cards
  */
-public class Deck {
+class Deck {
 	private static boolean compareByValue;
 	private static boolean includeJokers;
 	private final Card[] cards;

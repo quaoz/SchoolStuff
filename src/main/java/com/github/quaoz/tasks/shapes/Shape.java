@@ -1,6 +1,6 @@
 package com.github.quaoz.tasks.shapes;
 
-public class Shape {
+class Shape {
 	float numSides;
 
 	float getInternalAngle() {

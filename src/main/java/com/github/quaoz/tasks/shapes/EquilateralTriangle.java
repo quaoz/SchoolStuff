@@ -1,6 +1,6 @@
 package com.github.quaoz.tasks.shapes;
 
-public class EquilateralTriangle extends Shape {
+class EquilateralTriangle extends Shape {
 	private double side;
 
 	EquilateralTriangle(double side) {

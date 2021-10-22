@@ -8,7 +8,7 @@ import java.util.Locale;
 /**
  * Class representing a card
  */
-public class Card implements Comparable<Card> {
+class Card implements Comparable<Card> {
 	final private String suit;
 	final private int faceValue;
 

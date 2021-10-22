@@ -1,6 +1,6 @@
 package com.github.quaoz.tasks.shapes;
 
-public class RightAngleTriangle extends Shape {
+class RightAngleTriangle extends Shape {
 	private double base;
 	private double height;
 

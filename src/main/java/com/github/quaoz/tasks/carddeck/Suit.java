@@ -5,7 +5,7 @@ import java.util.Arrays;
 /**
  * Class representing a suit of cards
  */
-public class Suit {
+class Suit {
 	private final String suitName;
 	private final Card[] cards = new Card[13];
 

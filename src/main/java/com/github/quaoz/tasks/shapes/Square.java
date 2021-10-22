@@ -1,6 +1,6 @@
 package com.github.quaoz.tasks.shapes;
 
-public class Square extends Shape {
+class Square extends Shape {
 	private double side;
 
 	Square(double side) {
