@@ -36,8 +36,8 @@ public class ShellSort {
 
 				// Moves elements of array[0..i-1] that are greater than the insert value one gap ahead
 				while (j >= gap && Comparisons.smaller(insertValue, array[j - gap])) {
-					array[j] = array[j - gap];
 					j -= gap;
+					array[j] = array[j];
 				}
 				array[j] = insertValue;
 			}

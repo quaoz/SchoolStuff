@@ -34,55 +34,54 @@ public class HeapSort {
      * @return T The sorted array
      */
     static <T extends Comparable<T>> T @NotNull [] sort(T @NotNull [] array, int start, int end) {
-        final int size = end - start;
+		int size = end - start - 1;
 
-        // Build heap
-        for (int i = size / 2 - 1; i >= 0; i--) {
-            heapify(array, size, i);
-        }
+		// Build heap
+		for (int i = size / 2; i >= 0; i--) {
+			heapify(array, size, i);
+		}
 
-        // Extract an element from the heap
-        for (int i = size - 1; i >= 0; i--) {
-            // Move the current root to the end
-            Swap.swap(array, start, start + i);
+		// Extract an element from the heap
+		while (size >= 0) {
+			// Move the current root to the end
+			Swap.swap(array, start, start + size);
 
-            // Heapify the reduced heap
-            heapify(array, i, start);
-        }
+			// Heapify the reduced heap
+			heapify(array, size--, start);
+		}
 
-        return array;
-    }
+		return array;
+	}
 
-    /**
-     * Heapifies the subtree
-     *
-     * @param array The array to be heapified
-     * @param size  The size of the subtree
-     * @param root  The node root of the subtree
-     * @param <T>   The array type
-     */
-    // to heapify a subtree rooted with node root which is an index in array[]
-    static <T extends Comparable<T>> void heapify(T[] array, int size, int root) {
-        int max = root;
-        final int left = 2 * root + 1;
-        final int right = 2 * root + 2;
+	/**
+	 * Heapifies the subtree
+	 *
+	 * @param array The array to be heapified
+	 * @param size  The size of the subtree
+	 * @param root  The node root of the subtree
+	 * @param <T>   The array type
+	 */
+	static <T extends Comparable<T>> void heapify(T @NotNull [] array, int size, int root) {
+		int max = root;
+		final int left = 2 * root + 1;
+		final int right = 2 * root + 2;
 
-        // If left is bigger than max replace max with it
-        if (left < size && Comparisons.bigger(array[left], array[max])) {
-            max = left;
-        }
+		// If left is bigger than max replace max with it
+		if (left < size && Comparisons.bigger(array[left], array[max])) {
+			max = left;
+		}
 
-        // If right is bigger than max replace max with it
-        if (right < size && Comparisons.bigger(array[right], array[max])) {
-            max = right;
-        }
+		// If right is bigger than max replace max with it
+		if (right < size && Comparisons.bigger(array[right], array[max])) {
+			max = right;
+		}
 
-        // Swaps the max and the root if they aren't equal
-        if (max != root) {
-            Swap.swap(array, root, max);
+		// Swaps the max and the root if they aren't equal
+		if (max != root) {
+			Swap.swap(array, root, max);
 
-            // Recursively heapify the affected subtree
-            heapify(array, size, max);
-        }
-    }
+			// Recursively heapify the affected subtree
+			heapify(array, size, max);
+		}
+	}
 }

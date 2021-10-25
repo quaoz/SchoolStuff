@@ -36,16 +36,18 @@ public class TimSort {
 		for (int size = minRun; size < arrayLength; size *= 2) {
 
 			// Pick starting point of left sub array
-			for (int left = 0; left < arrayLength; left += 2 * size) {
+			int left = 0;
+			while (left < arrayLength) {
 
 				// Find end point of left sub array
 				final int mid = left + size - 1;
-				final int right = Math.min((left + 2 * size - 1), (arrayLength - 1));
+				final int right = Math.min(left + 2 * size - 1, arrayLength - 1);
 
 				// Merge sub arrays
 				if (mid < right) {
 					MergeSort.merge(array, left, mid, right);
 				}
+				left += 2 * size;
 			}
 		}
 

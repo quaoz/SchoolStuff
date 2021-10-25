@@ -57,7 +57,7 @@ public class MergeSort {
 	 * @param left  The first index of the array
 	 * @param mid   The middle index of the array
 	 * @param right The last index of the array
-	* @param <T>   The array type
+	 * @param <T>   The array type
 	 */
 	static <T extends Comparable<T>> void merge(T[] array, int left, int mid, int right) {
 		int length = right - left + 1;

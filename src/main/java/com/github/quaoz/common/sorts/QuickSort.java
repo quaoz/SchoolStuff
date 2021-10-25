@@ -71,16 +71,16 @@ public class QuickSort {
 	 */
 	static <T extends Comparable<T>> int partition(T @NotNull [] array, int left, int right) {
 		final T pivot = array[right];
-		int i = left;
+		int index = left;
 
 		while (left < right) {
 			if (!Comparisons.bigger(array[left], pivot)) {
-				Swap.swap(array, i++, left);
+				Swap.swap(array, index++, left);
 			}
 			left++;
 		}
 
-		Swap.swap(array, i, right);
-		return i;
+		Swap.swap(array, index, right);
+		return index;
 	}
 }
