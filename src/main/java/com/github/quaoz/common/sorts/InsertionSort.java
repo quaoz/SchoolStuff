@@ -20,7 +20,7 @@ public class InsertionSort {
 	 * @return T The sorted array
 	 */
 	public static <T extends Comparable<T>> T[] sort(T @NotNull [] array) {
-		return sort(array, 0, array.length);
+		return sort(array, 0, array.length - 1);
 	}
 
 	/**
@@ -36,18 +36,17 @@ public class InsertionSort {
 	static <T extends Comparable<T>> T[] sort(T @NotNull [] array, int start, int end) {
 
 		// Iterates through the array
-		for (int i = start + 1; i < end; i++) {
+		for (int i = start; i <= end; i++) {
 			T insertValue = array[i];
-			int j = i - 1;
+			int j = i;
 
 			// Moves elements of array[0..i-1] that are greater than the insert value one position ahead
-			while (j >= start && Comparisons.smaller(insertValue, array[j])) {
-				array[j + 1] = array[j];
-				j--;
+			while (j > start && Comparisons.smaller(insertValue, array[j - 1])) {
+				array[j] = array[--j];
 			}
 
 			// Re-adds the insert value
-			array[j + 1] = insertValue;
+			array[j] = insertValue;
 		}
 
 		return array;

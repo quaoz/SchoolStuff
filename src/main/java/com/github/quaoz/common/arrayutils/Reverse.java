@@ -11,7 +11,7 @@ public class Reverse {
 	 * @param array The array to reverse
 	 */
 	public static <T extends Comparable<T>> void reverse(T[] array) {
-		reverse(array, 0, array.length);
+		reverse(array, 0, array.length - 1);
 	}
 
 	/**

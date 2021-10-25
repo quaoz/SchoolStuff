@@ -3,14 +3,12 @@ package com.github.quaoz.common.sorts;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Intro sort is a combination of quick sort, heap sort and insertion sort, works by using quick sort until the maximum
- * depth has been reached, in which case it will switch to heap sort to avoid quick sorts rare worst case performance,
- * or until the array is under a certain length where it will switch to insertion sort
+ * Dual-pivot intro sort is a modified intro sort which uses dual-pivot quick sort instead of standard quick sort as it
+ * is faster for almost all data sets
  *
  * <p> Worst-case performance O(n log n), Best-case performance O(n log n), Average performance O(n log n)
  */
-public class IntroSort {
-
+public class DualPivotIntroSort {
 	/**
 	 * Implements a generic intro sort algorithm without the need to specify the bounds
 	 *
@@ -42,9 +40,11 @@ public class IntroSort {
 			if (maxDepth != 0) {
 				QuickSort.randomPivot(array, left, right);
 
-				final int partition = QuickSort.partition(array, left, right);
-				sort(array, left, partition - 1, maxDepth - 1);
-				sort(array, partition + 1, right, maxDepth - 1);
+				final int[] partition = DualPivotQuickSort.partition(array, left, right);
+
+				sort(array, left, partition[0] - 1, maxDepth - 1);
+				sort(array, partition[0] + 1, partition[1] - 1, maxDepth - 1);
+				sort(array, partition[1] + 1, right, maxDepth - 1);
 			} else {
 				HeapSort.sort(array, left, right);
 			}

@@ -117,8 +117,9 @@ public class ResizableArray<E> implements Iterable<E> {
 	 *
 	 * @throws IndexOutOfBoundsException The index was out of bounds for the array
 	 */
+	@SuppressWarnings("unchecked")
 	public E get(final int index) throws IndexOutOfBoundsException {
-		return getElement(index);
+		return (E) elements[index];
 	}
 
 	/**
@@ -218,11 +219,6 @@ public class ResizableArray<E> implements Iterable<E> {
 		elements = Arrays.copyOf(elements, elements.length + capacity);
 	}
 
-	@SuppressWarnings("unchecked")
-	private E getElement(final int index) {
-		return (E) elements[index];
-	}
-
 	/**
 	 * Returns the String representation of this object
 	 *
@@ -269,7 +265,7 @@ public class ResizableArray<E> implements Iterable<E> {
 				throw new ConcurrentModificationException();
 			}
 
-			return getElement(cursor++);
+			return get(cursor++);
 		}
 
 		@Override

@@ -36,10 +36,11 @@ public class QuickSort {
 	 */
 	static <T extends Comparable<T>> T[] sort(T[] array, int left, int right) {
 		if (left < right) {
-			int pivot = randomPartition(array, left, right);
+			randomPivot(array, left, right);
 
-			sort(array, left, pivot - 1);
-			sort(array, pivot, right);
+			final int partition = partition(array, left, right);
+			sort(array, left, partition - 1);
+			sort(array, partition + 1, right);
 		}
 
 		return array;
@@ -52,13 +53,10 @@ public class QuickSort {
 	 * @param left  The first index of an array
 	 * @param right The last index of an array
 	 * @param <T>   The array type
-	 *
-	 * @return int The partition index
 	 */
-	private static <T extends Comparable<T>> int randomPartition(T[] array, int left, int right) {
-		int randomIndex = left + (int) (Math.random() * (right - left + 1));
+	static <T extends Comparable<T>> void randomPivot(T[] array, int left, int right) {
+		final int randomIndex = left + (int) (Math.random() * (right - left + 1));
 		Swap.swap(array, randomIndex, right);
-		return partition(array, left, right);
 	}
 
 	/**
@@ -72,21 +70,17 @@ public class QuickSort {
 	 * @return int The partition index
 	 */
 	static <T extends Comparable<T>> int partition(T @NotNull [] array, int left, int right) {
-		int mid = (left + right) >>> 1;
-		T pivot = array[mid];
+		final T pivot = array[right];
+		int i = left;
 
-		while (left <= right) {
-			while (Comparisons.bigger(pivot, array[left])) {
-				left++;
+		while (left < right) {
+			if (!Comparisons.bigger(array[left], pivot)) {
+				Swap.swap(array, i++, left);
 			}
-			while (Comparisons.bigger(pivot, array[right])) {
-				right--;
-			}
-			if (left <= right) {
-				Swap.swap(array, left++, right--);
-			}
+			left++;
 		}
 
-		return left;
+		Swap.swap(array, i, right);
+		return i;
 	}
 }

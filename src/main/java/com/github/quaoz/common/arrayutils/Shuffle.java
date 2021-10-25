@@ -33,7 +33,7 @@ public class Shuffle {
 	 */
 	public static <T extends Comparable<T>> T[] shuffle(T @NotNull [] array, int start, int end) {
 		while (start < end) {
-			Swap.swap(array, start++, ThreadLocalRandom.current().nextInt(start, end));
+			Swap.swap(array, start++, ThreadLocalRandom.current().nextInt(end));
 		}
 
 		return array;
