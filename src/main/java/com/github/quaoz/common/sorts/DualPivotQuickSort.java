@@ -57,6 +57,14 @@ public class DualPivotQuickSort {
 	 * @return int[] The partition indexes
 	 */
 	static <T extends Comparable<T>> int @NotNull [] partition(T @NotNull [] array, int left, int right) {
+		/*
+		 * Randomizing one of the values which will be chosen as a pivot as we do with standard quick sort can
+		 * significantly increase the performance on non-random data sets as it allows dual-pivot quick sort to
+		 * function as though the data isn't sorted
+		 */
+
+		// QuickSort.randomPivot(array, left, right);
+
 		if (Comparisons.bigger(array[left], array[right])) {
 			Swap.swap(array, left, right);
 		}

@@ -1,7 +1,8 @@
 # Sorts
 
-The best sorting algorithm depends on the data being processed, however intro sort is the best general purpose sorting
-algorithm in my testing. Most sorting algorithms can be modified to further improve performance with specific data sets.
+The best sorting algorithm depends on the data being processed, however dual-pivot intro sort or intro sort is the best
+general purpose sorting algorithm in my testing. Most sorting algorithms can be modified to further improve performance
+with specific data sets.
 
 ## Bubble Sort
 
@@ -31,12 +32,18 @@ algorithm in my testing. Most sorting algorithms can be modified to further impr
 ## Dual-pivot quick sort
 
 - Modified quick sort
-- May be faster than quick sort in some scenarios
+- Faster in most scenarios
 
 ## Intro sort
 
 - Runs very well on all sized data sets
 - Combination of insertion, quick and heap sort
+-
+
+## Dual-pivot intro sort
+
+- Modified intro sort using dual-pivot quick sort
+- Faster in scenarios where the data is random
 
 ## Tim sort
 

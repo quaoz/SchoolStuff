@@ -21,6 +21,7 @@ public class SortTimer {
 		put("quick", 0);
 		put("dual-pivot quick", 0);
 		put("intro", 0);
+		put("dual-pivot intro", 0);
 		put("tim", 0);
 		put("heap", 0);
 		put("java arrays sort", 0);
@@ -133,6 +134,10 @@ public class SortTimer {
 		timer.startTimerNano();
 		IntroSort.sort(array.clone());
 		printResults(results, "intro");
+
+		timer.startTimerNano();
+		DualPivotIntroSort.sort(array.clone());
+		printResults(results, "dual-pivot intro");
 
 		timer.startTimerNano();
 		TimSort.sort(array.clone());

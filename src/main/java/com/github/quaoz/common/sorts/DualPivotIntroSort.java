@@ -38,8 +38,6 @@ public class DualPivotIntroSort {
 
 		if (size > 16) {
 			if (maxDepth != 0) {
-				QuickSort.randomPivot(array, left, right);
-
 				final int[] partition = DualPivotQuickSort.partition(array, left, right);
 
 				sort(array, left, partition[0] - 1, maxDepth - 1);
