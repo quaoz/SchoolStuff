@@ -13,15 +13,16 @@ import java.util.function.Consumer;
 public class ResizableArray<E> implements Iterable<E> {
 	private static final int defaultCapacity = 16;
 	private int size = 0;                                // Number of spaces taken up in the array
-	private Object[] elements;
+	private E[] elements;
 
 	/**
 	 * Constructs a resizable array with a set capacity
 	 *
 	 * @param capacity The starting capacity of the array
 	 */
+	@SuppressWarnings("unchecked")
 	public ResizableArray(final int capacity) {
-		this.elements = new Object[capacity];
+		this.elements = (E[]) new Object[capacity];
 	}
 
 	/**
@@ -117,9 +118,8 @@ public class ResizableArray<E> implements Iterable<E> {
 	 *
 	 * @throws IndexOutOfBoundsException The index was out of bounds for the array
 	 */
-	@SuppressWarnings("unchecked")
 	public E get(final int index) throws IndexOutOfBoundsException {
-		return (E) elements[index];
+		return elements[index];
 	}
 
 	/**
@@ -186,11 +186,20 @@ public class ResizableArray<E> implements Iterable<E> {
 	}
 
 	/**
+	 * Trims the array to the requested size
+	 *
+	 * @param size The size to trim the array to
+	 */
+	public void trimToSize(final int size) {
+		elements = Arrays.copyOf(elements, size);
+	}
+
+	/**
 	 * Returns the array size, number of elements containing a value
 	 *
 	 * @return int The size
 	 */
-	public int getSize() {
+	public int size() {
 		return size;
 	}
 
@@ -217,6 +226,17 @@ public class ResizableArray<E> implements Iterable<E> {
 	 */
 	public void increaseCapacity(int capacity) {
 		elements = Arrays.copyOf(elements, elements.length + capacity);
+	}
+
+	/**
+	 * Makes sure the capacity is over a specified amount
+	 *
+	 * @param capacity The minimum capacity
+	 */
+	public void ensureCapacity(int capacity) {
+		if (elements.length - size < capacity) {
+			elements = Arrays.copyOf(elements, size + capacity);
+		}
 	}
 
 	/**

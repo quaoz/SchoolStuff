@@ -99,6 +99,26 @@ public class Comparisons {
 	}
 
 	/**
+	 * Finds the largest value in an array
+	 *
+	 * @param array The array to find the max value in
+	 * @param <T>   The array type
+	 *
+	 * @return The largest value in the array
+	 */
+	public static <T extends Comparable<T>> T max(T @NotNull [] array) {
+		int index = 0;
+
+		for (int i = 1; i < array.length - 1; i++) {
+			if (bigger(array[i], array[index])) {
+				index = i;
+			}
+		}
+
+		return array[index];
+	}
+
+	/**
 	 * Returns the biggest value
 	 *
 	 * @param a   The first argument to compare
@@ -123,6 +143,26 @@ public class Comparisons {
 	 */
 	public static <T extends Comparable<T>> T min(T a, T b) {
 		return (smaller(a, b)) ? a : b;
+	}
+
+	/**
+	 * Finds the smallest value in an array
+	 *
+	 * @param array The array to find the min value in
+	 * @param <T>   The array type
+	 *
+	 * @return The smallest value in the array
+	 */
+	public static <T extends Comparable<T>> T min(T @NotNull [] array) {
+		int index = 0;
+
+		for (int i = 1; i < array.length - 1; i++) {
+			if (smaller(array[i], array[index])) {
+				index = i;
+			}
+		}
+
+		return array[index];
 	}
 
 	/**

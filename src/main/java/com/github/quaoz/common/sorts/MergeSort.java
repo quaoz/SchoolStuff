@@ -60,17 +60,17 @@ public class MergeSort {
 	 * @param <T>   The array type
 	 */
 	static <T extends Comparable<T>> void merge(T[] array, int left, int mid, int right) {
-		int length = right - left + 1;
+		int size = right - left + 1;
 
 		@SuppressWarnings("unchecked")
-		T[] temp = (T[]) new Comparable[length];
+		T[] temp = (T[]) new Comparable[size];
 		int i = left;
 		int j = mid + 1;
 		int k = 0;
 
 		// Compares and adds the values to the temp array
 		while (i <= mid && j <= right) {
-			temp[k++] = !Comparisons.bigger(array[i], array[j])
+			temp[k++] = Comparisons.smallerOrEqual(array[i], array[j])
 					? array[i++]
 					: array[j++];
 		}
@@ -85,6 +85,6 @@ public class MergeSort {
 		}
 
 		// Copies the temp array to the original array
-		System.arraycopy(temp, 0, array, left, length);
+		System.arraycopy(temp, 0, array, left, size);
 	}
 }

@@ -74,7 +74,7 @@ public class QuickSort {
 		int index = left;
 
 		while (left < right) {
-			if (!Comparisons.bigger(array[left], pivot)) {
+			if (Comparisons.smallerOrEqual(array[left], pivot)) {
 				Swap.swap(array, index++, left);
 			}
 			left++;

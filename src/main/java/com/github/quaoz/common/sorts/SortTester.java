@@ -14,7 +14,7 @@ import java.util.stream.IntStream;
  */
 public class SortTester {
 	private static final SortTimer sortTimer = new SortTimer(true);
-	private static final int[] arraySizes = {16, 64, 256, 1024, 4096};
+	private static final int[] arraySizes = {16, 64, 1024, 4096};
 	private static final int numTests = 6;
 	private static final int runsPerArray = 2;
 	private static final int numArrays = 50;
@@ -33,8 +33,8 @@ public class SortTester {
 
 		for (int size : arraySizes) {
 			globalStartTime = System.currentTimeMillis();
-			count = 0;
 			arraySize = size;
+			count = 0;
 
 			randomIntegers();
 			lowVariationRandomIntegers();
@@ -52,10 +52,12 @@ public class SortTester {
 				tablesSplit[j] = tables[i][j].split("\n");
 			}
 
-			for (int j = 0; j < arraySizes.length / 3; j++) {
+			int j = 0;
+			while (j < arraySizes.length - 3) {
 				for (int k = 0; k < tablesSplit[0].length; k++) {
 					System.out.format("%-70.70s %-70.70s %-70.70s %n", tablesSplit[j][k], tablesSplit[j + 1][k], tablesSplit[j + 2][k]);
 				}
+				j += 3;
 			}
 
 			if (arraySizes.length % 3 == 1) {
@@ -65,6 +67,10 @@ public class SortTester {
 			} else if (arraySizes.length % 3 == 2) {
 				for (int k = 0; k < tablesSplit[0].length; k++) {
 					System.out.format("%-70.70s %-70.70s %n", tablesSplit[arraySizes.length - 2][k], tablesSplit[arraySizes.length - 1][k]);
+				}
+			} else {
+				for (int k = 0; k < tablesSplit[0].length; k++) {
+					System.out.format("%-70.70s %-70.70s %-70.70s %n", tablesSplit[arraySizes.length - 3][k], tablesSplit[arraySizes.length - 2][k], tablesSplit[arraySizes.length - 1][k]);
 				}
 			}
 		}
@@ -85,7 +91,7 @@ public class SortTester {
 
 	private static void lowVariationRandomIntegers() {
 		for (int i = 0; i < numArrays; i++) {
-			Integer[] randomIntegers = IntStream.generate(() -> ThreadLocalRandom.current().nextInt(0, arraySize / 10))
+			Integer[] randomIntegers = IntStream.generate(() -> ThreadLocalRandom.current().nextInt((int) Math.ceil((float) arraySize / 10)))
 					.limit(arraySize)
 					.unordered()
 					.boxed()
