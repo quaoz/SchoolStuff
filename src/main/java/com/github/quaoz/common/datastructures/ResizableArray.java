@@ -8,12 +8,12 @@ import java.util.function.Consumer;
 /**
  * Implements a resizable array
  *
- * @param <E> The array type
+ * @param <T> The array type
  */
-public class ResizableArray<E> implements Iterable<E> {
+public class ResizableArray<T> implements Iterable<T>, Interpreter<T> {
 	private static final int defaultCapacity = 16;
 	private int size = 0;                                // Number of spaces taken up in the array
-	private E[] elements;
+	private T[] elements;
 
 	/**
 	 * Constructs a resizable array with a set capacity
@@ -22,7 +22,7 @@ public class ResizableArray<E> implements Iterable<E> {
 	 */
 	@SuppressWarnings("unchecked")
 	public ResizableArray(final int capacity) {
-		this.elements = (E[]) new Object[capacity];
+		this.elements = (T[]) new Object[capacity];
 	}
 
 	/**
@@ -37,7 +37,7 @@ public class ResizableArray<E> implements Iterable<E> {
 	 *
 	 * @param element The element to add to the array
 	 */
-	public void add(final E element) {
+	public void add(final T element) {
 		if (size == elements.length) {
 			increaseCapacity();
 		}
@@ -50,7 +50,7 @@ public class ResizableArray<E> implements Iterable<E> {
 	 *
 	 * @param elements The elements to add to the array
 	 */
-	public void addAll(final E @NotNull [] elements) {
+	public void addAll(final T @NotNull [] elements) {
 		size += elements.length;
 
 		if (size >= this.elements.length) {
@@ -68,7 +68,7 @@ public class ResizableArray<E> implements Iterable<E> {
 	 *
 	 * @throws IndexOutOfBoundsException The index was out of bounds for the array
 	 */
-	public void put(final int index, final E element) throws IndexOutOfBoundsException {
+	public void put(final int index, final T element) throws IndexOutOfBoundsException {
 		elements[index] = element;
 	}
 
@@ -80,7 +80,7 @@ public class ResizableArray<E> implements Iterable<E> {
 	 *
 	 * @throws IndexOutOfBoundsException The index was out of bounds for the array
 	 */
-	public void insert(final int index, E element) throws IndexOutOfBoundsException {
+	public void insert(final int index, T element) throws IndexOutOfBoundsException {
 		if (size == elements.length) {
 			increaseCapacity();
 		}
@@ -98,7 +98,7 @@ public class ResizableArray<E> implements Iterable<E> {
 	 *
 	 * @throws IndexOutOfBoundsException The index was out of bounds for the array
 	 */
-	public void insertAll(final int index, final E @NotNull [] elements) throws IndexOutOfBoundsException {
+	public void insertAll(final int index, final T @NotNull [] elements) throws IndexOutOfBoundsException {
 		size += elements.length;
 
 		if (size >= this.elements.length) {
@@ -109,17 +109,17 @@ public class ResizableArray<E> implements Iterable<E> {
 		System.arraycopy(elements, 0, this.elements, index, elements.length);
 	}
 
-	/**
-	 * Gets the element at the requested index
-	 *
-	 * @param index The desired index of the element
-	 *
-	 * @return The element at the specified index
-	 *
-	 * @throws IndexOutOfBoundsException The index was out of bounds for the array
-	 */
-	public E get(final int index) throws IndexOutOfBoundsException {
+	@Override
+	public T get(int index) {
 		return elements[index];
+	}
+
+	@Override
+	public T set(int index, T element) {
+		final T previous = elements[index];
+		elements[index] = element;
+
+		return previous;
 	}
 
 	/**
@@ -255,19 +255,19 @@ public class ResizableArray<E> implements Iterable<E> {
 	 * @return Iterator A Resizable Array iterator
 	 */
 	@Override
-	public Iterator<E> iterator() {
+	public Iterator<T> iterator() {
 		return new DynamicArrayIterator();
 	}
 
 	@Override
-	public Spliterator<E> spliterator() {
+	public Spliterator<T> spliterator() {
 		return Iterable.super.spliterator();
 	}
 
 	/**
 	 * Iterator for a Resizable Array
 	 */
-	private class DynamicArrayIterator implements Iterator<E> {
+	private class DynamicArrayIterator implements Iterator<T> {
 		private int cursor;
 
 		@Override
@@ -276,7 +276,7 @@ public class ResizableArray<E> implements Iterable<E> {
 		}
 
 		@Override
-		public E next() {
+		public T next() {
 			if (cursor > size) {
 				throw new NoSuchElementException();
 			}
@@ -298,7 +298,7 @@ public class ResizableArray<E> implements Iterable<E> {
 		}
 
 		@Override
-		public void forEachRemaining(Consumer<? super E> action) {
+		public void forEachRemaining(Consumer<? super T> action) {
 			Objects.requireNonNull(action);
 
 			while (hasNext()) {

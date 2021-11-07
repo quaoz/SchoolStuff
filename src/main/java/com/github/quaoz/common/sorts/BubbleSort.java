@@ -2,6 +2,7 @@ package com.github.quaoz.common.sorts;
 
 import com.github.quaoz.common.Comparisons;
 import com.github.quaoz.common.arrayutils.Swap;
+import com.github.quaoz.common.datastructures.Interpreter;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -52,4 +53,45 @@ public class BubbleSort {
 		}
 		return array;
 	}
+
+	/**
+	 * Implements a generic bubble sort algorithm, assumes the whole array should be sorted
+	 *
+	 * @param interpreter The interpreter to be sorted
+	 * @param <T>         The interpreter type
+	 *
+	 * @return The sorted interpreter
+	 */
+	public static <T extends Comparable<T>> Interpreter<T> sort(Interpreter<T> interpreter) {
+		return sort(interpreter, 0, interpreter.size() - 1);
+	}
+
+	/**
+	 * Implements a generic bubble sort algorithm
+	 *
+	 * @param interpreter The interpreter to be sorted
+	 * @param start       The index to start searching from
+	 * @param end         The index to stop searching at
+	 * @param <T>         The interpreter type
+	 *
+	 * @return The sorted interpreter
+	 */
+	static <T extends Comparable<T>> Interpreter<T> sort(Interpreter<T> interpreter, int start, int end) {
+		boolean swapped = true;
+
+		while (swapped) {
+			swapped = false;
+			int j = start;
+			while (j < end) {
+				if (Comparisons.bigger(interpreter.get(j++), interpreter.get(j))) {
+					Swap.swap(interpreter, j - 1, j);
+					swapped = true;
+				}
+			}
+
+			end--;
+		}
+		return interpreter;
+	}
+
 }

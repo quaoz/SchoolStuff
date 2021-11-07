@@ -1,15 +1,14 @@
 package com.github.quaoz.common.sorts;
 
 import com.github.quaoz.common.Comparisons;
-import com.github.quaoz.common.arrayutils.Swap;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.IntStream;
+
+// BROKEN DO NOT USE
+// TODO: fix
 
 public class DropMergeSort {
 	final static boolean DOUBLE_COMPARISONS = true;
@@ -31,69 +30,67 @@ public class DropMergeSort {
 		System.out.println(Arrays.toString(array));
 	}
 
+	@SuppressWarnings("unchekced")
 	public static <T extends Comparable<T>> T @NotNull [] sort(T @NotNull [] array, int left, int right) {
-		ArrayList<T> dropped = new ArrayList<>();
+		final int length = array.length - 1;
+		T[] dropped = (T[]) new Comparable[length];
+
 		int droppedInRow = 0;
+		int droppedIndex = 0;
 		int write = 0;
 		int read = 0;
-		int iteration = 0;
-		final int earlyOutStop = array.length / EARLY_OUT_TEST_AT;
 
-		while (read < array.length) {
-			iteration++;
+		final int earlyOutStop = length / EARLY_OUT_TEST_AT;
 
-			if (EARLY_OUT && iteration == earlyOutStop && dropped.size() > read * EARLY_OUT_DISORDER_FRACTION) {
-				int i = write;
-				for (T element : dropped) {
-					array[i++] = element;
+		while (read < length) {
+			if (EARLY_OUT && read == earlyOutStop && droppedIndex > read * EARLY_OUT_DISORDER_FRACTION) {
+				for (int i = 0; i < droppedIndex; i++) {
+					array[write + i] = dropped[i];
 				}
 
 				// Sort using intro sort as we have seen lots of elements and dropped a lot of them
 				return IntroSort.sort(array);
 			}
 
-			if (write == 0 || Comparisons.biggerOrEqual(array[read], array[write - 1])) {
+			int lastWrite = write - 1;
+			T currentRead = array[read];
+			T previous = write == 0 ? array[0] : array[lastWrite];
+
+			if (write == 0 || Comparisons.biggerOrEqual(currentRead, previous)) {
 				// They are in order
-				Swap.swap(array, write, read);
+				array[write++] = currentRead;
 				read++;
-				write++;
 				droppedInRow = 0;
 			} else {
-				if (DOUBLE_COMPARISONS && droppedInRow == 0 && 2 <= write && Comparisons.biggerOrEqual(array[read], array[write - 2])) {
-					dropped.add(array[write - 1]);
-					Swap.swap(array, write - 1, read);
+				if (DOUBLE_COMPARISONS && droppedInRow == 0 && 2 <= write && Comparisons.biggerOrEqual(currentRead, array[write - 2])) {
+					dropped[droppedIndex++] = previous;
+					array[lastWrite] = currentRead;
 					read++;
 					continue;
 				}
 
 				if (droppedInRow < RECENCY) {
-					dropped.add(array[read]);
+					dropped[droppedIndex++] = currentRead;
 					read++;
 					droppedInRow++;
 				} else {
-					final int truncToLength = dropped.size() - droppedInRow;
-
-					for (int i = truncToLength; i > 0; i--) {
-						dropped.remove(dropped.size() - i);
-						dropped.trimToSize();
-					}
-
+					final int truncToLength = dropped.length - droppedInRow;
+					droppedIndex -= droppedInRow;
 					read -= droppedInRow;
 
 					int numBacktracked = 1;
 					write--;
 
 					if (FAST_BACKTRACKING) {
-						T maxOfDropped = Comparisons.max(array);
+						T maxOfDropped = Comparisons.max(Arrays.copyOfRange(array, read, read + droppedInRow + 1));
 						while (1 <= write && Comparisons.smaller(maxOfDropped, array[write - 1])) {
 							numBacktracked++;
 							write--;
 						}
 					}
 
-					dropped.ensureCapacity(numBacktracked);
 					for (int i = 0; i < numBacktracked; i++) {
-						dropped.add(array[i + numBacktracked]);
+						dropped[droppedIndex++] = array[write + i];
 					}
 
 					droppedInRow = 0;
@@ -101,21 +98,22 @@ public class DropMergeSort {
 			}
 		}
 
-		Collections.sort(dropped);
-		int back = array.length;
+		System.out.println(Arrays.toString(dropped));
+		System.out.println(Arrays.toString(array));
 
-		for (int i = dropped.size() - 1; i > 1; i--) {
-			T lastDropped = dropped.get(i);
+		dropped = Arrays.copyOf(dropped, droppedIndex);
+		dropped = IntroSort.sort(dropped);
+
+		System.out.println(Arrays.toString(dropped));
+
+		int back = length;
+		int pos = 0;
+		while (pos < dropped.length) {
+			T lastDropped = dropped[pos++];
 			while (0 < write && Comparisons.smaller(lastDropped, array[write - 1])) {
-				Swap.swap(array, back - 1, write -1);
-				back--;
-				write--;
+				array[--back] = array[--write];
 			}
-
-			array[back - 1] = lastDropped;
-			back--;
-			dropped.remove(dropped.size() - i);
-			dropped.trimToSize();
+			array[--back] = lastDropped;
 		}
 
 		return array;
