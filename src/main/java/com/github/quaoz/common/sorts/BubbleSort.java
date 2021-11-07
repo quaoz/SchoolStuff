@@ -36,20 +36,19 @@ public class BubbleSort {
 	 * @return T    The sorted array
 	 */
 	static <T extends Comparable<T>> T[] sort(T @NotNull [] array, int start, int end) {
-		boolean swapped;
+		boolean swapped = true;
 
-		for (int i = start; i < end; ++i) {
+		while (swapped) {
 			swapped = false;
-			for (int j = start; j < end - i; ++j) {
-				if (Comparisons.bigger(array[j], array[j + 1])) {
-					Swap.swap(array, j, j + 1);
+			int j = start;
+			while (j < end) {
+				if (Comparisons.bigger(array[j++], array[j])) {
+					Swap.swap(array, j - 1, j);
 					swapped = true;
 				}
 			}
 
-			if (!swapped) {
-				break;
-			}
+			end--;
 		}
 		return array;
 	}
