@@ -23,6 +23,18 @@ public class Swap {
 	}
 
 	/**
+	 * Helper method for swapping places in an interpreter
+	 *
+	 * @param interpreter The interpreter with elements we want to swap
+	 * @param idx         The index of the first element
+	 * @param idy         The index of the second element
+	 * @param <T>         The interpreter type
+	 */
+	public static <T extends Comparable<T>> void swap(@NotNull Interpreter<T> interpreter, int idx, int idy) {
+		interpreter.set(idy, interpreter.set(idx, interpreter.get(idy)));
+	}
+
+	/**
 	 * Helper method to swap a block of an array
 	 *
 	 * @param array      The array to perform the swap on
@@ -39,18 +51,6 @@ public class Swap {
 			swap(array, blockStart + i, dest + i);
 			i++;
 		}
-	}
-
-	/**
-	 * Helper method for swapping places in an interpreter
-	 *
-	 * @param interpreter The interpreter with elements we want to swap
-	 * @param idx         The index of the first element
-	 * @param idy         The index of the second element
-	 * @param <T>         The interpreter type
-	 */
-	public static <T extends Comparable<T>> void swap(@NotNull Interpreter<T> interpreter, int idx, int idy) {
-		interpreter.set(idy, interpreter.set(idx, interpreter.get(idy)));
 	}
 
 	/**

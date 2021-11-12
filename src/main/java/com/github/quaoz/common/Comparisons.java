@@ -169,7 +169,7 @@ public class Comparisons {
 	 * Returns the smallest value
 	 *
 	 * @param a   The first argument to compare
-	 * @param b      The second argument to compare
+	 * @param b   The second argument to compare
 	 * @param c   The third argument to compare
 	 * @param <T> The value type
 	 *
