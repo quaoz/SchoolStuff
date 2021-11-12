@@ -34,7 +34,7 @@ public class LinearSearch {
 	 * @param contains Whether to return the index of the value or just if the array contains it
 	 * @param <T>      The array type
 	 *
-	 * @return int        Whether the value was found or not, -2 = not found, -1 = found, anything else is the index
+	 * @return int Whether the value was found or not, -2 = not found, -1 = found, anything else is the index
 	 */
 	public static <T extends Comparable<T>> int find(T @NotNull [] array, @NotNull T value, boolean contains) {
 		int result = -2;
@@ -58,7 +58,7 @@ public class LinearSearch {
 	 * @param value The value being searched for
 	 * @param <T>   The array type
 	 *
-	 * @return int    Whether the value was found or not, -2 = not found, anything else is the index
+	 * @return int Whether the value was found or not, -2 = not found, anything else is the index
 	 */
 	public static <T extends Comparable<T>> int findWithSentinel(T @NotNull [] array, @NotNull T value) {
 		return findWithSentinel(array, value, false);
@@ -71,9 +71,9 @@ public class LinearSearch {
 	 * @param array    The array to be searched
 	 * @param value    The value being searched for
 	 * @param contains Whether to return the index of the value or just if the array contains it
-	 * @param <T>   The array type
+	 * @param <T>      The array type
 	 *
-	 * @return int        Whether the value was found or not, -2 = not found, -1 = found, anything else is the index
+	 * @return int Whether the value was found or not, -2 = not found, -1 = found, anything else is the index
 	 */
 	public static <T extends Comparable<T>> int findWithSentinel(T @NotNull [] array, @NotNull T value, boolean contains) {
 		final int result;
@@ -107,7 +107,7 @@ public class LinearSearch {
 	 * @param value The value being searched for
 	 * @param <T>   The array type
 	 *
-	 * @return int    Whether the value was found or not, -2 = not found, anything else is the index
+	 * @return int Whether the value was found or not, -2 = not found, anything else is the index
 	 */
 	public static <T extends Comparable<T>> int findForceSentinel(T @NotNull [] array, @NotNull T value) {
 		return findForceSentinel(array, value, false);
@@ -121,7 +121,7 @@ public class LinearSearch {
 	 * @param value The value being searched for
 	 * @param <T>   The array type
 	 *
-	 * @return int    Whether the value was found or not, -2 = not found, anything else is the index
+	 * @return int Whether the value was found or not, -2 = not found, anything else is the index
 	 */
 	public static <T extends Comparable<T>> int findForceSentinel(T @NotNull [] array, @NotNull T value, boolean contains) {
 		return Comparisons.equal(array[array.length - 1], value)
@@ -136,7 +136,7 @@ public class LinearSearch {
 	 * @param value The value being searched for
 	 * @param <T>   The array type
 	 *
-	 * @return Integer    ArrayList All the indexes the value was found at
+	 * @return Integer ArrayList All the indexes the value was found at
 	 */
 	public static <T extends Comparable<T>> @NotNull ArrayList<Integer> findOccurrences(T @NotNull [] array, @NotNull T value) {
 		ArrayList<Integer> indexes = new ArrayList<>();
@@ -158,7 +158,7 @@ public class LinearSearch {
 	 * @param value The value being searched for
 	 * @param <T>   The array type
 	 *
-	 * @return int    The total number of times the value occurred
+	 * @return int The total number of times the value occurred
 	 */
 	public static <T extends Comparable<T>> int findTotalOccurrences(T @NotNull [] array, @NotNull T value) {
 		int occurrences = 0;
@@ -180,7 +180,7 @@ public class LinearSearch {
 	 * @param values The array of values being searched for
 	 * @param <T>    The array type
 	 *
-	 * @return int        The total number of times the value occurred
+	 * @return int The total number of times the value occurred
 	 */
 	public static <T extends Comparable<T>> int findTotalOccurrences(T @NotNull [] array, T @NotNull [] values) {
 		int occurrences = 0;
@@ -197,5 +197,44 @@ public class LinearSearch {
 
 		return occurrences;
 	}
+
+	/**
+	 * Implements a generic linear search which will fail fast if it passes the point where the element should be,
+	 * the array must be sorted, returns the index by default
+	 *
+	 * @param array The array to be searched
+	 * @param value The value being searched for
+	 * @param <T>   The array type
+	 *
+	 * @return int Whether the value was found or not, -2 = not found, anything else is the index
+	 */
+	public static <T extends Comparable<T>> int findSorted(@NotNull T[] array, T value) {
+		return findSorted(array, value, false);
+	}
+
+	/**
+	 * Implements a generic linear search which will fail fast if it passes the point where the element should be,
+	 * the array must be sorted
+	 *
+	 * @param array The array to be searched
+	 * @param value The value being searched for
+	 * @param <T>   The array type
+	 *
+	 * @return int Whether the value was found or not, -2 = not found, anything else is the index
+	 */
+	public static <T extends Comparable<T>> int findSorted(T @NotNull [] array, T value, boolean contains) {
+		int result = -2;
+		int i = 0;
+
+		while (Comparisons.smallerOrEqual(array[i], value)) {
+			if (Comparisons.equal(array[i++], value)) {
+				result = contains ? -1 : i - 1;
+				break;
+			}
+		}
+
+		return result;
+	}
+
 
 }
