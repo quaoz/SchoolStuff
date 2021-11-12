@@ -13,40 +13,26 @@ import org.jetbrains.annotations.NotNull;
 public class ExponentialSearch {
 
 	/**
-	 * Implements a generic exponential search which returns the index by default
+	 * Implements a generic exponential search
 	 *
 	 * @param array The array to be searched
 	 * @param value The value being searched for
 	 * @param <T>   The array type
 	 *
-	 * @return int    Whether the value was found or not, -2 = not found, -1 = found, anything else is the index
+	 * @return int The index or -1 if it wasn't found
 	 */
 	public static <T extends Comparable<T>> int find(T @NotNull [] array, T value) {
-		return find(array, value, false);
-	}
-
-	/**
-	 * Implements a generic exponential search
-	 *
-	 * @param array    The array to be searched
-	 * @param value    The value being searched for
-	 * @param contains Whether to return the index of the value or just if the array contains it
-	 * @param <T>      The array type
-	 *
-	 * @return int        Whether the value was found or not, -2 = not found, -1 = found, anything else is the index
-	 */
-	public static <T extends Comparable<T>> int find(T @NotNull [] array, T value, boolean contains) {
 		int size = array.length;
 		int bound = 1;
 		int result;
 
 		if (Comparisons.equal(array[0], value)) {
-			result = contains ? -1 : 0;
+			result = 0;
 		} else {
 			while (bound < size && Comparisons.smaller(array[bound], value)) {
 				bound *= 2;
 			}
-			result = BinarySearch.find(array, value, bound / 2, Math.min(bound + 1, size), contains);
+			result = BinarySearch.find(array, value, bound / 2, Math.min(bound + 1, size));
 		}
 
 		return result;

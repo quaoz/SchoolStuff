@@ -12,33 +12,18 @@ import org.jetbrains.annotations.NotNull;
 public class JumpSearch {
 
 	/**
-	 * Implements a generic jump search which returns the index by default
+	 * Implements a generic jump search
 	 *
 	 * @param array The array to be searched
 	 * @param value The value being searched for
 	 * @param <T>   The array type
 	 *
-	 * @return int    Whether the value was found or not, -2 = not found, -1 = found, anything else is the index
+	 * @return int The index or -1 if it wasn't found
 	 */
 	public static <T extends Comparable<T>> int find(T @NotNull [] array, @NotNull T value) {
-		return find(array, value, false);
-	}
-
-	/**
-	 * Implements a generic jump search
-	 *
-	 * @param array    The array to be searched
-	 * @param value    The value being searched for
-	 * @param contains Whether to return the index of the value or just if the array contains it
-	 * @param <T>   The array type
-	 *
-	 * @return int        Whether the value was found or not, -2 = not found, -1 = found, anything else is the index
-	 */
-	public static <T extends Comparable<T>> int find(T @NotNull [] array, @NotNull T value, boolean contains) {
-		int result = -2;
+		int result = -1;
 		final int length = array.length;
-		// Defines the block size
-		final int blockSize = (int) Math.floor(Math.sqrt(length));
+		final int blockSize = (int) Math.floor(Math.sqrt(length)); // Defines the block size
 
 		// Finds the block which may contain the value
 		int limit = blockSize;
@@ -51,7 +36,7 @@ public class JumpSearch {
 		while (i <= limit) {
 			if (Comparisons.equal(array[i], value)) {
 				// Returns -1 if contains is true or the index if contains is false
-				result = contains ? -1 : i;
+				result = i;
 				break;
 			}
 			i++;
