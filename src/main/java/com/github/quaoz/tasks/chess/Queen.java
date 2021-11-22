@@ -1,7 +1,6 @@
 package com.github.quaoz.tasks.chess;
 
 import it.unimi.dsi.fastutil.ints.IntIntImmutablePair;
-import it.unimi.dsi.fastutil.ints.IntIntImmutablePair;
 
 public class Queen extends Piece {
 	public Queen(IntIntImmutablePair position, boolean black) {
@@ -9,8 +8,8 @@ public class Queen extends Piece {
 	}
 
 	@Override
-	public boolean moveTo(IntIntImmutablePair dest, Piece[][] board) {
-		return false;
+	public MoveResult moveTo(IntIntImmutablePair dest, Piece[][] board) {
+		return null;
 	}
 
 	@Override

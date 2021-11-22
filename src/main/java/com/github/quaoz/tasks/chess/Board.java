@@ -72,7 +72,14 @@ public class Board {
 		// Checks that there is a piece
 		if (piece != null) {
 			// Calls piece specific move
-			if (piece.moveTo(destPos, board)) {
+			final MoveResult moveResult = piece.moveTo(destPos, board);
+
+			if (moveResult.isValid()) {
+				// Try to take the piece
+				if (moveResult.isTaking()) {
+					take(destPos);
+				}
+
 				// Copies the piece to its new location
 				board[destPos.leftInt()][destPos.rightInt()] = piece;
 				board[srcPos.leftInt()][srcPos.rightInt()] = null;
