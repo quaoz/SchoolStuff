@@ -95,13 +95,16 @@ public class Board {
 	 protected void take(@NotNull IntIntImmutablePair pos) {
 		final Piece piece = board[pos.leftInt()][pos.rightInt()];
 
+		// Checks that there is a piece to take
 		if (piece != null) {
+			// Adds the piece to the correct list
 			if (piece.isBlack()) {
 				takenBlack.add(piece);
 			} else {
 				takenWhite.add(piece);
 			}
 
+			// Removes the piece from the board
 			board[pos.leftInt()][pos.rightInt()] = null;
 		}
 	}

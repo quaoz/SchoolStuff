@@ -50,7 +50,7 @@ public class Rook extends Piece {
 
 		// If the destination has a piece take it
 		if (pieces[pos.leftInt()][dest.rightInt()] != null) {
-			// Only allow taking is the piece is not of the same colour
+			// Only allow taking if the piece is not of the same colour
 			if (pieces[pos.leftInt()][dest.rightInt()].isBlack() != this.isBlack()) {
 				moveResult.take(dest);
 			} else {
