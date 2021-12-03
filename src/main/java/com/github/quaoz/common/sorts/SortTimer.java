@@ -15,6 +15,7 @@ public class SortTimer {
 	private final Timer timer = new Timer();
 	private final Object2DoubleOpenHashMap<String> means = new Object2DoubleOpenHashMap<>() {{
 		put("bubble", 0);
+		put("selection", 0);
 		put("merge", 0);
 		put("insertion", 0);
 		put("shell", 0);
@@ -54,7 +55,7 @@ public class SortTimer {
 
 		final int repeatsPerArray = 10;
 		final int numArrays = 10;
-		final int maxElement = 100000;
+		final int maxElement = 10000;
 		final int size = 10000;
 
 		Integer[] array;
@@ -110,6 +111,10 @@ public class SortTimer {
 		timer.startTimerNano();
 		BubbleSort.sort(array.clone());
 		printResults(results, "bubble");
+
+		timer.startTimerNano();
+		SelectionSort.sort(array.clone());
+		printResults(results, "selection");
 
 		timer.startTimerNano();
 		MergeSort.sort(array.clone());

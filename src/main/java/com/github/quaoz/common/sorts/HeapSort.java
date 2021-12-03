@@ -29,7 +29,7 @@ public class HeapSort {
      * @param array The array to be sorted
      * @param <T>   The array type
      * @param start The start index
-     * @param end    The end index
+     * @param end   The end index
      *
      * @return T The sorted array
      */

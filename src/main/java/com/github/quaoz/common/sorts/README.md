@@ -9,6 +9,10 @@ with specific data sets.
 - Shouldn't be used anywhere
 - Terrible performance for anything but already sorted arrays
 
+## Selection Sort
+- Poor performance
+- Best suited to very small data sets but beaten by Insertion sort almost always
+
 ## Merge Sort
 
 - Works well with moderately sized data sets
