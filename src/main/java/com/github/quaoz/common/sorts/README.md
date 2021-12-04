@@ -59,3 +59,9 @@ with specific data sets.
 - Works well on medium large sets of data
 - Alternative to quick sort
 
+## Conventions
+
+- `start` and `end` parameters are used on non-recursive sorting algorithms
+- They define the portion of the array to operate on
+- `left` and `right` parameters are used on recursive sorting algorithms
+- They define the *current* portion of the array to operate on

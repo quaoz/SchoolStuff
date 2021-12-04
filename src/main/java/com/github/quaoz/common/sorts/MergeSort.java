@@ -25,8 +25,8 @@ public class MergeSort {
 	 * Implements a generic merge sort algorithm
 	 *
 	 * @param array The array to be sorted
-	 * @param left  The first index of the array
-	 * @param right The last index of the array
+	 * @param left  The left bound of the array
+	 * @param right The right bound of the array
 	 * @param <T>   The array type
 	 *
 	 * @return T The sorted array
@@ -54,9 +54,9 @@ public class MergeSort {
 	 * Merges two parts of an array.
 	 *
 	 * @param array The array to be merged
-	 * @param left  The first index of the array
-	 * @param mid   The middle index of the array
-	 * @param right The last index of the array
+	 * @param left  The left bound of the array
+	 * @param mid   The midpoint of the array
+	 * @param right The right bound of the array
 	 * @param <T>   The array type
 	 */
 	static <T extends Comparable<T>> void merge(T[] array, int left, int mid, int right) {

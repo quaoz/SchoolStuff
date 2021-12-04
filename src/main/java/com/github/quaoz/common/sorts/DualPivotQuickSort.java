@@ -28,8 +28,8 @@ public class DualPivotQuickSort {
 	 * Implements a generic dual-pivot quick sort algorithm
 	 *
 	 * @param array The array to be sorted
-	 * @param left  The first index of the array
-	 * @param right The last index of the array
+	 * @param left  The left bound of the array
+	 * @param right The right bound of the array
 	 * @param <T>   The array type
 	 *
 	 * @return T    The sorted array
@@ -50,8 +50,8 @@ public class DualPivotQuickSort {
 	 * Partitions an array around two pivot values
 	 *
 	 * @param array The array to partition
-	 * @param left  The first index of the array
-	 * @param right The last index of the array
+	 * @param left  The left bound of the array
+	 * @param right The right bound of the array
 	 * @param <T>   The array type
 	 *
 	 * @return int[] The partition indexes
@@ -69,32 +69,32 @@ public class DualPivotQuickSort {
 			Swap.swap(array, left, right);
 		}
 
-		int index = left;
+		int index = left + 1;
 		int leftIndex = left + 1;
-		int rightIndex = right;
+		int rightIndex = right - 1;
 
 		final T pivotOne = array[left];
 		final T pivotTwo = array[right];
 
 		while (leftIndex <= rightIndex) {
 			if (Comparisons.smaller(array[leftIndex], pivotOne)) {
-				Swap.swap(array, leftIndex, ++index);
+				Swap.swap(array, leftIndex, index++);
 			} else if (Comparisons.biggerOrEqual(array[leftIndex], pivotTwo)) {
 				while (Comparisons.bigger(array[rightIndex], pivotTwo) && leftIndex < rightIndex) {
 					--rightIndex;
 				}
 
-				Swap.swap(array, leftIndex, --rightIndex);
+				Swap.swap(array, leftIndex, rightIndex--);
 
 				if (Comparisons.smaller(array[leftIndex], pivotOne)) {
-					Swap.swap(array, leftIndex, ++index);
+					Swap.swap(array, leftIndex, index++);
 				}
 			}
 			leftIndex++;
 		}
 
-		Swap.swap(array, left, index--);
-		Swap.swap(array, right, rightIndex++);
+		Swap.swap(array, left, --index);
+		Swap.swap(array, right, ++rightIndex);
 
 		return new int[]{index, rightIndex};
 	}

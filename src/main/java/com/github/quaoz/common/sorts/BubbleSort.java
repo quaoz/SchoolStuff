@@ -29,8 +29,8 @@ public class BubbleSort {
 	 * Implements a generic bubble sort algorithm
 	 *
 	 * @param array The array to be sorted
-	 * @param start The index to start searching from
-	 * @param end   The index to stop searching at
+	 * @param start The start index
+	 * @param end   The end index
 	 * @param <T>   The array type
 	 *
 	 * @return T    The sorted array
@@ -69,8 +69,8 @@ public class BubbleSort {
 	 * Implements a generic bubble sort algorithm
 	 *
 	 * @param interpreter The interpreter to be sorted
-	 * @param start       The index to start searching from
-	 * @param end         The index to stop searching at
+	 * @param start          The start index
+	 * @param end      The end index
 	 * @param <T>         The interpreter type
 	 *
 	 * @return The sorted interpreter

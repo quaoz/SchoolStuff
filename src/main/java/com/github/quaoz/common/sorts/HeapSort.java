@@ -13,27 +13,28 @@ import org.jetbrains.annotations.NotNull;
 public class HeapSort {
 
     /**
-     * Implements a generic heap sort algorithm without having to specify the bounds
-     *
-     * @param array The array to be sorted
-     * @param <T>   The array type
-     * @return T The sorted array
-     */
-    public static <T extends Comparable<T>> T @NotNull [] sort(T @NotNull [] array) {
-        return sort(array, 0, array.length);
-    }
+	 * Implements a generic heap sort algorithm without having to specify the bounds
+	 *
+	 * @param array The array to be sorted
+	 * @param <T>   The array type
+	 *
+	 * @return T The sorted array
+	 */
+	public static <T extends Comparable<T>> T @NotNull [] sort(T @NotNull [] array) {
+		return sort(array, 0, array.length);
+	}
 
-    /**
-     * Implements a generic heap sort algorithm
-     *
-     * @param array The array to be sorted
-     * @param <T>   The array type
-     * @param start The start index
-     * @param end   The end index
-     *
-     * @return T The sorted array
-     */
-    static <T extends Comparable<T>> T @NotNull [] sort(T @NotNull [] array, int start, int end) {
+	/**
+	 * Implements a generic heap sort algorithm
+	 *
+	 * @param array The array to be sorted
+	 * @param start The start index
+	 * @param end   The end index
+	 * @param <T>   The array type
+	 *
+	 * @return T The sorted array
+	 */
+	static <T extends Comparable<T>> T @NotNull [] sort(T @NotNull [] array, int start, int end) {
 		int size = end - start - 1;
 
 		// Build heap
@@ -58,7 +59,7 @@ public class HeapSort {
 	 *
 	 * @param array The array to be heapified
 	 * @param size  The size of the subtree
-	 * @param root  The node root of the subtree
+	 * @param root  The root of the subtree
 	 * @param <T>   The array type
 	 */
 	static <T extends Comparable<T>> void heapify(T @NotNull [] array, int size, int root) {

@@ -27,8 +27,8 @@ public class InsertionSort {
 	 * Implements a generic insertion sort algorithm
 	 *
 	 * @param array The array to be sorted
-	 * @param start The index to start sorting at
-	 * @param end   The index to stop sorting at
+	 * @param start The start index
+	 * @param end   The end index
 	 * @param <T>   The array type
 	 *
 	 * @return T The sorted array

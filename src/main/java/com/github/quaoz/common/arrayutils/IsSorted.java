@@ -32,8 +32,8 @@ public class IsSorted {
 	public static <T extends Comparable<T>> boolean isSorted(T @NotNull [] array, int start, int end) {
 		boolean sorted = true;
 
-		for (int i = start; i < end; i++) {
-			if (Comparisons.bigger(array[i], array[i + 1])) {
+		while (start < end) {
+			if (Comparisons.bigger(array[start], array[++start])) {
 				sorted = false;
 				break;
 			}
@@ -66,8 +66,8 @@ public class IsSorted {
 	public static <T extends Comparable<T>> boolean isReverseSorted(T @NotNull [] array, int start, int end) {
 		boolean sorted = true;
 
-		for (int i = start; i < end; i++) {
-			if (Comparisons.smaller(array[i], array[i + 1])) {
+		while (start < end) {
+			if (Comparisons.smaller(array[start], array[++start])) {
 				sorted = false;
 				break;
 			}

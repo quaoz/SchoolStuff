@@ -28,8 +28,8 @@ public class QuickSort {
 	 * Implements a generic quick sort algorithm
 	 *
 	 * @param array The array to be sorted
-	 * @param left  The first index of the array
-	 * @param right The last index of the array
+	 * @param left  The left bound of the array
+	 * @param right The right bound of the array
 	 * @param <T>   The array type
 	 *
 	 * @return T The sorted array
@@ -50,8 +50,8 @@ public class QuickSort {
 	 * Randomise the array to avoid the basically ordered sequences
 	 *
 	 * @param array The array to be sorted
-	 * @param left  The first index of an array
-	 * @param right The last index of an array
+	 * @param left  The left bound of the array
+	 * @param right The right bound of the array
 	 * @param <T>   The array type
 	 */
 	static <T extends Comparable<T>> void randomPivot(T[] array, int left, int right) {
@@ -63,8 +63,8 @@ public class QuickSort {
 	 * This method finds the partition index for an array
 	 *
 	 * @param array The array to be partitioned
-	 * @param left  The first index of an array
-	 * @param right The last index of an array
+	 * @param left  The left bound of the array
+	 * @param right The right bound of the array
 	 * @param <T>   The array type
 	 *
 	 * @return int The partition index
