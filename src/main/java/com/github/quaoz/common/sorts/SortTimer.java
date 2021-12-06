@@ -16,6 +16,7 @@ public class SortTimer {
 	private final Object2DoubleOpenHashMap<String> means = new Object2DoubleOpenHashMap<>() {{
 		put("bubble", 0);
 		put("selection", 0);
+		put("dual-selection", 0);
 		put("merge", 0);
 		put("insertion", 0);
 		put("shell", 0);
@@ -115,6 +116,10 @@ public class SortTimer {
 		timer.startTimerNano();
 		SelectionSort.sort(array.clone());
 		printResults(results, "selection");
+
+		timer.startTimerNano();
+		DualSelectionSort.sort(array.clone());
+		printResults(results, "dual-selection");
 
 		timer.startTimerNano();
 		MergeSort.sort(array.clone());

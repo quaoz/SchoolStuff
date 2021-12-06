@@ -47,7 +47,6 @@ public class BubbleSort {
 					swapped = true;
 				}
 			}
-
 			end--;
 		}
 		return array;
@@ -87,10 +86,8 @@ public class BubbleSort {
 					swapped = true;
 				}
 			}
-
 			end--;
 		}
 		return interpreter;
 	}
-
 }

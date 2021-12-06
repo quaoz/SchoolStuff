@@ -5,15 +5,15 @@ import com.github.quaoz.common.arrayutils.Swap;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Selection sort is a simple sorting algorithm which works by finding the smallest element and moving it into the
- * sorted region of the array
+ * Modified selection sort which works by finding the smallest and largest elements and moving them into the correct
+ * sorted regions of the array
  *
  * <p> Worst-case performance O(n^2), Best-case performance O(n^2), Average performance O(n^2)
  */
-public class SelectionSort {
+public class DualSelectionSort {
 
 	/**
-	 * Implements a generic selection sort algorithm, assumes the whole array should be sorted
+	 * Implements a generic dual selection sort algorithm, assumes the whole array should be sorted
 	 *
 	 * @param array The array to be sorted
 	 * @param <T>   The array type
@@ -25,7 +25,7 @@ public class SelectionSort {
 	}
 
 	/**
-	 * Implements a generic selection sort algorithm
+	 * Implements a generic dual selection sort algorithm
 	 *
 	 * @param array The array to be sorted
 	 * @param start The start index
@@ -35,17 +35,20 @@ public class SelectionSort {
 	 * @return T    The sorted array
 	 */
 	static <T extends Comparable<T>> T[] sort(T @NotNull [] array, int start, int end) {
-		for (int i = start; i < end; i++) {
-			int smallest = i;
-			for (int j = i + 1; j <= end; j++) {
-				if (Comparisons.smaller(array[j], array[smallest])) {
-					smallest = j;
+		while (start < end) {
+			int lowIndex = start;
+			int highIndex = end;
+
+			for (int i = start; i <= end; i++) {
+				if (Comparisons.smaller(array[i], array[lowIndex])) {
+					lowIndex = i;
+				} else if (Comparisons.bigger(array[i], array[highIndex])) {
+					highIndex = i;
 				}
 			}
 
-			if (i != smallest) {
-				Swap.swap(array, i, smallest);
-			}
+			Swap.swap(array, lowIndex, start++);
+			Swap.swap(array, highIndex, end--);
 		}
 		return array;
 	}
