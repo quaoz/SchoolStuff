@@ -28,6 +28,7 @@ public class Rook extends Piece {
 			for (int i = start; i < end - 1; i++) {
 				if (pieces[pos.leftInt()][i] != null) {
 					valid = false;
+					break;
 				}
 			}
 		} else if (dest.rightInt() == pos.rightInt() && dest.leftInt() != pos.leftInt()) {

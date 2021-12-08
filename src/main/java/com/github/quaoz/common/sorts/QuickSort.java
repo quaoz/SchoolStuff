@@ -45,7 +45,7 @@ public class QuickSort {
 
 		return array;
 	}
-
+	
 	/**
 	 * Randomise the array to avoid the basically ordered sequences
 	 *

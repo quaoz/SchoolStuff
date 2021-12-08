@@ -19,7 +19,7 @@ public class Pawn extends Piece {
 
 	@Override
 	public MoveResult moveTo(@NotNull IntIntImmutablePair dest, Piece[][] pieces) {
-		MoveResult moveResult = new MoveResult();
+		final MoveResult moveResult = new MoveResult();
 
 		// Check move is forwards, relative to colour
 		if (dest.leftInt() == (isBlack()
