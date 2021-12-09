@@ -20,7 +20,8 @@ public abstract class Gate {
 	public abstract Boolean output();
 
 	public void truthTable() {
-		Boolean[] possible = {false, true};
+		final Boolean[] possible = {false, true};
+		System.out.println("  A   B  Out");
 
 		for (Boolean a : possible) {
 			setInputOne(a);
