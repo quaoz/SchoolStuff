@@ -28,7 +28,7 @@ public class Calendar {
 		}
 		messages.add("Merry christmas!");
 
-		grid = new Integer[width][height];
+		grid = new Integer[height][width];
 		currentIsOpened = false;
 		init();
 	}
