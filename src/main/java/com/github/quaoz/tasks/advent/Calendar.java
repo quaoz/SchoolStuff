@@ -1,11 +1,16 @@
 package com.github.quaoz.tasks.advent;
 
+import com.github.quaoz.common.console.Format;
+
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Calendar {
 	private final Integer[][] grid;
+	private final ArrayList<String> messages = new ArrayList<>();
+	private boolean currentIsOpened;
 
 	/**
 	 * Constructor
@@ -14,11 +19,17 @@ public class Calendar {
 	 * @param height the height of the grid
 	 */
 	public Calendar(final int width, final int height) {
-		if (width * height < 25) {
-			throw new RuntimeException("Grid too small");
-		}
+		// Checks that the grid is big enough
+		assert width * height >= 25 : "Grid too small";
 
-		grid = new Integer[width][height];
+		// Creates the messages
+		for (int i = 1; i <= 25; i++) {
+			messages.add(25 - i + " days left to christmas!");
+		}
+		messages.add("Merry christmas!");
+
+		grid = new Integer[height][width];
+		currentIsOpened = false;
 		init();
 	}
 
@@ -53,6 +64,9 @@ public class Calendar {
 		}
 	}
 
+	/**
+	 * Displays the calendar
+	 */
 	public void display() {
 		System.out.println("\nAdvent Calendar:\n");
 		for (Integer[] integers : grid) {
@@ -62,16 +76,28 @@ public class Calendar {
 				if (integer == null) {
 					string = "--";
 				} else if (integer > 0) {
+					// Display future days as their number
 					string = integer.toString();
-				} else if (integer == 0) {
+				} else if (integer == 0 || currentIsOpened) {
+					// Display past days as []
 					string = "[]";
 				} else {
-					string = "\033[4m" + -integer + "\033[0m  ";
+					// Make current day bold and underlined
+					string = Format.bold(Format.underline(Integer.toString(-integer))) + "  ";
 				}
 
 				System.out.printf("%-4s", string);
 			}
 			System.out.println();
 		}
+	}
+
+	/**
+	 * Opens the current day and prints the message
+	 */
+	public void open() {
+		currentIsOpened = true;
+		display();
+		System.out.println("\n" + messages.get(LocalDate.now().getDayOfMonth()));
 	}
 }
