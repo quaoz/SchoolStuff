@@ -21,6 +21,6 @@ public class Main {
 			System.out.println("Name not found.");
 		}
 
-		System.out.println(WordCounter.countWords());
+		System.out.println("There are " + WordCounter.countWords() + " words");
 	}
 }

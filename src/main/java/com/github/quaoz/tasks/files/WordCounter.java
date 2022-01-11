@@ -16,9 +16,10 @@ public class WordCounter {
 			// Read each line
 			String line = br.readLine();
 			while (line != null) {
+				// Ignore blank lines (only whitespace lines)
 				if (!line.isBlank()) {
-					line = line.trim();
-					words += line.split("\\s+").length;
+					// Match the words in a line separated by spaces
+					words += line.trim().split("\\s+").length;
 				}
 				line = br.readLine();
 			}
