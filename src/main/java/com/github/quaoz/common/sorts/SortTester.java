@@ -2,12 +2,15 @@ package com.github.quaoz.common.sorts;
 
 import com.github.quaoz.common.arrayutils.IsSorted;
 
+import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.IntStream;
 
 public class SortTester {
 	public static void main(String[] args) {
-		testSort();
+		for (int i = 0; i < 100; i++) {
+			testSort();
+		}
 	}
 
 	public static void testSort() {
@@ -16,6 +19,8 @@ public class SortTester {
 				.unordered()
 				.boxed()
 				.toArray(Integer[]::new);
+
+		System.out.println("\nArray: " + Arrays.toString(array) + "\n");
 
 		isSorted(BubbleSort.class.getSimpleName(), BubbleSort.sort(array.clone()));
 		isSorted(SelectionSort.class.getSimpleName(), SelectionSort.sort(array.clone()));
@@ -32,9 +37,10 @@ public class SortTester {
 
 	private static <T extends Comparable<T>> void isSorted(String name, T[] array) {
 		if (!IsSorted.isSorted(array)) {
-			System.out.println("Failed : " + name);
+			System.out.println("- Failed : " + name);
+			System.out.println(Arrays.toString(array));
 		} else {
-			// System.out.println("Passed : " + name);
+			System.out.println("  Passed : " + name);
 		}
 	}
 }

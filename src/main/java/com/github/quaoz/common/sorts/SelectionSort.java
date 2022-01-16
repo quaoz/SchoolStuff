@@ -18,7 +18,7 @@ public class SelectionSort {
 	 * @param array The array to be sorted
 	 * @param <T>   The array type
 	 *
-	 * @return T    The sorted array
+	 * @return The sorted array
 	 */
 	public static <T extends Comparable<T>> T[] sort(T @NotNull [] array) {
 		return sort(array, 0, array.length - 1);
@@ -32,7 +32,7 @@ public class SelectionSort {
 	 * @param end   The end index
 	 * @param <T>   The array type
 	 *
-	 * @return T    The sorted array
+	 * @return The sorted array
 	 */
 	static <T extends Comparable<T>> T[] sort(T @NotNull [] array, int start, int end) {
 		for (int i = start; i < end; i++) {

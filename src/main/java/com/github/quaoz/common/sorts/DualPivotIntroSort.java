@@ -15,7 +15,7 @@ public class DualPivotIntroSort {
 	 * @param array The array to be sorted
 	 * @param <T>   The array type
 	 *
-	 * @return T The sorted array
+	 * @return The sorted array
 	 */
 	public static <T extends Comparable<T>> T @NotNull [] sort(T @NotNull [] array) {
 		final int maxDepth = (int) (2 * Math.floor(Math.log(array.length) / Math.log(2)));
@@ -31,7 +31,7 @@ public class DualPivotIntroSort {
 	 * @param right    The right bound of the array
 	 * @param <T>      The array type
 	 *
-	 * @return T The sorted array
+	 * @return The sorted array
 	 */
 	static <T extends Comparable<T>> T @NotNull [] sort(T @NotNull [] array, int left, int right, int maxDepth) {
 		final int size = right - left;

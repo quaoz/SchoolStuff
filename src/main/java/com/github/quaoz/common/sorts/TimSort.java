@@ -16,7 +16,7 @@ public class TimSort {
 	 * @param array The array to be sorted
 	 * @param <T>   The array type
 	 *
-	 * @return T    The sorted array
+	 * @return The sorted array
 	 */
 	public static <T extends Comparable<T>> T[] sort(T @NotNull [] array) {
 		return sort(array, 0, array.length - 1);
@@ -28,7 +28,7 @@ public class TimSort {
 	 * @param array The array to be sorted
 	 * @param <T>   The array type
 	 *
-	 * @return T The sorted array
+	 * @return The sorted array
 	 */
 	public static <T extends Comparable<T>> T @NotNull [] sort(T @NotNull [] array, int start, int end) {
 		final int minMerge = 32;

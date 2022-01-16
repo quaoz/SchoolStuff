@@ -1,5 +1,6 @@
 package com.github.quaoz.common.sorts;
 
+import com.github.quaoz.common.datastructures.Interpreter;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -17,7 +18,7 @@ public class IntroSort {
 	 * @param array The array to be sorted
 	 * @param <T>   The array type
 	 *
-	 * @return T The sorted array
+	 * @return The sorted array
 	 */
 	public static <T extends Comparable<T>> T @NotNull [] sort(T @NotNull [] array) {
 		final int maxDepth = (int) (2 * Math.floor(Math.log(array.length) / Math.log(2)));
@@ -33,7 +34,7 @@ public class IntroSort {
 	 * @param right    The right bound of the array
 	 * @param <T>      The array type
 	 *
-	 * @return T The sorted array
+	 * @return The sorted array
 	 */
 	static <T extends Comparable<T>> T @NotNull [] sort(T @NotNull [] array, int left, int right, int maxDepth) {
 		final int size = right - left;
@@ -53,5 +54,49 @@ public class IntroSort {
 		}
 
 		return array;
+	}
+
+	/**
+	 * Implements a generic intro sort algorithm without the need to specify the bounds
+	 *
+	 * @param interpreter The interpreter to be sorted
+	 * @param <T>         The interpreter type
+	 *
+	 * @return The sorted interpreter
+	 */
+	public static <T extends Comparable<T>> @NotNull Interpreter<T> sort(@NotNull Interpreter<T> interpreter) {
+		final int maxDepth = (int) (2 * Math.floor(Math.log(interpreter.size()) / Math.log(2)));
+		return sort(interpreter, 0, interpreter.size() - 1, maxDepth);
+	}
+
+	/**
+	 * Implements a generic intro sort algorithm
+	 *
+	 * @param interpreter The interpreter to be sorted
+	 * @param maxDepth    The number of times the function can recursively call itself before switching to heapsort
+	 * @param left        The left bound of the interpreter
+	 * @param right       The right bound of the interpreter
+	 * @param <T>         The interpreter type
+	 *
+	 * @return The sorted interpreter
+	 */
+	static <T extends Comparable<T>> Interpreter<T> sort(Interpreter<T> interpreter, int left, int right, int maxDepth) {
+		final int size = right - left;
+
+		if (size > 16) {
+			if (maxDepth != 0) {
+				QuickSort.randomPivot(interpreter, left, right);
+
+				final int partition = QuickSort.partition(interpreter, left, right);
+				sort(interpreter, left, partition - 1, maxDepth - 1);
+				sort(interpreter, partition + 1, right, maxDepth - 1);
+			} else {
+				HeapSort.sort(interpreter, left, right);
+			}
+		} else {
+			InsertionSort.sort(interpreter, left, right);
+		}
+
+		return interpreter;
 	}
 }

@@ -18,7 +18,7 @@ public class DualPivotQuickSort {
 	 * @param array The array to be sorted
 	 * @param <T>   The array type
 	 *
-	 * @return T    The sorted array
+	 * @return The sorted array
 	 */
 	public static <T extends Comparable<T>> T[] sort(T[] array) {
 		return sort(array, 0, array.length - 1);
@@ -32,7 +32,7 @@ public class DualPivotQuickSort {
 	 * @param right The right bound of the array
 	 * @param <T>   The array type
 	 *
-	 * @return T    The sorted array
+	 * @return The sorted array
 	 */
 	static <T extends Comparable<T>> T[] sort(T[] array, int left, int right) {
 		if (left < right) {
@@ -54,7 +54,7 @@ public class DualPivotQuickSort {
 	 * @param right The right bound of the array
 	 * @param <T>   The array type
 	 *
-	 * @return int[] The partition indexes
+	 * @return The partition indexes
 	 */
 	static <T extends Comparable<T>> int @NotNull [] partition(T @NotNull [] array, int left, int right) {
 		/*

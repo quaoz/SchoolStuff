@@ -15,7 +15,7 @@ public class MergeSort {
 	 * @param array The array to be sorted
 	 * @param <T>   The array type
 	 *
-	 * @return T The sorted array
+	 * @return The sorted array
 	 */
 	public static <T extends Comparable<T>> T[] sort(T[] array) {
 		return sort(array, 0, array.length - 1);
@@ -29,7 +29,7 @@ public class MergeSort {
 	 * @param right The right bound of the array
 	 * @param <T>   The array type
 	 *
-	 * @return T The sorted array
+	 * @return The sorted array
 	 */
 	static <T extends Comparable<T>> T[] sort(T[] array, int left, int right) {
 		if (left < right) {

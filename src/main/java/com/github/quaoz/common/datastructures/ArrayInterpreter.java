@@ -24,4 +24,13 @@ public class ArrayInterpreter<T> implements Interpreter<T> {
 	public int size() {
 		return array.length;
 	}
+
+	/**
+	 * Returns the base array
+	 *
+	 * @return The base array
+	 */
+	public T[] getArray() {
+		return array;
+	}
 }

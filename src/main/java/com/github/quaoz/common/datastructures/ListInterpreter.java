@@ -23,4 +23,13 @@ public class ListInterpreter<E> implements Interpreter<E> {
 	public int size() {
 		return list.size();
 	}
+
+	/**
+	 * Returns the base array
+	 *
+	 * @return The base list
+	 */
+	public List<E> getList() {
+		return list;
+	}
 }

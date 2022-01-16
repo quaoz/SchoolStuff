@@ -18,7 +18,7 @@ public class DualSelectionSort {
 	 * @param array The array to be sorted
 	 * @param <T>   The array type
 	 *
-	 * @return T    The sorted array
+	 * @return The sorted array
 	 */
 	public static <T extends Comparable<T>> T[] sort(T @NotNull [] array) {
 		return sort(array, 0, array.length - 1);
@@ -32,7 +32,7 @@ public class DualSelectionSort {
 	 * @param end   The end index
 	 * @param <T>   The array type
 	 *
-	 * @return T    The sorted array
+	 * @return The sorted array
 	 */
 	static <T extends Comparable<T>> T[] sort(T @NotNull [] array, int start, int end) {
 		while (start < end) {
