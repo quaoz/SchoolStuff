@@ -25,11 +25,11 @@ public class Reader {
 	 * @return An array list containing the lines in the file
 	 */
 	public @NotNull ArrayList<String> readLines() {
-		try {
-			// Create a FileReader and a BufferedReader
-			final FileReader fileReader = new FileReader(fileName);
-			final BufferedReader bufferedReader = new BufferedReader(fileReader);
-
+		try (
+				// Create a FileReader and a BufferedReader
+				final FileReader fileReader = new FileReader(fileName);
+				final BufferedReader bufferedReader = new BufferedReader(fileReader)
+		) {
 			// Read each line into an array list
 			String line = bufferedReader.readLine();
 			while (line != null) {
