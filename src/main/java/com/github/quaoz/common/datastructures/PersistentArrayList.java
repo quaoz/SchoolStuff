@@ -1,5 +1,8 @@
 package com.github.quaoz.common.datastructures;
 
+import com.github.quaoz.common.filehandling.FileHandler;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.function.IntFunction;
@@ -21,12 +24,19 @@ public class PersistentArrayList<E> extends ArrayList<E> {
 	public PersistentArrayList(String fileLocation, Collection<? extends E> c) {
 		super(c);
 		this.fileLocation = fileLocation;
+		FileHandler.writeAll(fileLocation, c);
 	}
 
 	@Override
-	public boolean add(E e) {
-
+	public boolean add(@NotNull E e) {
+		FileHandler.write(fileLocation, e.toString());
 		return super.add(e);
+	}
+
+	@Override
+	public E set(int index, E element) {
+		E oldValue = super.set(index, element);
+		return oldValue;
 	}
 
 	@Override
