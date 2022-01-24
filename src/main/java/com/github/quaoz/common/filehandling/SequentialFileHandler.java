@@ -13,7 +13,7 @@ import java.util.Iterator;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class FileHandler {
+public class SequentialFileHandler {
 
 	/**
 	 * Writes to a file, appending by default
