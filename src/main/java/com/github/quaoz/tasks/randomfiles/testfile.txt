@@ -1,0 +1,12 @@
+wordsxwithxspacesxinxbetween
+axnewxline
+
+therexwasxaxgapxbetweenxthisxlinexandxthexonexbefore
+numbersx123
+1
+2
+3
+4
+punctuation
+.//
+'['

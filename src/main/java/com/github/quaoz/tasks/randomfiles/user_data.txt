@@ -1,4 +1,4 @@
-﻿name,phone,postalZip
+name,phone,postalZip
 Rae Soto,(481) 684-1755,51347
 Steven Foster,(188) 211-7436,K6M 3A2
 Hedy Lawrence,1-796-148-1569,V3 0EQ
