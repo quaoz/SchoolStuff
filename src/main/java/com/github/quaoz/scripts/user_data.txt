@@ -1,0 +1,101 @@
+﻿name,phone,postalZip
+Rae Soto,(481) 684-1755,51347
+Steven Foster,(188) 211-7436,K6M 3A2
+Hedy Lawrence,1-796-148-1569,V3 0EQ
+Vivien Langley,(522) 855-6610,237118
+Raya Tucker,(896) 817-5136,14633
+Kalia Holland,1-421-911-3645,1322 VC
+Venus Rollins,(892) 579-8723,2569
+Elvis Combs,1-586-214-1442,79287
+Olivia Norris,1-544-219-7118,32368
+Perry Davis,1-443-834-6333,306218
+Harper Emerson,(425) 707-5782,46951
+Moses Stewart,(844) 327-7905,53455
+Dai Rosales,(785) 647-1752,71611
+Indira Ware,(797) 827-2730,7153
+Harrison Reid,(235) 833-2628,17225
+Ira Chapman,(624) 812-6832,83158
+Wade Floyd,1-581-664-3274,1359
+Amela Jimenez,1-377-528-0874,94-204
+Jana Brown,1-222-486-3772,42638
+Rina Pollard,(652) 332-2875,34878446
+Nathan Bright,(233) 395-3788,46217
+Paul Sutton,(846) 743-4342,20667
+Neil Dixon,1-965-767-8015,46650
+Athena Maldonado,(218) 632-3534,LC2K 8LJ
+Lareina Wheeler,1-537-670-8913,245527
+Gage Banks,1-396-544-5742,30186-88183
+Ashton Howell,1-862-366-9676,3674 RT
+Harper Stephenson,1-576-411-4418,12875
+Olivia Snow,1-562-845-6137,12497
+Lacy Gaines,(575) 814-3571,66373
+Erasmus Kirby,(344) 548-5929,38524
+Tate Francis,(261) 364-1267,60851-40742
+Victor Bruce,(142) 352-8884,31259
+Larissa Hurst,(274) 422-1738,4558
+Flavia Harding,1-884-420-1880,1366
+Kelly Evans,(762) 845-1238,15169-15720
+Kyle Herring,1-816-748-3531,789555
+Latifah Ellison,1-734-584-2526,215234
+Hadassah Bradford,(862) 628-9284,4686
+Kaye Gilbert,(144) 426-2375,7514
+Kaitlin Luna,(536) 144-3683,37645
+Pandora Lott,1-868-614-8533,25067
+Marsden Ayers,1-446-870-2747,3384
+Murphy Vance,(814) 782-6712,7389
+Odessa Mccray,1-974-747-6952,3121
+India Stevens,(216) 628-8646,A2H 8W4
+Stewart Morgan,(185) 456-5396,51863-236
+Inga Dudley,(686) 608-2641,7650
+Leslie Schultz,(732) 156-9170,12019
+Alvin Vazquez,(394) 713-2555,7177
+Nayda Stanton,(311) 561-5436,675378
+Palmer Haynes,(439) 334-8167,6451
+Veda Swanson,(683) 286-4770,28176
+Shelley Slater,1-623-363-6959,722434
+Jocelyn Steele,(354) 410-6239,8831
+Dacey Garza,1-586-611-1048,YU1 1CR
+Gillian Madden,(748) 483-5552,868633
+Wesley Perry,1-471-865-6230,23595
+Russell Blake,(377) 535-3835,956575
+Ora Caldwell,1-321-442-7767,71891
+Eleanor Cook,1-782-213-4576,B4B 7W6
+Kennedy Rodriquez,(955) 328-4475,563376
+Charles Brown,(986) 363-6522,52211
+Mikayla Mejia,(244) 293-3578,R3B 5B3
+Xaviera Moon,1-974-333-6733,7426 VA
+Alexa Valentine,(610) 131-4277,167336
+Germane Hodge,(523) 274-7810,50216
+September Robbins,(557) 731-3762,32855
+Damon Pratt,(284) 330-2462,2187
+Carla Ortiz,1-829-909-6751,MK1 7CH
+Merritt Rich,(720) 504-2507,20797
+Marcia Dodson,1-432-213-8367,22835
+Jordan Poole,1-651-164-5554,40314
+James Webb,(745) 976-1178,61218
+Jordan Munoz,(966) 571-4787,06747
+Micah Crosby,(880) 711-7386,0942
+Ifeoma Barton,(476) 715-1582,66599
+Ashton Zimmerman,1-583-613-1326,305587
+Xanthus Nelson,(649) 563-1339,502265
+Sebastian House,1-929-540-7376,50211
+Nathaniel Malone,1-312-797-3404,6511
+Petra Bright,1-705-355-1826,448743
+Liberty Leach,(216) 491-8650,693880
+Colleen Mullins,(513) 936-3208,3278 JM
+Charlotte Booth,(368) 544-1477,7852
+Levi Vinson,1-877-268-8586,676235
+Azalia Burke,(798) 321-3877,264249
+Amethyst Ochoa,1-313-315-6736,01456
+Gage Martin,(167) 852-8755,505164
+Anthony Spears,1-915-466-5156,H71 7IR
+Kimberly Garrett,1-813-258-1370,21007
+MacKenzie Ball,1-514-205-4202,887203
+Tad Duran,1-268-681-8537,18139
+Alvin Fry,1-708-755-3101,363992
+Myra Matthews,1-832-754-5892,72976
+Anastasia Drake,(360) 847-7464,2780
+Herman Callahan,(472) 387-2175,97702
+Colin Potts,1-865-358-8118,Y5E 0L3
+Holly Reid,(446) 137-3821,65567
+Roary Garcia,(487) 415-0198,11481
