@@ -17,12 +17,32 @@ public class RandomFileHandler {
 	 * @return The character at that position
 	 */
 	public static @Nullable Character randomRead(File file, long pos) {
-		try (RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rs")) {
+		try (RandomAccessFile randomAccessFile = new RandomAccessFile(file, "r")) {
 			randomAccessFile.seek(pos);
 
 			// randomAccessFile.readChar() didn't work as it reads the first two bytes however the text file encoding
 			// used one byte per character, so instead we read the byte and cast it to a char
 			return (char) randomAccessFile.readByte();
+		} catch (IOException e) {
+			System.out.printf("Failed to read byte at %d in %s", pos, file);
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * Reads a line at a specified position in a file
+	 *
+	 * @param file  The file to read from
+	 * @param pos   The position to read at
+	 *
+	 * @return The line at that position
+	 */
+	public static @Nullable String randomReadLine(File file, long pos) {
+		try (RandomAccessFile randomAccessFile = new RandomAccessFile(file, "r")) {
+			randomAccessFile.seek(pos);
+
+			return randomAccessFile.readLine();
 		} catch (IOException e) {
 			System.out.printf("Failed to read byte at %d in %s", pos, file);
 			e.printStackTrace();

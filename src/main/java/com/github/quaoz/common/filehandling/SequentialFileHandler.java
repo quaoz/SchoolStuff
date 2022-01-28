@@ -17,8 +17,9 @@ public class SequentialFileHandler {
 
 	/**
 	 * Writes to a file, appending by default
-	 *  @param file The file to write to
-	 * @param text     The text to write
+	 *
+	 * @param file The file to write to
+	 * @param text The text to write
 	 */
 	public static void write(File file, String text) {
 		write(file, text, true);
@@ -27,9 +28,10 @@ public class SequentialFileHandler {
 
 	/**
 	 * Writes to a file
-	 *  @param file The file to write to
-	 * @param text     The text to write
-	 * @param append   Whether to append the file or not
+	 *
+	 * @param file   The file to write to
+	 * @param text   The text to write
+	 * @param append Whether to append the file or not
 	 */
 	public static void write(File file, String text, boolean append) {
 		try (
@@ -48,8 +50,8 @@ public class SequentialFileHandler {
 	 * Writes to a specific line in a file, overwriting the previous contents
 	 *
 	 * @param file The file to write to
-	 * @param text	   The text to write
-	 * @param line	   The line to start writing at
+	 * @param text The text to write
+	 * @param line The line to start writing at
 	 */
 	public static void writeAt(File file, String text, Integer line) {
 		try (
@@ -78,9 +80,10 @@ public class SequentialFileHandler {
 
 	/**
 	 * Writes to a specific line in a file, overwriting the previous contents
-	 *  @param file The file to write to
-	 * @param lines       The lines to write
-	 * @param line       The line to start writing at
+	 *
+	 * @param file  The file to write to
+	 * @param lines The lines to write
+	 * @param line  The line to start writing at
 	 */
 	public static void writeAllAt(File file, String[] lines, Integer line) {
 		try (
@@ -113,18 +116,20 @@ public class SequentialFileHandler {
 
 	/**
 	 * Writes to a file, appending by default
-	 *  @param file The file to write to
-	 * @param c        The collection of objects to write
+	 *
+	 * @param file The file to write to
+	 * @param c    The collection of objects to write
 	 */
 	public static void writeAll(File file, Collection<?> c) {
-		writeAll(file, c, true);
+		writeAll(file, c, false);
 	}
 
 	/**
 	 * Writes to a file
-	 *  @param file The file to write to
-	 * @param c        The collection of objects to write
-	 * @param append   Whether to append the file or not
+	 *
+	 * @param file   The file to write to
+	 * @param c      The collection of objects to write
+	 * @param append Whether to append the file or not
 	 */
 	public static void writeAll(File file, @NotNull Collection<?> c, boolean append) {
 		try (
@@ -133,7 +138,7 @@ public class SequentialFileHandler {
 				PrintWriter printWriter = new PrintWriter(fileWriter)
 		) {
 			for (Object o : c) {
-				printWriter.println(c);
+				printWriter.println(o);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -142,8 +147,9 @@ public class SequentialFileHandler {
 
 	/**
 	 * Deletes a specific line from a file
-	 *  @param file The file to write to
-	 * @param line       The line to delete
+	 *
+	 * @param file The file to write to
+	 * @param line The line to delete
 	 */
 	public static void deleteLine(File file, Integer line) {
 		try (
@@ -173,7 +179,8 @@ public class SequentialFileHandler {
 
 	/**
 	 * Deletes all the lines between two bounds in a file
-	 *  @param file    The file to write to
+	 *
+	 * @param file      The file to write to
 	 * @param startLine The line to start deleting at
 	 * @param endLine   the line to delete to
 	 */
@@ -267,7 +274,7 @@ public class SequentialFileHandler {
 	/**
 	 * Reads the portion of the file within the given bounds
 	 *
-	 * @param file  The file to read from
+	 * @param file      The file to read from
 	 * @param startLine The line to start reading from
 	 * @param endLine   The line to stop reading at (set to -1 to read to the end)
 	 *
