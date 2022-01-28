@@ -17,31 +17,29 @@ public class SequentialFileHandler {
 
 	/**
 	 * Writes to a file, appending by default
-	 *
-	 * @param fileName The file to write to
+	 *  @param file The file to write to
 	 * @param text     The text to write
 	 */
-	public static void write(String fileName, String text) {
-		write(fileName, text, true);
+	public static void write(File file, String text) {
+		write(file, text, true);
 	}
 
 
 	/**
 	 * Writes to a file
-	 *
-	 * @param fileName The file to write to
+	 *  @param file The file to write to
 	 * @param text     The text to write
 	 * @param append   Whether to append the file or not
 	 */
-	public static void write(String fileName, String text, boolean append) {
+	public static void write(File file, String text, boolean append) {
 		try (
 				// Create a file writer and print writer
-				FileWriter fileWriter = new FileWriter(fileName, append);
+				FileWriter fileWriter = new FileWriter(file, append);
 				PrintWriter printWriter = new PrintWriter(fileWriter)
 		) {
 			printWriter.println(text);
 		} catch (IOException e) {
-			System.out.printf("Failed to write \"%s\" to %s", text, fileName);
+			System.out.printf("Failed to write \"%s\" to %s", text, file);
 			e.printStackTrace();
 		}
 	}
@@ -49,15 +47,15 @@ public class SequentialFileHandler {
 	/**
 	 * Writes to a specific line in a file, overwriting the previous contents
 	 *
-	 * @param fileName The file to write to
+	 * @param file The file to write to
 	 * @param text	   The text to write
 	 * @param line	   The line to start writing at
 	 */
-	public static void writeAt(String fileName, String text, Integer line) {
+	public static void writeAt(File file, String text, Integer line) {
 		try (
 				// Create print writer and buffered reader
 				PrintWriter printWriter = new PrintWriter(new FileWriter("src/main/java/com/github/quaoz/tmp/copying.txt", false));
-				BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))
+				BufferedReader bufferedReader = new BufferedReader(new FileReader(file))
 		) {
 			String currentLineText;
 			int currentLine = 0;
@@ -71,27 +69,26 @@ public class SequentialFileHandler {
 			}
 
 		} catch (IOException e) {
-			System.out.printf("Failed to write \"%s\" at line %d in %s", text, line, fileName);
+			System.out.printf("Failed to write \"%s\" at line %d in %s", text, line, file);
 			e.printStackTrace();
 		}
 
-		copy(Paths.get("src/main/java/com/github/quaoz/tmp/copying.txt"), Paths.get(fileName), StandardCopyOption.REPLACE_EXISTING);
+		copy(Paths.get("src/main/java/com/github/quaoz/tmp/copying.txt"), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
 	}
 
 	/**
 	 * Writes to a specific line in a file, overwriting the previous contents
-	 *
-	 * @param fileName The file to write to
-	 * @param lines	   The lines to write
-	 * @param line	   The line to start writing at
+	 *  @param file The file to write to
+	 * @param lines       The lines to write
+	 * @param line       The line to start writing at
 	 */
-	public static void writeAllAt(String fileName, String[] lines, Integer line) {
+	public static void writeAllAt(File file, String[] lines, Integer line) {
 		try (
 				// Create a file writer and print writer
 				PrintWriter printWriter = new PrintWriter(new FileWriter("src/main/java/com/github/quaoz/tmp/copying.txt", false));
 
 				// Create a BufferedReader
-				BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))
+				BufferedReader bufferedReader = new BufferedReader(new FileReader(file))
 		) {
 			String currentLineText;
 			int currentLine = 0;
@@ -111,30 +108,28 @@ public class SequentialFileHandler {
 			e.printStackTrace();
 		}
 
-		copy(Paths.get("src/main/java/com/github/quaoz/tmp/copying.txt"), Paths.get(fileName), StandardCopyOption.REPLACE_EXISTING);
+		copy(Paths.get("src/main/java/com/github/quaoz/tmp/copying.txt"), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
 	}
 
 	/**
 	 * Writes to a file, appending by default
-	 *
-	 * @param fileName The file to write to
+	 *  @param file The file to write to
 	 * @param c        The collection of objects to write
 	 */
-	public static void writeAll(String fileName, Collection<?> c) {
-		writeAll(fileName, c, true);
+	public static void writeAll(File file, Collection<?> c) {
+		writeAll(file, c, true);
 	}
 
 	/**
 	 * Writes to a file
-	 *
-	 * @param fileName The file to write to
+	 *  @param file The file to write to
 	 * @param c        The collection of objects to write
 	 * @param append   Whether to append the file or not
 	 */
-	public static void writeAll(String fileName, @NotNull Collection<?> c, boolean append) {
+	public static void writeAll(File file, @NotNull Collection<?> c, boolean append) {
 		try (
 				// Create a file writer and print writer
-				FileWriter fileWriter = new FileWriter(fileName, append);
+				FileWriter fileWriter = new FileWriter(file, append);
 				PrintWriter printWriter = new PrintWriter(fileWriter)
 		) {
 			for (Object o : c) {
@@ -147,17 +142,16 @@ public class SequentialFileHandler {
 
 	/**
 	 * Deletes a specific line from a file
-	 *
-	 * @param fileName The file to write to
-	 * @param line	   The line to delete
+	 *  @param file The file to write to
+	 * @param line       The line to delete
 	 */
-	public static void deleteLine(String fileName, Integer line) {
+	public static void deleteLine(File file, Integer line) {
 		try (
 				// Create a file writer and print writer
 				PrintWriter printWriter = new PrintWriter(new FileWriter("src/main/java/com/github/quaoz/tmp/copying.txt", false));
 
 				// Create a BufferedReader
-				BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))
+				BufferedReader bufferedReader = new BufferedReader(new FileReader(file))
 		) {
 			String currentLineText;
 			int currentLine = 0;
@@ -174,23 +168,22 @@ public class SequentialFileHandler {
 			e.printStackTrace();
 		}
 
-		copy(Paths.get("src/main/java/com/github/quaoz/tmp/copying.txt"), Paths.get(fileName), StandardCopyOption.REPLACE_EXISTING);
+		copy(Paths.get("src/main/java/com/github/quaoz/tmp/copying.txt"), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
 	}
 
 	/**
 	 * Deletes all the lines between two bounds in a file
-	 *
-	 * @param fileName 	The file to write to
+	 *  @param file    The file to write to
 	 * @param startLine The line to start deleting at
 	 * @param endLine   the line to delete to
 	 */
-	public static void deleteLines(String fileName, Integer startLine, Integer endLine) {
+	public static void deleteLines(File file, Integer startLine, Integer endLine) {
 		try (
 				// Create a file writer and print writer
 				PrintWriter printWriter = new PrintWriter(new FileWriter("src/main/java/com/github/quaoz/tmp/copying.txt", false));
 
 				// Create a BufferedReader
-				BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))
+				BufferedReader bufferedReader = new BufferedReader(new FileReader(file))
 		) {
 			String currentLineText;
 			int currentLine = 0;
@@ -207,16 +200,16 @@ public class SequentialFileHandler {
 			e.printStackTrace();
 		}
 
-		copy(Paths.get("src/main/java/com/github/quaoz/tmp/copying.txt"), Paths.get(fileName), StandardCopyOption.REPLACE_EXISTING);
+		copy(Paths.get("src/main/java/com/github/quaoz/tmp/copying.txt"), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
 	}
 
-	public static void insert(String fileName, String text, Integer line) {
+	public static void insert(File file, String text, Integer line) {
 		try (
 				// Create a file writer and print writer
 				PrintWriter printWriter = new PrintWriter(new FileWriter("src/main/java/com/github/quaoz/tmp/copying.txt", false));
 
 				// Create a BufferedReader
-				BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))
+				BufferedReader bufferedReader = new BufferedReader(new FileReader(file))
 		) {
 			String currentLineText;
 			int currentLine = 0;
@@ -231,16 +224,16 @@ public class SequentialFileHandler {
 			e.printStackTrace();
 		}
 
-		copy(Paths.get("src/main/java/com/github/quaoz/tmp/copying.txt"), Paths.get(fileName), StandardCopyOption.REPLACE_EXISTING);
+		copy(Paths.get("src/main/java/com/github/quaoz/tmp/copying.txt"), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
 	}
 
-	public static void insertAll(String fileName, String[] lines, Integer line) {
+	public static void insertAll(File file, String[] lines, Integer line) {
 		try (
 				// Create a file writer and print writer
 				PrintWriter printWriter = new PrintWriter(new FileWriter("src/main/java/com/github/quaoz/tmp/copying.txt", false));
 
 				// Create a BufferedReader
-				BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))
+				BufferedReader bufferedReader = new BufferedReader(new FileReader(file))
 		) {
 			String currentLineText;
 			int currentLine = 0;
@@ -257,35 +250,35 @@ public class SequentialFileHandler {
 			e.printStackTrace();
 		}
 
-		copy(Paths.get("src/main/java/com/github/quaoz/tmp/copying.txt"), Paths.get(fileName), StandardCopyOption.REPLACE_EXISTING);
+		copy(Paths.get("src/main/java/com/github/quaoz/tmp/copying.txt"), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
 	}
 
 	/**
 	 * Reads the whole contents of a file
 	 *
-	 * @param fileName The file to read from
+	 * @param file The file to read from
 	 *
 	 * @return An ArrayList containing all the lines in a file
 	 */
-	public static @NotNull ArrayList<String> read(String fileName) {
-		return read(fileName, 0, -1);
+	public static @NotNull ArrayList<String> read(File file) {
+		return read(file, 0, -1);
 	}
 
 	/**
 	 * Reads the portion of the file within the given bounds
 	 *
-	 * @param fileName  The file to read from
+	 * @param file  The file to read from
 	 * @param startLine The line to start reading from
 	 * @param endLine   The line to stop reading at (set to -1 to read to the end)
 	 *
 	 * @return An ArrayList containing the lines within the given bounds
 	 */
-	public static @NotNull ArrayList<String> read(String fileName, Integer startLine, Integer endLine) {
+	public static @NotNull ArrayList<String> read(File file, Integer startLine, Integer endLine) {
 		ArrayList<String> lines = new ArrayList<>();
 
 		try (
 				// Create a FileReader and a BufferedReader
-				FileReader fileReader = new FileReader(fileName);
+				FileReader fileReader = new FileReader(file);
 				BufferedReader bufferedReader = new BufferedReader(fileReader)
 		) {
 			if (startLine == 0 && endLine == -1) {

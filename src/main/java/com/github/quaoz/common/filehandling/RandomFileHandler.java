@@ -14,7 +14,7 @@ public class RandomFileHandler {
 	 * @param file  The file to read from
 	 * @param pos   The position to read at
 	 *
-	 * @return The character at that postion
+	 * @return The character at that position
 	 */
 	public static @Nullable Character randomRead(File file, long pos) {
 		try (RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rs")) {
