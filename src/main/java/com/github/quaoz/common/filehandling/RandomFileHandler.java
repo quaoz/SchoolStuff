@@ -69,4 +69,23 @@ public class RandomFileHandler {
 			e.printStackTrace();
 		}
 	}
+
+	/**
+	 * Writes the given character to a specific position in a file
+	 *
+	 * @param file The file to write to
+	 * @param pos  The position to write at
+	 * @param line The string to write
+	 */
+	public static void randomWriteLine(File file, long pos, String line) {
+		try (RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rws")) {
+			// seeks to the given position
+			randomAccessFile.seek(pos);
+
+			randomAccessFile.writeUTF(line);
+		} catch (IOException e) {
+			System.out.printf("Failed to write line %s at %d in %s", line, pos, file);
+			e.printStackTrace();
+		}
+	}
 }

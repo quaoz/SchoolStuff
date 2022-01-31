@@ -18,7 +18,6 @@ public class Extension {
 		ArrayList<String> lines = SequentialFileHandler.read(file, 1, -1);
 
 		for (int i = 0; i < lines.size(); i++) {
-			System.out.println(i);
 			lines.set(i, String.format(format, (Object[]) lines.get(i).trim().split(",")));
 		}
 
