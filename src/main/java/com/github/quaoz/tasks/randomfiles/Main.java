@@ -1,7 +1,6 @@
 package com.github.quaoz.tasks.randomfiles;
 
 import com.github.quaoz.common.filehandling.RandomFileHandler;
-import com.github.quaoz.common.filehandling.SequentialFileHandler;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -19,7 +18,7 @@ public class Main {
 	private static void readEveryOther(@NotNull File file) {
 		// Jump forwards by two bytes until it reaches the end of the file
 		for (long i = 0; i < file.length(); i += 2) {
-			System.out.println(RandomFileHandler.randomRead(file, i));
+			System.out.println(RandomFileHandler.readByte(file, i));
 		}
 	}
 
@@ -27,7 +26,7 @@ public class Main {
 		// Iterates from the start of the file to the end
 		for (long i = 0; i < file.length(); i++) {
 			// Replaces all spaces with x
-			if (Objects.equals(RandomFileHandler.randomRead(file, i), ' ')) {
+			if (Objects.equals(RandomFileHandler.readByte(file, i), ' ')) {
 				RandomFileHandler.randomWrite(file, i, 'x');
 			}
 		}
@@ -36,7 +35,7 @@ public class Main {
 	private static void readReverse(@NotNull File file) {
 		// Iterates from the end of the file to the start
 		for (long i = file.length(); i >= 0; i--) {
-			System.out.println(RandomFileHandler.randomRead(file, i));
+			System.out.println(RandomFileHandler.readByte(file, i));
 		}
 	}
 }

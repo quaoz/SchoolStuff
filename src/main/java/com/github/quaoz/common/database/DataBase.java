@@ -1,6 +1,7 @@
 package com.github.quaoz.common.database;
 
 import com.github.quaoz.common.filehandling.RandomFileHandler;
+import com.github.quaoz.common.filehandling.SequentialFileHandler;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -11,15 +12,15 @@ public class DataBase {
 	private final File location;
 	private final String recordFormat;
 	private long recordCount;
+	private String delimiter;
+	private final int recordLength;
 
-	public DataBase(@NotNull File location, String recordFormat) {
-		if (location.exists()) {
-			System.err.printf("File already exists at %s", location);
-		}
-
+	public DataBase(@NotNull File location, String recordFormat, String formatDelimiter, int recordLength) {
 		this.recordFormat = recordFormat;
 		this.location = location;
-		recordCount = getRecordCount();
+		recordCount = updateRecordCount();
+		delimiter = formatDelimiter;
+		this.recordLength = recordLength;
 	}
 
 	/**
@@ -42,7 +43,7 @@ public class DataBase {
 	}
 
 	/**
-	 * Returns the number of linse in the database
+	 * Returns the number of lines in the database
 	 *
 	 * @return The number of lines in the database
 	 */
@@ -51,7 +52,12 @@ public class DataBase {
 	}
 
 	public void appendRecord(String record) {
-		record = String.format(recordFormat, record);
-		RandomFileHandler.randomWriteLine(location, recordCount++, record);
+		record = String.format(recordFormat, (Object[]) record.split(delimiter));
+		SequentialFileHandler.write(location, record, true);
+		recordCount++;
+	}
+
+	public byte[] getRecord(long record) {
+		return RandomFileHandler.randomReadLine(location, recordLength * record).getBytes();
 	}
 }
