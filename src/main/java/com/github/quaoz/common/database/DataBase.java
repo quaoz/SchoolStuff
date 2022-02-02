@@ -7,6 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.Objects;
 
 public class DataBase {
 	private final File location;
@@ -58,6 +59,6 @@ public class DataBase {
 	}
 
 	public byte[] getRecord(long record) {
-		return RandomFileHandler.randomReadLine(location, recordLength * record).getBytes();
+		return Objects.requireNonNull(RandomFileHandler.randomReadLine(location, recordLength * record)).getBytes();
 	}
 }
