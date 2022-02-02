@@ -27,7 +27,7 @@ public class Main {
 		for (long i = 0; i < file.length(); i++) {
 			// Replaces all spaces with x
 			if (Objects.equals(RandomFileHandler.readByte(file, i), ' ')) {
-				RandomFileHandler.randomWrite(file, i, 'x');
+				RandomFileHandler.writeByte(file, i, (byte) 'x');
 			}
 		}
 	}

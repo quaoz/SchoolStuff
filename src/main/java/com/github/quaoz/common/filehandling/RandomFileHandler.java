@@ -6,6 +6,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.Arrays;
 
 public class RandomFileHandler {
 
@@ -17,7 +18,7 @@ public class RandomFileHandler {
 	 *
 	 * @return The byte at that position
 	 */
-	public static @Nullable byte readByte(File file, long pos) {
+	public static byte readByte(File file, long pos) {
 		try (RandomAccessFile randomAccessFile = new RandomAccessFile(file, "r")) {
 			randomAccessFile.seek(pos);
 			return randomAccessFile.readByte();
@@ -37,7 +38,7 @@ public class RandomFileHandler {
 	 *
 	 * @return The bytes at that position
 	 */
-	public static @Nullable byte @NotNull [] readBytes(File file, long pos, int numBytes) {
+	public static byte @NotNull [] readBytes(File file, long pos, int numBytes) {
 		try (RandomAccessFile randomAccessFile = new RandomAccessFile(file, "r")) {
 			randomAccessFile.seek(pos);
 
@@ -65,50 +66,59 @@ public class RandomFileHandler {
 		try (RandomAccessFile randomAccessFile = new RandomAccessFile(file, "r")) {
 			randomAccessFile.seek(pos);
 
-			randomAccessFile.readUTF()
-			return randomAccessFile.readLine();
+			return randomAccessFile.readUTF();
 		} catch (IOException e) {
-			System.out.printf("Failed to read byte at %d in %s", pos, file);
+			System.out.printf("Failed to read byte at %s in %s", pos, file);
 			e.printStackTrace();
 		}
 		return null;
 	}
 
 	/**
-	 * Writes the given character to a specific position in a file
+	 * Writes the given byte to a specific position in a file
 	 *
 	 * @param file The file to write to
 	 * @param pos  The position to write at
-	 * @param c	   The character to write
+	 * @param b	   The byte to write
 	 */
-	public static void randomWrite(File file, long pos, char c) {
+	public static void writeByte(File file, long pos, byte b) {
 		try (RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rws")) {
 			// seeks to the given position
 			randomAccessFile.seek(pos);
 
-			// casts the char to a byte and writes it to the file
-			randomAccessFile.writeByte((byte) c);
+			randomAccessFile.writeByte(b);
 		} catch (IOException e) {
-			System.out.printf("Failed to write char %c at %d in %s", c, pos, file);
+			System.out.printf("Failed to write byte %s at %d in %s", b, pos, file);
 			e.printStackTrace();
 		}
 	}
 
 	/**
-	 * Writes the given character to a specific position in a file
+	 * Writes an array of bytes to the file
 	 *
-	 * @param file The file to write to
-	 * @param pos  The position to write at
-	 * @param line The string to write
+	 * @param file  The file to write to
+	 * @param pos   The position to write at
+	 * @param bytes The bytes to write
 	 */
-	public static void randomWriteLine(File file, long pos, String line) {
+	public static void writeBytes(File file, long pos, byte[] bytes) {
 		try (RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rws")) {
 			// seeks to the given position
 			randomAccessFile.seek(pos);
 
+			randomAccessFile.write(bytes);
+		} catch (IOException e) {
+			System.out.printf("Failed to write bytes %s at %d in %s", Arrays.toString(bytes), pos, file);
+			e.printStackTrace();
+		}
+	}
+
+	public static void writeLine(File file, long pos, String line) {
+		try (RandomAccessFile randomAccessFile = new RandomAccessFile(file, "r")) {
+			randomAccessFile.seek(pos);
+
 			randomAccessFile.writeUTF(line);
 		} catch (IOException e) {
-			System.out.printf("Failed to write line %s at %d in %s", line, pos, file);
+			System.out.printf("Failed to write line %s at %s in %s", line, pos, file);
 			e.printStackTrace();
 		}
 	}
