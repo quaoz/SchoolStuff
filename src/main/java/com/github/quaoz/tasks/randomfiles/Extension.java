@@ -25,6 +25,6 @@ public class Extension {
 	}
 
 	public static String get(File file, long record) {
-		return RandomFileHandler.randomReadLine(file, record * 52);
+		return RandomFileHandler.readLine(file, record * 52);
 	}
 }

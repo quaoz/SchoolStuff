@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Arrays;
 
+// Note: it is generally more reliable to write and read data as bytes when dealing with strings to avoid encoding issues
 public class RandomFileHandler {
 
 	/**
@@ -62,7 +63,7 @@ public class RandomFileHandler {
 	 *
 	 * @return The line at that position
 	 */
-	public static @Nullable String randomReadLine(File file, long pos) {
+	public static @Nullable String readLine(File file, long pos) {
 		try (RandomAccessFile randomAccessFile = new RandomAccessFile(file, "r")) {
 			randomAccessFile.seek(pos);
 
@@ -119,6 +120,20 @@ public class RandomFileHandler {
 			randomAccessFile.writeUTF(line);
 		} catch (IOException e) {
 			System.out.printf("Failed to write line %s at %s in %s", line, pos, file);
+			e.printStackTrace();
+		}
+	}
+
+	public static void insertBytes(File file, long pos, byte[] bytes) {
+		try (RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rws")) {
+			// seeks to the given position
+			randomAccessFile.seek(pos);
+
+			File tmp = File.createTempFile("copying", ".tmp");
+
+			randomAccessFile.write(bytes);
+		} catch (IOException e) {
+			System.out.printf("Failed to write bytes %s at %d in %s", Arrays.toString(bytes), pos, file);
 			e.printStackTrace();
 		}
 	}

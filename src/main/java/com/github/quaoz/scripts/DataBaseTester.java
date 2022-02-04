@@ -3,6 +3,7 @@ package com.github.quaoz.scripts;
 import com.github.quaoz.common.database.DataBase;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 
 public class DataBaseTester {
 	public static void main(String[] args) {
@@ -18,7 +19,11 @@ public class DataBaseTester {
 		dataBase.appendRecord("three,four");
 
 		System.out.println("dataBase.getRecordCount() = " + dataBase.getRecordCount());
-		System.out.println("dataBase.getRecord(1) = " + dataBase.getRecord(1));
+		System.out.print("dataBase.getRecord(1) = " + new String(dataBase.getRecord(1), StandardCharsets.UTF_8));
+		System.out.print("dataBase.getRecordString(1) = " + dataBase.getRecordString(1));
 
+		System.out.println("dataBase.updateRecordCount() = " + dataBase.updateRecordCount());
+
+		dataBase.insertRecord("insert,record", 2);
 	}
 }
