@@ -5,7 +5,6 @@ import org.jetbrains.annotations.NotNull;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -53,10 +52,13 @@ public class SequentialFileHandler {
 	 * @param text The text to write
 	 * @param line The line to start writing at
 	 */
-	public static void writeAt(File file, String text, Integer line) {
+	public static void writeAt(File file, String text, Integer line) throws IOException {
+		// Create tmp file
+		File tmp = File.createTempFile("copying", ".tmp");
+
 		try (
 				// Create print writer and buffered reader
-				PrintWriter printWriter = new PrintWriter(new FileWriter("src/main/java/com/github/quaoz/tmp/copying.txt", false));
+				PrintWriter printWriter = new PrintWriter(new FileWriter(tmp, false));
 				BufferedReader bufferedReader = new BufferedReader(new FileReader(file))
 		) {
 			String currentLineText;
@@ -75,7 +77,8 @@ public class SequentialFileHandler {
 			e.printStackTrace();
 		}
 
-		copy(Paths.get("src/main/java/com/github/quaoz/tmp/copying.txt"), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+		copy(tmp.toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+		tmp.deleteOnExit();
 	}
 
 	/**
@@ -85,10 +88,13 @@ public class SequentialFileHandler {
 	 * @param lines The lines to write
 	 * @param line  The line to start writing at
 	 */
-	public static void writeAllAt(File file, String[] lines, Integer line) {
+	public static void writeAllAt(File file, String[] lines, Integer line) throws IOException {
+		// Create tmp file
+		File tmp = File.createTempFile("copying", ".tmp");
+
 		try (
 				// Create a file writer and print writer
-				PrintWriter printWriter = new PrintWriter(new FileWriter("src/main/java/com/github/quaoz/tmp/copying.txt", false));
+				PrintWriter printWriter = new PrintWriter(new FileWriter(tmp, false));
 
 				// Create a BufferedReader
 				BufferedReader bufferedReader = new BufferedReader(new FileReader(file))
@@ -111,7 +117,8 @@ public class SequentialFileHandler {
 			e.printStackTrace();
 		}
 
-		copy(Paths.get("src/main/java/com/github/quaoz/tmp/copying.txt"), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+		copy(tmp.toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+		tmp.deleteOnExit();
 	}
 
 	/**
@@ -151,10 +158,13 @@ public class SequentialFileHandler {
 	 * @param file The file to write to
 	 * @param line The line to delete
 	 */
-	public static void deleteLine(File file, Integer line) {
+	public static void deleteLine(File file, Integer line) throws IOException {
+		// Create tmp file
+		File tmp = File.createTempFile("copying", ".tmp");
+
 		try (
 				// Create a file writer and print writer
-				PrintWriter printWriter = new PrintWriter(new FileWriter("src/main/java/com/github/quaoz/tmp/copying.txt", false));
+				PrintWriter printWriter = new PrintWriter(new FileWriter(tmp, false));
 
 				// Create a BufferedReader
 				BufferedReader bufferedReader = new BufferedReader(new FileReader(file))
@@ -174,7 +184,8 @@ public class SequentialFileHandler {
 			e.printStackTrace();
 		}
 
-		copy(Paths.get("src/main/java/com/github/quaoz/tmp/copying.txt"), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+		copy(tmp.toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+		tmp.deleteOnExit();
 	}
 
 	/**
@@ -184,10 +195,13 @@ public class SequentialFileHandler {
 	 * @param startLine The line to start deleting at
 	 * @param endLine   the line to delete to
 	 */
-	public static void deleteLines(File file, Integer startLine, Integer endLine) {
+	public static void deleteLines(File file, Integer startLine, Integer endLine) throws IOException {
+		// Create tmp file
+		File tmp = File.createTempFile("copying", ".tmp");
+
 		try (
 				// Create a file writer and print writer
-				PrintWriter printWriter = new PrintWriter(new FileWriter("src/main/java/com/github/quaoz/tmp/copying.txt", false));
+				PrintWriter printWriter = new PrintWriter(new FileWriter(tmp, false));
 
 				// Create a BufferedReader
 				BufferedReader bufferedReader = new BufferedReader(new FileReader(file))
@@ -207,13 +221,17 @@ public class SequentialFileHandler {
 			e.printStackTrace();
 		}
 
-		copy(Paths.get("src/main/java/com/github/quaoz/tmp/copying.txt"), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+		copy(tmp.toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+		tmp.deleteOnExit();
 	}
 
-	public static void insert(File file, String text, Integer line) {
+	public static void insert(File file, String text, Integer line) throws IOException {
+		// Create tmp file
+		File tmp = File.createTempFile("copying", ".tmp");
+
 		try (
 				// Create a file writer and print writer
-				PrintWriter printWriter = new PrintWriter(new FileWriter("src/main/java/com/github/quaoz/tmp/copying.txt", false));
+				PrintWriter printWriter = new PrintWriter(new FileWriter(tmp, false));
 
 				// Create a BufferedReader
 				BufferedReader bufferedReader = new BufferedReader(new FileReader(file))
@@ -231,13 +249,17 @@ public class SequentialFileHandler {
 			e.printStackTrace();
 		}
 
-		copy(Paths.get("src/main/java/com/github/quaoz/tmp/copying.txt"), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+		copy(tmp.toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+		tmp.deleteOnExit();
 	}
 
-	public static void insertAll(File file, String[] lines, Integer line) {
+	public static void insertAll(File file, String[] lines, Integer line) throws IOException {
+		// Create tmp file
+		File tmp = File.createTempFile("copying", ".tmp");
+
 		try (
 				// Create a file writer and print writer
-				PrintWriter printWriter = new PrintWriter(new FileWriter("src/main/java/com/github/quaoz/tmp/copying.txt", false));
+				PrintWriter printWriter = new PrintWriter(new FileWriter(tmp, false));
 
 				// Create a BufferedReader
 				BufferedReader bufferedReader = new BufferedReader(new FileReader(file))
@@ -257,7 +279,8 @@ public class SequentialFileHandler {
 			e.printStackTrace();
 		}
 
-		copy(Paths.get("src/main/java/com/github/quaoz/tmp/copying.txt"), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+		copy(tmp.toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+		tmp.deleteOnExit();
 	}
 
 	/**
@@ -320,6 +343,40 @@ public class SequentialFileHandler {
 			Files.copy(source, destination, standardCopyOption);
 		} catch (IOException e) {
 			System.out.printf("Failed to copy %s to %s with option %s", source, destination, standardCopyOption);
+			e.printStackTrace();
+		}
+	}
+
+	public static void copyLines(File source, File destination, long startLine, long endLine) {
+		try (
+				// Create a new BufferedReader
+				BufferedReader bufferedReader = new BufferedReader(new FileReader(source));
+
+				// Create a file writer and print writer
+				PrintWriter printWriter = new PrintWriter(new FileWriter(destination, false))
+		) {
+			if (startLine == 0 && endLine == -1) {
+				// Copying the whole file
+				copy(source.toPath(), destination.toPath(), StandardCopyOption.REPLACE_EXISTING);
+			} else {
+				// Skips to the requested line and returns an iterator
+				Iterator<String> iterator = bufferedReader.lines().skip(startLine).iterator();
+
+				if (endLine == -1) {
+					// If we are reading from this line to the end of the file we can just iterate through the remaining
+					// elements and write them to the file
+					iterator.forEachRemaining(printWriter::println);
+
+				} else {
+					// Otherwise, we read until the end of the file or until we reach the specified line to stop at
+					long line = startLine;
+					while (iterator.hasNext() && line <= endLine) {
+						printWriter.println(iterator.next());
+						line++;
+					}
+				}
+			}
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}

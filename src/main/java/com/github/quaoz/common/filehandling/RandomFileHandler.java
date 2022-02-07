@@ -3,10 +3,10 @@ package com.github.quaoz.common.filehandling;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.RandomAccessFile;
+import java.io.*;
+import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
+import java.util.Objects;
 
 // Note: it is generally more reliable to write and read data as bytes when dealing with strings to avoid encoding issues
 public class RandomFileHandler {
@@ -120,20 +120,6 @@ public class RandomFileHandler {
 			randomAccessFile.writeUTF(line);
 		} catch (IOException e) {
 			System.out.printf("Failed to write line %s at %s in %s", line, pos, file);
-			e.printStackTrace();
-		}
-	}
-
-	public static void insertBytes(File file, long pos, byte[] bytes) {
-		try (RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rws")) {
-			// seeks to the given position
-			randomAccessFile.seek(pos);
-
-			File tmp = File.createTempFile("copying", ".tmp");
-
-			randomAccessFile.write(bytes);
-		} catch (IOException e) {
-			System.out.printf("Failed to write bytes %s at %d in %s", Arrays.toString(bytes), pos, file);
 			e.printStackTrace();
 		}
 	}

@@ -69,16 +69,22 @@ public class DataBase {
 		RandomFileHandler.writeBytes(location, pos, record.getBytes(StandardCharsets.UTF_8));
 	}
 
-	public void insertRecord(String record, long pos) {
+	public void writeRecord(long pos, String record) {
 		// Formats the record
 		record = String.format(recordFormat, (Object[]) record.split(formatDelimiter)).concat("\n");
 
-		// Calculate the position in the file and increase the record count
-		pos = pos * recordLength;
-		recordCount++;
+		// Calculate the position in the file
+		pos = recordLength * pos;
 
 		// Write the String to the file as bytes
 		RandomFileHandler.writeBytes(location, pos, record.getBytes(StandardCharsets.UTF_8));
+	}
+
+	public void deleteRecord(long pos) throws IOException {
+		File tmp = File.createTempFile("copying", ".tmp");
+
+		SequentialFileHandler.copyLines(location, tmp, 0, pos - 1);
+		SequentialFileHandler.copyLines(location, tmp, pos + 1, -1);
 	}
 
 	/**
@@ -100,6 +106,6 @@ public class DataBase {
 	 * @return The specified record as a String from the file
 	 */
 	public String getRecordString(long record) {
-		return new String(RandomFileHandler.readBytes(location, record * recordLength, recordLength), StandardCharsets.UTF_8);
+		return new String(getRecord(record), StandardCharsets.UTF_8);
 	}
 }

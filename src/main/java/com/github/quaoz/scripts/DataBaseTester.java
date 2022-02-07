@@ -24,6 +24,6 @@ public class DataBaseTester {
 
 		System.out.println("dataBase.updateRecordCount() = " + dataBase.updateRecordCount());
 
-		dataBase.insertRecord("insert,record", 2);
+		dataBase.writeRecord(2, "wrote,record");
 	}
 }

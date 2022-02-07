@@ -4,6 +4,7 @@ import com.github.quaoz.common.filehandling.SequentialFileHandler;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.function.IntFunction;
@@ -53,7 +54,11 @@ public class PersistentArrayList<E> extends ArrayList<E> {
 	@Override
 	public E set(int index, E element) {
 		E oldValue = super.set(index, element);
-		SequentialFileHandler.writeAt(file, element.toString(), index);
+		try {
+			SequentialFileHandler.writeAt(file, element.toString(), index);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return oldValue;
 	}
 
