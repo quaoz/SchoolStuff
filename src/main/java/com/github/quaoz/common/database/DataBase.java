@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.util.Arrays;
 
 public class DataBase {
 	private final File location;
@@ -69,22 +71,30 @@ public class DataBase {
 		RandomFileHandler.writeBytes(location, pos, record.getBytes(StandardCharsets.UTF_8));
 	}
 
+	/**
+	 * Overwrites a record
+	 *
+	 * @param pos    The line to overwrite
+	 * @param record The record to write
+	 */
 	public void writeRecord(long pos, String record) {
 		// Formats the record
 		record = String.format(recordFormat, (Object[]) record.split(formatDelimiter)).concat("\n");
 
 		// Calculate the position in the file
-		pos = recordLength * pos;
+		pos *= recordLength;
 
 		// Write the String to the file as bytes
 		RandomFileHandler.writeBytes(location, pos, record.getBytes(StandardCharsets.UTF_8));
 	}
 
-	public void deleteRecord(long pos) throws IOException {
-		File tmp = File.createTempFile("copying", ".tmp");
-
-		SequentialFileHandler.copyLines(location, tmp, 0, pos - 1);
-		SequentialFileHandler.copyLines(location, tmp, pos + 1, -1);
+	/**
+	 * Deletes a record
+	 *
+	 * @param pos The record to delete
+	 */
+	public void deleteRecord(long pos) {
+		RandomFileHandler.deleteLine(location, pos * recordLength, recordLength);
 	}
 
 	/**

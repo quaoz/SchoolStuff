@@ -17,6 +17,8 @@ public class DataBaseTester {
 		dataBase.appendRecord("record,field");
 		dataBase.appendRecord("one,two");
 		dataBase.appendRecord("three,four");
+		dataBase.appendRecord("five,six");
+		dataBase.appendRecord("seven,eight");
 
 		System.out.println("dataBase.getRecordCount() = " + dataBase.getRecordCount());
 		System.out.print("dataBase.getRecord(1) = " + new String(dataBase.getRecord(1), StandardCharsets.UTF_8));
@@ -24,6 +26,7 @@ public class DataBaseTester {
 
 		System.out.println("dataBase.updateRecordCount() = " + dataBase.updateRecordCount());
 
-		dataBase.writeRecord(2, "wrote,record");
+		//dataBase.writeRecord(2, "wrote,record");
+		dataBase.deleteRecord(2);
 	}
 }

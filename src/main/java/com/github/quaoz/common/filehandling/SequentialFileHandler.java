@@ -353,7 +353,7 @@ public class SequentialFileHandler {
 				BufferedReader bufferedReader = new BufferedReader(new FileReader(source));
 
 				// Create a file writer and print writer
-				PrintWriter printWriter = new PrintWriter(new FileWriter(destination, false))
+				PrintWriter printWriter = new PrintWriter(new FileWriter(destination, true))
 		) {
 			if (startLine == 0 && endLine == -1) {
 				// Copying the whole file

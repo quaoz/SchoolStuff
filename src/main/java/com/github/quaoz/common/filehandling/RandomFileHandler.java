@@ -4,9 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
-import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
-import java.util.Objects;
 
 // Note: it is generally more reliable to write and read data as bytes when dealing with strings to avoid encoding issues
 public class RandomFileHandler {
@@ -48,11 +46,11 @@ public class RandomFileHandler {
 
 			return bytes;
 		} catch (IOException e) {
-			System.err.printf("Failed to read byte at %d in %s", pos, file);
+			System.err.printf("Failed to read %d bytes at %d in %s", numBytes, pos, file);
 			e.printStackTrace();
 		}
 
-		throw new RuntimeException("Failed to read byte from file");
+		throw new RuntimeException("Failed to read bytes from file");
 	}
 
 	/**
@@ -69,9 +67,10 @@ public class RandomFileHandler {
 
 			return randomAccessFile.readUTF();
 		} catch (IOException e) {
-			System.out.printf("Failed to read byte at %s in %s", pos, file);
+			System.out.printf("Failed to read line at %d in %s", pos, file);
 			e.printStackTrace();
 		}
+
 		return null;
 	}
 
@@ -119,7 +118,25 @@ public class RandomFileHandler {
 
 			randomAccessFile.writeUTF(line);
 		} catch (IOException e) {
-			System.out.printf("Failed to write line %s at %s in %s", line, pos, file);
+			System.out.printf("Failed to write line %s at %d in %s", line, pos, file);
+			e.printStackTrace();
+		}
+	}
+
+	public static void deleteLine(File file, long pos, int lineLength) {
+		try (RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rws")) {
+			while (pos < randomAccessFile.length() - lineLength) {
+				pos += lineLength;
+				randomAccessFile.seek(pos);
+
+				byte[] bytes = new byte[lineLength];
+				randomAccessFile.read(bytes, 0, lineLength);
+				randomAccessFile.seek(pos - lineLength);
+				randomAccessFile.write(bytes);
+			}
+
+			randomAccessFile.setLength(randomAccessFile.length() - lineLength);
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
