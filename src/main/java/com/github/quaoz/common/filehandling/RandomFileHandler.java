@@ -112,6 +112,13 @@ public class RandomFileHandler {
 		}
 	}
 
+	/**
+	 * Writes a UTF string to a file at the given location
+	 *
+	 * @param file The file to write to
+	 * @param pos  The position to write at
+	 * @param line The line to write
+	 */
 	public static void writeLine(File file, long pos, String line) {
 		try (RandomAccessFile randomAccessFile = new RandomAccessFile(file, "r")) {
 			randomAccessFile.seek(pos);
@@ -123,6 +130,13 @@ public class RandomFileHandler {
 		}
 	}
 
+	/**
+	 * Deletes the given line from a file
+	 *
+	 * @param file 		 The file to write to
+	 * @param pos        The line to delete
+	 * @param lineLength The length of the line
+	 */
 	public static void deleteLine(File file, long pos, int lineLength) {
 		try (RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rws")) {
 			while (pos < randomAccessFile.length() - lineLength) {

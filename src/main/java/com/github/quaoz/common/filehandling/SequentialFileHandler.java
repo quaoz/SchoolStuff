@@ -34,9 +34,8 @@ public class SequentialFileHandler {
 	 */
 	public static void write(File file, String text, boolean append) {
 		try (
-				// Create a file writer and print writer
-				FileWriter fileWriter = new FileWriter(file, append);
-				PrintWriter printWriter = new PrintWriter(fileWriter)
+				// Create a PrintWriter
+				PrintWriter printWriter = new PrintWriter(new FileWriter(file, append))
 		) {
 			printWriter.println(text);
 		} catch (IOException e) {
@@ -53,7 +52,7 @@ public class SequentialFileHandler {
 	 * @param line The line to start writing at
 	 */
 	public static void writeAt(File file, String text, Integer line) throws IOException {
-		// Create tmp file
+		// Create a temp file
 		File tmp = File.createTempFile("copying", ".tmp");
 
 		try (
@@ -78,7 +77,11 @@ public class SequentialFileHandler {
 		}
 
 		copy(tmp.toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
-		tmp.deleteOnExit();
+
+		if (!tmp.delete()) {
+			tmp.deleteOnExit();
+			System.err.printf("Failed to delete the temp file %s", tmp.getPath());
+		}
 	}
 
 	/**
@@ -93,10 +96,8 @@ public class SequentialFileHandler {
 		File tmp = File.createTempFile("copying", ".tmp");
 
 		try (
-				// Create a file writer and print writer
+				// Create a PrintWriter and BufferedReader
 				PrintWriter printWriter = new PrintWriter(new FileWriter(tmp, false));
-
-				// Create a BufferedReader
 				BufferedReader bufferedReader = new BufferedReader(new FileReader(file))
 		) {
 			String currentLineText;
@@ -118,7 +119,11 @@ public class SequentialFileHandler {
 		}
 
 		copy(tmp.toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
-		tmp.deleteOnExit();
+
+		if (!tmp.delete()) {
+			tmp.deleteOnExit();
+			System.err.printf("Failed to delete the temp file %s", tmp.getPath());
+		}
 	}
 
 	/**
@@ -140,9 +145,8 @@ public class SequentialFileHandler {
 	 */
 	public static void writeAll(File file, @NotNull Collection<?> c, boolean append) {
 		try (
-				// Create a file writer and print writer
-				FileWriter fileWriter = new FileWriter(file, append);
-				PrintWriter printWriter = new PrintWriter(fileWriter)
+				// Create a PrintWriter
+				PrintWriter printWriter = new PrintWriter( new FileWriter(file, append))
 		) {
 			for (Object o : c) {
 				printWriter.println(o);
@@ -165,7 +169,6 @@ public class SequentialFileHandler {
 		try (
 				// Create a file writer and print writer
 				PrintWriter printWriter = new PrintWriter(new FileWriter(tmp, false));
-
 				// Create a BufferedReader
 				BufferedReader bufferedReader = new BufferedReader(new FileReader(file))
 		) {
@@ -185,7 +188,11 @@ public class SequentialFileHandler {
 		}
 
 		copy(tmp.toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
-		tmp.deleteOnExit();
+
+		if (!tmp.delete()) {
+			tmp.deleteOnExit();
+			System.err.printf("Failed to delete the temp file %s", tmp.getPath());
+		}
 	}
 
 	/**
@@ -202,7 +209,6 @@ public class SequentialFileHandler {
 		try (
 				// Create a file writer and print writer
 				PrintWriter printWriter = new PrintWriter(new FileWriter(tmp, false));
-
 				// Create a BufferedReader
 				BufferedReader bufferedReader = new BufferedReader(new FileReader(file))
 		) {
@@ -222,9 +228,21 @@ public class SequentialFileHandler {
 		}
 
 		copy(tmp.toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
-		tmp.deleteOnExit();
+
+		if (!tmp.delete()) {
+			tmp.deleteOnExit();
+			System.err.printf("Failed to delete the temp file %s", tmp.getPath());
+
+		}
 	}
 
+	/**
+	 * Inserts the given string into a file
+	 *
+	 * @param file The file to use
+	 * @param text The text to insert
+	 * @param line The line to insert at
+	 */
 	public static void insert(File file, String text, Integer line) throws IOException {
 		// Create tmp file
 		File tmp = File.createTempFile("copying", ".tmp");
@@ -250,7 +268,11 @@ public class SequentialFileHandler {
 		}
 
 		copy(tmp.toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
-		tmp.deleteOnExit();
+
+		if (!tmp.delete()) {
+			tmp.deleteOnExit();
+			System.err.printf("Failed to delete the temp file %s", tmp.getPath());
+		}
 	}
 
 	public static void insertAll(File file, String[] lines, Integer line) throws IOException {
