@@ -11,6 +11,10 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
 
+// TODO: Create flowchart
+// https://app.code2flow.com/
+// https://stackoverflow.com/questions/22411136/automatic-flowchart-tool
+
 public class DataBase {
 	private final File location;
 	private final String recordFormat;
@@ -86,6 +90,10 @@ public class DataBase {
 
 		// Write the String to the file as bytes
 		RandomFileHandler.writeBytes(location, pos, record.getBytes(StandardCharsets.UTF_8));
+	}
+
+	public void insertRecord(long pos, String record) {
+
 	}
 
 	/**

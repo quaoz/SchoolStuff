@@ -154,4 +154,21 @@ public class RandomFileHandler {
 			e.printStackTrace();
 		}
 	}
+
+	public static void insertLine(File file, String line, long pos, int lineLength) {
+		try (RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rws")) {
+			randomAccessFile.seek(randomAccessFile.length());
+			randomAccessFile.setLength(randomAccessFile.length() + lineLength);
+
+			byte[] bytes = new byte[lineLength];
+			randomAccessFile.read(bytes, 0, lineLength);
+			randomAccessFile.seek(randomAccessFile.getFilePointer() + lineLength);
+			randomAccessFile.write(bytes);
+
+			// seek back 2?
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
