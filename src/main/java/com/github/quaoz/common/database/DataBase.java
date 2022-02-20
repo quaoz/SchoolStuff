@@ -1,34 +1,28 @@
 package com.github.quaoz.common.database;
 
 import com.github.quaoz.common.filehandling.RandomFileHandler;
-import com.github.quaoz.common.filehandling.SequentialFileHandler;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
-import java.util.Arrays;
+import java.util.Iterator;
 
 // TODO: Create flowchart
 // https://app.code2flow.com/
 // https://stackoverflow.com/questions/22411136/automatic-flowchart-tool
 
-public class DataBase {
+public class DataBase<T extends Record> {
 	private final File location;
-	private final String recordFormat;
+	private final int length;
 	private long recordCount;
-	private final String formatDelimiter;
-	private final int recordLength;
 
-	public DataBase(@NotNull File location, String recordFormat, String formatDelimiter, int recordLength) {
+	public DataBase(@NotNull File location, int length) {
 		this.location = location;
-		this.recordFormat = recordFormat;
-		// Add one to account for newline character
-		this.recordLength = recordLength + 1;
 		this.recordCount = updateRecordCount();
-		this.formatDelimiter = formatDelimiter;
+		this.length = length;
 	}
 
 	/**
@@ -38,8 +32,9 @@ public class DataBase {
 	 *
 	 * @throws RuntimeException Unable to access the file
 	 */
-	public long updateRecordCount() throws RuntimeException {
+	private long updateRecordCount() throws RuntimeException {
 		try {
+			// Recounts the lines
 			recordCount = Files.lines(location.toPath()).count();
 			return getRecordCount();
 		} catch (IOException e) {
@@ -60,19 +55,28 @@ public class DataBase {
 	}
 
 	/**
+	 * Returns a record as a formatted array of bytes
+	 *
+	 * @param record The record to format
+	 *
+	 * @return The formatted record as an array of bytes
+	 */
+	private byte @NotNull [] getRecordBytes(@NotNull T record) {
+		// Return the formatted record as an array of bytes
+		return record.toString().getBytes(StandardCharsets.UTF_8);
+	}
+
+	/**
 	 * Appends a record to the file
 	 *
 	 * @param record The record to append to the file
 	 */
-	public void appendRecord(String record) {
-		// Formats the record
-		record = String.format(recordFormat, (Object[]) record.split(formatDelimiter)).concat("\n");
-
+	public void appendRecord(@NotNull T record) {
 		// Calculate the position in the file and increase the record count
-		final long pos = recordLength * recordCount++;
+		final long pos = length * recordCount++;
 
 		// Write the String to the file as bytes
-		RandomFileHandler.writeBytes(location, pos, record.getBytes(StandardCharsets.UTF_8));
+		RandomFileHandler.writeBytes(location, pos, getRecordBytes(record));
 	}
 
 	/**
@@ -81,19 +85,23 @@ public class DataBase {
 	 * @param pos    The line to overwrite
 	 * @param record The record to write
 	 */
-	public void writeRecord(long pos, String record) {
-		// Formats the record
-		record = String.format(recordFormat, (Object[]) record.split(formatDelimiter)).concat("\n");
-
+	public void writeRecord(@NotNull T record, long pos) {
 		// Calculate the position in the file
-		pos *= recordLength;
+		pos *= length;
 
 		// Write the String to the file as bytes
-		RandomFileHandler.writeBytes(location, pos, record.getBytes(StandardCharsets.UTF_8));
+		RandomFileHandler.writeBytes(location, pos, getRecordBytes(record));
 	}
 
-	public void insertRecord(long pos, String record) {
-
+	/**
+	 * Inserts a record at a given position
+	 *
+	 * @param pos    The position to insert at
+	 * @param record The record to insert
+	 */
+	public void insertRecord(T record, long pos) {
+		RandomFileHandler.insertLine(location, getRecordBytes(record), pos * length, length);
+		recordCount++;
 	}
 
 	/**
@@ -102,7 +110,7 @@ public class DataBase {
 	 * @param pos The record to delete
 	 */
 	public void deleteRecord(long pos) {
-		RandomFileHandler.deleteLine(location, pos * recordLength, recordLength);
+		RandomFileHandler.deleteLine(location, pos * length, length);
 	}
 
 	/**
@@ -113,17 +121,34 @@ public class DataBase {
 	 * @return The specified record from the file
 	 */
 	public byte[] getRecord(long record) {
-		return RandomFileHandler.readBytes(location, record * recordLength, recordLength);
+		return RandomFileHandler.readBytes(location, record * length, length);
 	}
 
 	/**
-	 * Gets a record as a String from the file using UTF-8 encoding
+	 * Performs a linear search for the record
 	 *
-	 * @param record The record to return
+	 * @param record The record to search for
 	 *
-	 * @return The specified record as a String from the file
+	 * @return The line the record was found at
 	 */
-	public String getRecordString(long record) {
-		return new String(getRecord(record), StandardCharsets.UTF_8);
+	public long findRecord(T record) {
+		try {
+			Iterator<byte[]> iterator = RandomFileHandler.iterator(location, length);
+			long line = 0;
+
+			while (iterator.hasNext()) {
+				if (record.equals(record.fromString(new String(iterator.next(), StandardCharsets.UTF_8)))) {
+					break;
+				} else {
+					line++;
+				}
+			}
+
+			return line;
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		throw new RuntimeException("Unable to access the file");
 	}
 }

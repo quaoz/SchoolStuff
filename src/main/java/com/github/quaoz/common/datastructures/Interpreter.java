@@ -6,7 +6,6 @@ package com.github.quaoz.common.datastructures;
  * @param <T> The interpreter type
  */
 public interface Interpreter<T> {
-
 	/**
 	 * Returns the element at the specified position in this interpreter
 	 *

@@ -1,6 +1,7 @@
 package com.github.quaoz.scripts;
 
 import com.github.quaoz.common.database.DataBase;
+import com.github.quaoz.common.database.ExampleRecord;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;
@@ -8,25 +9,22 @@ import java.nio.charset.StandardCharsets;
 public class DataBaseTester {
 	public static void main(String[] args) {
 		final File file = new File("src/main/java/com/github/quaoz/tmp/database.txt");
-		final String fmt = "%-10s %-10s";
 
-		DataBase dataBase = new DataBase(file, fmt, ",", 21);
+		DataBase<ExampleRecord> dataBase = new DataBase<>(file, ExampleRecord.getLength());
+
+		dataBase.appendRecord(new ExampleRecord("Joe", 22));
+		dataBase.appendRecord(new ExampleRecord("Adam", 34));
+		dataBase.appendRecord(new ExampleRecord("Sahra", 21));
+		dataBase.appendRecord(new ExampleRecord("May", 25));
+
+		dataBase.writeRecord(new ExampleRecord("Write", 0), 2);
+		dataBase.insertRecord(new ExampleRecord("Insert", 100), 3);
+
+		ExampleRecord exampleRecord = new ExampleRecord(new String(dataBase.getRecord(0), StandardCharsets.UTF_8));
+		System.out.println("exampleRecord.getAge() = " + exampleRecord.getAge());
+		System.out.println("exampleRecord.getName() = " + exampleRecord.getName());
 
 		System.out.println("dataBase.getRecordCount() = " + dataBase.getRecordCount());
-
-		dataBase.appendRecord("record,field");
-		dataBase.appendRecord("one,two");
-		dataBase.appendRecord("three,four");
-		dataBase.appendRecord("five,six");
-		dataBase.appendRecord("seven,eight");
-
-		System.out.println("dataBase.getRecordCount() = " + dataBase.getRecordCount());
-		System.out.print("dataBase.getRecord(1) = " + new String(dataBase.getRecord(1), StandardCharsets.UTF_8));
-		System.out.print("dataBase.getRecordString(1) = " + dataBase.getRecordString(1));
-
-		System.out.println("dataBase.updateRecordCount() = " + dataBase.updateRecordCount());
-
-		//dataBase.writeRecord(2, "wrote,record");
-		dataBase.deleteRecord(2);
+		System.out.println("dataBase.findRecord(new ExampleRecord(\"May\", 0)) = " + dataBase.findRecord(new ExampleRecord("May", 0)));
 	}
 }

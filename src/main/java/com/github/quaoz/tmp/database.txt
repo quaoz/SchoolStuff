@@ -1,4 +1,5 @@
-record     field     
-one        two       
-five       six       
-seven      eight     
+Joe        0022
+Adam       0034
+Write      0000
+Insert     0100
+May        0025
