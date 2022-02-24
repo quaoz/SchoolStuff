@@ -1,6 +1,7 @@
 package com.github.quaoz.common.database;
 
 import com.github.quaoz.common.filehandling.RandomFileHandler;
+import it.unimi.dsi.fastutil.longs.LongObjectImmutablePair;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -8,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 // TODO: Create flowchart
@@ -15,13 +17,39 @@ import java.util.Iterator;
 // https://stackoverflow.com/questions/22411136/automatic-flowchart-tool
 
 public class DataBase<T extends Record> {
+	private static final int defaultCacheSize = 10;
 	private final File location;
 	private final int length;
 	private long recordCount;
+	private DataBaseCache cache;
+
+	class DataBaseCache {
+		private ArrayList<LongObjectImmutablePair<byte[]>> cache;
+		private final int cacheSize;
+
+		public DataBaseCache(int cacheSize) {
+
+			// pair = new LongObjectImmutablePair<>();
+			this.cacheSize = cacheSize;
+			cache = new ArrayList<>(cacheSize);
+		}
+
+		public void addRecord(byte[] record, long pos) {
+			cache.add(record);
+		}
+	}
+
+	public DataBase(@NotNull File location, int length, int cacheSize) {
+		this.recordCount = updateRecordCount();
+		cache = new DataBaseCache(cacheSize);
+		this.location = location;
+		this.length = length;
+	}
 
 	public DataBase(@NotNull File location, int length) {
-		this.location = location;
+		cache = new DataBaseCache(defaultCacheSize);
 		this.recordCount = updateRecordCount();
+		this.location = location;
 		this.length = length;
 	}
 
