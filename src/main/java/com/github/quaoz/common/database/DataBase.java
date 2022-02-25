@@ -23,19 +23,45 @@ public class DataBase<T extends Record> {
 	private long recordCount;
 	private DataBaseCache cache;
 
-	class DataBaseCache {
-		private ArrayList<LongObjectImmutablePair<byte[]>> cache;
+	static class DataBaseCache {
+		private final ArrayList<LongObjectImmutablePair<byte[]>> cache;
+		private final int defaultCacheSize = 10;
 		private final int cacheSize;
+		private int cacheIndex;
 
 		public DataBaseCache(int cacheSize) {
-
-			// pair = new LongObjectImmutablePair<>();
 			this.cacheSize = cacheSize;
+			cacheIndex = 0;
+
+			cache = new ArrayList<>(cacheSize);
+		}
+
+		public DataBaseCache() {
+			this.cacheSize = defaultCacheSize;
+			cacheIndex = 0;
+
 			cache = new ArrayList<>(cacheSize);
 		}
 
 		public void addRecord(byte[] record, long pos) {
-			cache.add(record);
+			if (cache.size() < cacheSize) {
+				cache.add(cacheIndex++, new LongObjectImmutablePair<>(pos, record));
+			} else {
+				if (cacheIndex > cacheSize) {
+					cacheIndex = 0;
+				}
+				cache.set(cacheIndex++, new LongObjectImmutablePair<>(pos, record));
+			}
+		}
+
+		public byte[] getRecord(long pos) {
+			for (LongObjectImmutablePair<byte[]> longObjectImmutablePair : cache) {
+				if (longObjectImmutablePair.leftLong() == pos) {
+					return longObjectImmutablePair.right();
+				}
+			}
+
+			return null;
 		}
 	}
 
