@@ -23,7 +23,7 @@ public class DataBase<T extends Record> {
 	private long recordCount;
 	private DataBaseCache cache;
 
-	static class DataBaseCache {
+	class DataBaseCache {
 		private final ArrayList<LongObjectImmutablePair<byte[]>> cache;
 		private final int defaultCacheSize = 10;
 		private final int cacheSize;
