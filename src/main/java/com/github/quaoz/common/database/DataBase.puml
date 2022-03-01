@@ -2,7 +2,6 @@
 'https://plantuml.com/class-diagram
 
 +class DataBase {
-- {static} int defaultCacheSize
 - DataBaseCache cache
 - long recordCount
 - File location
@@ -23,7 +22,14 @@
 }
 
 class DataBaseCache {
-- ArrayList<LongObjectImmutablePair<byte[]>>
+- ArrayList<LongObjectImmutablePair<byte[]>> cache
+- int defaultCacheSize
+- int defaultCache
+- int cacheIndex
+
++ void addRecord()
++ byte[] getRecord()
+
 }
 
 DataBase *- DataBaseCache

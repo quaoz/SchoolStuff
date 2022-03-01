@@ -10,5 +10,8 @@ public class Main {
 
 		FarmAnimal animal3 = new Cow("Bess");
 		System.out.println(animal3.display() + " says " + animal3.noise());
+
+		FarmAnimal animal4 = new Sheep();
+		System.out.println(animal4.display() + " says " + animal4.noise());
 	}
 }

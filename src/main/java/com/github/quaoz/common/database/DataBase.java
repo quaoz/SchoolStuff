@@ -12,16 +12,11 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-// TODO: Create flowchart
-// https://app.code2flow.com/
-// https://stackoverflow.com/questions/22411136/automatic-flowchart-tool
-
 public class DataBase<T extends Record> {
-	private static final int defaultCacheSize = 10;
 	private final File location;
 	private final int length;
 	private long recordCount;
-	private DataBaseCache cache;
+	private final DataBaseCache cache;
 
 	class DataBaseCache {
 		private final ArrayList<LongObjectImmutablePair<byte[]>> cache;
@@ -43,7 +38,7 @@ public class DataBase<T extends Record> {
 			cache = new ArrayList<>(cacheSize);
 		}
 
-		public void addRecord(byte[] record, long pos) {
+		public void addRecord(long pos, byte[] record) {
 			if (cache.size() < cacheSize) {
 				cache.add(cacheIndex++, new LongObjectImmutablePair<>(pos, record));
 			} else {
@@ -51,6 +46,16 @@ public class DataBase<T extends Record> {
 					cacheIndex = 0;
 				}
 				cache.set(cacheIndex++, new LongObjectImmutablePair<>(pos, record));
+			}
+
+			//TODO insert in place, sorted cache
+		}
+
+		public void editRecord(long pos, byte[] record) {
+			for (int i = 0; i < cache.size(); i++) {
+				if (cache.get(i).leftLong() == pos) {
+					cache.set(i, new LongObjectImmutablePair<>(pos, record));
+				}
 			}
 		}
 
@@ -73,7 +78,7 @@ public class DataBase<T extends Record> {
 	}
 
 	public DataBase(@NotNull File location, int length) {
-		cache = new DataBaseCache(defaultCacheSize);
+		cache = new DataBaseCache();
 		this.recordCount = updateRecordCount();
 		this.location = location;
 		this.length = length;
@@ -140,6 +145,8 @@ public class DataBase<T extends Record> {
 	 * @param record The record to write
 	 */
 	public void writeRecord(@NotNull T record, long pos) {
+		cache.editRecord(pos, getRecordBytes(record));
+
 		// Calculate the position in the file
 		pos *= length;
 
@@ -155,6 +162,9 @@ public class DataBase<T extends Record> {
 	 */
 	public void insertRecord(T record, long pos) {
 		RandomFileHandler.insertLine(location, getRecordBytes(record), pos * length, length);
+
+		//TODO cache
+
 		recordCount++;
 	}
 
@@ -164,6 +174,7 @@ public class DataBase<T extends Record> {
 	 * @param pos The record to delete
 	 */
 	public void deleteRecord(long pos) {
+		//TODO cache
 		RandomFileHandler.deleteLine(location, pos * length, length);
 	}
 
@@ -175,7 +186,16 @@ public class DataBase<T extends Record> {
 	 * @return The specified record from the file
 	 */
 	public byte[] getRecord(long record) {
-		return RandomFileHandler.readBytes(location, record * length, length);
+		byte[] cacheRecord = cache.getRecord(record);
+
+		if (cacheRecord == null) {
+			byte[] fileRecord = RandomFileHandler.readBytes(location, record * length, length);
+			cache.addRecord(record, fileRecord);
+
+			return fileRecord;
+		} else {
+			return cacheRecord;
+		}
 	}
 
 	/**
@@ -186,6 +206,9 @@ public class DataBase<T extends Record> {
 	 * @return The line the record was found at
 	 */
 	public long findRecord(T record) {
+
+		//TODO cache
+
 		try {
 			Iterator<byte[]> iterator = RandomFileHandler.iterator(location, length);
 			long line = 0;
