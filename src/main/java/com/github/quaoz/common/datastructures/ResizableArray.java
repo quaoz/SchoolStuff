@@ -1,5 +1,6 @@
 package com.github.quaoz.common.datastructures;
 
+import com.github.quaoz.common.datastructures.interpreter.Interpreter;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;

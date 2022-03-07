@@ -1,6 +1,6 @@
 package com.github.quaoz.common.searches;
 
-import com.github.quaoz.common.datastructures.Interpreter;
+import com.github.quaoz.common.datastructures.interpreter.Interpreter;
 
 /**
  * Binary search is a popular search algorithm, it works by repeatedly splitting the array and selecting the half that

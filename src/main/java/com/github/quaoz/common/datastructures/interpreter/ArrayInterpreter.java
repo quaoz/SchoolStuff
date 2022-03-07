@@ -1,4 +1,4 @@
-package com.github.quaoz.common.datastructures;
+package com.github.quaoz.common.datastructures.interpreter;
 
 public class ArrayInterpreter<T> implements Interpreter<T> {
 	private final T[] array;

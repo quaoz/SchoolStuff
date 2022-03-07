@@ -54,7 +54,7 @@ public class Grid {
 	public void display() {
 		for (Integer[] integers : array) {
 			for (Integer integer : integers) {
-				System.out.print(integer + " ");
+				System.out.print(integer + "  ");
 			}
 			System.out.println();
 		}

@@ -1,7 +1,7 @@
 package com.github.quaoz.tasks.files2;
 
 import com.github.quaoz.common.arrayutils.Swap;
-import com.github.quaoz.common.datastructures.ListInterpreter;
+import com.github.quaoz.common.datastructures.interpreter.ListInterpreter;
 import com.github.quaoz.common.sorts.IntroSort;
 import org.jetbrains.annotations.NotNull;
 

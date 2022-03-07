@@ -1,4 +1,4 @@
-package com.github.quaoz.common.datastructures;
+package com.github.quaoz.common.datastructures.interpreter;
 
 import java.util.List;
 

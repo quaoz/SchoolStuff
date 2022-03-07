@@ -1,6 +1,6 @@
 package com.github.quaoz.common.sorts;
 
-import com.github.quaoz.common.datastructures.Interpreter;
+import com.github.quaoz.common.datastructures.interpreter.Interpreter;
 import org.jetbrains.annotations.NotNull;
 
 /**

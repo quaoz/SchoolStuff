@@ -1,6 +1,6 @@
 package com.github.quaoz.tasks.scope;
 
-import com.github.quaoz.common.datastructures.ListInterpreter;
+import com.github.quaoz.common.datastructures.interpreter.ListInterpreter;
 import com.github.quaoz.common.searches.BinarySearch;
 import com.github.quaoz.common.sorts.BubbleSort;
 
