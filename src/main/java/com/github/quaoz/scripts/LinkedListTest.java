@@ -3,6 +3,8 @@ package com.github.quaoz.scripts;
 import com.github.quaoz.common.datastructures.linkedlist.Node;
 import com.github.quaoz.common.datastructures.linkedlist.LinkedList;
 
+import java.util.Iterator;
+
 public class LinkedListTest {
 	public static void main(String[] args) {
 		Node<Integer> n1 = new Node<>(13);
@@ -24,5 +26,12 @@ public class LinkedListTest {
 
 		System.out.println(linkedList.get(1));
 		System.out.println(linkedList.get(0));
+		System.out.println();
+
+		Iterator<Integer> iterator = linkedList.iterator();
+
+		while (iterator.hasNext()) {
+			System.out.println(iterator.next());
+		}
 	}
 }
