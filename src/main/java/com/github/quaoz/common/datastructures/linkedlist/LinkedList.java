@@ -51,75 +51,142 @@ public class LinkedList<E> implements Interpreter<E>, Iterable<E> {
 	}
 
 	public void add(E value) {
+		add(-1, value);
+	}
+
+	public void add(int index, E value) {
+		// Create a new node from the parsed value
+		Node<E> node = new Node<>(value);
+
+		if (index > size) {
+			throw new IndexOutOfBoundsException(String.format("Index %d out of bounds for list of length %d", index, size));
+		} else if (index == -1) {
+			// Adds the node at the first available position
+			if (head == null) {
+				// If the node has no head value initialise it to the parsed value
+				head = node;
+			} else {
+				// If the head is set step through the list until an unlinked node is found
+				Node<E> current = head;
+
+				while (current.getNext() != null) {
+					current = current.getNext();
+				}
+
+				current.setNext(node);
+			}
+		} else {
+			Node<E> current = head;
+			int pos = 1;
+
+			// Step through the list until the position is reached
+			while (pos < index) {
+				current = current.getNext();
+				pos++;
+			}
+
+			// Insert the node
+			node.setNext(current.getNext());
+			current.setNext(node);
+		}
+
+		size++;
+	}
+
+	public void addFirst(E value) {
+		// Create a new node from the parsed value
 		Node<E> node = new Node<>(value);
 		size++;
 
-		if (head == null) {
-			// If the node has no head value initialise it to the parsed value
-			head = node;
-		} else {
-			// If the head is set step through the list until an unlinked node is found
-			Node<E> current = head;
-
-			while (current.getNext() != null) {
-				current = current.getNext();
-			}
-
-			current.setNext(node);
-		}
+		// Replace the head value
+		node.setNext(head);
+		head = node;
 	}
 
 	@Override
 	public E get(int index) {
-		int pos = 0;
 		Node<E> current = head;
+		int pos = 0;
 
-		// TODO: compare index to size
-
-		while (pos != index) {
-			if (current.getNext() != null) {
+		if (index > size) {
+			throw new IndexOutOfBoundsException(String.format("Index %d out of bounds for list of length %d", index, size));
+		} else {
+			// Step through the list until the position is reached
+			while (pos != index) {
 				current = current.getNext();
 				pos++;
-			} else {
-				throw new IndexOutOfBoundsException(String.format("Index %d out of bounds for list of length %d", index, pos));
 			}
 		}
 
 		return current.getValue();
 	}
 
-	@Override
-	public E set(int index, E element) {
-		int pos = 0;
+	public boolean contains(E value) {
+		return indexOf(value) != -1;
+	}
+
+	public int indexOf(E value) {
 		Node<E> current = head;
+		int pos = 0;
 
-		// TODO: compare index to size
-
-		while (pos != index) {
-			if (current.getNext() != null) {
+		while (current.getNext() != null) {
+			if (current.getValue() == value) {
+				return pos;
+			} else {
 				current = current.getNext();
 				pos++;
-			} else {
-				throw new IndexOutOfBoundsException(String.format("Index %d out of bounds for list of length %d", index, pos));
+			}
+		}
+
+		return -1;
+	}
+
+	@Override
+	public E set(int index, E element) {
+		Node<E> current = head;
+		int pos = 0;
+
+		if (index > size) {
+			throw new IndexOutOfBoundsException(String.format("Index %d out of bounds for list of length %d", index, size));
+		} else {
+			// Step through the list until the position is reached
+			while (pos != index) {
+				current = current.getNext();
+				pos++;
 			}
 		}
 
 		return current.setValue(element);
 	}
 
+	public void clear() {
+		head = null;
+	}
+
+	public @NotNull Node<E> remove(int index) {
+		Node<E> current = head;
+		int pos = 0;
+
+		if (index > size) {
+			throw new IndexOutOfBoundsException(String.format("Index %d out of bounds for list of length %d", index, size));
+		} else {
+			size--;
+
+			// Step through the list until the position is reached
+			while (pos != index - 1) {
+				current = current.getNext();
+				pos++;
+			}
+
+			// Remove the node by setting the current nodes next to the removed nodes next
+			Node <E> removed = current.getNext();
+			current.setNext(removed.getNext());
+			return removed;
+		}
+	}
+
 	@Override
 	public int size() {
-		Node<E> current = head;
-		int size = 0;
-
-		// TODO: return size instead of checking
-
-
-		while (current.getNext() != null) {
-			current = current.getNext();
-			size++;
-		}
-
 		return size;
 	}
 

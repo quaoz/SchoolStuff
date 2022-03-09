@@ -22,16 +22,40 @@ public class LinkedListTest {
 		linkedList.add(4);
 		linkedList.add(5);
 
+		System.out.println();
+
+		for (Integer integer : linkedList) {
+			System.out.println(integer);
+		}
+
+		System.out.println();
+
 		linkedList.set(1, 10);
 
 		System.out.println(linkedList.get(1));
 		System.out.println(linkedList.get(0));
 		System.out.println();
 
-		Iterator<Integer> iterator = linkedList.iterator();
+		linkedList.add(1, -10);
+		linkedList.addFirst(2000);
+		linkedList.remove(3);
 
-		while (iterator.hasNext()) {
-			System.out.println(iterator.next());
+		for (Integer integer : linkedList) {
+			System.out.println(integer);
 		}
+
+		System.out.println();
+		System.out.println(linkedList.get(3));
+		linkedList.remove(3);
+		System.out.println(linkedList.get(3));
+		System.out.println();
+
+		for (Integer integer : linkedList) {
+			System.out.println(integer);
+		}
+
+		System.out.println("\n2000 at " + linkedList.indexOf(2000));
+		System.out.println(linkedList.remove(linkedList.indexOf(2000)));
+		System.out.println("\n2000 at " + linkedList.contains(2000));
 	}
 }

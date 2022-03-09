@@ -11,6 +11,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class DataBase<T extends Record> {
 	private final File location;
@@ -18,7 +19,7 @@ public class DataBase<T extends Record> {
 	private long recordCount;
 	private final DataBaseCache cache;
 
-	class DataBaseCache {
+	static class DataBaseCache {
 		private final ArrayList<LongObjectImmutablePair<byte[]>> cache;
 		private final int defaultCacheSize = 10;
 		private final int cacheSize;
