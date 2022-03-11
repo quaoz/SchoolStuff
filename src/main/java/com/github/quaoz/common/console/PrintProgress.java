@@ -28,9 +28,10 @@ public class PrintProgress {
 				TimeUnit.MILLISECONDS.toMinutes(eta) % TimeUnit.HOURS.toMinutes(1),
 				TimeUnit.MILLISECONDS.toSeconds(eta) % TimeUnit.MINUTES.toSeconds(1));
 
-		int percent = (int) (current * 100 / total);
+		int percent = (int) (((float) current / (float) total) * 100);
 
 		String string = "\r" +
+				String.join("", Collections.nCopies(percent == 0 ? 2 : 2 - (int) (Math.log10(percent)), " ")) +
 				String.format("%d%% [", percent) +
 				String.join("", Collections.nCopies(percent, "=")) + '>' +
 				String.join("", Collections.nCopies(100 - percent, " ")) + ']' +
