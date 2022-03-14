@@ -3,10 +3,12 @@ package com.github.quaoz.common.datastructures.linkedlist;
 import com.github.quaoz.common.datastructures.interpreter.Interpreter;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
-public class LinkedList<E> implements Interpreter<E>, Iterable<E> {
+public class LinkedList<E> implements Interpreter<E>, Iterable<E>, List<E> {
 	private int size;
 	private Node<E> head;
 
@@ -92,8 +94,76 @@ public class LinkedList<E> implements Interpreter<E>, Iterable<E> {
 	 *
 	 * @param value The value to add
 	 */
-	public void add(E value) {
+	public boolean add(E value) {
 		add(-1, value);
+		return true;
+	}
+
+	@Override
+	public boolean remove(Object o) {
+		int index = indexOf(o);
+
+		if (index == -1) {
+			return false;
+		} else {
+			remove(index);
+			return true;
+		}
+	}
+
+	@Override
+	public boolean containsAll(@NotNull Collection<?> c) {
+		for (Object o : c) {
+			if (!contains(o)) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	@Override
+	public boolean addAll(@NotNull Collection<? extends E> c) {
+		if (c.isEmpty()) {
+			return false;
+		} else {
+			for (E e : c) {
+				add(e);
+			}
+		}
+
+		return true;
+	}
+
+	@Override
+	public boolean addAll(int index, @NotNull Collection<? extends E> c) {
+		if (c.isEmpty()) {
+			return false;
+		} else {
+			for (E e : c) {
+				add(index++, e);
+			}
+		}
+
+		return true;
+	}
+
+	@Override
+	public boolean removeAll(@NotNull Collection<?> c) {
+		if (c.isEmpty()) {
+			return false;
+		} else {
+			for (Object o : c) {
+				remove(o);
+			}
+		}
+
+		return true;
+	}
+
+	@Override
+	public boolean retainAll(@NotNull Collection<?> c) {
+		return false;
 	}
 
 	/**
@@ -217,38 +287,13 @@ public class LinkedList<E> implements Interpreter<E>, Iterable<E> {
 		return head.getValue();
 	}
 
-	/**
-	 * Returns whether the linked list contains a given value
-	 *
-	 * @param value The value to search for
-	 *
-	 * @return boolean Whether the list contains the value
-	 */
-	public boolean contains(E value) {
-		return indexOf(value) != -1;
+	public boolean isEmpty() {
+		return size == 0;
 	}
 
-	/**
-	 * Returns the index of a given value in the linked list
-	 *
-	 * @param value The value to search for
-	 *
-	 * @return The index of the value or {@code -1} if it isn't found
-	 */
-	public int indexOf(E value) {
-		Node<E> current = head;
-		int pos = 0;
-
-		while (current.getNext() != null) {
-			if (current.getValue().equals(value)) {
-				return pos;
-			} else {
-				current = current.getNext();
-				pos++;
-			}
-		}
-
-		return -1;
+	@Override
+	public boolean contains(Object o) {
+		return indexOf(o) != -1;
 	}
 
 	/**
@@ -303,6 +348,46 @@ public class LinkedList<E> implements Interpreter<E>, Iterable<E> {
 	}
 
 	@Override
+	public int indexOf(Object o) {
+		Node<E> current = head;
+		int pos = 0;
+
+		while (current.getNext() != null) {
+			if (current.getValue().equals(o)) {
+				return pos;
+			} else {
+				current = current.getNext();
+				pos++;
+			}
+		}
+
+		return -1;
+	}
+
+	@Override
+	public int lastIndexOf(Object o) {
+		return 0;
+	}
+
+	@NotNull
+	@Override
+	public ListIterator<E> listIterator() {
+		return null;
+	}
+
+	@NotNull
+	@Override
+	public ListIterator<E> listIterator(int index) {
+		return null;
+	}
+
+	@NotNull
+	@Override
+	public List<E> subList(int fromIndex, int toIndex) {
+		return null;
+	}
+
+	@Override
 	public int size() {
 		return size;
 	}
@@ -311,6 +396,18 @@ public class LinkedList<E> implements Interpreter<E>, Iterable<E> {
 	@Override
 	public Iterator<E> iterator() {
 		return new LinkedListIterator();
+	}
+
+	@NotNull
+	@Override
+	public Object[] toArray() {
+		return new Object[0];
+	}
+
+	@NotNull
+	@Override
+	public <T> T[] toArray(@NotNull T[] a) {
+		return null;
 	}
 
 	private class LinkedListIterator implements Iterator<E> {

@@ -2,7 +2,7 @@ package com.github.quaoz.common.datastructures.linkedlist;
 
 import org.jetbrains.annotations.NotNull;
 
-public class Node<T> implements Comparable<T>{
+public class Node<T> implements Comparable<T> {
 	private T value;
 	private Node<T> next;
 
@@ -67,6 +67,8 @@ public class Node<T> implements Comparable<T>{
 	@Override
 	@SuppressWarnings("unchecked")
 	public int compareTo(@NotNull T o) {
-		return value instanceof Comparable ? ((Comparable<T>) value).compareTo(o) : value.toString().compareTo(o.toString());
+		return value instanceof Comparable
+				? ((Comparable<T>) value).compareTo(o)
+				: 0;
 	}
 }
