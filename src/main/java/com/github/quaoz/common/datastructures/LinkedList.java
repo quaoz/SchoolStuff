@@ -1,4 +1,4 @@
-package com.github.quaoz.common.datastructures.linkedlist;
+package com.github.quaoz.common.datastructures;
 
 import com.github.quaoz.common.datastructures.interpreter.Interpreter;
 import org.jetbrains.annotations.NotNull;
@@ -370,12 +370,14 @@ public class LinkedList<E> implements Interpreter<E>, Iterable<E>, List<E> {
 
 	@NotNull
 	@Override
+	@Deprecated
 	public ListIterator<E> listIterator() {
 		return null;
 	}
 
 	@NotNull
 	@Override
+	@Deprecated
 	public ListIterator<E> listIterator(int index) {
 		return null;
 	}

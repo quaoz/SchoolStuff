@@ -1,4 +1,4 @@
-package com.github.quaoz.common.datastructures.linkedlist;
+package com.github.quaoz.common.datastructures;
 
 import org.jetbrains.annotations.NotNull;
 

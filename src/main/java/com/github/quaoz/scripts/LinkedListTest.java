@@ -1,10 +1,7 @@
 package com.github.quaoz.scripts;
 
-import com.github.quaoz.common.datastructures.linkedlist.LinkedList;
-import com.github.quaoz.common.datastructures.linkedlist.Node;
-
-import java.util.Arrays;
-import java.util.Iterator;
+import com.github.quaoz.common.datastructures.LinkedList;
+import com.github.quaoz.common.datastructures.Node;
 
 public class LinkedListTest {
 	public static void main(String[] args) {
