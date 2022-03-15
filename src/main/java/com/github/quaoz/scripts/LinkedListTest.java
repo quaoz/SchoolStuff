@@ -54,5 +54,7 @@ public class LinkedListTest {
 		System.out.println("\n2000 at " + linkedList.indexOf(2000));
 		System.out.println(linkedList.remove(linkedList.indexOf(2000)));
 		System.out.println("\n2000 at " + linkedList.contains(2000));
+
+		LinkedList<Integer> list = new LinkedList<>(new Integer[] {1, 2, 3, 4});
 	}
 }

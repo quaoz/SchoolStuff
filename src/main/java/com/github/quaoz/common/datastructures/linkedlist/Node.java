@@ -5,6 +5,7 @@ import org.jetbrains.annotations.NotNull;
 public class Node<T> implements Comparable<T> {
 	private T value;
 	private Node<T> next;
+	private Node<T> prev;
 
 	/**
 	 * Constructs a new node
@@ -14,6 +15,7 @@ public class Node<T> implements Comparable<T> {
 	public Node(T value) {
 		this.value = value;
 		next = null;
+		prev = null;
 	}
 
 	/**
@@ -32,6 +34,24 @@ public class Node<T> implements Comparable<T> {
 	 */
 	public void setNext(Node<T> next) {
 		this.next = next;
+	}
+
+	/**
+	 * Returns the previous node
+	 *
+	 * @return The previous node
+	 */
+	public Node<T> getPrev() {
+		return prev;
+	}
+
+	/**
+	 * Sets the previous node
+	 *
+	 * @param prev The previous node
+	 */
+	public void setPrev(Node<T> prev) {
+		this.prev = prev;
 	}
 
 	/**

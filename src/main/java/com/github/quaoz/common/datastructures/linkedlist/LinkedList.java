@@ -3,20 +3,21 @@ package com.github.quaoz.common.datastructures.linkedlist;
 import com.github.quaoz.common.datastructures.interpreter.Interpreter;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 public class LinkedList<E> implements Interpreter<E>, Iterable<E>, List<E> {
 	private int size;
 	private Node<E> head;
+	private Node<E> last;
+
+	/* Constructors */
 
 	/**
 	 * Constructs an empty linked list
 	 */
 	public LinkedList() {
 		head = null;
+		last = null;
 		size = 0;
 	}
 
@@ -34,6 +35,8 @@ public class LinkedList<E> implements Interpreter<E>, Iterable<E>, List<E> {
 			node.setNext(new Node<>(e));
 			node = node.getNext();
 		}
+
+		last = node;
 	}
 
 	/**
@@ -50,6 +53,8 @@ public class LinkedList<E> implements Interpreter<E>, Iterable<E>, List<E> {
 			node.setNext(new Node<>(e));
 			node = node.getNext();
 		}
+
+		last = node;
 	}
 
 	/**
@@ -69,6 +74,8 @@ public class LinkedList<E> implements Interpreter<E>, Iterable<E>, List<E> {
 			node = node.getNext();
 			size++;
 		}
+
+		last = node;
 	}
 
 	/**
@@ -87,16 +94,8 @@ public class LinkedList<E> implements Interpreter<E>, Iterable<E>, List<E> {
 			node = node.getNext();
 			size++;
 		}
-	}
 
-	/**
-	 * Adds a value to the end of the array
-	 *
-	 * @param value The value to add
-	 */
-	public boolean add(E value) {
-		add(-1, value);
-		return true;
+		last = node;
 	}
 
 	@Override
@@ -179,20 +178,8 @@ public class LinkedList<E> implements Interpreter<E>, Iterable<E>, List<E> {
 		if (index > size) {
 			throw new IndexOutOfBoundsException(String.format("Index %d out of bounds for list of length %d", index, size));
 		} else if (index == -1) {
-			// Adds the node at the first available position
-			if (head == null) {
-				// If the node has no head value initialise it to the parsed value
-				head = node;
-			} else {
-				// If the head is set step through the list until an unlinked node is found
-				Node<E> current = head;
-
-				while (current.getNext() != null) {
-					current = current.getNext();
-				}
-
-				current.setNext(node);
-			}
+			last.setNext(node);
+			last = node;
 		} else {
 			Node<E> current = head;
 			int pos = 1;
@@ -233,6 +220,8 @@ public class LinkedList<E> implements Interpreter<E>, Iterable<E>, List<E> {
 
 		if (index > size) {
 			throw new IndexOutOfBoundsException(String.format("Index %d out of bounds for list of length %d", index, size));
+		} if (index == size) {
+			return last.setValue(element);
 		} else {
 			// Step through the list until the position is reached
 			while (pos != index) {
@@ -268,14 +257,7 @@ public class LinkedList<E> implements Interpreter<E>, Iterable<E>, List<E> {
 	 * @return The last value in the list
 	 */
 	public E getLast() {
-		Node<E> current = head;
-
-		// Step through the list until the last position is reached
-		while (current.getNext() != null) {
-			current = current.getNext();
-		}
-
-		return current.getValue();
+		return last.getValue();
 	}
 
 	/**
@@ -301,6 +283,7 @@ public class LinkedList<E> implements Interpreter<E>, Iterable<E>, List<E> {
 	 */
 	public void clear() {
 		head = null;
+		last = null;
 	}
 
 	/**
@@ -330,6 +313,10 @@ public class LinkedList<E> implements Interpreter<E>, Iterable<E>, List<E> {
 			throw new IndexOutOfBoundsException(String.format("Index %d out of bounds for list of length %d", index, size));
 		} else if (index == 0) {
 			head = head.getNext();
+			return current.getValue();
+		} else if (index == size) {
+			current = last;
+			last = last.getPrev();
 			return current.getValue();
 		} else {
 			size--;
@@ -366,7 +353,19 @@ public class LinkedList<E> implements Interpreter<E>, Iterable<E>, List<E> {
 
 	@Override
 	public int lastIndexOf(Object o) {
-		return 0;
+		Node<E> current = last;
+		int pos = size;
+
+		while (current.getPrev() != null) {
+			if (current.getValue().equals(o)) {
+				return pos;
+			} else {
+				current = current.getNext();
+				pos++;
+			}
+		}
+
+		return -1;
 	}
 
 	@NotNull
@@ -384,7 +383,22 @@ public class LinkedList<E> implements Interpreter<E>, Iterable<E>, List<E> {
 	@NotNull
 	@Override
 	public List<E> subList(int fromIndex, int toIndex) {
-		return null;
+		Node<E> current = head;
+		int pos = 0;
+
+		while (pos < fromIndex) {
+			current = current.getNext();
+			pos++;
+		}
+
+		List<E> list = new ArrayList<>();
+
+		for (int i = 0; i < toIndex; i++) {
+			list.add(current.getValue());
+			current = current.getNext();
+		}
+
+		return list;
 	}
 
 	@Override
@@ -400,14 +414,41 @@ public class LinkedList<E> implements Interpreter<E>, Iterable<E>, List<E> {
 
 	@NotNull
 	@Override
-	public Object[] toArray() {
-		return new Object[0];
+	public Object @NotNull [] toArray() {
+		Object[] array = new Object[size];
+		Node<E> current = head;
+		int pos = 0;
+
+		while (current.getNext() != null) {
+			array[pos++] = current.getValue();
+			current = current.getNext();
+		}
+
+		return array;
 	}
 
 	@NotNull
 	@Override
-	public <T> T[] toArray(@NotNull T[] a) {
-		return null;
+	@SuppressWarnings("unchecked")
+	public <T> T @NotNull [] toArray(@NotNull T @NotNull [] a) {
+		Node<E> current = head;
+		int pos = 0;
+
+		while (current.getNext() != null) {
+			a[pos++] = (T) current.getValue();
+			current = current.getNext();
+		}
+
+		return a;
+	}
+
+	@Override
+	public boolean add(E e) {
+		Node<E> node = new Node<>(e);
+		last.setNext(node);
+		last = node;
+
+		return true;
 	}
 
 	private class LinkedListIterator implements Iterator<E> {
