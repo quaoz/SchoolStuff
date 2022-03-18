@@ -11,7 +11,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 public class DataBase<T extends Record> {
 	private final File location;
@@ -20,60 +19,111 @@ public class DataBase<T extends Record> {
 	private final DataBaseCache cache;
 
 	static class DataBaseCache {
-		private final ArrayList<LongObjectImmutablePair<byte[]>> cache;
+		private final ArrayList<CacheRecord> cache;
 		private final int defaultCacheSize = 10;
 		private final int cacheSize;
-		private int cacheIndex;
+		private CacheRecord first;
+		private CacheRecord last;
+
+		static class CacheRecord implements Comparable<CacheRecord> {
+			protected final long pos;
+			protected final byte[] record;
+			private CacheRecord next;
+
+			public CacheRecord(long pos, byte[] record) {
+				this.record = record;
+				this.pos = pos;
+
+				this.next = null;
+			}
+
+			public void setNext(CacheRecord next) {
+				this.next = next;
+			}
+
+			public CacheRecord getNext() {
+				return next;
+			}
+
+			@Override
+			public int compareTo(@NotNull DataBase.DataBaseCache.CacheRecord o) {
+				return Long.compare(pos, o.pos);
+			}
+		}
 
 		public DataBaseCache(int cacheSize) {
 			this.cacheSize = cacheSize;
-			cacheIndex = 0;
 
 			cache = new ArrayList<>(cacheSize);
 		}
 
 		public DataBaseCache() {
 			this.cacheSize = defaultCacheSize;
-			cacheIndex = 0;
 
 			cache = new ArrayList<>(cacheSize);
 		}
 
 		public void addRecord(long pos, byte[] record) {
+			CacheRecord cacheRecord = new CacheRecord(pos, record);
+
 			if (cache.size() < cacheSize) {
-				cache.add(cacheIndex++, new LongObjectImmutablePair<>(pos, record));
-			} else {
-				if (cacheIndex > cacheSize) {
-					cacheIndex = 0;
+				if (first == null) {
+					first = cacheRecord;
+					last = cacheRecord;
+					cache.add(cacheRecord);
+				} else {
+					last.setNext(cacheRecord);
+					last = cacheRecord;
 				}
-				cache.set(cacheIndex++, new LongObjectImmutablePair<>(pos, record));
+
+			} else {
+				cache.remove(find(first.pos, 0, cacheSize, true));
+				first = first.getNext();
 			}
 
-			//TODO insert in place, sorted cache
+			cache.add(find(pos, 0 , cache.size(), true), cacheRecord);
 		}
 
 		public void editRecord(long pos, byte[] record) {
-			for (int i = 0; i < cache.size(); i++) {
-				if (cache.get(i).leftLong() == pos) {
-					cache.set(i, new LongObjectImmutablePair<>(pos, record));
-				}
-			}
+			// TODO: - set to first when edited
+			//       - search for record
+
+			int edit = find(pos, 0, cacheSize, false);
 		}
 
-		public byte[] getRecord(long pos) {
-			for (LongObjectImmutablePair<byte[]> longObjectImmutablePair : cache) {
-				if (longObjectImmutablePair.leftLong() == pos) {
-					return longObjectImmutablePair.right();
+		private int find(Long value, int left, int right, boolean pos) {
+			int result;
+
+			if (left <= right) {
+				// Finds the middle
+				final int middle = (left + right) >>> 1;
+				final int comp = value.compareTo(cache.get(middle).pos);
+
+				// Recursively splits the array and searches the half that may contain the term
+				if (comp < 0) {
+					result = find(value, left, middle - 1, pos);
+				} else if (comp > 0) {
+					result = find(value, middle + 1, right, pos);
+				} else {
+					result = middle;
+				}
+			} else {
+				if (pos) {
+					result = left;
+				} else {
+					result = -1;
 				}
 			}
 
-			return null;
+			return result;
 		}
 	}
+
 
 	public DataBase(@NotNull File location, int length, int cacheSize) {
 		this.recordCount = updateRecordCount();
 		cache = new DataBaseCache(cacheSize);
+
 		this.location = location;
 		this.length = length;
 	}

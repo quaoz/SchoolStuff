@@ -38,12 +38,8 @@ public class Test {
 		if (list.size() == 0) {
 			list.add(integer);
 		} else {
-			list.add(find(list, integer), integer);
+			list.add(find(list, integer, 0, list.size() - 1), integer);
 		}
-	}
-
-	private static <E extends Comparable<E>> int find(List<E> list, E value) {
-		return find(list, value, 0, list.size() - 1);
 	}
 
 	private static <E extends Comparable<E>> int find(List<E> list, E value, int left, int right) {
