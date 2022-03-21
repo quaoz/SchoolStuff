@@ -237,7 +237,7 @@ public class DataBase<T extends Record> {
 	 * @return The specified record from the file
 	 */
 	public byte[] getRecord(long record) {
-		byte[] cacheRecord = cache.getRecord(record);
+		/* byte[] cacheRecord = cache.getRecord(record);
 
 		if (cacheRecord == null) {
 			byte[] fileRecord = RandomFileHandler.readBytes(location, record * length, length);
@@ -246,7 +246,8 @@ public class DataBase<T extends Record> {
 			return fileRecord;
 		} else {
 			return cacheRecord;
-		}
+		}*/
+		return null;
 	}
 
 	/**
