@@ -98,6 +98,27 @@ public class LinkedList<E> implements Interpreter<E>, List<E> {
 		last = node;
 	}
 
+	/**
+	 * Adds a value as the head of the linked list
+	 *
+	 * @param value The value to add
+	 */
+	public void addFirst(E value) {
+		// Create a new node from the parsed value
+		Node<E> node = new Node<>(value);
+		size++;
+
+		// Replace the head value
+		if (head == null) {
+			last = node;
+		} else {
+			node.setNext(head);
+			head.setPrev(node);
+		}
+
+		head = node;
+	}
+
 	@Override
 	public boolean remove(Object o) {
 		int index = indexOf(o);
@@ -198,27 +219,6 @@ public class LinkedList<E> implements Interpreter<E>, List<E> {
 		}
 	}
 
-	/**
-	 * Adds a value as the head of the linked list
-	 *
-	 * @param value The value to add
-	 */
-	public void addFirst(E value) {
-		// Create a new node from the parsed value
-		Node<E> node = new Node<>(value);
-		size++;
-
-		// Replace the head value
-		if (head == null) {
-			last = node;
-		} else {
-			node.setNext(head);
-			head.setPrev(node);
-		}
-
-		head = node;
-	}
-
 	@Override
 	public E set(int index, E element) {
 		Node<E> current = head;
@@ -226,7 +226,7 @@ public class LinkedList<E> implements Interpreter<E>, List<E> {
 
 		if (index > size) {
 			throw new IndexOutOfBoundsException(String.format("Index %d out of bounds for list of length %d", index, size));
-		} if (index == size) {
+		} else if (index == size) {
 			return last.setValue(element);
 		} else {
 			// Step through the list until the position is reached
