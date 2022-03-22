@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
-public class LinkedList<E> implements Interpreter<E>, Iterable<E>, List<E> {
+public class LinkedList<E> implements Interpreter<E>, List<E> {
 	private int size;
 	private Node<E> head;
 	private Node<E> last;
@@ -161,6 +161,7 @@ public class LinkedList<E> implements Interpreter<E>, Iterable<E>, List<E> {
 	}
 
 	@Override
+	@Deprecated
 	public boolean retainAll(@NotNull Collection<?> c) {
 		return false;
 	}
@@ -171,6 +172,7 @@ public class LinkedList<E> implements Interpreter<E>, Iterable<E>, List<E> {
 	 * @param index The index to add the value at
 	 * @param value The value to add
 	 */
+	@Override
 	public void add(int index, E value) {
 		// Create a new node from the parsed value
 		Node<E> node = new Node<>(value);
@@ -178,8 +180,7 @@ public class LinkedList<E> implements Interpreter<E>, Iterable<E>, List<E> {
 		if (index > size) {
 			throw new IndexOutOfBoundsException(String.format("Index %d out of bounds for list of length %d", index, size));
 		} else if (index == -1) {
-			last.setNext(node);
-			last = node;
+			add(value);
 		} else {
 			Node<E> current = head;
 			int pos = 1;
@@ -193,9 +194,8 @@ public class LinkedList<E> implements Interpreter<E>, Iterable<E>, List<E> {
 			// Insert the node
 			node.setNext(current.getNext());
 			current.setNext(node);
+			size++;
 		}
-
-		size++;
 	}
 
 	/**
@@ -209,7 +209,13 @@ public class LinkedList<E> implements Interpreter<E>, Iterable<E>, List<E> {
 		size++;
 
 		// Replace the head value
-		node.setNext(head);
+		if (head == null) {
+			last = node;
+		} else {
+			node.setNext(head);
+			head.setPrev(node);
+		}
+
 		head = node;
 	}
 
@@ -284,6 +290,7 @@ public class LinkedList<E> implements Interpreter<E>, Iterable<E>, List<E> {
 	public void clear() {
 		head = null;
 		last = null;
+		size = 0;
 	}
 
 	/**
@@ -291,11 +298,35 @@ public class LinkedList<E> implements Interpreter<E>, Iterable<E>, List<E> {
 	 *
 	 * @return The removed element
 	 */
-	public E remove() {
+	public E removeFirst() {
 		Node<E> removed = head;
-		head = head.getNext();
 
-		return removed.getValue();
+		if (removed != null) {
+			head = head.getNext();
+			size--;
+
+			return removed.getValue();
+		} else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes the last element of the linked list
+	 *
+	 * @return The removed element
+	 */
+	public E removeLast() {
+		Node<E> removed = last;
+
+		if (removed != null) {
+			last = last.getPrev();
+			size--;
+
+			return removed.getValue();
+		} else {
+			return null;
+		}
 	}
 
 	/**
@@ -312,8 +343,7 @@ public class LinkedList<E> implements Interpreter<E>, Iterable<E>, List<E> {
 		if (index > size) {
 			throw new IndexOutOfBoundsException(String.format("Index %d out of bounds for list of length %d", index, size));
 		} else if (index == 0) {
-			head = head.getNext();
-			return current.getValue();
+			return removeFirst();
 		} else if (index == size) {
 			current = last;
 			last = last.getPrev();
@@ -447,8 +477,15 @@ public class LinkedList<E> implements Interpreter<E>, Iterable<E>, List<E> {
 	@Override
 	public boolean add(E e) {
 		Node<E> node = new Node<>(e);
-		last.setNext(node);
+
+		if (head == null) {
+			head = node;
+		} else {
+			last.setNext(node);
+		}
+
 		last = node;
+		size++;
 
 		return true;
 	}

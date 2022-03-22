@@ -14,26 +14,6 @@ public class Stack<E> implements Iterable<E> {
 		size = 0;
 	}
 
-	public static void main(String[] args) {
-		Stack<Integer> stack = new Stack<>();
-		Integer[] array = {0, 1, 2, 3, 4, 5, 6, 7, 8};
-
-		stack.pushAll(List.of(array));
-		System.out.println(stack.size());
-
-		System.out.println("-----------");
-
-		for (Integer integer : stack) {
-			System.out.println(integer);
-		}
-
-		System.out.println("-----------");
-
-		while (!stack.isEmpty()) {
-			System.out.println(stack.pop());
-		}
-	}
-
 	public <T extends Iterable<E>> Stack(T collection) {
 		top = null;
 		size = 0;
