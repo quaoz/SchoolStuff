@@ -3,35 +3,63 @@ package com.github.quaoz.common.datastructures;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
-import java.util.List;
 
 public class Stack<E> implements Iterable<E> {
 	Node<E> top;
 	int size;
 
+	/**
+	 * Constructor
+	 */
 	public Stack() {
 		top = null;
 		size = 0;
 	}
 
+	/**
+	 * Constructs the stack from a collection
+	 *
+	 * @param collection The collection to construct the stack from
+	 * @param <T>		 The collections type
+	 */
 	public <T extends Iterable<E>> Stack(T collection) {
 		top = null;
 		size = 0;
 		pushAll(collection);
 	}
 
-	public void push(E value) {
-		Node<E> node = new Node<>(value);
+	/**
+	 * Adds a value to the stack
+	 *
+	 * @param value The value to add
+	 *
+	 * @return {@code true} if the stack is changed as a result of this call
+	 */
+	public boolean push(E value) {
+		if (value != null) {
+			Node<E> node = new Node<>(value);
 
-		if (top != null) {
-			node.setPrev(top);
-			top.setNext(node);
+			if (top != null) {
+				node.setPrev(top);
+				top.setNext(node);
+			}
+
+			top = node;
+			size++;
+
+			return true;
+		} else {
+			return false;
 		}
-
-		top = node;
-		size++;
 	}
 
+	/**
+	 * Adds a set of values to the stack
+	 *
+	 * @param iterable The values to add
+	 *
+	 * @return {@code true} if the stack is changed as a result of this call
+	 */
 	public boolean pushAll(@NotNull Iterable<E> iterable) {
 		Iterator<E> iterator = iterable.iterator();
 
@@ -58,6 +86,11 @@ public class Stack<E> implements Iterable<E> {
 		}
 	}
 
+	/**
+	 * Removes and returns the value from the top of the stack
+	 *
+	 * @return The value from the top of the stack
+	 */
 	public E pop() {
 		E value = top == null
 				? null
@@ -71,14 +104,27 @@ public class Stack<E> implements Iterable<E> {
 		return value;
 	}
 
+	/**
+	 * Retirns the top value on the stack
+	 *
+	 * @return The top value on the stack
+	 */
 	public E peek() {
 		return top.getValue();
 	}
 
+	/**
+	 * Returns the size of the stack
+	 *
+	 * @return The size of the stack
+	 */
 	public int size() {
 		return size;
 	}
 
+	/**
+	 * @return {@code true} if the stack is empty
+	 */
 	public boolean isEmpty() {
 		return top == null;
 	}
