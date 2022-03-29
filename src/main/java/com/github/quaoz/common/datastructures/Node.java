@@ -84,11 +84,61 @@ public class Node<T> implements Comparable<T> {
 		System.out.println(value.toString());
 	}
 
+	/**
+	 * Compares the current node to the given object
+	 *
+	 * @param o The object to compare to
+	 *
+	 * @return The result of the comparison
+	 */
 	@Override
 	@SuppressWarnings("unchecked")
 	public int compareTo(@NotNull T o) {
 		return value instanceof Comparable
 				? ((Comparable<T>) value).compareTo(o)
-				: 0;
+				: value.toString().compareTo(o.toString());
+	}
+
+	/**
+	 * Compares the value of the node to the given value
+	 *
+	 * @param o The value to compare the node's value to
+	 *
+	 * @return The result of the comparison
+	 */
+	@Override
+	public boolean equals(Object o) {
+		boolean result;
+
+		if (this == o) {
+			result = true;
+		} else if (o == null || getClass() != o.getClass()) {
+			result = false;
+		} else {
+			Node<?> node = (Node<?>) o;
+			result = value.equals(node.value);
+		}
+
+		return result;
+	}
+
+	/**
+	 * Returns the hashcode of the value
+	 *
+	 * @return The hashcode of the value
+	 */
+	@Override
+	public int hashCode() {
+		return value.hashCode();
+	}
+
+	/**
+	 * Returns the string representation of the value
+	 *
+	 * @return The string representation of the value
+	 */
+	@Override
+	public String toString() {
+		return value.toString();
 	}
 }
