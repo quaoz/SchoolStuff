@@ -4,14 +4,14 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
 
-public class StackImplementation<E> implements Iterable<E> {
+public class SimpleStack<E> implements Iterable<E> {
 	NodeImplementation<E> top;
 	int size;
 
 	/**
 	 * Constructor
 	 */
-	public StackImplementation() {
+	public SimpleStack() {
 		top = null;
 		size = 0;
 	}
@@ -22,7 +22,7 @@ public class StackImplementation<E> implements Iterable<E> {
 	 * @param collection The collection to construct the stack from
 	 * @param <T>        The collections type
 	 */
-	public <T extends Iterable<E>> StackImplementation(T collection) {
+	public <T extends Iterable<E>> SimpleStack(T collection) {
 		top = null;
 		size = 0;
 		pushAll(collection);

@@ -1,12 +1,12 @@
 package com.github.quaoz.scripts;
 
-import com.github.quaoz.common.datastructures.StackImplementation;
+import com.github.quaoz.common.datastructures.SimpleStack;
 
 import java.util.List;
 
 public class StackTest {
 	public static void main(String[] args) {
-		StackImplementation<Integer> stack = new StackImplementation<>();
+		SimpleStack<Integer> stack = new SimpleStack<>();
 		Integer[] array = {0, 1, 2, 3, 4, 5, 6, 7, 8};
 
 		stack.pushAll(List.of(array));
