@@ -4,14 +4,14 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
 
-public class Stack<E> implements Iterable<E> {
-	Node<E> top;
+public class StackImplementation<E> implements Iterable<E> {
+	NodeImplementation<E> top;
 	int size;
 
 	/**
 	 * Constructor
 	 */
-	public Stack() {
+	public StackImplementation() {
 		top = null;
 		size = 0;
 	}
@@ -20,9 +20,9 @@ public class Stack<E> implements Iterable<E> {
 	 * Constructs the stack from a collection
 	 *
 	 * @param collection The collection to construct the stack from
-	 * @param <T>		 The collections type
+	 * @param <T>        The collections type
 	 */
-	public <T extends Iterable<E>> Stack(T collection) {
+	public <T extends Iterable<E>> StackImplementation(T collection) {
 		top = null;
 		size = 0;
 		pushAll(collection);
@@ -37,7 +37,7 @@ public class Stack<E> implements Iterable<E> {
 	 */
 	public boolean push(E value) {
 		if (value != null) {
-			Node<E> node = new Node<>(value);
+			NodeImplementation<E> node = new NodeImplementation<>(value);
 
 			if (top != null) {
 				node.setPrev(top);
@@ -66,11 +66,11 @@ public class Stack<E> implements Iterable<E> {
 		if (!iterator.hasNext()) {
 			return false;
 		} else {
-			Node<E> node = new Node<>(iterator.next());
+			NodeImplementation<E> node = new NodeImplementation<>(iterator.next());
 
 			if (top == null) {
 				top = node;
-				node = new Node<>(iterator.next());
+				node = new NodeImplementation<>(iterator.next());
 				size++;
 			}
 
@@ -78,7 +78,7 @@ public class Stack<E> implements Iterable<E> {
 				top.setNext(node);
 				node.setPrev(top);
 				top = node;
-				node = new Node<>(iterator.next());
+				node = new NodeImplementation<>(iterator.next());
 				size++;
 			}
 
@@ -136,7 +136,7 @@ public class Stack<E> implements Iterable<E> {
 	}
 
 	private class StackIterator implements Iterator<E> {
-		Node<E> current = top;
+		NodeImplementation<E> current = top;
 
 		@Override
 		public boolean hasNext() {

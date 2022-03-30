@@ -2,17 +2,17 @@ package com.github.quaoz.common.datastructures;
 
 import org.jetbrains.annotations.NotNull;
 
-public class Node<T> implements Comparable<T> {
+public class NodeImplementation<T> implements Comparable<T> {
 	private T value;
-	private Node<T> next;
-	private Node<T> prev;
+	private NodeImplementation<T> next;
+	private NodeImplementation<T> prev;
 
 	/**
 	 * Constructs a new node
 	 *
 	 * @param value The value to initialise the node with
 	 */
-	public Node(T value) {
+	public NodeImplementation(T value) {
 		this.value = value;
 		next = null;
 		prev = null;
@@ -23,7 +23,7 @@ public class Node<T> implements Comparable<T> {
 	 *
 	 * @return The next node
 	 */
-	public Node<T> getNext() {
+	public NodeImplementation<T> getNext() {
 		return next;
 	}
 
@@ -32,7 +32,7 @@ public class Node<T> implements Comparable<T> {
 	 *
 	 * @param next The next node
 	 */
-	public void setNext(Node<T> next) {
+	public void setNext(NodeImplementation<T> next) {
 		this.next = next;
 	}
 
@@ -41,7 +41,7 @@ public class Node<T> implements Comparable<T> {
 	 *
 	 * @return The previous node
 	 */
-	public Node<T> getPrev() {
+	public NodeImplementation<T> getPrev() {
 		return prev;
 	}
 
@@ -50,7 +50,7 @@ public class Node<T> implements Comparable<T> {
 	 *
 	 * @param prev The previous node
 	 */
-	public void setPrev(Node<T> prev) {
+	public void setPrev(NodeImplementation<T> prev) {
 		this.prev = prev;
 	}
 
@@ -115,7 +115,7 @@ public class Node<T> implements Comparable<T> {
 		} else if (o == null || getClass() != o.getClass()) {
 			result = false;
 		} else {
-			Node<?> node = (Node<?>) o;
+			NodeImplementation<?> node = (NodeImplementation<?>) o;
 			result = value.equals(node.value);
 		}
 

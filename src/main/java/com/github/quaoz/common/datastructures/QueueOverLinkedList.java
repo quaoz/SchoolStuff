@@ -1,6 +1,6 @@
 package com.github.quaoz.common.datastructures;
 
-public class Queue<E> extends LinkedList<E> {
+public class QueueOverLinkedList<E> extends LinkedListImplementation<E> {
 
 	public void enqueue(E value) {
 		addFirst(value);

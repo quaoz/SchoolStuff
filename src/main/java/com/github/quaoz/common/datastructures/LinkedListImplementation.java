@@ -5,17 +5,17 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
-public class LinkedList<E> implements Interpreter<E>, List<E> {
+public class LinkedListImplementation<E> implements Interpreter<E>, List<E> {
 	private int size;
-	private Node<E> head;
-	private Node<E> last;
+	private NodeImplementation<E> head;
+	private NodeImplementation<E> last;
 
 	/* Constructors */
 
 	/**
 	 * Constructs an empty linked list
 	 */
-	public LinkedList() {
+	public LinkedListImplementation() {
 		head = null;
 		last = null;
 		size = 0;
@@ -26,13 +26,13 @@ public class LinkedList<E> implements Interpreter<E>, List<E> {
 	 *
 	 * @param array The array to use
 	 */
-	public LinkedList(E @NotNull [] array) {
-		Node<E> node = new Node<>(array[0]);
+	public LinkedListImplementation(E @NotNull [] array) {
+		NodeImplementation<E> node = new NodeImplementation<>(array[0]);
 		size = array.length;
 		head = node;
 
 		for (E e : array) {
-			node.setNext(new Node<>(e));
+			node.setNext(new NodeImplementation<>(e));
 			node = node.getNext();
 		}
 
@@ -44,13 +44,13 @@ public class LinkedList<E> implements Interpreter<E>, List<E> {
 	 *
 	 * @param list The list to use
 	 */
-	public LinkedList(@NotNull List<E> list) {
-		Node<E> node = new Node<>(list.get(0));
+	public LinkedListImplementation(@NotNull List<E> list) {
+		NodeImplementation<E> node = new NodeImplementation<>(list.get(0));
 		size = list.size();
 		head = node;
 
 		for (E e : list) {
-			node.setNext(new Node<>(e));
+			node.setNext(new NodeImplementation<>(e));
 			node = node.getNext();
 		}
 
@@ -63,14 +63,14 @@ public class LinkedList<E> implements Interpreter<E>, List<E> {
 	 * @param iterable The iterable object to use
 	 * @param <T>      The type of the iterable
 	 */
-	public <T extends Iterable<E>> LinkedList(@NotNull T iterable) {
+	public <T extends Iterable<E>> LinkedListImplementation(@NotNull T iterable) {
 		Iterator<E> iterator = iterable.iterator();
-		Node<E> node = new Node<>(iterator.next());
+		NodeImplementation<E> node = new NodeImplementation<>(iterator.next());
 		head = node;
 		size = 0;
 
 		while (iterator.hasNext()) {
-			node.setNext(new Node<>(iterator.next()));
+			node.setNext(new NodeImplementation<>(iterator.next()));
 			node = node.getNext();
 			size++;
 		}
@@ -84,13 +84,13 @@ public class LinkedList<E> implements Interpreter<E>, List<E> {
 	 * @param iterator The iterator to use
 	 * @param <T>      The iterators type
 	 */
-	public <T extends Iterator<E>> LinkedList(@NotNull T iterator) {
-		Node<E> node = new Node<>(iterator.next());
+	public <T extends Iterator<E>> LinkedListImplementation(@NotNull T iterator) {
+		NodeImplementation<E> node = new NodeImplementation<>(iterator.next());
 		head = node;
 		size = 0;
 
 		while (iterator.hasNext()) {
-			node.setNext(new Node<>(iterator.next()));
+			node.setNext(new NodeImplementation<>(iterator.next()));
 			node = node.getNext();
 			size++;
 		}
@@ -105,7 +105,7 @@ public class LinkedList<E> implements Interpreter<E>, List<E> {
 	 */
 	public void addFirst(E value) {
 		// Create a new node from the parsed value
-		Node<E> node = new Node<>(value);
+		NodeImplementation<E> node = new NodeImplementation<>(value);
 		size++;
 
 		// Replace the head value
@@ -196,14 +196,14 @@ public class LinkedList<E> implements Interpreter<E>, List<E> {
 	@Override
 	public void add(int index, E value) {
 		// Create a new node from the parsed value
-		Node<E> node = new Node<>(value);
+		NodeImplementation<E> node = new NodeImplementation<>(value);
 
 		if (index > size) {
 			throw new IndexOutOfBoundsException(String.format("Index %d out of bounds for list of length %d", index, size));
 		} else if (index == -1) {
 			add(value);
 		} else {
-			Node<E> current = head;
+			NodeImplementation<E> current = head;
 			int pos = 1;
 
 			// Step through the list until the position is reached
@@ -221,7 +221,7 @@ public class LinkedList<E> implements Interpreter<E>, List<E> {
 
 	@Override
 	public E set(int index, E element) {
-		Node<E> current = head;
+		NodeImplementation<E> current = head;
 		int pos = 0;
 
 		if (index > size) {
@@ -241,7 +241,7 @@ public class LinkedList<E> implements Interpreter<E>, List<E> {
 
 	@Override
 	public E get(int index) {
-		Node<E> current = head;
+		NodeImplementation<E> current = head;
 		int pos = 0;
 
 		if (index > size || index < 0) {
@@ -299,7 +299,7 @@ public class LinkedList<E> implements Interpreter<E>, List<E> {
 	 * @return The removed element
 	 */
 	public E removeFirst() {
-		Node<E> removed = head;
+		NodeImplementation<E> removed = head;
 
 		if (removed != null) {
 			head = head.getNext();
@@ -317,7 +317,7 @@ public class LinkedList<E> implements Interpreter<E>, List<E> {
 	 * @return The removed element
 	 */
 	public E removeLast() {
-		Node<E> removed = last;
+		NodeImplementation<E> removed = last;
 
 		if (removed != null) {
 			last = last.getPrev();
@@ -337,7 +337,7 @@ public class LinkedList<E> implements Interpreter<E>, List<E> {
 	 * @return The removed element
 	 */
 	public @NotNull E remove(int index) {
-		Node<E> current = head;
+		NodeImplementation<E> current = head;
 		int pos = 0;
 
 		if (index > size) {
@@ -358,7 +358,7 @@ public class LinkedList<E> implements Interpreter<E>, List<E> {
 			}
 
 			// Remove the node by setting the current nodes next to the removed nodes next
-			Node<E> removed = current.getNext();
+			NodeImplementation<E> removed = current.getNext();
 			current.setNext(removed.getNext());
 			return removed.getValue();
 		}
@@ -366,7 +366,7 @@ public class LinkedList<E> implements Interpreter<E>, List<E> {
 
 	@Override
 	public int indexOf(Object o) {
-		Node<E> current = head;
+		NodeImplementation<E> current = head;
 		int pos = 0;
 
 		while (current.getNext() != null) {
@@ -383,7 +383,7 @@ public class LinkedList<E> implements Interpreter<E>, List<E> {
 
 	@Override
 	public int lastIndexOf(Object o) {
-		Node<E> current = last;
+		NodeImplementation<E> current = last;
 		int pos = size;
 
 		while (current.getPrev() != null) {
@@ -415,7 +415,7 @@ public class LinkedList<E> implements Interpreter<E>, List<E> {
 	@NotNull
 	@Override
 	public List<E> subList(int fromIndex, int toIndex) {
-		Node<E> current = head;
+		NodeImplementation<E> current = head;
 		int pos = 0;
 
 		while (pos < fromIndex) {
@@ -448,7 +448,7 @@ public class LinkedList<E> implements Interpreter<E>, List<E> {
 	@Override
 	public Object @NotNull [] toArray() {
 		Object[] array = new Object[size];
-		Node<E> current = head;
+		NodeImplementation<E> current = head;
 		int pos = 0;
 
 		while (current.getNext() != null) {
@@ -463,7 +463,7 @@ public class LinkedList<E> implements Interpreter<E>, List<E> {
 	@Override
 	@SuppressWarnings("unchecked")
 	public <T> T @NotNull [] toArray(@NotNull T @NotNull [] a) {
-		Node<E> current = head;
+		NodeImplementation<E> current = head;
 		int pos = 0;
 
 		while (current.getNext() != null) {
@@ -476,7 +476,7 @@ public class LinkedList<E> implements Interpreter<E>, List<E> {
 
 	@Override
 	public boolean add(E e) {
-		Node<E> node = new Node<>(e);
+		NodeImplementation<E> node = new NodeImplementation<>(e);
 
 		if (head == null) {
 			head = node;
@@ -491,7 +491,7 @@ public class LinkedList<E> implements Interpreter<E>, List<E> {
 	}
 
 	private class LinkedListIterator implements Iterator<E> {
-		private Node<E> node = head;
+		private NodeImplementation<E> node = head;
 
 		@Override
 		public boolean hasNext() {

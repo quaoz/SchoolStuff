@@ -1,19 +1,19 @@
 package com.github.quaoz.scripts;
 
-import com.github.quaoz.common.datastructures.LinkedList;
-import com.github.quaoz.common.datastructures.Node;
+import com.github.quaoz.common.datastructures.LinkedListImplementation;
+import com.github.quaoz.common.datastructures.NodeImplementation;
 
 public class LinkedListTest {
 	public static void main(String[] args) {
-		Node<Integer> n1 = new Node<>(13);
-		Node<Integer> n2 = new Node<>(7);
-		Node<Integer> n3 = new Node<>(68);
+		NodeImplementation<Integer> n1 = new NodeImplementation<>(13);
+		NodeImplementation<Integer> n2 = new NodeImplementation<>(7);
+		NodeImplementation<Integer> n3 = new NodeImplementation<>(68);
 
 		n1.display();
 		n2.display();
 		n3.display();
 
-		LinkedList<Integer> linkedList = new LinkedList<>();
+		LinkedListImplementation<Integer> linkedList = new LinkedListImplementation<>();
 		linkedList.add(1);
 		linkedList.add(2);
 		linkedList.add(3);
@@ -52,6 +52,6 @@ public class LinkedListTest {
 		System.out.println(linkedList.remove(linkedList.indexOf(2000)));
 		System.out.println("\n2000 at " + linkedList.contains(2000));
 
-		LinkedList<Integer> list = new LinkedList<>(new Integer[] {1, 2, 3, 4});
+		LinkedListImplementation<Integer> list = new LinkedListImplementation<>(new Integer[]{1, 2, 3, 4});
 	}
 }
