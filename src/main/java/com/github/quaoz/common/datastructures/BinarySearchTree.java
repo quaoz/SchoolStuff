@@ -540,6 +540,8 @@ public class BinarySearchTree<T extends Comparable<T>> {
 		 * @param value The nodes value
 		 */
 		public BinaryNode(T value) {
+			Integer valueInt = (Integer) value;
+
 			this.value = value;
 		}
 	}

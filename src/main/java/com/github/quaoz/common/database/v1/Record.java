@@ -1,4 +1,4 @@
-package com.github.quaoz.common.database;
+package com.github.quaoz.common.database.v1;
 
 import org.jetbrains.annotations.NotNull;
 

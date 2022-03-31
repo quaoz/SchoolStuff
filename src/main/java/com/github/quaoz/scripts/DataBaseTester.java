@@ -1,7 +1,7 @@
 package com.github.quaoz.scripts;
 
-import com.github.quaoz.common.database.DataBase;
-import com.github.quaoz.common.database.ExampleRecord;
+import com.github.quaoz.common.database.v1.DataBase;
+import com.github.quaoz.common.database.v1.ExampleRecord;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;

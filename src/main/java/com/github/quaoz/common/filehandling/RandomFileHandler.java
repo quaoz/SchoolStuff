@@ -7,7 +7,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Iterator;
 
-// Note: it is generally more reliable to write and read data as bytes when dealing with strings to avoid encoding issues
 public class RandomFileHandler {
 
 	/**
@@ -27,7 +26,7 @@ public class RandomFileHandler {
 
 			return randomAccessFile.readByte();
 		} catch (IOException e) {
-			System.err.printf("Failed to read byte at %d in %s", pos, file);
+			System.out.printf("Failed to read byte at %d in %s", pos, file);
 			e.printStackTrace();
 		}
 
@@ -177,8 +176,8 @@ public class RandomFileHandler {
 	 * @param pos        The position to write at
 	 * @param lineLength The length of the line
 	 */
-	public static void insertLine(File file, @NotNull String line, long pos, int lineLength) {
-		insertLine(file, line.getBytes(StandardCharsets.UTF_8), pos, lineLength);
+	public static void insertBytes(File file, @NotNull String line, long pos, int lineLength) {
+		insertBytes(file, line.getBytes(StandardCharsets.UTF_8), pos, lineLength);
 	}
 
 	/**
@@ -189,7 +188,7 @@ public class RandomFileHandler {
 	 * @param pos        The position to write at
 	 * @param lineLength The length of the line
 	 */
-	public static void insertLine(File file, byte[] bytes, long pos, int lineLength) {
+	public static void insertBytes(File file, byte[] bytes, long pos, int lineLength) {
 		try (RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rws")) {
 			// Seek to the last line in the file
 			long index = randomAccessFile.length() - lineLength;
