@@ -1,5 +1,6 @@
 package com.github.quaoz.common.database.v2;
 
+import com.github.quaoz.common.datastructures.BinarySearchTree;
 import com.github.quaoz.common.filehandling.RandomFileHandler;
 import org.jetbrains.annotations.NotNull;
 
@@ -7,10 +8,15 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serial;
 import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.Queue;
 
 public class CachedDataBase<T extends ComparableRecord> {
 	private final File location;
 	private long recordCount;
+	// private Cache<T> cache;
+
+
 
 	/**
 	 * Creates a new database or loads an existing one
@@ -78,6 +84,38 @@ public class CachedDataBase<T extends ComparableRecord> {
 		} else {
 			add(record, 0, recordCount);
 		}
+
+
+	}
+
+	private static class Cache<T> {
+		BinarySearchTree<T> tree;
+		ArrayList<T> list;
+
+		public Cache() {
+			// TODO: fix this
+			tree = new BinarySearchTree<T>();
+			list = new ArrayList<>();
+		}
+
+		public void add(T record) {
+			list.add(record);
+
+			if (list.size() > 100) {
+				tree.remove(list.get(0));
+				list.remove(0);
+			}
+
+			tree.add(record);
+		}
+
+		public T get(T record) {
+			return tree.get(record);
+		}
+
+		public void remove(T record) {
+			tree.remove(record);
+		}
 	}
 
 	/**
@@ -108,5 +146,71 @@ public class CachedDataBase<T extends ComparableRecord> {
 	 */
 	public String get(long index, int length) {
 		return new String(RandomFileHandler.readBytes(location, index * length, length));
+	}
+
+	/**
+	 * Gets a record from the database
+	 *
+	 * @param record The record to get
+	 *
+	 * @return The record from the database
+	 */
+	public T get(T record) {
+		return get(record, 0, recordCount);
+	}
+
+	/**
+	 * Gets a record from the database
+	 *
+	 * @param record The record to get
+	 * @param start  The start index of the search
+	 * @param end    The end index of the search
+	 *
+	 * @return The record from the database
+	 */
+	@SuppressWarnings("unchecked")
+	private T get(@NotNull T record, long start, long end) {
+		long mid = (start + end) / 2;
+		T midRecord = (T) record.fromString(get(mid, record.length()));
+		int comparison = midRecord.compareTo(record);
+
+		if (comparison > 0) {
+			return get(record, start, mid);
+		} else if (comparison < 0) {
+			return get(record, mid, end);
+		} else {
+			return midRecord;
+		}
+	}
+
+	/**
+	 * Removes a record from the database
+	 *
+	 * @param record The record to remove
+	 */
+	public void remove(T record) {
+		remove(record, 0, recordCount);
+	}
+
+	/**
+	 * Removes a record from the database
+	 *
+	 * @param record The record to remove
+	 * @param start  The start index of the search
+	 * @param end    The end index of the search
+	 */
+	@SuppressWarnings("unchecked")
+	private void remove(@NotNull T record, long start, long end) {
+		long mid = (start + end) / 2;
+		T midRecord = (T) record.fromString(get(mid, record.length()));
+		int comparison = midRecord.compareTo(record);
+
+		if (comparison > 0) {
+			remove(record, start, mid);
+		} else if (comparison < 0) {
+			remove(record, mid, end);
+		} else {
+			RandomFileHandler.deleteLine(location, mid * record.length(), record.length());
+		}
 	}
 }

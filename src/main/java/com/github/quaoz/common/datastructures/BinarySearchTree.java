@@ -390,6 +390,40 @@ public class BinarySearchTree<T extends Comparable<T>> {
 	}
 
 	/**
+	 * Gets the node with the given value
+	 *
+	 * @param value The value to get the node for
+	 *
+	 * @return The node with the given value
+	 */
+	public T get(T value) {
+		return get(root, value);
+	}
+
+	/**
+	 * Gets the node with the given value
+	 *
+	 * @param node  The node to start at
+	 * @param value The value to get the node for
+	 *
+	 * @return The node with the given value
+	 */
+	private T get(BinaryNode<T> node, T value) {
+		if (node == null) {
+			return null;
+		} else if (node.value.compareTo(value) > 0) {
+			// Go left if the value is less than the current node
+			return get(node.left, value);
+		} else if (node.value.compareTo(value) < 0) {
+			// Go right if the value is greater than the current node
+			return get(node.right, value);
+		} else {
+			// Return the value if it is equal to the current node
+			return node.value;
+		}
+	}
+
+	/**
 	 * Traverses the tree pre-order and returns an arraylist of the values
 	 */
 	public ArrayList<T> preOrder() {
