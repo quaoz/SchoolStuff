@@ -2,15 +2,8 @@ package com.github.quaoz.common.database.v2;
 
 import org.jetbrains.annotations.NotNull;
 
-public class ExampleRecord implements Comparable<ExampleRecord> {
+public record ExampleRecord(String name, int age) implements Comparable<ExampleRecord> {
 	private static final String format = "%-10s %04d";
-	private final String name;
-	private final int age;
-
-	public ExampleRecord(String name, int age) {
-		this.name = name;
-		this.age = age;
-	}
 
 	@Override
 	public String toString() {
