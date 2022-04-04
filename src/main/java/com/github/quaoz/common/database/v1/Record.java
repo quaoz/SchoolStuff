@@ -2,7 +2,7 @@ package com.github.quaoz.common.database.v1;
 
 import org.jetbrains.annotations.NotNull;
 
-public abstract class Record {
+abstract class Record {
 	public abstract String toString();
 
 	public abstract Record fromString(String source);

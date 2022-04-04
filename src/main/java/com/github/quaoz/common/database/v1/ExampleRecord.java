@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class ExampleRecord extends Record {
+class ExampleRecord extends Record {
 	private static final String format = "%-10s %04d";
 	private static final String splitter = " ";
 	private static final int length = 16;

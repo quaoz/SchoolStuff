@@ -26,6 +26,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
 	}
 
 	public static void main(String[] args) {
+		// some test code
 		BinarySearchTree<Integer> bst = new BinarySearchTree<>();
 
 		for (int i = 0; i < 10; i++) {
@@ -230,25 +231,34 @@ public class BinarySearchTree<T extends Comparable<T>> {
 		return min(node.left);
 	}
 
+	/**
+	 * Visually prints the tree
+	 */
 	public void print() {
 		print(root, 0);
 	}
 
-	private void print(BinaryNode<T> node, int level) {
+	/**
+	 * Visually prints the tree
+	 *
+	 * @param node  The node to start at
+	 * @param depth The current depth
+	 */
+	private void print(BinaryNode<T> node, int depth) {
 		// Return if the node is null
 		if (node == null) {
 			return;
 		}
 
 		// Recursively print the right and left nodes with one level of indentation more for each recursion
-		print(node.right, level + 1);
+		print(node.right, depth + 1);
 
-		for (int i = 0; i < level; i++) {
+		for (int i = 0; i < depth; i++) {
 			System.out.print("\t");
 		}
 		System.out.println(node.value);
 
-		print(node.left, level + 1);
+		print(node.left, depth + 1);
 	}
 
 	/**
