@@ -3,75 +3,55 @@ package com.github.quaoz.tasks.swing;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.text.BadLocationException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GUI extends JPanel implements ActionListener, DocumentListener {
-	JButton button1;
-	JButton button2;
-	JTextField userName;
+public class GUI extends JPanel implements ActionListener {
+	JButton loginButton;
+	JLabel usernameLabel;
+	JLabel passwordLabel;
+	JTextField username;
+	JTextField password;
 
 	public GUI(int width, int height) {
 		System.out.println("SEQUENCE: GUI constructor");
 		this.setPreferredSize(new Dimension(width, height));
 		setLayout(null);
 
-		button1 = new JButton("b1");
-		button1.setBounds(0, 0, 100, 40);
-		button1.addActionListener(this);
+		usernameLabel = new JLabel("Username");
+		usernameLabel.setBounds(100, 8, 70, 20);
 
-		button2 = new JButton("b2");
-		button2.setBounds(120, 0, 100, 40);
-		button2.addActionListener(this);
+		passwordLabel = new JLabel("Password");
+		passwordLabel.setBounds(100, 55, 70, 20);
 
-		userName = new JTextField("user");
-		userName.setBounds(0, 40, 200, 40);
-		userName.getDocument().addDocumentListener(this);
+		username = new JTextField();
+		username.setBounds(100, 27, 193, 28);
 
-		add(button1);
-		add(button2);
-		add(userName);
+		password = new JTextField();
+		password.setBounds(100, 75, 193, 28);
+
+		loginButton = new JButton("Login");
+		loginButton.setBounds(100, 110, 90, 25);
+		loginButton.setForeground(Color.WHITE);
+		loginButton.setBackground(Color.BLACK);
+		loginButton.addActionListener(this);
+
+		add(usernameLabel);
+		add(passwordLabel);
+		add(loginButton);
+		add(username);
+		add(password);
 	}
 
 	@Override
 	public void actionPerformed(@NotNull ActionEvent e) {
-		System.out.println("SEQUENCE: GUI actionPerformed");
-
-		if (e.getSource() == button1) {
-			System.out.println("SEQUENCE: button1 pressed");
-		} else if (e.getSource() == button2) {
-			System.out.println("SEQUENCE: button2 pressed");
-		}
-	}
-
-	@Override
-	public void insertUpdate(DocumentEvent e) {
-		try {
-			System.out.println(e.getDocument().getText(0, e.getDocument().getLength()));
-		} catch (BadLocationException ex) {
-			ex.printStackTrace();
-		}
-	}
-
-	@Override
-	public void removeUpdate(DocumentEvent e) {
-		try {
-			System.out.println(e.getDocument().getText(0, e.getDocument().getLength()));
-		} catch (BadLocationException ex) {
-			ex.printStackTrace();
-		}
-	}
-
-	@Override
-	public void changedUpdate(DocumentEvent e) {
-		try {
-			System.out.println(e.getDocument().getText(0, e.getDocument().getLength()));
-		} catch (BadLocationException ex) {
-			ex.printStackTrace();
+		if (e.getSource() == loginButton) {
+			if (username.getText().equals("user") && password.getText().equals("psswd")) {
+				JOptionPane.showMessageDialog(null, "Login Successful");
+			} else {
+				JOptionPane.showMessageDialog(null, "Username or Password mismatch ");
+			}
 		}
 	}
 }
