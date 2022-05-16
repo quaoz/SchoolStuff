@@ -6,7 +6,7 @@ import java.awt.*;
 public class Main {
 	public static void main(String[] args) {
 		// Demo GUI
-		System.out.println("SEQUENCE: Program started");
+		System.out.println("START");
 
 		JFrame frame = new JFrame("User Login");
 		frame.setLocation(new Point(500, 300));

@@ -8,14 +8,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GUI extends JPanel implements ActionListener {
-	JButton loginButton;
-	JLabel usernameLabel;
-	JLabel passwordLabel;
-	JTextField username;
-	JTextField password;
+	private JFrame frame;
+	private final JButton loginButton;
+	private final JButton graphButton;
+	private final JLabel usernameLabel;
+	private final JLabel passwordLabel;
+	private final JTextField username;
+	private final JTextField password;
 
 	public GUI(int width, int height) {
 		System.out.println("SEQUENCE: GUI constructor");
+
+		frame = new JFrame("Demo");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setBounds(0,0, 400, 300);
+		frame.setLayout(null);
+
 		this.setPreferredSize(new Dimension(width, height));
 		setLayout(null);
 
@@ -37,11 +45,20 @@ public class GUI extends JPanel implements ActionListener {
 		loginButton.setBackground(Color.BLACK);
 		loginButton.addActionListener(this);
 
+		graphButton = new JButton("Graph");
+		graphButton.setBounds(100, 140, 90, 25);
+		graphButton.setForeground(Color.WHITE);
+		graphButton.setBackground(Color.BLACK);
+		graphButton.addActionListener(this);
+
 		add(usernameLabel);
 		add(passwordLabel);
 		add(loginButton);
 		add(username);
 		add(password);
+
+		frame.getContentPane().add(graphButton);
+		frame.setVisible(true);
 	}
 
 	@Override
@@ -52,6 +69,8 @@ public class GUI extends JPanel implements ActionListener {
 			} else {
 				JOptionPane.showMessageDialog(null, "Username or Password mismatch ");
 			}
+		} else if (e.getSource() == graphButton) {
+			Basic basic = new Basic(50, 50, new int[]{10, 20, 30, 15});
 		}
 	}
 }
