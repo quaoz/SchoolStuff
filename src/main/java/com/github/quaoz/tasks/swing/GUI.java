@@ -70,7 +70,7 @@ public class GUI extends JPanel implements ActionListener {
 				JOptionPane.showMessageDialog(null, "Username or Password mismatch ");
 			}
 		} else if (e.getSource() == graphButton) {
-			Basic basic = new Basic(50, 50, new int[]{10, 20, 30, 15});
+			Basic basic = new Basic(50, 50, new int[]{10, 20, 30, 15, 100, 50, 50, 5});
 		}
 	}
 }
