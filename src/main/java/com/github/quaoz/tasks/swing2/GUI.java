@@ -8,33 +8,19 @@ import java.awt.event.ActionListener;
 public class GUI implements ActionListener {
 	private JFrame frame;
 	private final JButton loginButton;
-	private final JLabel usernameLabel;
-	private final JLabel passwordLabel;
-	private final JTextField username;
-	private final JTextField password;
+	private final JButton registerButton;
+	private final LoginForm loginForm;
+	private final RegisterForm registerForm;
 
-	private static final int FRAME_WIDTH = 20;
+	private static final int FRAME_WIDTH = 100;
+	private static final int FRAME_HEIGHT = 200;
 
 	public GUI() {
 		frame = new JFrame("Demo");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(0,0, 400, 300);
-		frame.setLayout(null);
-
-		frame.setPreferredSize(new Dimension(width, height));
-		setLayout(null);
-
-		usernameLabel = new JLabel("Username");
-		usernameLabel.setBounds(100, 8, 70, 20);
-
-		passwordLabel = new JLabel("Password");
-		passwordLabel.setBounds(100, 55, 70, 20);
-
-		username = new JTextField();
-		username.setBounds(100, 27, 193, 28);
-
-		password = new JTextField();
-		password.setBounds(100, 75, 193, 28);
+		frame.setPreferredSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
+		frame.setLayout(new GridBagLayout());
 
 		loginButton = new JButton("Login");
 		loginButton.setBounds(100, 110, 90, 25);
@@ -42,17 +28,22 @@ public class GUI implements ActionListener {
 		loginButton.setBackground(Color.BLACK);
 		loginButton.addActionListener(this);
 
-		frame.add(usernameLabel);
-		frame.add(passwordLabel);
+		registerButton = new JButton("Register");
+		registerButton.setBounds(100, 80, 90, 25);
+		registerButton.setForeground(Color.WHITE);
+		registerButton.setBackground(Color.WHITE);
+
+		loginForm = new LoginForm();
+
 		frame.add(loginButton);
-		frame.add(username);
-		frame.add(password);
 
 		frame.setVisible(true);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
+		if (e.getSource() == loginButton) {
+			loginForm.show();
+		}
 	}
 }
