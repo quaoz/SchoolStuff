@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LoginForm implements ActionListener {
-	private JFrame frame;
+	private final JFrame frame;
 	private final JButton loginButton;
 	private final JLabel usernameLabel;
 	private final JLabel passwordLabel;
@@ -18,7 +18,7 @@ public class LoginForm implements ActionListener {
 	private static final int FRAME_HEIGHT = 200;
 
 	public LoginForm() {
-		frame = new JFrame("Demo");
+		frame = new JFrame("Login");
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setBounds(0,0, 400, 300);
 		frame.setLayout(new GridBagLayout());

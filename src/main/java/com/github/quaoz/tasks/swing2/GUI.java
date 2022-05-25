@@ -20,7 +20,7 @@ public class GUI implements ActionListener {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(0,0, 400, 300);
 		frame.setPreferredSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
-		frame.setLayout(new GridBagLayout());
+		frame.setLayout(null);
 
 		loginButton = new JButton("Login");
 		loginButton.setBounds(100, 110, 90, 25);
@@ -31,11 +31,14 @@ public class GUI implements ActionListener {
 		registerButton = new JButton("Register");
 		registerButton.setBounds(100, 80, 90, 25);
 		registerButton.setForeground(Color.WHITE);
-		registerButton.setBackground(Color.WHITE);
+		registerButton.setBackground(Color.BLACK);
+		registerButton.addActionListener(this);
 
 		loginForm = new LoginForm();
+		registerForm = new RegisterForm();
 
 		frame.add(loginButton);
+		frame.add(registerButton);
 
 		frame.setVisible(true);
 	}
@@ -44,6 +47,8 @@ public class GUI implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == loginButton) {
 			loginForm.show();
+		} else if (e.getSource() == registerButton) {
+			registerForm.show();
 		}
 	}
 }
