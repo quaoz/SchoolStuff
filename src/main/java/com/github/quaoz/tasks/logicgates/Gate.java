@@ -27,7 +27,7 @@ public abstract class Gate {
 			setInputOne(a);
 			for (Boolean b : possible) {
 				setInputTwo(b);
-				System.out.printf("%3d %3d %3d %n" , a ? 1 : 0, b ? 1 : 0, output() ? 1 : 0);
+				System.out.printf("%3d %3d %3d %n", a ? 1 : 0, b ? 1 : 0, output() ? 1 : 0);
 			}
 		}
 	}

@@ -44,20 +44,6 @@ class Deck {
 	}
 
 	/**
-	 * @return Card[] The cards
-	 */
-	public Card[] getCards() {
-		return cards;
-	}
-
-	/**
-	 * @return Suit[] Returns the suits
-	 */
-	public Suit[] getSuits() {
-		return suits;
-	}
-
-	/**
 	 * @return boolean Returns compareByValue
 	 */
 	public static boolean isCompareByValue() {
@@ -99,6 +85,20 @@ class Deck {
 			cards[cards.length - 1] = new Card("Jokers", 13);
 			cards[cards.length - 2] = new Card("Jokers", 13);
 		}
+	}
+
+	/**
+	 * @return Card[] The cards
+	 */
+	public Card[] getCards() {
+		return cards;
+	}
+
+	/**
+	 * @return Suit[] Returns the suits
+	 */
+	public Suit[] getSuits() {
+		return suits;
 	}
 
 	/**

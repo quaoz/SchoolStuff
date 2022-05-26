@@ -5,8 +5,8 @@ import java.awt.*;
 import java.util.Arrays;
 
 public class Basic extends JPanel {
-	private JFrame frame;
-	private int[] values;
+	private final JFrame frame;
+	private final int[] values;
 
 	public Basic(int width, int height, int[] values) {
 		frame = new JFrame("Basic Graph");

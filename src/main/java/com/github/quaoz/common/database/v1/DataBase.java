@@ -15,16 +15,12 @@ public class DataBase<T extends Record> {
 	private final int length;
 	private long recordCount;
 
-	static class DataBaseCache {
-
-	}
-
-
 	public DataBase(@NotNull File location, int length, int cacheSize) {
 		this.recordCount = updateRecordCount();
 		this.location = location;
 		this.length = length;
 	}
+
 
 	public DataBase(@NotNull File location, int length) {
 		this.recordCount = updateRecordCount();
@@ -174,5 +170,9 @@ public class DataBase<T extends Record> {
 		}
 
 		throw new RuntimeException("Unable to access the file");
+	}
+
+	static class DataBaseCache {
+
 	}
 }

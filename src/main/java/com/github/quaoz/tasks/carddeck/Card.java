@@ -9,9 +9,6 @@ import java.util.Locale;
  * Class representing a card
  */
 class Card implements Comparable<Card> {
-	final private String suit;
-	final private int faceValue;
-
 	/**
 	 * Used to convert integer values to their word representations
 	 */
@@ -31,6 +28,8 @@ class Card implements Comparable<Card> {
 		put(12, "Ace");
 		put(13, "Joker");
 	}};
+	final private String suit;
+	final private int faceValue;
 
 	/**
 	 * Card constructor

@@ -2,7 +2,10 @@ package com.github.quaoz.common.filehandling;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -36,8 +39,8 @@ public class RandomFileHandler {
 	/**
 	 * Reads a set number of bytes at a specified position from a file
 	 *
-	 * @param file  The file to read from
-	 * @param pos   The position to read at
+	 * @param file The file to read from
+	 * @param pos  The position to read at
 	 *
 	 * @return The bytes at that position
 	 *
@@ -89,7 +92,7 @@ public class RandomFileHandler {
 	 *
 	 * @param file The file to write to
 	 * @param pos  The position to write at
-	 * @param b	   The byte to write
+	 * @param b    The byte to write
 	 */
 	public static void writeByte(File file, long pos, byte b) {
 		try (RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rws")) {
@@ -144,7 +147,7 @@ public class RandomFileHandler {
 	/**
 	 * Deletes the given line from a file
 	 *
-	 * @param file 		 The file to write to
+	 * @param file       The file to write to
 	 * @param pos        The line to delete
 	 * @param lineLength The length of the line
 	 */

@@ -8,32 +8,26 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class RegisterForm implements ActionListener {
+	private static final int FRAME_WIDTH = 100;
+	private static final int FRAME_HEIGHT = 200;
 	private final JFrame frame;
-
 	private final JButton registerButton;
-
 	private final JLabel usernameLabel;
 	private final JLabel passwordLabel;
 	private final JLabel repeatPasswordLabel;
-
 	private final JLabel message;
-
 	private final JTextField username;
 	private final JTextField password;
 	private final JTextField repeatPassword;
-
 	private final JLabel usernameCheck;
 	private final JLabel passwordCheck;
 	private final JLabel repeatPasswordCheck;
-
-	private static final int FRAME_WIDTH = 100;
-	private static final int FRAME_HEIGHT = 200;
 
 	public RegisterForm() {
 		/* Frames */
 		frame = new JFrame("Register");
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.setBounds(0,0, 400, 300);
+		frame.setBounds(0, 0, 400, 300);
 		frame.setPreferredSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
 		frame.setLayout(null);
 
@@ -65,10 +59,42 @@ public class RegisterForm implements ActionListener {
 		username = new JTextField();
 		username.setBounds(100, 27, 193, 28);
 		username.addActionListener(this);
+		username.getDocument().addDocumentListener(new DocumentListener() {
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				verify(username);
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				verify(username);
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				verify(username);
+			}
+		});
 
 		password = new JTextField();
 		password.setBounds(100, 75, 193, 28);
 		password.addActionListener(this);
+		password.getDocument().addDocumentListener(new DocumentListener() {
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				verify(password);
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				verify(password);
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				verify(password);
+			}
+		});
 
 		repeatPassword = new JTextField();
 		repeatPassword.setBounds(100, 123, 193, 28);
@@ -129,22 +155,30 @@ public class RegisterForm implements ActionListener {
 	}
 
 	private void verify(JTextField element) {
-
 		if (element == repeatPassword || element == password) {
-			if (repeatPassword.getText().equals(password.getText())) {
-				repeatPasswordCheck.setText("\u2713");
-				message.setText("");
-			} else {
-				repeatPasswordCheck.setText("\u2717");
-				message.setText("Passwords don't match");
-			}
-
 			if (password.getText().length() >= 8) {
-				passwordCheck.setText("\u2713");
-				// TODO: prevent use of common passwords https://github.com/danielmiessler/SecLists/tree/master/Passwords/Common-Credentials
+				if (password.getText().equals("password")) {
+					// https://github.com/danielmiessler/SecLists/tree/master/Passwords/Common-Credentials
+					passwordCheck.setText("\u2717");
+					message.setText("This password is very common");
+				} else {
+					passwordCheck.setText("\u2713");
+					message.setText("");
+
+					if (repeatPassword.getText().equals(password.getText())) {
+						repeatPasswordCheck.setText("\u2713");
+						message.setText("");
+					} else {
+						repeatPasswordCheck.setText("\u2717");
+						message.setText("Passwords don't match");
+					}
+				}
 			} else {
-				passwordCheck.setText("");
+				passwordCheck.setText("\u2717");
+				message.setText("Password too short (min 8)");
 			}
+		} else if (element == username) {
+
 		}
 	}
 }

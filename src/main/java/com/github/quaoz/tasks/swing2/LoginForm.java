@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LoginForm implements ActionListener {
+	private static final int FRAME_WIDTH = 100;
+	private static final int FRAME_HEIGHT = 200;
 	private final JFrame frame;
 	private final JButton loginButton;
 	private final JLabel usernameLabel;
@@ -14,13 +16,10 @@ public class LoginForm implements ActionListener {
 	private final JTextField username;
 	private final JTextField password;
 
-	private static final int FRAME_WIDTH = 100;
-	private static final int FRAME_HEIGHT = 200;
-
 	public LoginForm() {
 		frame = new JFrame("Login");
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.setBounds(0,0, 400, 300);
+		frame.setBounds(0, 0, 400, 300);
 		frame.setLayout(new GridBagLayout());
 
 		frame.setPreferredSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT));

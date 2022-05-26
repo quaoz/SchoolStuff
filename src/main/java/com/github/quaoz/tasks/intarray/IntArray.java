@@ -11,6 +11,49 @@ class IntArray {
 		System.arraycopy(array, 0, this.array, 0, array.length);
 	}
 
+	public static void mergeSort(int[] array, int pos) {
+		if (pos < 2) {
+			return;
+		}
+
+		// creates two new arrays
+		int mid = pos / 2;
+		int[] leftArray = new int[mid];
+		int[] rightArray = new int[pos - mid];
+
+		// splits the content of the main array
+		System.arraycopy(array, 0, leftArray, 0, mid);
+
+		if (pos - mid >= 0) {
+			System.arraycopy(array, mid, rightArray, 0, pos - mid);
+		}
+
+		// recursively sorts the arrays
+		mergeSort(leftArray, mid);
+		mergeSort(rightArray, pos - mid);
+
+		// merges the resulting arrays
+		merge(array, leftArray, rightArray, mid, pos - mid);
+	}
+
+	public static void merge(int[] array, int[] leftArray, int[] rightArray, int left, int right) {
+		int i = 0, j = 0, k = 0;
+
+		// merges the two arrays with the smaller number first
+		while (i < left && j < right) {
+			array[k++] = leftArray[i] <= rightArray[j]
+					? leftArray[i++]
+					: rightArray[j++];
+		}
+
+		while (i < left) {
+			array[k++] = leftArray[i++];
+		}
+		while (j < right) {
+			array[k++] = rightArray[j++];
+		}
+	}
+
 	public int[] getArray() {
 		return array;
 	}
@@ -91,48 +134,5 @@ class IntArray {
 	public int[] mergeSort() {
 		mergeSort(array, array.length);
 		return array;
-	}
-
-	public static void mergeSort(int[] array, int pos) {
-		if (pos < 2) {
-			return;
-		}
-
-		// creates two new arrays
-		int mid = pos / 2;
-		int[] leftArray = new int[mid];
-		int[] rightArray = new int[pos - mid];
-
-		// splits the content of the main array
-		System.arraycopy(array, 0, leftArray, 0, mid);
-
-		if (pos - mid >= 0) {
-			System.arraycopy(array, mid, rightArray, 0, pos - mid);
-		}
-
-		// recursively sorts the arrays
-		mergeSort(leftArray, mid);
-		mergeSort(rightArray, pos - mid);
-
-		// merges the resulting arrays
-		merge(array, leftArray, rightArray, mid, pos - mid);
-	}
-
-	public static void merge(int[] array, int[] leftArray, int[] rightArray, int left, int right) {
-		int i = 0, j = 0, k = 0;
-
-		// merges the two arrays with the smaller number first
-		while (i < left && j < right) {
-			array[k++] = leftArray[i] <= rightArray[j]
-					? leftArray[i++]
-					: rightArray[j++];
-		}
-
-		while (i < left) {
-			array[k++] = leftArray[i++];
-		}
-		while (j < right) {
-			array[k++] = rightArray[j++];
-		}
 	}
 }

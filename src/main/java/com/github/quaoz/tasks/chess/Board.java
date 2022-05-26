@@ -92,7 +92,7 @@ public class Board {
 	 *
 	 * @param pos The position of the piece to take
 	 */
-	 protected void take(@NotNull IntIntImmutablePair pos) {
+	protected void take(@NotNull IntIntImmutablePair pos) {
 		final Piece piece = board[pos.leftInt()][pos.rightInt()];
 
 		// Checks that there is a piece to take

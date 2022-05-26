@@ -8,20 +8,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GUI extends JPanel implements ActionListener {
-	private JFrame frame;
 	private final JButton loginButton;
 	private final JButton graphButton;
 	private final JLabel usernameLabel;
 	private final JLabel passwordLabel;
 	private final JTextField username;
 	private final JTextField password;
+	private final JFrame frame;
 
 	public GUI(int width, int height) {
 		System.out.println("SEQUENCE: GUI constructor");
 
 		frame = new JFrame("Demo");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setBounds(0,0, 400, 300);
+		frame.setBounds(0, 0, 400, 300);
 		frame.setLayout(null);
 
 		this.setPreferredSize(new Dimension(width, height));

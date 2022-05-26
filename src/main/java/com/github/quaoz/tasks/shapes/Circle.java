@@ -1,8 +1,8 @@
 package com.github.quaoz.tasks.shapes;
 
 class Circle extends Shape {
-	private double radius;
 	private final double Pi = Math.PI;
+	private double radius;
 
 	Circle(double radius) {
 		this.radius = radius;

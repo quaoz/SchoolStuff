@@ -6,19 +6,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GUI implements ActionListener {
-	private JFrame frame;
+	private static final int FRAME_WIDTH = 100;
+	private static final int FRAME_HEIGHT = 200;
 	private final JButton loginButton;
 	private final JButton registerButton;
 	private final LoginForm loginForm;
 	private final RegisterForm registerForm;
-
-	private static final int FRAME_WIDTH = 100;
-	private static final int FRAME_HEIGHT = 200;
+	private final JFrame frame;
 
 	public GUI() {
 		frame = new JFrame("Demo");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setBounds(0,0, 400, 300);
+		frame.setBounds(0, 0, 400, 300);
 		frame.setPreferredSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
 		frame.setLayout(null);
 

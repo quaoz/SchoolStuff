@@ -6,9 +6,9 @@ import java.io.PrintWriter;
 
 public class Writer {
 	public static void writeToFile(String fileName, String text) {
-		try	(
-			FileWriter fileWriter = new FileWriter(fileName, true);
-			PrintWriter printWriter = new PrintWriter(fileWriter)
+		try (
+				FileWriter fileWriter = new FileWriter(fileName, true);
+				PrintWriter printWriter = new PrintWriter(fileWriter)
 		) {
 			printWriter.println(text);
 		} catch (IOException e) {

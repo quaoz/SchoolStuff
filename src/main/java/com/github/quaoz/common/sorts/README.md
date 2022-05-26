@@ -10,6 +10,7 @@ with specific data sets.
 - Terrible performance for anything but already sorted arrays
 
 ## Selection Sort
+
 - Poor performance
 - Best suited to very small data sets but beaten by Insertion sort almost always
 

@@ -146,7 +146,7 @@ public class SequentialFileHandler {
 	public static void writeAll(File file, @NotNull Collection<?> c, boolean append) {
 		try (
 				// Create a PrintWriter
-				PrintWriter printWriter = new PrintWriter( new FileWriter(file, append))
+				PrintWriter printWriter = new PrintWriter(new FileWriter(file, append))
 		) {
 			for (Object o : c) {
 				printWriter.println(o);
