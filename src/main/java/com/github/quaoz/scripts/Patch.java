@@ -3,48 +3,63 @@ package com.github.quaoz.scripts;
 import com.github.quaoz.common.datastructures.BinarySearchTree;
 import com.github.quaoz.common.sorts.DualPivotIntroSort;
 import com.github.quaoz.common.timer.Timer;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Patch {
 	public static void main(String[] args) throws IOException {
-		// Download the list of common passwords
-		// URL url = new URL("https://raw.githubusercontent.com/danielmiessler/SecLists/master/Passwords/Common-Credentials/10-million-password-list-top-1000000.txt");
-		// ReadableByteChannel readableByteChannel = Channels.newChannel(url.openStream());
-		// FileOutputStream fileOutputStream = new FileOutputStream("list.txt");
-		// fileOutputStream.getChannel().transferFrom(readableByteChannel, 0, Long.MAX_VALUE);
+		System.out.println(isCommon("password"));
+	}
 
+	private static void generate(@NotNull URL url) {
 		File source = new File("list.txt");
 		File destination = new File("done.txt");
 
-		Timer timer = new Timer();
-		timer.startTimerNano();
+		try (
+				FileOutputStream fileOutputStream = new FileOutputStream("list.txt");
+				BufferedReader br = new BufferedReader(new FileReader(source));
+				PrintWriter printWriter = new PrintWriter(new FileWriter(destination, true));
+			 ) {
+			ReadableByteChannel readableByteChannel = Channels.newChannel(url.openStream());
+			fileOutputStream.getChannel().transferFrom(readableByteChannel, 0, Long.MAX_VALUE);
+			BinarySearchTree<String> binarySearchTree = new BinarySearchTree<>();
 
-		BufferedReader br = new BufferedReader(new FileReader(source));
-		PrintWriter printWriter = new PrintWriter(new FileWriter(destination, true));
-		/*
-		BinarySearchTree<String> binarySearchTree = new BinarySearchTree<>();
-
-		// Import the lines into a binary search tree
-		for (String line = br.readLine(); line != null; line = br.readLine()) {
-			if (line.length() >= 8) {
-				binarySearchTree.add(line);
+			// Import the lines into a binary search tree
+			for (String line = br.readLine(); line != null; line = br.readLine()) {
+				if (line.length() >= 8) {
+					binarySearchTree.add(line);
+				}
 			}
+
+			// Write the sorted lines to a file
+			binarySearchTree.inOrder().forEach(printWriter::println);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static boolean isCommon(String password) {
+		try (BufferedReader br = new BufferedReader(new FileReader("done.txt"))) {
+			String line = br.readLine();
+
+			while (line != null && line.compareTo(password) <= 0) {
+				if (line.toLowerCase(Locale.ROOT).equals(password.toLowerCase(Locale.ROOT))) {
+					System.out.println("common password");
+					return true;
+				}
+				line = br.readLine();
+			}
+			System.out.println(line);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 
-		// Write the sorted lines to a file
-		binarySearchTree.inOrder().forEach(printWriter::println);
-		*/
-		ArrayList<String> lines = new ArrayList<>();
-		br.lines().forEachOrdered(lines::add);
-
-		DualPivotIntroSort.sort(lines.toArray(new String[0]));
-
-		System.out.println(timer.stopAndGetElapsedTime());
-		// 407300100
+		return false;
 	}
 }
