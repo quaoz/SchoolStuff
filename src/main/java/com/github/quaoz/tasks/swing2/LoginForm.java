@@ -8,6 +8,14 @@ import java.awt.event.ActionListener;
 public class LoginForm implements ActionListener {
 	private static final int FRAME_WIDTH = 100;
 	private static final int FRAME_HEIGHT = 200;
+	private static final Rectangle FRAME_BOUNDS = new Rectangle(0, 0, 400, 300);
+	private static final Rectangle USERNAME_LABEL_BOUNDS = new Rectangle(100, 8, 70, 20);
+	private static final Rectangle PASSWORD_LABEL_BOUNDS = new Rectangle(100, 55, 70, 20);
+	private static final Rectangle MESSAGE_BOUNDS = new Rectangle(100, 130, 193, 28);
+	private static final Rectangle USERNAME_BOUNDS = new Rectangle(100, 27, 193, 28);
+	private static final Rectangle PASSWORD_BOUNDS = new Rectangle(100, 75, 193, 28);
+	private static final Rectangle LOGIN_BUTTON_BOUNDS = new Rectangle(100, 110, 90, 25);
+
 	private final JFrame frame;
 	private final JButton loginButton;
 	private final JLabel usernameLabel;
@@ -19,31 +27,31 @@ public class LoginForm implements ActionListener {
 	public LoginForm() {
 		frame = new JFrame("Login");
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.setBounds(0, 0, 400, 300);
+		frame.setBounds(FRAME_BOUNDS);
 		frame.setLayout(new GridBagLayout());
 
 		frame.setPreferredSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
 		frame.setLayout(null);
 
 		usernameLabel = new JLabel("Username");
-		usernameLabel.setBounds(100, 8, 70, 20);
+		usernameLabel.setBounds(USERNAME_LABEL_BOUNDS);
 
 		passwordLabel = new JLabel("Password");
-		passwordLabel.setBounds(100, 55, 70, 20);
+		passwordLabel.setBounds(PASSWORD_LABEL_BOUNDS);
 
 		message = new JLabel("");
-		message.setBounds(100, 130, 193, 28);
+		message.setBounds(MESSAGE_BOUNDS);
 
 		username = new JTextField();
-		username.setBounds(100, 27, 193, 28);
+		username.setBounds(USERNAME_BOUNDS);
 		username.addActionListener(this);
 
 		password = new JTextField();
-		password.setBounds(100, 75, 193, 28);
+		password.setBounds(PASSWORD_BOUNDS);
 		password.addActionListener(this);
 
 		loginButton = new JButton("Login");
-		loginButton.setBounds(100, 110, 90, 25);
+		loginButton.setBounds(LOGIN_BUTTON_BOUNDS);
 		loginButton.setForeground(Color.WHITE);
 		loginButton.setBackground(Color.BLACK);
 		loginButton.addActionListener(this);
