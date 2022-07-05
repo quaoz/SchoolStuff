@@ -1,5 +1,9 @@
 package com.github.quaoz.tasks.swing2;
 
+import com.intellij.uiDesigner.core.Spacer;
+import com.jgoodies.forms.layout.CellConstraints;
+import com.jgoodies.forms.layout.FormLayout;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -33,27 +37,27 @@ public class SearchForm {
 	 */
 	private void $$$setupUI$$$() {
 		panel = new JPanel();
-		panel.setLayout(new com.jgoodies.forms.layout.FormLayout("fill:d:grow,left:4dlu:noGrow,fill:d:grow,left:4dlu:noGrow,fill:d:grow", "center:d:grow,top:4dlu:noGrow,center:d:noGrow,top:4dlu:noGrow,center:max(d;4px):noGrow,top:4dlu:noGrow,center:max(d;4px):noGrow,top:4dlu:noGrow,center:d:grow,top:4dlu:noGrow,center:max(d;4px):noGrow,top:4dlu:noGrow,center:max(d;4px):noGrow"));
+		panel.setLayout(new FormLayout("fill:d:grow,left:4dlu:noGrow,fill:d:grow,left:4dlu:noGrow,fill:d:grow", "center:d:grow,top:4dlu:noGrow,center:d:noGrow,top:4dlu:noGrow,center:max(d;4px):noGrow,top:4dlu:noGrow,center:max(d;4px):noGrow,top:4dlu:noGrow,center:d:grow,top:4dlu:noGrow,center:max(d;4px):noGrow,top:4dlu:noGrow,center:max(d;4px):noGrow"));
 		panel.setMinimumSize(new Dimension(240, 180));
 		panel.setPreferredSize(new Dimension(240, 180));
 		searchLabel = new JLabel();
 		searchLabel.setHorizontalAlignment(10);
 		searchLabel.setText("Search");
-		com.jgoodies.forms.layout.CellConstraints cc = new com.jgoodies.forms.layout.CellConstraints();
-		panel.add(searchLabel, cc.xy(3, 3, com.jgoodies.forms.layout.CellConstraints.LEFT, com.jgoodies.forms.layout.CellConstraints.DEFAULT));
-		final com.intellij.uiDesigner.core.Spacer spacer1 = new com.intellij.uiDesigner.core.Spacer();
-		panel.add(spacer1, cc.xywh(5, 3, 1, 11, com.jgoodies.forms.layout.CellConstraints.RIGHT, com.jgoodies.forms.layout.CellConstraints.DEFAULT));
-		final com.intellij.uiDesigner.core.Spacer spacer2 = new com.intellij.uiDesigner.core.Spacer();
-		panel.add(spacer2, cc.xywh(1, 3, 1, 11, com.jgoodies.forms.layout.CellConstraints.LEFT, com.jgoodies.forms.layout.CellConstraints.DEFAULT));
+		CellConstraints cc = new CellConstraints();
+		panel.add(searchLabel, cc.xy(3, 3, CellConstraints.LEFT, CellConstraints.DEFAULT));
+		final Spacer spacer1 = new Spacer();
+		panel.add(spacer1, cc.xywh(5, 3, 1, 11, CellConstraints.RIGHT, CellConstraints.DEFAULT));
+		final Spacer spacer2 = new Spacer();
+		panel.add(spacer2, cc.xywh(1, 3, 1, 11, CellConstraints.LEFT, CellConstraints.DEFAULT));
 		searchBox = new JTextField();
-		panel.add(searchBox, cc.xy(3, 5, com.jgoodies.forms.layout.CellConstraints.FILL, com.jgoodies.forms.layout.CellConstraints.DEFAULT));
+		panel.add(searchBox, cc.xy(3, 5, CellConstraints.FILL, CellConstraints.CENTER));
 		searchButton = new JButton();
 		searchButton.setText("Search");
 		panel.add(searchButton, cc.xy(3, 7));
-		final com.intellij.uiDesigner.core.Spacer spacer3 = new com.intellij.uiDesigner.core.Spacer();
-		panel.add(spacer3, cc.xy(3, 1, com.jgoodies.forms.layout.CellConstraints.DEFAULT, com.jgoodies.forms.layout.CellConstraints.FILL));
-		final com.intellij.uiDesigner.core.Spacer spacer4 = new com.intellij.uiDesigner.core.Spacer();
-		panel.add(spacer4, cc.xy(3, 9, com.jgoodies.forms.layout.CellConstraints.DEFAULT, com.jgoodies.forms.layout.CellConstraints.FILL));
+		final Spacer spacer3 = new Spacer();
+		panel.add(spacer3, cc.xy(3, 1, CellConstraints.DEFAULT, CellConstraints.FILL));
+		final Spacer spacer4 = new Spacer();
+		panel.add(spacer4, cc.xy(3, 9, CellConstraints.DEFAULT, CellConstraints.FILL));
 	}
 
 	/**
@@ -62,4 +66,5 @@ public class SearchForm {
 	public JComponent $$$getRootComponent$$$() {
 		return panel;
 	}
+
 }

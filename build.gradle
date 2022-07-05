@@ -1,5 +1,6 @@
 plugins {
 	id 'java'
+    id 'idea'
 }
 
 group 'com.github.quaoz'
@@ -7,6 +8,7 @@ version '1.0-SNAPSHOT'
 
 repositories {
 	mavenCentral()
+    maven { url "https://www.jetbrains.com/intellij-repository/releases" }
 }
 
 dependencies {
@@ -20,6 +22,7 @@ dependencies {
     implementation "org.apache.commons:commons-lang3:${project.apache_commons_lang_version}"
 
     implementation 'com.jgoodies:jgoodies-forms:1.9.0'
+    implementation 'com.jetbrains.intellij.java:java-gui-forms-rt:221.5921.27'
 }
 
 test {
