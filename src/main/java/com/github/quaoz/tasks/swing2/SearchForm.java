@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class SearchForm {
 	private JButton searchButton;
-	private JLabel searchLabel;
+	private JLabel titleLabel;
 	private JTextField searchBox;
 	private JPanel panel;
 
@@ -19,6 +19,10 @@ public class SearchForm {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
 		frame.setVisible(true);
+	}
+
+	public JPanel get() {
+		return panel;
 	}
 
 	{
@@ -40,11 +44,11 @@ public class SearchForm {
 		panel.setLayout(new FormLayout("fill:d:grow,left:4dlu:noGrow,fill:d:grow,left:4dlu:noGrow,fill:d:grow", "center:d:grow,top:4dlu:noGrow,center:d:noGrow,top:4dlu:noGrow,center:max(d;4px):noGrow,top:4dlu:noGrow,center:max(d;4px):noGrow,top:4dlu:noGrow,center:d:grow,top:4dlu:noGrow,center:max(d;4px):noGrow,top:4dlu:noGrow,center:max(d;4px):noGrow"));
 		panel.setMinimumSize(new Dimension(240, 180));
 		panel.setPreferredSize(new Dimension(240, 180));
-		searchLabel = new JLabel();
-		searchLabel.setHorizontalAlignment(10);
-		searchLabel.setText("Search");
+		titleLabel = new JLabel();
+		titleLabel.setHorizontalAlignment(10);
+		titleLabel.setText("Search");
 		CellConstraints cc = new CellConstraints();
-		panel.add(searchLabel, cc.xy(3, 3, CellConstraints.LEFT, CellConstraints.DEFAULT));
+		panel.add(titleLabel, cc.xy(3, 3, CellConstraints.LEFT, CellConstraints.DEFAULT));
 		final Spacer spacer1 = new Spacer();
 		panel.add(spacer1, cc.xywh(5, 3, 1, 11, CellConstraints.RIGHT, CellConstraints.DEFAULT));
 		final Spacer spacer2 = new Spacer();
