@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LoginForm implements ActionListener {
+public class LoginFormOld implements ActionListener {
 	private static final int FRAME_WIDTH = 100;
 	private static final int FRAME_HEIGHT = 200;
 	private static final Rectangle FRAME_BOUNDS = new Rectangle(0, 0, 400, 300);
@@ -24,7 +24,7 @@ public class LoginForm implements ActionListener {
 	private final JTextField username;
 	private final JTextField password;
 
-	public LoginForm() {
+	public LoginFormOld() {
 		frame = new JFrame("Login");
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setBounds(FRAME_BOUNDS);

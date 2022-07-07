@@ -6,8 +6,6 @@ import com.jgoodies.forms.layout.FormLayout;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class HomeLoggedIn {
 	private JTextField searchField;
@@ -20,19 +18,25 @@ public class HomeLoggedIn {
 		submitRecordButton.addActionListener(e -> {
 			JFrame frame = new JFrame("Submit Record");
 			frame.setContentPane(new SubmitRecordForm().get());
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			frame.pack();
-			System.out.println("balls");
 			frame.setVisible(true);
 		});
 
 		advancedSearchButton.addActionListener(e -> {
 			JFrame frame = new JFrame("Advanced Search Record");
 			frame.setContentPane(new AdvancedSearchForm().get());
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			frame.pack();
-			System.out.println("balls");
 			frame.setVisible(true);
+		});
+
+		profileButton.addActionListener(e -> {
+			// Go to profile
+		});
+
+		searchField.addActionListener(e -> {
+			// Do search
 		});
 	}
 

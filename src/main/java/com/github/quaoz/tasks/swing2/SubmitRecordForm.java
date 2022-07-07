@@ -6,6 +6,8 @@ import com.jgoodies.forms.layout.FormLayout;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class SubmitRecordForm {
 	private JPanel panel;
@@ -20,6 +22,16 @@ public class SubmitRecordForm {
 	private JLabel titleLabel;
 	private JButton submitButton;
 	private JButton cancelButton;
+
+	public SubmitRecordForm() {
+		submitButton.addActionListener(e -> {
+			// Submit record
+		});
+
+		cancelButton.addActionListener(e -> {
+			// Go back
+		});
+	}
 
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("SubmitRecordForm");

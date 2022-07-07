@@ -6,6 +6,8 @@ import com.jgoodies.forms.layout.FormLayout;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class AdvancedSearchForm {
 	private JTextField nameField;
@@ -26,6 +28,16 @@ public class AdvancedSearchForm {
 	private JLabel titleLabel;
 	private JButton cancelButton;
 	private JPanel panel;
+
+	public AdvancedSearchForm() {
+		cancelButton.addActionListener(e -> {
+			// Go back
+		});
+
+		searchButton.addActionListener(e -> {
+			// Do search
+		});
+	}
 
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("AdvancedSearchForm");

@@ -10,7 +10,7 @@ public class GUI implements ActionListener {
 	private static final int FRAME_HEIGHT = 200;
 	private final JButton loginButton;
 	private final JButton registerButton;
-	private final LoginForm loginForm;
+	private final LoginFormOld loginForm;
 	private final RegisterForm registerForm;
 	private final JFrame frame;
 
@@ -33,7 +33,7 @@ public class GUI implements ActionListener {
 		registerButton.setBackground(Color.BLACK);
 		registerButton.addActionListener(this);
 
-		loginForm = new LoginForm();
+		loginForm = new LoginFormOld();
 		registerForm = new RegisterForm();
 
 		frame.add(loginButton);
