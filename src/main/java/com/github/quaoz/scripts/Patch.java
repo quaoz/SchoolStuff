@@ -1,15 +1,12 @@
 package com.github.quaoz.scripts;
 
 import com.github.quaoz.common.datastructures.BinarySearchTree;
-import com.github.quaoz.common.sorts.DualPivotIntroSort;
-import com.github.quaoz.common.timer.Timer;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
-import java.util.ArrayList;
 import java.util.Locale;
 
 public class Patch {
@@ -24,8 +21,8 @@ public class Patch {
 		try (
 				FileOutputStream fileOutputStream = new FileOutputStream("list.txt");
 				BufferedReader br = new BufferedReader(new FileReader(source));
-				PrintWriter printWriter = new PrintWriter(new FileWriter(destination, true));
-			 ) {
+				PrintWriter printWriter = new PrintWriter(new FileWriter(destination, true))
+		) {
 			ReadableByteChannel readableByteChannel = Channels.newChannel(url.openStream());
 			fileOutputStream.getChannel().transferFrom(readableByteChannel, 0, Long.MAX_VALUE);
 			BinarySearchTree<String> binarySearchTree = new BinarySearchTree<>();
